@@ -27,29 +27,39 @@ class Sima:
 
     def go_to_XY(self, goal_x, goal_y):
         angle = atan2(goal_y - self.curr_y, goal_x - self.curr_x)
+        goal_angle = angle
+        angle -= self.curr_theta
+
+        if angle < -pi:
+            angle = 2*pi + angle
+        elif angle > pi:
+            angle = 2*pi - angle
+
+
         print(f"angle: {angle}")
-        if angle >  0:
-            while abs(angle-self.curr_theta) > 0.01:
+        
+        if angle > 0:
+            while abs(goal_angle-self.curr_theta) > 0.01:
                 #print(f"Current angle {self.curr_theta}")
                 self.speed_l = -100
                 self.speed_r = 100
                 if self.going == False:
                     send_velocity_multiple([4, 1],[-98.5, -100])
                     self.going = True
-                time.sleep(0.0001)                
+                time.sleep(0.0005)                
             self.speed_l = 0
             self.speed_r = 0
             send_velocity_multiple([4, 1],[0, 0])
             self.going = False
         else:
-            while abs(angle-self.curr_theta) > 0.01:
+            while abs(goal_angle-self.curr_theta) > 0.01:
                 #print(f"Current theta: {self.curr_theta}")
                 self.speed_l = 100
                 self.speed_r = -100
                 if self.going == False:
                     send_velocity_multiple([4, 1],[98.5, 100])
                     self.going = True
-                time.sleep(0.0001)
+                time.sleep(0.0005)
             self.speed_l = 0
             self.speed_r = 0
             send_velocity_multiple([4, 1],[0, 0])
