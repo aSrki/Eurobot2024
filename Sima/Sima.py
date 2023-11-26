@@ -1,6 +1,5 @@
 from XL430 import *
-# import time
-# from global_var import *
+import time
 from math import *
 import threading
 import sys
@@ -29,24 +28,23 @@ class Sima:
     def go_to_XY(self, goal_x, goal_y):
         dist = sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)
         angle = atan2(goal_y - self.curr_y, goal_x - self.curr_x)
-        print(angle)
     
         if angle >= 0:
             while abs(angle-self.curr_theta) > 0.01:
-                print(f"Curr ang {self.curr_theta}")
+                print(f"Current angle {self.curr_theta}")
                 self.speed_l = -100
                 self.speed_r = 100
                 if self.going == False:
                     send_velocity_multiple([4, 1],[-100, -100])
                     self.going = True
-                time.sleep(0.0001)
+                time.sleep(0.0001)                
             self.speed_l = 0
             self.speed_r = 0
             send_velocity_multiple([4, 1],[0, 0])
             self.going = False
         else:
             while abs(angle-self.curr_theta) > 0.01:
-                print(f"Curr ang {self.curr_theta}")
+                print(f"Current theta: {self.curr_theta}")
                 self.speed_l = 100
                 self.speed_r = -100
                 if self.going == False:
@@ -72,7 +70,7 @@ class Sima:
         while True:
             delta_dist = ((((self.speed_r/100) *1.32 * pi * self.d_r) + ((self.speed_l/100) * 1.32 * pi * self.d_l))/2.0)*0.0005
             delta_ang = ((((self.speed_r/100) * 1.08 * pi * self.d_r) - ((self.speed_l/100) * 1.08 * pi * self.d_l))/self.b)*0.0005
-            print(f"Delta nag {delta_ang}")
+            print(f"Delta angle {delta_ang}")
             self.curr_x += delta_dist * cos(self.curr_theta + 0.5*delta_ang)
             self.curr_y += delta_dist * sin(self.curr_theta + 0.5*delta_ang)
             self.curr_theta += delta_ang
