@@ -26,16 +26,15 @@ class Sima:
         self.b = b
 
     def go_to_XY(self, goal_x, goal_y):
-        dist = sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)
         angle = atan2(goal_y - self.curr_y, goal_x - self.curr_x)
-    
-        if angle >= 0:
+        print(f"angle: {angle}")
+        if angle >  0:
             while abs(angle-self.curr_theta) > 0.01:
-                print(f"Current angle {self.curr_theta}")
+                #print(f"Current angle {self.curr_theta}")
                 self.speed_l = -100
                 self.speed_r = 100
                 if self.going == False:
-                    send_velocity_multiple([4, 1],[-100, -100])
+                    send_velocity_multiple([4, 1],[-98.5, -100])
                     self.going = True
                 time.sleep(0.0001)                
             self.speed_l = 0
@@ -44,11 +43,11 @@ class Sima:
             self.going = False
         else:
             while abs(angle-self.curr_theta) > 0.01:
-                print(f"Current theta: {self.curr_theta}")
+                #print(f"Current theta: {self.curr_theta}")
                 self.speed_l = 100
                 self.speed_r = -100
                 if self.going == False:
-                    send_velocity_multiple([4, 1],[100, 100])
+                    send_velocity_multiple([4, 1],[98.5, 100])
                     self.going = True
                 time.sleep(0.0001)
             self.speed_l = 0
@@ -69,8 +68,8 @@ class Sima:
     def update_odometry(self):
         while True:
             delta_dist = ((((self.speed_r/100) *1.32 * pi * self.d_r) + ((self.speed_l/100) * 1.32 * pi * self.d_l))/2.0)*0.0005
-            delta_ang = ((((self.speed_r/100) * 1.08 * pi * self.d_r) - ((self.speed_l/100) * 1.08 * pi * self.d_l))/self.b)*0.0005
-            print(f"Delta angle {delta_ang}")
+            delta_ang = ((((self.speed_r/100) * 1.2 * pi * self.d_r) - ((self.speed_l/100) * 1.2 * pi * self.d_l))/self.b)*0.0005
+            #print(f"Delta angle {delta_ang}")
             self.curr_x += delta_dist * cos(self.curr_theta + 0.5*delta_ang)
             self.curr_y += delta_dist * sin(self.curr_theta + 0.5*delta_ang)
             self.curr_theta += delta_ang
