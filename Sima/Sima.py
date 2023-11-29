@@ -51,8 +51,7 @@ class Sima:
         print(f"Current angle: {self.curr_angle}")
         print(f"Current theta: {self.curr_theta}")        
 
-
-        if (goal_angle - self.curr_angle > pi - 0.02 and goal_angle - self.curr_angle < pi + 0.02):
+        if (abs(goal_angle - self.curr_angle) > pi - 0.1 and abs(goal_angle - self.curr_angle) < pi + 0.1):
             # DISTANCE
             self.flag = 0
             while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 15:
@@ -70,7 +69,7 @@ class Sima:
             # ANGLE
             self.flag = 1
             if angle > 0:
-                while abs((abs(goal_angle) - abs(self.curr_angle))) > 0.01:
+                while abs((goal_angle - self.curr_angle)) > 0.01:
                     print(f"Current angle {self.curr_angle}")
                     self.speed_l = -100
                     self.speed_r = 100
@@ -83,8 +82,8 @@ class Sima:
                 send_velocity_multiple([4, 1], [0, 0])
                 self.going = False
             else:
-                while abs((abs(goal_angle) - abs(self.curr_angle))) > 0.01:
-                    print(f"Current theta: {self.curr_angle}")
+                while abs((goal_angle - self.curr_angle)) > 0.01:
+                    print(f"Current angle: {self.curr_angle}")
                     self.speed_l = 100
                     self.speed_r = -100
                     if self.going == False:
@@ -125,19 +124,21 @@ class Sima:
             if self.flag == 1:
                 self.curr_x += delta_dist * cos(self.curr_theta + 0.5*delta_ang)
                 self.curr_y += delta_dist * sin(self.curr_theta + 0.5*delta_ang)
+                self.curr_theta += delta_ang
             else:
                 self.curr_x -= delta_dist * cos(self.curr_theta + 0.5*delta_ang)
                 self.curr_y -= delta_dist * sin(self.curr_theta + 0.5*delta_ang)
-
-            self.curr_theta += delta_ang
-
+                self.curr_theta -= delta_ang
+            # self.curr_theta += delta_ang
+            
             if self.curr_theta < -pi:
                 self.curr_angle = 2*pi + self.curr_theta
             elif self.curr_theta > pi:
                 self.curr_angle = self.curr_theta - 2*pi
             else:
                 self.curr_angle = self.curr_theta
-       
+           
+        
             time.sleep(0.0005)
 
     def run_odom(self):
