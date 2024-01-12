@@ -4,7 +4,5 @@ from position import *
 can_comm = CAN_COMM()
 can_comm.start()
 
-pos = Position()
-pos.start()
-
-
+pose = Position()
+pose.start()
