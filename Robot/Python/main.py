@@ -1,8 +1,8 @@
-from can_comm import *
+import can_comm
 from position import *
 
-can_comm = CAN_COMM()
-can_comm.start()
+can_com = can_comm.CAN_COMM()
+can_com.start()
 
-pose = Position()
-pose.start()
+# pos = Position()
+# pos.start()

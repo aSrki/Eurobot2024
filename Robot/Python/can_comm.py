@@ -3,7 +3,10 @@ import subprocess
 import data
 import threading
 import math
-from main import pose
+from position import Position
+
+pos = Position()
+pos.start()
 
 
 class CAN_COMM:
@@ -19,6 +22,7 @@ class CAN_COMM:
 
     def receive(self):
         while True:
+
             msg = self.can0.recv(10.0)
 
             if len(msg.data) == 4:
@@ -36,7 +40,7 @@ class CAN_COMM:
                 data.enc_left = enc1
                 data.enc_right = enc2
 
-                pose.calculate_position()
+                pos.calculate_position()
 
             if msg is None:
                 print('Timeout occurred, no message.')

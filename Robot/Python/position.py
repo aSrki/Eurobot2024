@@ -72,7 +72,9 @@ class Position:
         data.x_current = x
         data.y_current = y
         data.f_current = f
-        # self.print_position()
+
+        if data.debug:
+            self.print_position()
         return d
 
     def print_position(self):
