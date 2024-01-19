@@ -22,6 +22,7 @@ def send_velocity_multiple(ids, vels):
 
     # handler = Protocol2PacketHandler()
     velocity = EncXL430(SERVO_PORT = "/dev/ttyUSB0", BAUD_RATE = 115200)
+    EncXL430.permission = 0
     for id in ids:
         communication_result, servo_error = velocity.handler.write1ByteTxRx(velocity.portHandler, id, TORQUE_ADDR, 0)
         print("TORQUE OFF : %s" % velocity.handler.getTxRxResult(communication_result))
@@ -63,6 +64,7 @@ def send_velocity_multiple(ids, vels):
     if dxl_comm_result != COMM_SUCCESS:
         print("%s" % handler.getTxRxResult(dxl_comm_result))
 
+    EncXL430.permission = 1
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
 
