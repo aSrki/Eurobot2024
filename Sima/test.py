@@ -5,14 +5,14 @@ import threading
 import time
 
 def odom():
-        try:
-                while True:
-                        if EncXL430.permission == 1:
-                                read_positions([1,4])
-                        time.sleep(0.0005)
-        except KeyboardInterrupt:
-                send_velocity_multiple([1,4],[0,0])
-                thread.join()
+	try:
+		while True:
+			if EncXL430.permission == 1:
+				read_positions([1,4])
+			time.sleep(0.0005)
+	except KeyboardInterrupt:
+		send_velocity_multiple([1,4],[0,0])
+		thread.join()
         
 
 thread = threading.Thread(target=odom)
