@@ -1,5 +1,6 @@
 from dynamixel_sdk import *
-
+# ID_1 MOTOR RIGHT
+# ID_4 MOTOR LEFT
 class EncXL430:
     SERVO_PORT = "/dev/ttyUSB0"
     BAUD_RATE = 115200

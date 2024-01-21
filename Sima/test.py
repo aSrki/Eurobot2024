@@ -3,8 +3,9 @@ from XL430 import *
 from enc import *
 import threading
 import time
+from odom import *
 
-def odom():
+def ODOM():
 	try:
 		while True:
 			if EncXL430.permission == 1:
@@ -15,13 +16,21 @@ def odom():
 		thread.join()
         
 
-thread = threading.Thread(target=odom)
+thread = threading.Thread(target=ODOM)
 thread.start()
 
-send_velocity_multiple([1,4],[-50,-50])
-time.sleep(2)
-send_velocity_multiple([1,4],[0,0])
-time.sleep(2)
-send_velocity_multiple([1,4],[100,100])
-time.sleep(2)
-send_velocity_multiple([1,4],[0,0])
+# print("--------------------------------------")
+# print("--------------------------------------")
+# print("--------------------------------------")
+# Odom = odom(100, 100, 0, 0)
+# print("--------------------------------------")
+# print("--------------------------------------")
+# print("--------------------------------------")
+
+# send_velocity_multiple([1,4],[-50,-50])
+# time.sleep(2)
+# send_velocity_multiple([1,4],[0,0])
+# time.sleep(2)
+# send_velocity_multiple([1,4],[100,100])
+# time.sleep(2)
+# send_velocity_multiple([1,4],[0,0])
