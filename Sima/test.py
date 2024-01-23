@@ -5,39 +5,64 @@ import threading
 import time
 from odom import *
 
-def ODOM():
-	try:
-		while True:
-			if EncXL430.permission == 1:
-				read_positions([1,4])
-			time.sleep(0.0005)
-	except KeyboardInterrupt:
-		send_velocity_multiple([1,4],[0,0])
-		thread.join()
+# Problem 1
+# Ako je init klase pre starta thread-a procita dobro.. ako je odma nakon trhreada cita 0, 0
+# 1 resenje initi svih klasa pre starta bilo kog thread-a
+
+# print("--------------------------------------")
+# print("--------------------------------------")
+# print("--------------------------------------")
+# Odom = odom(100, 100, 0, 0)
+# print("--------------------------------------")
+# print("--------------------------------------")
+# print("--------------------------------------")
+
+# Problem 2
+# Pored EncXL430.permission i dalje ima problem sa citanjem jer thread upadne pre seta promenljive
+# Uvodjenjem promenljive se smanjio broj citanja 0 tokom upisivanja
+# 1 resenje provera citanje trenutno i prethodno ako su oba 0 usvojiti, ako ne citati ponovo
+# 2 resenje samo odbaciti 0 i citati opet
+
+# def ODOM():
+# 	try:
+# 		while True:
+# 			if EncXL430.permission == 1:
+# 				read_positions([1,4])
+# 			time.sleep(0.0005)
+# 	except KeyboardInterrupt:
+# 		send_velocity_multiple([1,4],[0,0])
+# 		thread.join()
         
 
-thread = threading.Thread(target=ODOM)
-thread.start()
+# thread = threading.Thread(target=ODOM)
+# thread.start()
+
+# time.sleep(0.5)
 
 print("--------------------------------------")
 print("--------------------------------------")
 print("--------------------------------------")
-Odom = odom(100, 100, 0, 0)
+odom = Odom(100, 100, 0, 0)
 print("--------------------------------------")
 print("--------------------------------------")
 print("--------------------------------------")
 
-# Odom.run_odom()
-# try:
-# 	send_velocity_multiple([1,4],[-50,-50])
-# 	time.sleep(2)
-# 	send_velocity_multiple([1,4],[0,0])
-# 	time.sleep(2)
-# except KeyboardInterrupt:
-#     Odom.stop_odom()
+# time.sleep(0.5)
+try:
+	odom.run_odom()
+	# send_velocity_multiple([1,4],[-50,-50])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[100,100])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)
+except KeyboardInterrupt:
+    odom.stop_odom()
 
 
-send_velocity_multiple([1,4],[-50,-50])
-time.sleep(2)
-send_velocity_multiple([1,4],[0,0])
-time.sleep(2)
+# send_velocity_multiple([1,4],[-50,-50])
+# time.sleep(1)
+# send_velocity_multiple([1,4],[0,0])
+# time.sleep(1)

@@ -34,11 +34,14 @@ def read_positions(ids):
                 position.portHandler, motor_id, ADDR_PRESENT_POSITION
             )
             positions[motor_id] = dxl_present_position
-            print(f"Motor {motor_id} - Current position: {positions[motor_id]}")
-        
+            # print(f"Motor {motor_id} - Current position: {positions[motor_id]}")
+            # print(f"MOTOR ID IN FOR LOOP {motor_id}")
+
+        pos_r = positions[ids[0]]   # = position[1]
+        pos_l = positions[ids[1]]   # = position[4]
         # port_handler.closePort()
         # print("Port handler closed")
-        return positions
+        return pos_r,pos_l
 
 if __name__ == "__main__":
     pos = []

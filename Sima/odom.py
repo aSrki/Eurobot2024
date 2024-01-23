@@ -3,7 +3,7 @@ import threading
 import time
 # ID_1 MOTOR RIGHT
 # ID_4 MOTOR LEFT
-class odom:
+class Odom:
     curr_x = 0
     curr_y = 0
     curr_theta = 0      #
@@ -36,33 +36,47 @@ class odom:
         print(self.enc_r_old, self.enc_l_old)
 
     def odom_update(self):
-        self.enc_r, self.enc_l = read_positions((1,4))              # enc -> t = t + 1
-        self.deltaR = self.enc_r - self.enc_r_old
-        self.deltaL = self.enc_l - self.enc_l_old
+        while True:
+            try:
+                self.enc_r, self.enc_l = read_positions((1,4))              # enc -> t = t + 1
+            except TypeError:
+                print("Cannot unpack non-iterable NoneType object")
 
-        print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
-        print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
+            # discard read = 0
+            if self.enc_r == 0:
+                self.enc_r = self.enc_r_old
+            if self.enc_l == 0:
+                self.enc_l = self.enc_l_old
+                
 
-        # overFlow/underFlow
-        # 0 - 65535 => 0 - (2^16)-1
-        if self.deltaR < -40000:
-            self.deltaR = (65535 - self.enc_r_old) + self.enc_r     # counting up
-        elif self.deltaR > 40000:
-            self.deltaR = (-65535 - self.enc_r_old) + self.enc_r     # counting down            
+            self.deltaR = self.enc_r - self.enc_r_old
+            self.deltaL = self.enc_l - self.enc_l_old
 
-        if self.deltaL < -40000:
-            self.deltaL = (65535 - self.enc_l_old) + self.enc_l     # counting up
-        elif self.deltaL > 40000:
-            self.deltaL = (-65535 - self.enc_l_old) + self.enc_l     # counting down    
+            # print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
+            # print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
 
-        print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
-        print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
+            # overFlow/underFlow
+            # 0 - 65535 => 0 - (2^16)-1
+            if self.deltaR < -40000:
+                self.deltaR = (65535 - self.enc_r_old) + self.enc_r     # counting up
+            elif self.deltaR > 40000:
+                self.deltaR = (-65535 - self.enc_r_old) + self.enc_r     # counting down            
+
+            if self.deltaL < -40000:
+                self.deltaL = (65535 - self.enc_l_old) + self.enc_l     # counting up
+            elif self.deltaL > 40000:
+                self.deltaL = (-65535 - self.enc_l_old) + self.enc_l     # counting down    
+
+            print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
+            print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
 
 
-        self.enc_r_old = self.enc_r     # update
-        self.enc_l_old = self.enc_l     # update
+            self.enc_r_old = self.enc_r     # update
+            self.enc_l_old = self.enc_l     # update
 
-        time.sleep(0.0005)
+            # return self.deltaR, self.deltaL
+
+            time.sleep(0.01)
 
     def run_odom(self):
         self.thread = threading.Thread(target=self.odom_update)
