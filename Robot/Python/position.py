@@ -8,13 +8,14 @@ import time
 import data
 import math
 
+
 class Position:
 
     def __init__(self):
         self.cur_encoder_right = 0
         self.cur_encoder_left = 0
 
-        self.delay = 0.0005  # svakih .5 milisekundi
+        self.delay = 0.002  # svakih 2 milisekundi
 
     def start(self):
         thread = threading.Thread(target=self.run)
@@ -37,12 +38,12 @@ class Position:
 
         encoder_left = data.enc_left
         encoder_right = data.enc_right
-        #print(f"ENC1: {encoder_left} ENC2: {encoder_right}")
+        # print(f"ENC1: {encoder_left} ENC2: {encoder_right}")
 
         # predjeni put u instanci vremena(trenutni)
         d = ((encoder_left + encoder_right) / 2) * \
             data.OdometryData.inc_mm  # inc_mm
-        
+
         # ugao u instanci vremena
         g = -((encoder_left - encoder_right) / 2) * data.OdometryData.inc_deg
 
@@ -71,7 +72,9 @@ class Position:
         data.x_current = x
         data.y_current = y
         data.f_current = f
-        #self.print_position()
+
+        if data.debug:
+            self.print_position()
         return d
 
     def print_position(self):

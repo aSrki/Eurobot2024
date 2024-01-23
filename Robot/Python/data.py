@@ -8,6 +8,8 @@ color = None
 
 time_strategy_type = 95000
 
+debug = True
+
 running = threading.Event()
 
 points = 0
@@ -63,6 +65,7 @@ class TypesOfSendParameters(Enum):
     ANGLE = 1
     DISTANCE_ANGLE = 3
 # -------------------------------
+
 
 class TypeOfAction(Enum):
     SERVO = 0
@@ -123,6 +126,7 @@ front_lidar_detection = False
 back_lidar_detection = False
 
 cake_sensor = 0
+
 
 class Sensors(Enum):
     FRONT_ON = 0

@@ -25,19 +25,20 @@ def read_positions(ids):
     #     print("Failed to change the baudrate")
     #     exit(1)
     position = EncXL430(SERVO_PORT = "/dev/ttyUSB0", BAUD_RATE = 115200)
-    positions = {}
-    for motor_id in ids:
-        time.sleep(0.0001)
-        # Read the present position of each motor
-        dxl_present_position, _, _ = position.handler.read2ByteTxRx(
-            position.portHandler, motor_id, ADDR_PRESENT_POSITION
-        )
-        positions[motor_id] = dxl_present_position
-        print(f"Motor {motor_id} - Current position: {positions[motor_id]}")
-    
-    # port_handler.closePort()
-    # print("Port handler closed")
-    return positions
+    if EncXL430.permission == 1:
+        positions = {}
+        for motor_id in ids:
+            time.sleep(0.0001)
+            # Read the present position of each motor
+            dxl_present_position, _, _ = position.handler.read2ByteTxRx(
+                position.portHandler, motor_id, ADDR_PRESENT_POSITION
+            )
+            positions[motor_id] = dxl_present_position
+            print(f"Motor {motor_id} - Current position: {positions[motor_id]}")
+        
+        # port_handler.closePort()
+        # print("Port handler closed")
+        return positions
 
 if __name__ == "__main__":
     pos = []
