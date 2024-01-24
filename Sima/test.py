@@ -48,12 +48,14 @@ print("--------------------------------------")
 print("--------------------------------------")
 
 # time.sleep(0.5)
+# ID_1 MOTOR RIGHT
+# ID_4 MOTOR LEFT
 try:
 	odom.run_odom()
-	# send_velocity_multiple([1,4],[-50,-50])
-	# time.sleep(1)
-	# send_velocity_multiple([1,4],[0,0])
-	# time.sleep(1)
+	send_velocity_multiple([1,4],[-50,50])	# forward
+	time.sleep(2)
+	send_velocity_multiple([1,4],[0,0])
+	time.sleep(1)
 	# send_velocity_multiple([1,4],[100,100])
 	# time.sleep(1)
 	# send_velocity_multiple([1,4],[0,0])

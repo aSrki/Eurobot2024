@@ -1,6 +1,9 @@
 from dynamixel_sdk import *
+import threading
 # ID_1 MOTOR RIGHT
 # ID_4 MOTOR LEFT
+communication_lock = threading.Lock()
+
 class EncXL430:
     SERVO_PORT = "/dev/ttyUSB0"
     BAUD_RATE = 115200

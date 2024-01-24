@@ -10,63 +10,66 @@ OPERATING_MODE_ADDR = 11
 GOAL_VELOCITY_ADDR = 104
 
 def send_velocity_multiple(ids, vels):
-    for i in range(len(vels)):
-        vels[i] = int((vels[i] / 100)*265)
+    with communication_lock:
+        for i in range(len(vels)):
+            vels[i] = int((vels[i] / 100)*265)
+        
+        # portHandler = PortHandler(SERVO_PORT)
+        # portHandler.openPort()
     
-    # portHandler = PortHandler(SERVO_PORT)
-    # portHandler.openPort()
-   
 
-    # # Baud rate set via Wizard (default value is 57600)
-    # portHandler.setBaudRate(BAUD_RATE)
+        # # Baud rate set via Wizard (default value is 57600)
+        # portHandler.setBaudRate(BAUD_RATE)
 
-    # handler = Protocol2PacketHandler()
-    velocity = EncXL430(SERVO_PORT = "/dev/ttyUSB0", BAUD_RATE = 115200)
-    EncXL430.permission = 0
-    for id in ids:
-        communication_result, servo_error = velocity.handler.write1ByteTxRx(velocity.portHandler, id, TORQUE_ADDR, 0)
-        print("TORQUE OFF : %s" % velocity.handler.getTxRxResult(communication_result))
-        if servo_error != 0:
-            print("TORQUE OFF: %s" % velocity.handler.getRxPacketError(servo_error))
+        # handler = Protocol2PacketHandler()
+        velocity = EncXL430(SERVO_PORT = "/dev/ttyUSB0", BAUD_RATE = 115200)
+        EncXL430.permission = 0
+        for id in ids:
+            communication_result, servo_error = velocity.handler.write1ByteTxRx(velocity.portHandler, id, TORQUE_ADDR, 0)
+            print("TORQUE OFF : %s" % velocity.handler.getTxRxResult(communication_result))
+            if servo_error != 0:
+                print("TORQUE OFF: %s" % velocity.handler.getRxPacketError(servo_error))
 
-    for i in range(len(ids)):
-        communication_result, servo_error = velocity.handler.write1ByteTxRx(
-            velocity.portHandler, ids[i], OPERATING_MODE_ADDR, 1) # speed control mode
-        print("SINGLEMODE ON : %s" %
-                velocity.handler.getTxRxResult(communication_result))
-        if servo_error != 0:
+        for i in range(len(ids)):
+            communication_result, servo_error = velocity.handler.write1ByteTxRx(
+                velocity.portHandler, ids[i], OPERATING_MODE_ADDR, 1) # speed control mode
             print("SINGLEMODE ON : %s" %
-                    velocity.handler.getRxPacketError(servo_error))
+                    velocity.handler.getTxRxResult(communication_result))
+            if servo_error != 0:
+                print("SINGLEMODE ON : %s" %
+                        velocity.handler.getRxPacketError(servo_error))
 
-        # Enabling torque in order to set position goal and velocity
-        communication_result, servo_error = velocity.handler.write1ByteTxRx(
-            velocity.portHandler, ids[i], TORQUE_ADDR, 1)
-        print("TORQUE ON : %s" % velocity.handler.getTxRxResult(communication_result))
-        if servo_error != 0:
-            print("TORQUE ON : %s" % velocity.handler.getRxPacketError(servo_error))
+            # Enabling torque in order to set position goal and velocity
+            communication_result, servo_error = velocity.handler.write1ByteTxRx(
+                velocity.portHandler, ids[i], TORQUE_ADDR, 1)
+            print("TORQUE ON : %s" % velocity.handler.getTxRxResult(communication_result))
+            if servo_error != 0:
+                print("TORQUE ON : %s" % velocity.handler.getRxPacketError(servo_error))
 
-    dxl_goal_vel = vels
+        dxl_goal_vel = vels
 
-    groupSyncWrite = GroupSyncWrite(velocity.portHandler, velocity.handler, GOAL_VELOCITY_ADDR, 4)
+        groupSyncWrite = GroupSyncWrite(velocity.portHandler, velocity.handler, GOAL_VELOCITY_ADDR, 4)
 
-    for i in range(len(ids)):
-        # Allocate Dynamixel#i goal position value into byte array
-        param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_vel[i]))]
-        # Add Dynamixel#i goal position value to the Syncwrite parameter storage
-        dxl_addparam_result = groupSyncWrite.addParam(ids[i], param_goal_position)
-        if dxl_addparam_result != True:
-            print("[ID:%03d] groupSyncWrite addparam failed" % ids[i])
-            quit()
+        for i in range(len(ids)):
+            # Allocate Dynamixel#i goal position value into byte array
+            param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_vel[i]))]
+            # Add Dynamixel#i goal position value to the Syncwrite parameter storage
+            dxl_addparam_result = groupSyncWrite.addParam(ids[i], param_goal_position)
+            if dxl_addparam_result != True:
+                print("[ID:%03d] groupSyncWrite addparam failed" % ids[i])
+                quit()
 
-    # Syncwrite goal position
-    dxl_comm_result = groupSyncWrite.txPacket()
-    print("napravio sync write")
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % handler.getTxRxResult(dxl_comm_result))
+        # Syncwrite goal position
+        dxl_comm_result = groupSyncWrite.txPacket()
+        print("napravio sync write")
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % handler.getTxRxResult(dxl_comm_result))
 
-    EncXL430.permission = 1
-    # Clear syncwrite parameter storage
-    groupSyncWrite.clearParam()
+        EncXL430.permission = 1
+        # Clear syncwrite parameter storage
+        groupSyncWrite.clearParam()
+
+        
 
 def parallel_rotate(ids, angles):
     angle1 = int((angle1 / 360)*4095)
