@@ -56,10 +56,18 @@ try:
 	time.sleep(2)
 	send_velocity_multiple([1,4],[0,0])
 	time.sleep(1)
-	# send_velocity_multiple([1,4],[100,100])
-	# time.sleep(1)
-	# send_velocity_multiple([1,4],[0,0])
-	# time.sleep(1)
+	send_velocity_multiple([1,4],[50,-50])	# backward
+	time.sleep(2)
+	send_velocity_multiple([1,4],[0,0])
+	time.sleep(1)
+	send_velocity_multiple([1,4],[50,50])	# +
+	time.sleep(2)
+	send_velocity_multiple([1,4],[0,0])
+	time.sleep(1)
+	send_velocity_multiple([1,4],[-50,-50]) # -
+	time.sleep(2)
+	send_velocity_multiple([1,4],[0,0])
+	time.sleep(1)    
 except KeyboardInterrupt:
     odom.stop_odom()
 
