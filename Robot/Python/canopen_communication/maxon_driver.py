@@ -8,6 +8,8 @@ import time
 import subprocess
 import threading
 
+# flag = False
+
 
 class MaxonDriver:
 
@@ -26,7 +28,6 @@ class MaxonDriver:
             self.node.nmt.state = 'RESET COMMUNICATION'
             # node.nmt.state = 'RESET'
             self.node.nmt.wait_for_bootup(15)
-
             print('node nmt state 1) = {0}'.format(self.node.nmt.state))
 
             # Iterate over arrays or records
@@ -64,8 +65,6 @@ class MaxonDriver:
             print(device_name)
             print(vendor_id)
 
-            # self.node.state = 'SWITCH ON DISABLED'
-
             print('node state 1 = {0}'.format(self.node.state))
 
             # self.node.state = 'SWITCH ON DISABLED'
@@ -75,11 +74,29 @@ class MaxonDriver:
             # Re-map TxPDO1
             self.node.tpdo[1].clear()
             self.node.tpdo[1].add_variable('Statusword')
-            self.node.tpdo[1].add_variable('Velocity actual value')
+            self.node.tpdo[1].add_variable('Modes of operation display')
             self.node.tpdo[1].trans_type = 1
-            # self.node.tpdo[1].event_timer = 0
             self.node.tpdo[1].enabled = True
+
+            self.node.tpdo.read()
+            # Re-map TxPDO1
+            self.node.tpdo[2].clear()
+            self.node.tpdo[2].add_variable('Velocity demand value')
+            self.node.tpdo[2].add_variable('Velocity actual value')
+            self.node.tpdo[2].trans_type = 1
+            # self.node.tpdo[1].event_timer = 0
+            self.node.tpdo[2].enabled = True
             # Save new PDO configuration to self.node
+
+            self.node.tpdo.read()
+            # Re-map TxPDO1
+            self.node.tpdo[3].clear()
+            self.node.tpdo[3].add_variable('Position actual value')
+            self.node.tpdo[3].add_variable('Velocity actual value averaged')
+            self.node.tpdo[3].trans_type = 1
+            # self.node.tpdo[1].event_timer = 0
+            self.node.tpdo[3].enabled = True
+
             self.node.tpdo.save()
 
             # self.node.rpdo.read()
@@ -87,17 +104,29 @@ class MaxonDriver:
             # self.node.rpdo[1].transmit()
             # self.node.rpdo[1]['Controlword'].raw = 0x81
             # self.node.rpdo[1].transmit()
-
             self.node.rpdo[1].clear()
-            self.node.rpdo[1].add_variable('Modes of operation')
+            self.node.rpdo[1].add_variable('Controlword')
+            self.node.rpdo[1].add_variable('Target velocity')
             self.node.rpdo[1].trans_type = 1
             self.node.rpdo[1].enabled = True
 
             self.node.rpdo[2].clear()
-            self.node.rpdo[2].add_variable('Target velocity')
-            self.node.rpdo[2].add_variable('Controlword')
+            self.node.rpdo[2].add_variable('Target position')
+            self.node.rpdo[2].add_variable('Profile velocity')
             self.node.rpdo[2].trans_type = 1
             self.node.rpdo[2].enabled = True
+
+            self.node.rpdo[3].clear()
+            self.node.rpdo[3].add_variable('Profile acceleration')
+            self.node.rpdo[3].add_variable('Profile deceleration')
+            self.node.rpdo[3].trans_type = 1
+            self.node.rpdo[3].enabled = True
+
+            self.node.rpdo[4].clear()
+            self.node.rpdo[4].add_variable('Target torque')
+            self.node.rpdo[4].add_variable('Modes of operation')
+            self.node.rpdo[4].trans_type = 1
+            self.node.rpdo[4].enabled = True
 
             # self.node.rpdo[3].clear()
             # self.node.rpdo[3].add_variable('Controlword')
@@ -108,7 +137,8 @@ class MaxonDriver:
 
             self.node.rpdo[1].start(0.01)
             self.node.rpdo[2].start(0.01)
-            # self.node.rpdo[3].start(0.01)
+            self.node.rpdo[3].start(0.01)
+            self.node.rpdo[4].start(0.01)
 
             self.node.state = 'READY TO SWITCH ON'
 
@@ -168,36 +198,39 @@ class MaxonDriver:
         try:
 
             self.node.rpdo.read()
-            self.node.rpdo[1]['Modes of operation'].raw = 3
+            self.node.rpdo[1]['Controlword'].raw = 0x000F
+            self.node.rpdo[1]['Target velocity'].raw = vel
             self.node.rpdo[1].transmit()
 
             self.node.rpdo.read()
-            self.node.rpdo[2]['Target velocity'].raw = vel
-            self.node.rpdo[2]['Controlword'].raw = 0x000F
-            self.node.rpdo[2].transmit()
+            self.node.rpdo[4]['Target torque'].raw = 1
+            self.node.rpdo[4]['Modes of operation'].raw = 3
+            self.node.rpdo[4].transmit()
 
             # self.node.rpdo.read()
             # self.node.rpdo[3]['Controlword'].raw = 0x000F
             # self.node.rpdo[3].transmit()
 
-            print("Speed = " + str(self.node.rpdo[2]['Target velocity'].raw))
+            # print("Speed = " +
+            #       str(self.node.rpdo[2]['Target velocity'].raw))
 
             try:
                 self.network.check()
             except Exception:
                 pass
             # Read a value from TxPDO1
-            self.node.tpdo[1].wait_for_reception()
-            speed = self.node.tpdo[1]['Velocity actual value'].phys
+
+            # self.node.tpdo[1].wait_for_reception()
+            # speed = self.node.tpdo[1]['Target velocity'].phys
 
             # Read the state of the Statusword
             statusword = self.node.sdo[0x6041].raw
 
             print('ID: {0}'.format(ID))
             print('statusword: {0}'.format(statusword))
-            print('VEL: {0}'.format(speed))
+            # print('VEL: {0}'.format(speed))
 
-            time.sleep(0.001)
+            time.sleep(0.1)
 
         except KeyboardInterrupt:
             # Disconnect from CAN bus
@@ -234,15 +267,31 @@ network.connect(bustype='socketcan', channel='can0')
 network.check()
 
 maxon1 = MaxonDriver(1, network)
-time.sleep(0.1)
+time.sleep(0.5)
 maxon2 = MaxonDriver(2, network)
 time.sleep(1)
 
-maxon1.set_vel(1000, 1)
-time.sleep(0.01)
-maxon2.set_vel(1000, 2)
-time.sleep(5)
 
-maxon1.set_vel(2000, 1)
+vel = input()
+maxon1.set_vel(vel, 1)
 time.sleep(0.01)
-maxon2.set_vel(2000, 2)
+maxon2.set_vel(vel, 2)
+vel = input()
+maxon1.set_vel(vel, 1)
+time.sleep(0.01)
+maxon2.set_vel(vel, 2)
+# time.sleep(5)
+
+# maxon1.set_vel(2000, 1)
+# time.sleep(0.01)
+# maxon2.set_vel(2000, 2)
+
+print('going to exit... stopping...')
+if network:
+
+    for node_id in network:
+        node = network[node_id]
+        node.nmt.state = 'PRE-OPERATIONAL'
+        node.nmt.stop_node_guarding()
+    network.sync.stop()
+    network.disconnect()
