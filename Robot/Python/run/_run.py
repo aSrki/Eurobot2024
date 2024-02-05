@@ -1,0 +1,317 @@
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QDialog, QLabel
+from PyQt5.QtGui import QIcon, QPixmap, QPainter, QTransform
+from PyQt5.QtCore import pyqtSlot
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.uic import loadUi
+import threading
+import time
+import sys
+import os, subprocess
+sys.path.append("/home/mali/robot")
+
+
+stylesheet = """
+    Screen1 {
+        background-image: url("/home/mali/robot/run/slika_stola.jpg");
+        background-position: center;
+    }
+"""
+
+
+class Payload():
+    def __init__(self):
+        self.plate = None
+        self.color = None
+        self.strategy_type = None
+
+    def printPayload(self):
+        print('Sto = ', self.sto)
+        print('Boja = ', self.boja)
+        print('Strategija = ', self.strategija)
+        print('======================')
+
+
+gamePayload = Payload()
+count_time = 0
+
+
+class Screen1(QDialog):
+    def __init__(self):
+        super(Screen1, self).__init__()
+        loadUi("/home/mali/robot/run/screen1.ui", self)
+
+        self.showMaximized()
+
+        self.button_sto1.clicked.connect(self.on_click_sto1)
+        self.button_sto1.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto2.clicked.connect(self.on_click_sto2)
+        self.button_sto2.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto3.clicked.connect(self.on_click_sto3)
+        self.button_sto3.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto4.clicked.connect(self.on_click_sto4)
+        self.button_sto4.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto5.clicked.connect(self.on_click_sto5)
+        self.button_sto5.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto6.clicked.connect(self.on_click_sto6)
+        self.button_sto6.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto7.clicked.connect(self.on_click_sto7)
+        self.button_sto7.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto8.clicked.connect(self.on_click_sto8)
+        self.button_sto8.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto9.clicked.connect(self.on_click_sto9)
+        self.button_sto9.setStyleSheet(
+            "background-color: transparent; border: none;")
+        self.button_sto10.clicked.connect(self.on_click_sto10)
+        self.button_sto10.setStyleSheet(
+            "background-color: transparent; border: none;")
+
+    def on_click_sto1(self):
+        gamePayload.color = 'blue'
+        gamePayload.plate = 1
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto2(self):
+        gamePayload.color = 'green'
+        gamePayload.plate = 1
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto3(self):
+        gamePayload.color = 'blue'
+        gamePayload.plate = 2
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto4(self):
+        gamePayload.color = 'green'
+        gamePayload.plate = 2
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto5(self):
+        gamePayload.color = 'blue'
+        gamePayload.plate = 3
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto6(self):
+        gamePayload.color = 'green'
+        gamePayload.plate = 3
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto7(self):
+        gamePayload.color = 'blue'
+        gamePayload.plate = 4
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+        self.close()
+
+    def on_click_sto8(self):
+        gamePayload.color = 'green'
+        gamePayload.plate = 4
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto9(self):
+        gamePayload.color = 'blue'
+        gamePayload.plate = 5
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def on_click_sto10(self):
+        gamePayload.color = 'green'
+        gamePayload.plate = 5
+        # gamePayload.printPayload()
+        self.gotoScreen2()
+
+    def gotoScreen2(self):
+        screen2 = Screen2()
+        widget.addWidget(screen2)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+
+class Screen2(QDialog):
+    def __init__(self):
+        super(Screen2, self).__init__()
+        loadUi("/home/mali/robot/run/screen2.ui", self)
+
+        self.button_zelena.clicked.connect(self.on_click_zelena)
+        self.button_plava.clicked.connect(self.on_click_plava)
+        self.button_back.clicked.connect(self.gotoScreen1)
+
+    def on_click_zelena(self):
+        gamePayload.strategy_type = 'aggressive'
+        # gamePayload.printPayload()
+        self.gotoScreen3()
+
+    def on_click_plava(self):
+        gamePayload.strategy_type = 'passive'
+        # gamePayload.printPayload()
+        self.gotoScreen3()
+
+    def gotoScreen1(self):
+        screen1 = Screen1()
+        widget.addWidget(screen1)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+    def gotoScreen3(self):
+        screen3 = Screen3()
+        widget.addWidget(screen3)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+
+class Screen3(QDialog):
+    def __init__(self):
+        super(Screen3, self).__init__()
+        loadUi("/home/mali/robot/run/screen3.ui", self)
+
+        self.button_back_3.clicked.connect(self.gotoScreen2)
+        self.button_glhf.clicked.connect(self.glhf)
+        self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n" + "Izabran tanjir: " + str(gamePayload.plate) +
+                           "\nIzabrana strategija: " + str(gamePayload.strategy_type) + "\nDa li si siguran da zelis da nastavis?")
+
+    def gotoScreen2(self):
+        screen2 = Screen2()
+        widget.addWidget(screen2)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.button_glhf.hide()
+        self.close()
+
+    def glhf(self):
+        data.plate = gamePayload.plate
+        data.color = gamePayload.color
+        data.chosen_strategy = gamePayload.strategy_type
+        screen4 = Screen4()
+        widget.addWidget(screen4)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+
+class Screen4(QDialog):
+    def __init__(self):
+        super(Screen4, self).__init__()
+        loadUi("/home/mali/robot/run/screen4.ui", self)
+
+        # self.label.setText("Points: " + str(0) + "\nTime: " + str(data.elapsed_time) + "s")
+        self.kill_all_button.clicked.connect(self.kill_all)
+        self.kill_all_button.setStyleSheet(
+            "background-color: red; border: none;")
+
+        main = Main()
+        self.main_thread = threading.Thread(target=main.start)
+        self.main_thread.start()
+
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.update_label)
+        self.timer.start(1000)
+
+    def update_label(self):
+        if data.cinc != 1:
+            ispis = str("WAITING FOR CINC \n" + "Strategy:" +
+                        str(data.plate) + ", " + str(data.color))
+        else:
+            ispis = str("Points: " + str(data.points) +
+                        "\nTime: " + str(int(data.elapsed_time)) + "s\n")
+        self.label.setText(ispis)
+
+    def kill_all(self):
+        data.running.clear()
+        self.main_thread.join()
+        print("KILLING MAIN THREAD")
+        time.sleep(0.2)
+        screen5 = Screen5()
+        widget.addWidget(screen5)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+
+class Screen5(QDialog):
+    def __init__(self):
+        super(Screen5, self).__init__()
+        loadUi("/home/mali/robot/run/screen5.ui", self)
+
+        self.button_exit.clicked.connect(self.kill_me)
+        self.button_pusti_robote.clicked.connect(self.start_robots)
+        self.button_exit.setStyleSheet("background-color: red; border: none;")
+        self.button_bldc_in.clicked.connect(self.bldc_in)
+        self.button_bldc_out.clicked.connect(self.bldc_out)
+        self.button_bldc_off.clicked.connect(self.bldc_off)
+
+
+    def kill_me(self):
+        self.close()
+        sys.exit()
+
+    def start_robots(self):
+        screen1 = Screen1()
+        widget.addWidget(screen1)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+    
+    def bldc_in(self):
+        command = "bash -c \"python3 /home/mali/robot/servo/bldc_in.py\""
+        p = subprocess.Popen(
+            [command],
+            shell=True
+        )
+
+        try:
+            out, err = p.communicate()
+        except Exception as e:
+            print(f"BLDC IN ERROR: {e}")
+
+    def bldc_out(self):
+        command = "bash -c \"python3 /home/mali/robot/servo/bldc_out.py\""
+        p = subprocess.Popen(
+            [command],
+            shell=True
+        )
+
+        try:
+            out, err = p.communicate()
+        except Exception as e:
+            print(f"BLDC IN ERROR: {e}")
+    
+    def bldc_off(self):
+        command = "bash -c \"python3 /home/mali/robot/servo/bldc_off.py\""
+        p = subprocess.Popen(
+            [command],
+            shell=True
+        )
+
+        try:
+            out, err = p.communicate()
+        except Exception as e:
+            print(f"BLDC IN ERROR: {e}")
+
+
+
+if __name__ == '__main__':
+    import data
+    from main import Main
+
+    app = QApplication(sys.argv)
+    app.setStyleSheet(stylesheet)
+
+    widget = QtWidgets.QStackedWidget()
+    widget.resize(719, 480)
+
+    screen5 = Screen5()
+
+    widget.addWidget(screen5)
+    widget.showMaximized()
+
+    sys.exit(app.exec_())

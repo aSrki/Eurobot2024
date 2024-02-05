@@ -1,4 +1,4 @@
-import can_comm
+import Robot.Python.communication.can_comm as can_comm
 from position import *
 
 can_com = can_comm.CAN_COMM()

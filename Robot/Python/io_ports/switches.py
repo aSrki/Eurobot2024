@@ -1,0 +1,91 @@
+import RPi.GPIO as GPIO
+import time
+import threading
+if __name__ == "__main__":
+    import sys
+    sys.path.append("/home/mali/robot")
+import data
+from data import Sensors
+
+
+class Switches:
+    debug = False
+    GPIO.setmode(GPIO.BCM)
+    FRONT_LEFT = 9
+    FRONT_RIGHT = 25
+    BACK_LEFT = 11
+    BACK_RIGHT = 8
+    CAKE = 16
+
+    CINC = 7
+
+    # SENZORI
+    GPIO.setup(FRONT_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(FRONT_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(BACK_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(BACK_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(CAKE, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+    GPIO.setup(CINC, GPIO.IN)
+
+    def __init__(self):
+        pass
+
+    def start(self):
+        thread = threading.Thread(target=self.run)
+        thread.start()
+
+    def run(self):
+        while data.running.is_set():
+            self.check()
+            time.sleep(0.01)
+
+    def check(self):
+
+        if data.SENSORS_ENABLED:
+
+            if data.sensors == data.Sensors.FRONT_ON:
+                data.sensor_front_left = GPIO.input(self.FRONT_LEFT)
+                data.sensor_front_right = GPIO.input(self.FRONT_RIGHT)
+                data.sensor_back_left = 0
+                data.sensor_back_right = 0
+
+            elif data.sensors == data.Sensors.BACK_ON:
+                data.sensor_back_left = GPIO.input(self.BACK_LEFT)
+                data.sensor_back_right = GPIO.input(self.BACK_RIGHT)
+                data.sensor_front_left = 0
+                data.sensor_front_right = 0
+
+            elif data.sensors == data.Sensors.ALL_OFF:
+                data.sensor_front_left = 0
+                data.sensor_front_right = 0
+                data.sensor_back_left = 0
+                data.sensor_back_right = 0
+
+            else:
+                # print("\n\n\n\n\t\tGRESKA U SWITCHEVIMA\n\n\n\n")
+                data.sensor_front_left = GPIO.input(self.FRONT_LEFT)
+                data.sensor_front_right = GPIO.input(self.FRONT_RIGHT)
+                data.sensor_back_left = GPIO.input(self.BACK_LEFT)
+                data.sensor_back_right = GPIO.input(self.BACK_RIGHT)
+
+        data.cinc = GPIO.input(self.CINC)
+        data.cake_sensor = GPIO.input(self.CAKE)
+
+        if self.debug:
+            print(
+            f"FRONT --> left: { data.sensor_front_left}  right: {data.sensor_front_right} BACK -->> left: {data.sensor_back_left}  right: {data.sensor_back_right}")
+            print(f"BACK : {data.sensor_back_left} , {data.sensor_back_right}")
+            print("CINCa : ", GPIO.input(self.CINC))
+            print(f"CAKE HERE <3: {data.cake_sensor}")
+
+
+if __name__ == "__main__":
+    data.running.set()
+    data.sensors = None
+    switches = Switches()
+    switches.debug = True
+    
+    while True:
+        switches.check()
+        time.sleep(0.1)
