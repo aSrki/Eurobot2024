@@ -68,7 +68,6 @@ strategy1.check_time(1, "timeout")
 # ide na drugi dispenser
 
 strategy1.skip_to_flag(1)
-strategy1.vacuum_cherry(0)
 strategy1.front_all_on()
 strategy1.go_to_XY(1820, 1850, True, ss=0.5, bs=0, at=0,
                    b=50)  # odmakne se od dispensera
@@ -89,7 +88,6 @@ strategy1.back_all_off()
 strategy1.skip_to_flag(3)
 strategy1.skip_to_flag(4)
 strategy1.move_vacuum(173)
-strategy1.vacuum_cherry(0)
 strategy1.front_all_on()  # ide po pakove
 strategy1.set_skip_flag(9)
 strategy1.add_sequence(pink2(0, 0, attempts=100))

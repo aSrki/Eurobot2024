@@ -1,44 +1,34 @@
 import sys
 import time
 if __name__ == "__main__":
-    sys.path.append("/home/mali/robot")
+    sys.path.append("/home/robot/robot")
 
 import threading
 import time
 import data
 import math
-from communication.driver_communication import DriverCommunication
+
 
 class Position:
 
-    def __init__(self, maxon:DriverCommunication):
+    def __init__(self):
         self.cur_encoder_right = 0
         self.cur_encoder_left = 0
-        self.maxon = maxon
 
-        self.delay = 0.0005  # svakih .5 milisekundi
+        self.delay = 0.002  # svakih 2 milisekundi
 
     def start(self):
-        # data.running.set()
         thread = threading.Thread(target=self.run)
         thread.start()
+        print("Position started")
 
     def run(self):
+        print("Position running")
         while data.running.is_set():
             self.calculate_position()
             time.sleep(self.delay)
 
-        return
-
-    def update_inc(self):
-
-        data.sum_encoder_left, data.sum_encoder_right = self.maxon.get_encoders_left_right()
-        # print('\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left ))
-        # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
-
     def calculate_position(self):
-        self.update_inc()
-
         # Trenutne kordinate
         x = data.x_current
         y = data.y_current
@@ -46,18 +36,12 @@ class Position:
 
         # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
 
-        sum_left = data.sum_encoder_left
-        sum_right = data.sum_encoder_right
+        encoder_left = data.enc_left
+        encoder_right = data.enc_right
 
-        # Trenutna inkrementacija
-        encoder_right = self.cur_encoder_right
-        encoder_left = self.cur_encoder_left
-
-        encoder_left = sum_left - encoder_left
-        encoder_right = sum_right - encoder_right
-
-        self.cur_encoder_right = sum_right
-        self.cur_encoder_left = sum_left
+        data.sum_encoder_left += encoder_left
+        data.sum_encoder_right += encoder_right
+        print(f"ENC1: {encoder_left} ENC2: {encoder_right}")
 
         # predjeni put u instanci vremena(trenutni)
         d = ((encoder_left + encoder_right) / 2) * \
@@ -91,17 +75,16 @@ class Position:
         data.x_current = x
         data.y_current = y
         data.f_current = f
-        #self.print_position()
+
+        if data.debug:
+            self.print_position()
         return d
 
     def print_position(self):
-        print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
-        print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
-        # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
-        # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
-        print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
-        print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
-        print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n\n\n')
+        return
+        # print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
+        # print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
+        # print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n')
         # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
 

@@ -78,9 +78,10 @@ class Position:
         return d
 
     def print_position(self):
-        print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
-        print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
-        print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n')
+        return
+        # print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
+        # print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
+        # print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n')
         # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
 

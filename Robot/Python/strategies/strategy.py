@@ -190,15 +190,6 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def vacuum_cherry(self, v=0, s=0, da=0):
-        '''v - speed in %, s - sleep, da - delay action in step'''
-        action = Action.bldc_on(velocity=v, sleep=s, thread=self.thread)
-
-        if self.add_to_step:
-            action.delay_action = da
-            self.operations[-1].actions.append(action)
-        else:
-            self.operations.append(action)
 
     def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0):
         '''d - direction, g - gain, s - sleep, ss - sleep after detection, bs - sleep after backing, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags'''

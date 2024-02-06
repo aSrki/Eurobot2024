@@ -2,7 +2,7 @@ import serial
 import time
 if '__main__' == __name__:
     import sys
-    sys.path.append("/home/mali/robot/")
+    sys.path.append("/home/robot/robot/")
 import data
 
 

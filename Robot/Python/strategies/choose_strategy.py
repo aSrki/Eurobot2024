@@ -17,14 +17,6 @@
 # from strategies import strategy_test
 # from strategies import strategy_15_agresivna1
 
-from strategies.strategy_1 import strategy1
-from strategies.strategy_2 import strategy2
-from strategies.strategy_3 import strategy3
-from strategies.strategy_4 import strategy4
-from strategies.strategy_5 import strategy5
-from strategies.strategy_6 import strategy6
-from strategies.strategy_7 import strategy7
-from strategies.strategy_8 import strategy8
 from strategies.strategy_0 import strategy0
 
 if __name__ == '__main__':
@@ -39,81 +31,30 @@ debug = True
 
 
 def choose_strategy():
-    data.log.add_info_message(f"Chosen strategy {data.chosen_strategy}")
-    data.log.add_info_message(f"Color of plate {data.color}")
-    data.log.add_info_message(f"Plate number: {data.plate}")
+    #data.log.add_info_message(f"Chosen strategy {data.chosen_strategy}")
+    #data.log.add_info_message(f"Color of plate {data.color}")
+    #data.log.add_info_message(f"Plate number: {data.plate}")
 
     if debug:
         print(f"Chosen strategy {data.chosen_strategy}")
         print(f"Color of plate {data.color}")
         print(f"Plate number: {data.plate}")
 
-    if data.plate == 5 and data.color == "blue" and data.chosen_strategy == "passive":
-        data.time_strategy_type = 90  # 95
-        # za strategiju 1 plate = 5
-        data.x_current = 1820  # 1680 bez strartace
-        data.y_current = 1790
-        data.f_current = 0
-        return strategy1.operations  # strategy1
-    elif data.plate == 1 and data.color == "blue" and data.chosen_strategy == "passive":
-        data.time_strategy_type = 91  # 95
-        # za strategiju 3 plate = 2
-        data.x_current = 185
-        data.y_current = 2720
-        data.f_current = 180
-        return strategy3.operations
-    elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
-        data.time_strategy_type = 90  # 95
-        # za strategiju 2 plate = 1
-        data.x_current = 3#185  # 175
-        data.y_current = 3#1815  # 2055
-        data.f_current = 0#180
-        return strategy0.operations # 2
-    elif data.plate == 5 and data.color == "green" and data.chosen_strategy == "passive":
-        data.time_strategy_type = 91  # 95
-        # za strategiju 4 plate = 4 color green
-        data.x_current = 1820
-        data.y_current = 2720
-        data.f_current = 180
-        return strategy4.operations
-    elif data.plate == 5 and data.color == "blue" and data.chosen_strategy == "aggressive":
-        data.time_strategy_type = 95
-        # za strategiju 4 plate = 4 color green
-        data.x_current = 1820  # 1680 bez strartace
-        data.y_current = 1790
-        data.f_current = 0
-        return strategy5.operations
-    elif data.plate == 1 and data.color == "blue" and data.chosen_strategy == "aggressive":
-        data.time_strategy_type = 95
-        # za strategiju 4 plate = 4 color green
-        data.x_current = 185
-        data.y_current = 2720
-        data.f_current = 180
-        return strategy7.operations
-    elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "aggressive":
-        data.time_strategy_type = 95
-        # za strategiju 4 plate = 4 color green
-        data.x_current = 185  # 175
-        data.y_current = 1815  # 2055
-        data.f_current = 180
-        return strategy6.operations
-    elif data.plate == 5 and data.color == "green" and data.chosen_strategy == "aggressive":
-        data.time_strategy_type = 95
-        # za strategiju 4 plate = 4 color green
-        data.x_current = 1820
-        data.y_current = 2720
-        data.f_current = 180
-        return strategy8.operations
-    elif data.plate == 4 and data.color == "blue" and (data.chosen_strategy == "passive" or data.chosen_strategy == "aggressive"):
-        # data.time_strategy_type = 93  # 95
-        # data.x_current = 185
-        # data.y_current = 2720
-        # data.f_current = 180
-        data.time_strategy_type = 1000
-        data.x_current = 3
-        data.y_current = 3
-        data.f_current = 0
-        return strategy0.operations
+    # if data.plate == 5 and data.color == "blue" and data.chosen_strategy == "passive":
+    #     data.time_strategy_type = 90  # 95
+    #     # za strategiju 1 plate = 5
+    #     data.x_current = 1820  # 1680 bez strartace
+    #     data.y_current = 1790
+    #     data.f_current = 0
+    #     return strategy1.operations  # strategy1
+    # elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
+    #     data.time_strategy_type = 90  # 95
+    #     # za strategiju 2 plate = 1
+    data.x_current = 3
+    data.y_current = 3
+    data.f_current = 0
+    return strategy0.operations # 2
+    
 
 
 # class choses_strategy():

@@ -56,9 +56,16 @@ is_detection_front = None
 stop_time = 1  # kada staje
 backing_time = 1  # kada se vraca nazad
 
+offset = 0
+
 skip_to = None
 num_of_skips = 0
 
+sum_encoder_left = 0
+sum_encoder_right = 0
+
+last_MVL = 0
+last_MVR = 0
 
 class TypesOfSendParameters(Enum):
     COORDINATE = 0
@@ -99,15 +106,15 @@ class OdometryData:
 
 # --------------------------------
 
-# class IDS(Enum):
-#     id_bldc = 51
-#     id_pusher = 1  # 90 zatvoren # 530 otvoren
-#     id_gripper = 15  # otvoren 48; zatvoren 60
-#     id_lift = 11  # donja - 0, gornja - 340
-#     id_vacuum = 41  # 41 za XM  # sredina - 325, na desno manji ugao, na levo veci ugao
-#     id_reservoir_door = 6  # zatvoren - 160, otvoren - 210
-#     id_doser = 7  # load - 1, unload - 359
-#     id_cherry_pipe = 4  # zatvoren - 1, otvoren - 190
+class IDS(Enum):
+    id_bldc = 51
+    id_pusher = 1  # 90 zatvoren # 530 otvoren
+    id_gripper = 15  # otvoren 48; zatvoren 60
+    id_lift = 11  # donja - 0, gornja - 340
+    id_vacuum = 41  # 41 za XM  # sredina - 325, na desno manji ugao, na levo veci ugao
+    id_reservoir_door = 6  # zatvoren - 160, otvoren - 210
+    id_doser = 7  # load - 1, unload - 359
+    id_cherry_pipe = 4  # zatvoren - 1, otvoren - 190
 
 
 sleep = False

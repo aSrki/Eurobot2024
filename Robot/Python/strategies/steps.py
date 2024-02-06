@@ -37,16 +37,6 @@ class Action:
         action.delay_action = delay
         return action
 
-    @classmethod
-    def bldc_on(cls, velocity, sleep=0, thread=False, delay=0):
-        action = cls()
-        action.type = TypeOfAction.BLDC
-        action.velocity = velocity
-        action.sleep = sleep
-        action.thread = thread
-        action.delay_action = delay
-        return action
-
 
 class Step:
 

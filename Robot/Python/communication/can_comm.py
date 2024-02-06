@@ -5,10 +5,6 @@ import threading
 import math
 from position import Position
 
-pos = Position()
-pos.start()
-
-
 class CAN_COMM:
     def __init__(self):
         subprocess.run(["sudo", "/sbin/ip", "link", "set", "can0",
@@ -20,9 +16,10 @@ class CAN_COMM:
         data.running.set()
         self.thread = None
 
+        self.pos = Position()
+
     def receive(self):
         while True:
-
             msg = self.can0.recv(10.0)
 
             if len(msg.data) == 4:
@@ -40,7 +37,7 @@ class CAN_COMM:
                 data.enc_left = enc1
                 data.enc_right = enc2
 
-                pos.calculate_position()
+                self.pos.calculate_position()
 
             if msg is None:
                 print('Timeout occurred, no message.')

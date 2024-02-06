@@ -24,8 +24,8 @@ class Execute:
         self.moving = Moving()
 
         # Inicijalno salje nula na motore ako esp nastavi nesto da salje
-        self.moving.position.maxon.send_speed_left(0)
-        self.moving.position.maxon.send_speed_right(0)
+        self.moving.position.maxon_right.rotate_with_rpm(0)
+        self.moving.position.maxon_left.rotate_with_rpm(0)
 
         self.servo_threads = []
         self.bldc_thread = threading.Thread()
@@ -115,9 +115,6 @@ class Execute:
                         data.points += self.operation.points
                     elif self.operation.type == "unload":
                         data.points += self.operation.points
-                        data.on_kebab -= 1
-                    elif self.operation.type == "cherry":
-                        data.cherry_points += self.operation.points
 
                 # Ako je preskakao do flaga
                 if data.skip_to != None and self.skipping:

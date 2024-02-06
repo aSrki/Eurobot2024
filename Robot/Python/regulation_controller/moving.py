@@ -13,8 +13,8 @@ class Moving:
 
     def __init__(self):
         self.position = PositionRegulation()
-        self.position.maxon.send_speed_left(0)
-        self.position.maxon.send_speed_right(0)
+        self.position.maxon_left.rotate_with_rpm(0)
+        self.position.maxon_right.rotate_with_rpm(0)
         self.distance_error = 0
         self.current_distance = 0
 
@@ -135,8 +135,8 @@ class Moving:
         if self.DEBUG_FOR_GO:
             print('\nSALJE regulaciji distancu = ', distance, "\n")
             print(f'\n KOORDINATE:{x}, {y}\n')
-            data.log.add_info_message(f'OFFSET: {offset}')
-            data.log.add_info_message(f'\n KOORDINATE:{x}, {y}\n')
+            #data.log.add_info_message(f'OFFSET: {offset}')
+            #data.log.add_info_message(f'\n KOORDINATE:{x}, {y}\n')
 
         # Salje regulaciji zeljenu distancu i postavlja regulacione parametre
         self.translation_parameters()

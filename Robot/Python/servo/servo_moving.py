@@ -55,11 +55,12 @@ class Servo_Moving:
 
     # dovodi sve servoe na pocetni polozaj
     def home(self):
-        ServoXL430(IDS.id_cherry_pipe.value).rotate(170)
-        ServoXL430(IDS.id_vacuum.value).rotate(173)
-        ServoXL430(IDS.id_reservoir_door.value).rotate(190)
-        ServoXL430(IDS.id_gripper.value).rotate(48)
-        ServoXL430(IDS.id_lift.value).rotate(10)
+        return
+        # ServoXL430(IDS.id_cherry_pipe.value).rotate(170)
+        # ServoXL430(IDS.id_vacuum.value).rotate(173)
+        # ServoXL430(IDS.id_reservoir_door.value).rotate(190)
+        # ServoXL430(IDS.id_gripper.value).rotate(48)
+        # ServoXL430(IDS.id_lift.value).rotate(10)
         # ServoXL430(IDS.id_doser.value).rotate(310)
         
 

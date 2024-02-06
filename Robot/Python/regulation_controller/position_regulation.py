@@ -1,11 +1,10 @@
 import threading
 from time import sleep
 import data
-from communication.driver_communication import DriverCommunication
-from regulation_controller.position import Position
-
-# 14.5 volti ima napajanje
-
+#from communication.driver_communication import DriverCommunication
+#from regulation_controller.position import Position
+from communication.can_comm import *
+from communication.maxon_epos_driver import MaxonMotor
 
 class PositionRegulation:
     count = 0
@@ -43,7 +42,7 @@ class PositionRegulation:
     es_R = 0
 
     min_pid = 0
-    max_pid = 8000
+    max_pid = 5000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -51,31 +50,36 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
-    RAMP_INCREMENT_START = 170  # ikrimentira se za time: delay #14
+    RAMP_INCREMENT_START = 350  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 350  # ikrimentira se za time: delay  #12
 
-    ROT_RAMP_UP_INCREMENT = 100  # 12
-    ROT_RAMP_DOWN_INCREMENT = 20000  # 12
+    ROT_RAMP_UP_INCREMENT = 500  # 12
+    ROT_RAMP_DOWN_INCREMENT = 500  # 12
 
-    delay = 0.03  # speed regulation ~2ms
+    delay = 0.03  # speed regulation ~30ms
 
     def __init__(self):
         self.W_F = data.f_current
 
-        self.maxon = DriverCommunication(
-            ki=1, kp=2, side='L')
+        # self.maxon = DriverCommunication(
+        #     ki=1, kp=2, side='L')
+        
+        self.maxon_left = MaxonMotor(
+            1, 100000, 100000)
+        self.maxon_right = MaxonMotor(
+            2, 100000, 100000)
 
         self.stop_position = False
 
         print("position")
         # I2i P1p
-        self.position = Position(self.maxon)
-        # self.position.start()
+        self.can_communication = CAN_COMM()
 
     def start(self):
 
         self.is_running = True
-        self.position.start()
+        self.can_communication.start()
+        self.can_communication.pos.start()
 
         thread = threading.Thread(target=self.running_calculation)
         thread.start()
@@ -89,11 +93,11 @@ class PositionRegulation:
 
     def calculate_position(self):
 
-        debug = False
+        debug = True
         if self.count > self.max_count:
             self.count = 0
             debug = False
-            DriverCommunication.debug = False
+            #DriverCommunication.debug = False
         self.count += 1
 
         # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
@@ -115,13 +119,13 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if (debug):
+        if True:
             print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
             # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
             # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
-            print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
-            print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
+            print('X-osa:\t\t\t{:.0f} mm'.format(data.x_current))
+            print('Y-osa:\t\t\t{:.0f} mm'.format(data.y_current))
             print('UGAO osa:\t\t{:.0f}'.format(f), ' \n\n\n')
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
@@ -129,12 +133,16 @@ class PositionRegulation:
             while data.last_MVL > 2000 or data.last_MVR > 2000:
                 data.last_MVL = int(0.3 * data.last_MVL)
                 data.last_MVR = int(0.3 * data.last_MVR)
-                self.maxon.send_speed_left(data.last_MVL)
-                self.maxon.send_speed_right(data.last_MVR)
+                # self.maxon.send_speed_left(data.last_MVL)
+                # self.maxon.send_speed_right(data.last_MVR)
+                self.maxon_left.rotate_with_rpm(data.last_MVL)
+                self.maxon_right.rotate_with_rpm(data.last_MVR)
                 sleep(.01)
 
-            self.maxon.send_speed_left(0)
-            self.maxon.send_speed_right(0)
+            # self.maxon.send_speed_left(0)
+            # self.maxon.send_speed_right(0)
+            self.maxon_left.rotate_with_rpm(0)
+            self.maxon_right.rotate_with_rpm(0)
         else:
             self.regulation(d, f, debug)
 
@@ -224,11 +232,11 @@ class PositionRegulation:
                 # print("poj do 180")
                 rotpoj *= 1.2
 
-            KpK = 250 * pojacanje  # 6 #4 #Srdjan_bilo je 5
-            KpR = 28 * pojacanje * rotpoj
+            KpK = 2 * pojacanje  # 6 #4 #Srdjan_bilo je 5
+            KpR = 2 * pojacanje * rotpoj
 
-            TiR = 1700  # 450 # self.TiRConst#1#~60,150
-            TiK = 400  # ~2000
+            TiR = 1000000  # 450 # self.TiRConst#1#~60,150
+            TiK = 1000000  # ~2000
 
             TdK = 0  # bilo je 2
             TdR = 0  # 2
@@ -280,14 +288,14 @@ class PositionRegulation:
             if debug:
                 print("TRANSLATE")
 
-            KpK = 12 * pojacanje  # !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 60 * pojacanje * rotpoj  # 1.2 bilo
+            KpK = 5 * pojacanje  # !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
+            KpR = 2 * pojacanje * rotpoj  # 1.2 bilo
 
-            TiR = 400  # 200
-            TiK = 6000
+            TiR = 1000000  # 200
+            TiK = 1000000
 
-            TdK = 1  # 1
-            TdR = 1  # 3
+            TdK = 0  # 1
+            TdR = 0  # 3
 
         else:
             if debug:
@@ -295,14 +303,14 @@ class PositionRegulation:
 
             pojacanje = 1
 
-            KpK = 7   # (0.85 * pojacanje  )/1.2#1
-            KpR = 20   # (2 * pojacanje * 10)/2#40 ... 90
+            KpK = 2   # (0.85 * pojacanje  )/1.2#1
+            KpR = 2   # (2 * pojacanje * 10)/2#40 ... 90
             # 30,33
-            TiR = 200  # self.TiRConst#1#~60,150
-            TiK = 200  # ~2000
+            TiR = 1000000  # self.TiRConst#1#~60,150
+            TiK = 1000000  # ~2000
 
-            TdK = 2  # 3
-            TdR = 2  # 3
+            TdK = 0  # 3
+            TdR = 0  # 3
 
         # PID TRANSLACIJA________________________
         esK = self.es_K  # sTARA GRESKA
@@ -472,8 +480,11 @@ class PositionRegulation:
 
         if (enK >= -3) and (enK <= 3) and (-.5 <= enR <= .5):
             data.budz = True
-            self.maxon.send_speed_left(0)
-            self.maxon.send_speed_right(0)
+            # self.maxon.send_speed_left(0)
+            # self.maxon.send_speed_right(0)
+
+            self.maxon_left.rotate_with_rpm(0)
+            self.maxon_right.rotate_with_rpm(0)
 
             self.integral_K = 0
             self.integral_R = 0
@@ -498,9 +509,11 @@ class PositionRegulation:
             # MVL = 2000
             # MVR = 2000
 
-            self.maxon.send_speed_left(MVL)  # CHANAL 1 MVL
+            # self.maxon.send_speed_left(MVL)  # CHANAL 1 MVL
+            # self.maxon.send_speed_right(MVR)  # CHANAL2 MVR
 
-            self.maxon.send_speed_right(MVR)  # CHANAL2 MVR
+            self.maxon_left.rotate_with_rpm(MVL)
+            self.maxon_right.rotate_with_rpm(-MVR)
 
             data.last_MVL = MVL
             data.last_MVR = MVR

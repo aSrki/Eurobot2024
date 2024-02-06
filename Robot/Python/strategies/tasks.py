@@ -204,10 +204,8 @@ def cherry1():
 
     c1.rotate_to(0)
     c1.move_vacuum(145)
-    c1.vacuum_cherry(-70)
     c1.go_to_XY(1820, 1800, True, g=0.1, s=0.5, ss=0,
                 bs=2, b=0, at=0)  # da prodje dispenser
-    c1.vacuum_cherry(0)
     c1.add_points("cherry", 9)
     # c1.move_vacuum(165)
 
@@ -222,10 +220,8 @@ def cherry2(attempts=0, offs=0):
     c2.lift_cakes(10)
     c2.move_vacuum(150)
     c2.end_parallel()
-    c2.vacuum_cherry(-70)
 
     c2.set_distance_angle(450-offs, 0, g=0.1, s=1.5)
-    c2.vacuum_cherry(0)
 
     c2.back_lidar_on()
     c2.set_distance_angle(-450, -3, g=0.8, ss=0.5, bs=0, b=0, at=0+attempts)
@@ -240,10 +236,8 @@ def cherry3(xoffs=0, yoffs=0):
 
     c3.rotate_to(180)
     c3.move_vacuum(145)
-    c3.vacuum_cherry(-70)
     c3.go_to_XY(185+xoffs, 1250+yoffs, True, g=0.1, s=0.5, ss=0.5,
                 bs=2, b=0, at=0)  # da prodje dispenser
-    c3.vacuum_cherry(0)
 
     c3.add_points("cherry", 9)
 
@@ -257,10 +251,8 @@ def cherry4():
 
     c4.rotate_to(180)
     c4.move_vacuum(150)
-    c4.vacuum_cherry(-70)
 
     c4.set_distance_angle(450, 0, g=0.15, s=1)
-    c4.vacuum_cherry(0)
 
     c4.back_all_on()
     c4.set_distance_angle(-450, -3, ss=0.5, bs=0, b=0, at=0)
@@ -359,8 +351,6 @@ def unload_basket_blue():
     ubb.rotate_to(0)
     # ubb.move_pipe(1)
     ubb.move_door(235)
-    ubb.vacuum_cherry(30, 3)
-    ubb.vacuum_cherry(0)
 
     ubb.add_points("sort", 5)
 
@@ -378,8 +368,6 @@ def unload_basket_green():
     ubg.end_step_actions()  # 220
     ubg.rotate_to(0)
     ubg.move_door(235)
-    ubg.vacuum_cherry(30, 3)
-    ubg.vacuum_cherry(0)
 
     ubg.add_points("sort", 5)
 
