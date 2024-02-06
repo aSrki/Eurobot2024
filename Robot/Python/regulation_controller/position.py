@@ -18,15 +18,15 @@ class Position:
         self.delay = 0.002  # svakih 2 milisekundi
 
     def start(self):
-        thread = threading.Thread(target=self.run)
-        thread.start()
+        #     thread = threading.Thread(target=self.run)
+        #     thread.start()
         print("Position started")
 
-    def run(self):
-        print("Position running")
-        while data.running.is_set():
-            self.calculate_position()
-            time.sleep(self.delay)
+    # def run(self):
+    #     print("Position running")
+    #     while data.running.is_set():
+    #         self.calculate_position()
+    #         time.sleep(self.delay)
 
     def calculate_position(self):
         # Trenutne kordinate
@@ -36,12 +36,22 @@ class Position:
 
         # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
 
-        encoder_left = data.enc_left
-        encoder_right = data.enc_right
+        # encoder_left = data.enc_left
+        # encoder_right = data.enc_right
 
-        data.sum_encoder_left += encoder_left
-        data.sum_encoder_right += encoder_right
-        print(f"ENC1: {encoder_left} ENC2: {encoder_right}")
+        # print(f"POSITION:   INC1: {data.enc_left} INC2: {data.enc_right}")
+
+        curr_sum_enc_left = data.sum_encoder_left
+        encoder_left = curr_sum_enc_left - data.prev_enc_sum_left
+
+        curr_sum_enc_right = data.sum_encoder_right
+        encoder_right = curr_sum_enc_right - data.prev_enc_sum_right
+
+        data.prev_enc_sum_left = curr_sum_enc_left
+        data.prev_enc_sum_right = curr_sum_enc_right
+
+        print(
+            f"POSITION:   ENC1: {encoder_left} ENC2: {encoder_right}")
 
         # predjeni put u instanci vremena(trenutni)
         d = ((encoder_left + encoder_right) / 2) * \
@@ -81,11 +91,11 @@ class Position:
         return d
 
     def print_position(self):
-        return
         # print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
         # print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
         # print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n')
-        # # print('d duzina:\t\t\t{:.0f}'.format(d))
+        return
+        # print('d duzina:\t\t\t{:.0f}'.format(d))
 
 
 if __name__ == "__main__":

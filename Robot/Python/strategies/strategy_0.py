@@ -27,9 +27,9 @@ strategy0 = Strategy()
 # strategy0.end()
 
 
-strategy0.go_to_XY(3, 550)
+strategy0.go_to_XY(3, 250)
 strategy0.go_to_XY(3, 3, False)
-strategy0.go_to_XY(3, 550)
+strategy0.go_to_XY(3, 250)
 strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 550, s=1)
 # strategy0.go_to_XY(3, 3, False, s=1)

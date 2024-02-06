@@ -1,10 +1,11 @@
 import threading
 from time import sleep
 import data
-#from communication.driver_communication import DriverCommunication
-#from regulation_controller.position import Position
+# from communication.driver_communication import DriverCommunication
+# from regulation_controller.position import Position
 from communication.can_comm import *
 from communication.maxon_epos_driver import MaxonMotor
+
 
 class PositionRegulation:
     count = 0
@@ -63,7 +64,7 @@ class PositionRegulation:
 
         # self.maxon = DriverCommunication(
         #     ki=1, kp=2, side='L')
-        
+
         self.maxon_left = MaxonMotor(
             1, 100000, 100000)
         self.maxon_right = MaxonMotor(
@@ -97,11 +98,14 @@ class PositionRegulation:
         if self.count > self.max_count:
             self.count = 0
             debug = False
-            #DriverCommunication.debug = False
+            # DriverCommunication.debug = False
         self.count += 1
 
         # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
         # self.position.calculate_position()
+
+        self.can_communication.pos.calculate_position()
+
         sum_left = data.sum_encoder_left
         sum_right = data.sum_encoder_right
 
@@ -120,6 +124,7 @@ class PositionRegulation:
         f = data.f_current
 
         if True:
+            print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
             print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
             # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
@@ -258,15 +263,15 @@ class PositionRegulation:
                 rotpoj *= 1
 
             elif abs(W_d) > 400:
-                pojacanje *= 1.8 #1.7
+                pojacanje *= 1.8  # 1.7
                 rotpoj *= 1
 
             elif abs(W_d) > 100:
-                pojacanje *= 2 #1.15
+                pojacanje *= 2  # 1.15
                 rotpoj *= 0.5  # 0.85
 
             else:
-                pojacanje *= 2 #1.3
+                pojacanje *= 2  # 1.3
                 rotpoj *= 0.6  # 1
 
             if (abs(W_d) * 0.05 > abs(enK) and W_d != 0):
@@ -504,7 +509,6 @@ class PositionRegulation:
                 print('======================MVL===========================', MVL)
                 print('======================MVR===========================', MVR)
                 print("\n")
-
 
             # MVL = 2000
             # MVR = 2000

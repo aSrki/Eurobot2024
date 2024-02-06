@@ -41,6 +41,9 @@ operations = []
 enc_left = 0
 enc_right = 0
 
+prev_enc_sum_left = 0
+prev_enc_sum_right = 0
+
 # parametri za stajanje
 stop = False
 end_of_match = False
@@ -66,6 +69,7 @@ sum_encoder_right = 0
 
 last_MVL = 0
 last_MVR = 0
+
 
 class TypesOfSendParameters(Enum):
     COORDINATE = 0

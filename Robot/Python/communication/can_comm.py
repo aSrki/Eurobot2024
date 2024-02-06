@@ -3,7 +3,8 @@ import subprocess
 import data
 import threading
 import math
-from position import Position
+from regulation_controller.position import Position
+
 
 class CAN_COMM:
     def __init__(self):
@@ -36,6 +37,9 @@ class CAN_COMM:
 
                 data.enc_left = enc1
                 data.enc_right = enc2
+
+                data.sum_encoder_left += enc1
+                data.sum_encoder_right += enc2
 
                 self.pos.calculate_position()
 
