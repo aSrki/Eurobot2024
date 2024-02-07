@@ -26,9 +26,10 @@ class MaxonMotor:
         self.epos.VCS_ClearFault(self.keyHandle, self.ID, byref(self.pErrorCode)) # clear all faults
         self.epos.VCS_ActivateProfileVelocityMode(self.keyHandle, self.ID, byref(self.pErrorCode)) # activate profile position mode
         self.epos.VCS_SetEnableState(self.keyHandle, self.ID, byref(self.pErrorCode)) # enable device
+        
+        self.epos.VCS_SetVelocityProfile(self.keyHandle, self.ID, self.acceleration, self.deceleration, byref(self.pErrorCode)) # set profile parameters
 
     def rotate_with_rpm(self, target_speed):
-        self.epos.VCS_SetVelocityProfile(self.keyHandle, self.ID, self.acceleration, self.deceleration, byref(self.pErrorCode)) # set profile parameters
         self.epos.VCS_MoveWithVelocity(self.keyHandle, self.ID, target_speed, byref(self.pErrorCode)) # rotate with speed
 
     def disable_driver(self):

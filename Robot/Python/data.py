@@ -90,7 +90,7 @@ class MovingData:
     ms_one_degre = 0.01  # 0.0084
     robot_speed = 2.2/1000
 
-    pause_when_ending_moving = 0.2  # 0.05
+    pause_when_ending_moving = 0.1  # 0.05
 
     tim_chedova = False
 
@@ -101,8 +101,8 @@ class MovingData:
 class OdometryData:
     # rodo chnge var to english
     inc = 20480
-    poluprecnik_tocka = 35.5
-    polurastojanje_ose_tockova = 152
+    poluprecnik_tocka = 35.756
+    polurastojanje_ose_tockova = 152.76
     inc_R = (inc * polurastojanje_ose_tockova) / poluprecnik_tocka
     inc_deg = 360 / inc_R  # Inkremenata po stepenu
     inc_mm = (2 * poluprecnik_tocka * 3.1416) / inc  # 1687 #Inkremenata po mm

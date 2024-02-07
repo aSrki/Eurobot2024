@@ -105,22 +105,10 @@ class Main:
         custom_print('\n')
 
         try:
-            custom_print("Gasim BLDC")
-        except Exception as e:
-            custom_print(f"BLDC ERROR: {str(e)}")
+            self.execute.moving.position.maxon_left.rotate_with_rpm(0)
+            self.execute.moving.position.maxon_right.rotate_with_rpm(0)
 
-        try:
-            custom_print("Gasim ESP")
-            for i in range(2):
-
-                # self.execute.moving.stop()
-                self.execute.moving.position.maxon_left.rotate_with_rpm(0)
-                self.execute.moving.position.maxon_right.rotate_with_rpm(0)
-
-                time.sleep(1)
-
-                self.execute.moving.position.maxon_left.rotate_with_rpm(0)
-                self.execute.moving.position.maxon_right.rotate_with_rpm(0)
+            time.sleep(1)
 
             self.execute.moving.position.maxon_left.disable_driver()
             self.execute.moving.position.maxon_right.disable_driver()

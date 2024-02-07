@@ -1,5 +1,6 @@
 import threading
 from time import sleep
+import time
 import data
 # from communication.driver_communication import DriverCommunication
 # from regulation_controller.position import Position
@@ -9,7 +10,7 @@ from communication.maxon_epos_driver import MaxonMotor
 
 class PositionRegulation:
     count = 0
-    max_count = 1000000
+    max_count = 100000 #1000
 
     # Stanja pida
     sending_trans = False
@@ -43,7 +44,7 @@ class PositionRegulation:
     es_R = 0
 
     min_pid = 0
-    max_pid = 5000
+    max_pid = 3000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -51,30 +52,39 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
-    RAMP_INCREMENT_START = 350  # ikrimentira se za time: delay #14
-    RAMP_INCREMENT_STOP = 350  # ikrimentira se za time: delay  #12
+    RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
+    RAMP_INCREMENT_STOP = 200  # ikrimentira se za time: delay  #12
 
-    ROT_RAMP_UP_INCREMENT = 500  # 12
-    ROT_RAMP_DOWN_INCREMENT = 500  # 12
+    ROT_RAMP_UP_INCREMENT = 700  # 12
+    ROT_RAMP_DOWN_INCREMENT = 1000  # 12
 
-    delay = 0.03  # speed regulation ~30ms
+    
+
+    delay = 0.01 #0.03 # speed regulation ~30ms
 
     def __init__(self):
         self.W_F = data.f_current
+
+        self.MVL = 0
+        self.MVR = 0
 
         # self.maxon = DriverCommunication(
         #     ki=1, kp=2, side='L')
 
         self.maxon_left = MaxonMotor(
-            1, 100000, 100000)
+            1, 50000, 50000)
         self.maxon_right = MaxonMotor(
-            2, 100000, 100000)
+            2, 50000, 50000)
 
         self.stop_position = False
 
         print("position")
         # I2i P1p
         self.can_communication = CAN_COMM()
+        speed_thread1 = threading.Thread(target=self.send_vel_left)
+        speed_thread1.start()
+        speed_thread2 = threading.Thread(target=self.send_vel_right)
+        speed_thread2.start()
 
     def start(self):
 
@@ -89,6 +99,7 @@ class PositionRegulation:
         while data.running.is_set():
             self.calculate_position()
             sleep(self.delay)
+            print(f"Vreme3: {time.time()}")
 
         return
 
@@ -135,14 +146,14 @@ class PositionRegulation:
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
-            while data.last_MVL > 2000 or data.last_MVR > 2000:
-                data.last_MVL = int(0.3 * data.last_MVL)
-                data.last_MVR = int(0.3 * data.last_MVR)
-                # self.maxon.send_speed_left(data.last_MVL)
-                # self.maxon.send_speed_right(data.last_MVR)
-                self.maxon_left.rotate_with_rpm(data.last_MVL)
-                self.maxon_right.rotate_with_rpm(data.last_MVR)
-                sleep(.01)
+            # while data.last_MVL > 2000 or data.last_MVR > 2000:
+            #     data.last_MVL = int(0.3 * data.last_MVL)
+            #     data.last_MVR = int(0.3 * data.last_MVR)
+            #     # self.maxon.send_speed_left(data.last_MVL)
+            #     # self.maxon.send_speed_right(data.last_MVR)
+            #     self.maxon_left.rotate_with_rpm(data.last_MVL)
+            #     self.maxon_right.rotate_with_rpm(data.last_MVR)
+            #     sleep(.01)
 
             # self.maxon.send_speed_left(0)
             # self.maxon.send_speed_right(0)
@@ -210,96 +221,101 @@ class PositionRegulation:
                 # print("naniiii")
                 pojacanje *= 1
 
-            if self.get_new_angle() < 3:
-                # print("poj do 3")
-                rotpoj *= 3  # 6.7
+            # if self.get_new_angle() < 3:
+            #     # print("poj do 3")
+            #     rotpoj *= 3  # 6.7
 
-            elif self.get_new_angle() < 10:
-                # print("poj do 10")
-                rotpoj *= 2.2
+            # elif self.get_new_angle() < 10:
+            #     # print("poj do 10")
+            #     rotpoj *= 2.2
 
-            elif self.get_new_angle() < 25:
-                # print("poj do 25")
-                rotpoj *= 1.8
+            # elif self.get_new_angle() < 25:
+            #     # print("poj do 25")
+            #     rotpoj *= 1.8
 
-            elif self.get_new_angle() < 45:
-                # print("poj do 45")
-                rotpoj *= 1.6
+            # elif self.get_new_angle() < 45:
+            #     # print("poj do 45")
+            #     rotpoj *= 1.6
 
-            elif self.get_new_angle() < 90:
-                # print("poj do 90")
-                rotpoj *= 1.5
+            # elif self.get_new_angle() < 90:
+            #     # print("poj do 90")
+            #     rotpoj *= 1.5
 
-            elif self.get_new_angle() < 140:
-                # print("poj do 140")
-                rotpoj *= 1.4
-            else:
-                # print("poj do 180")
-                rotpoj *= 1.2
+            # elif self.get_new_angle() < 140:
+            #     # print("poj do 140")
+            #     rotpoj *= 1.4
+            # else:
+            #     # print("poj do 180")
+            #     rotpoj *= 1.2
 
-            KpK = 2 * pojacanje  # 6 #4 #Srdjan_bilo je 5
-            KpR = 2 * pojacanje * rotpoj
+            KpK = 72 * pojacanje  # 6 #4 #Srdjan_bilo je 5
+            KpR = 20.5 * pojacanje * rotpoj
 
-            TiR = 1000000  # 450 # self.TiRConst#1#~60,150
-            TiK = 1000000  # ~2000
+            TiR = 5500  # 450 # self.TiRConst#1#~60,150
+            TiK = 4000  # ~2000
 
-            TdK = 0  # bilo je 2
+            TdK = 1  # bilo je 2
             TdR = 0  # 2
 
+
+
+
+        #============TRANSlACIJAAAA======================================================================================
         elif self.sending_trans and not self.sending_stop:
             pojacanje = data.translate_pojacanje
             rotpoj = data.translate_rot_pojacanje
 
-            if abs(W_d) > 1500:
-                pojacanje *= 0.9
-                rotpoj *= 1
-                self.max_pid = 10000
-            elif abs(W_d) > 1000:
-                pojacanje *= 1
-                rotpoj *= 1
+            # if abs(W_d) > 1500:
+            #     pojacanje *= 0.9
+            #     rotpoj *= 1
+            #     self.max_pid = 10000
+            # elif abs(W_d) > 1000:
+            #     pojacanje *= 1
+            #     rotpoj *= 1
 
-            elif abs(W_d) > 600:
-                pojacanje *= 1.1
-                rotpoj *= 1
+            # elif abs(W_d) > 600:
+            #     pojacanje *= 1.1
+            #     rotpoj *= 1
 
-            elif abs(W_d) > 400:
-                pojacanje *= 1.8  # 1.7
-                rotpoj *= 1
+            # elif abs(W_d) > 400:
+            #     pojacanje *= 1.8  # 1.7
+            #     rotpoj *= 1
 
-            elif abs(W_d) > 100:
-                pojacanje *= 2  # 1.15
-                rotpoj *= 0.5  # 0.85
+            # elif abs(W_d) > 100:
+            #     pojacanje *= 2  # 1.15
+            #     rotpoj *= 0.5  # 0.85
 
-            else:
-                pojacanje *= 2  # 1.3
-                rotpoj *= 0.6  # 1
+            # else:
+            #     pojacanje *= 2  # 1.3
+            #     rotpoj *= 0.6  # 1
 
-            if (abs(W_d) * 0.05 > abs(enK) and W_d != 0):
-                pojacanje *= 1.3
-                rotpoj *= .4
-            elif (abs(W_d) * 0.2 > abs(enK) and W_d != 0):
-                pojacanje *= 1.3
-                rotpoj *= .8
+            # if (abs(W_d) * 0.05 > abs(enK) and W_d != 0):
+            #     pojacanje *= 1.3
+            #     rotpoj *= .4
+            # elif (abs(W_d) * 0.2 > abs(enK) and W_d != 0):
+            #     pojacanje *= 1.3
+            #     rotpoj *= .8
 
-            elif (abs(W_d) * 0.35 > abs(enK) and W_d != 0):
-                pojacanje *= 1
-                rotpoj *= .85
+            # elif (abs(W_d) * 0.35 > abs(enK) and W_d != 0):
+            #     pojacanje *= 1
+            #     rotpoj *= .85
 
-            elif (abs(W_d) * 0.9 < abs(enK) and W_d != 0):
-                pojacanje *= .75
-            elif (abs(W_d) * 0.8 < abs(enK) and W_d != 0):
-                pojacanje *= .9
+            # elif (abs(W_d) * 0.9 < abs(enK) and W_d != 0):
+            #     pojacanje *= .75
+            # elif (abs(W_d) * 0.8 < abs(enK) and W_d != 0):
+            #     pojacanje *= .9
 
+            #============TRANSlACIJAAAA======================================================================================
             if debug:
                 print("TRANSLATE")
 
-            KpK = 5 * pojacanje  # !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 2 * pojacanje * rotpoj  # 1.2 bilo
+            KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
+            KpR = 42 * pojacanje * rotpoj  # 1.2 bilo
 
-            TiR = 1000000  # 200
-            TiK = 1000000
+            TiR = 660000000  #6600 # 200
+            TiK = 520000000 #5200
 
-            TdK = 0  # 1
+            TdK = 4  # 1
             TdR = 0  # 3
 
         else:
@@ -464,6 +480,9 @@ class PositionRegulation:
         MVL = int(self.speed - self.rot_speed)
         MVR = int(self.speed + self.rot_speed)
 
+        self.MVL = MVL
+        self.MVR = MVR
+
         # # ANTI WINDUP down
         # if 0 > MVL > -self.min_pid:
         #     MVL = -self.min_pid
@@ -515,9 +534,11 @@ class PositionRegulation:
 
             # self.maxon.send_speed_left(MVL)  # CHANAL 1 MVL
             # self.maxon.send_speed_right(MVR)  # CHANAL2 MVR
-
-            self.maxon_left.rotate_with_rpm(MVL)
-            self.maxon_right.rotate_with_rpm(-MVR)
+                
+            # self.maxon_right.rotate_with_rpm(-MVR)
+            # print(f"Vreme2: {time.time()}")
+            # self.maxon_left.rotate_with_rpm(MVL)
+            # print(f"Vreme1: {time.time()}")
 
             data.last_MVL = MVL
             data.last_MVR = MVR
@@ -526,6 +547,19 @@ class PositionRegulation:
 
         # if debug:
         #     print(self.motor.get_read())
+            
+    def send_vel_left(self):
+        while data.running.is_set():
+            self.maxon_left.rotate_with_rpm(self.MVL)
+            print(f"Vreme1: {time.time()}")
+            time.sleep(self.delay)
+    def send_vel_right(self):
+        while data.running.is_set():
+            self.maxon_right.rotate_with_rpm(-self.MVR)
+            print(f"Vreme2: {time.time()}")
+            time.sleep(self.delay)
+    
+
 
 # position = Position()
 # position.start()

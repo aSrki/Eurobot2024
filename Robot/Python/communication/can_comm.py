@@ -1,10 +1,15 @@
 import can
 import subprocess
-import data
+import sys
 import threading
-import math
+
+if __name__ == "__main__":
+    sys.path.append("..")
+
+import data
 from regulation_controller.position import Position
 
+import math
 
 class CAN_COMM:
     def __init__(self):
@@ -41,7 +46,8 @@ class CAN_COMM:
                 data.sum_encoder_left += enc1
                 data.sum_encoder_right += enc2
 
-                self.pos.calculate_position()
+                #self.pos.calculate_position()
+
 
             if msg is None:
                 print('Timeout occurred, no message.')
@@ -52,5 +58,7 @@ class CAN_COMM:
 
 
 if __name__ == "__main__":
+    sys.path.append("..")
+
     comm = CAN_COMM()
     comm.receive()
