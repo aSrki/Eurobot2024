@@ -55,8 +55,8 @@ class PositionRegulation:
     RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 200  # ikrimentira se za time: delay  #12
 
-    ROT_RAMP_UP_INCREMENT = 700  # 12
-    ROT_RAMP_DOWN_INCREMENT = 1000  # 12
+    ROT_RAMP_UP_INCREMENT = 300  # 12
+    ROT_RAMP_DOWN_INCREMENT = 100  # 12
 
     
 
@@ -212,6 +212,7 @@ class PositionRegulation:
         elif self.en_R < -180:
             self.en_R = 360 + self.en_R
 
+        ###############################ROTATION###########################
         if self.sending_rot and not self.sending_stop:
             if debug:
                 print("ROTATION")
@@ -248,14 +249,14 @@ class PositionRegulation:
             #     # print("poj do 180")
             #     rotpoj *= 1.2
 
-            KpK = 72 * pojacanje  # 6 #4 #Srdjan_bilo je 5
-            KpR = 20.5 * pojacanje * rotpoj
+            KpK = 5 * pojacanje  # 6 #4 #Srdjan_bilo je 5
+            KpR = 20 * pojacanje * rotpoj
 
-            TiR = 5500  # 450 # self.TiRConst#1#~60,150
-            TiK = 4000  # ~2000
+            TiR = 550000000  # 450 # self.TiRConst#1#~60,150
+            TiK = 400000000  # ~2000
 
-            TdK = 1  # bilo je 2
-            TdR = 0  # 2
+            TdK = 0  # bilo je 2
+            TdR = -3  # 2
 
 
 
@@ -281,9 +282,9 @@ class PositionRegulation:
             #     pojacanje *= 1.8  # 1.7
             #     rotpoj *= 1
 
-            # elif abs(W_d) > 100:
-            #     pojacanje *= 2  # 1.15
-            #     rotpoj *= 0.5  # 0.85
+            if abs(W_d) <= 300:
+                pojacanje *= 0.75  # 1.15
+                # rotpoj *= 0.5  # 0.85
 
             # else:
             #     pojacanje *= 2  # 1.3
@@ -310,13 +311,13 @@ class PositionRegulation:
                 print("TRANSLATE")
 
             KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 42 * pojacanje * rotpoj  # 1.2 bilo
+            KpR = 75 * pojacanje * rotpoj  # 1.2 bilo
 
             TiR = 660000000  #6600 # 200
-            TiK = 520000000 #5200
+            TiK = 5000 #5200
 
-            TdK = 4  # 1
-            TdR = 0  # 3
+            TdK = 4 # 1
+            TdR = -5  # 3
 
         else:
             if debug:
