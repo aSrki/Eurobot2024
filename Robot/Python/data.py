@@ -101,7 +101,7 @@ class MovingData:
 class OdometryData:
     # rodo chnge var to english
     inc = 20480
-    poluprecnik_tocka = 35.756
+    poluprecnik_tocka = 35.750 #35.756
     polurastojanje_ose_tockova = 152.76
     inc_R = (inc * polurastojanje_ose_tockova) / poluprecnik_tocka
     inc_deg = 360 / inc_R  # Inkremenata po stepenu
