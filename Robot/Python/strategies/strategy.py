@@ -14,6 +14,7 @@ class Strategy:
         self.operations = []
         self.thread = False
         self.add_to_step = False
+        self.rotate_to(data.f_current)
 
     def add_points(self, type, points):
         task_points = Points(type, points)
@@ -95,6 +96,7 @@ class Strategy:
 
     def end(self):
         end = End()
+        self.rotate_to(data.f_current)
         self.operations.append(end)
 
     def start_step_actions(self):

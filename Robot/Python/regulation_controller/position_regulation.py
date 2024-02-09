@@ -86,11 +86,17 @@ class PositionRegulation:
         speed_thread2 = threading.Thread(target=self.send_vel_right)
         speed_thread2.start()
 
+        position_thread = threading.Thread(target=self.get_position)
+        position_thread.start()
+
+        
+
     def start(self):
 
-        self.is_running = True
         self.can_communication.start()
         self.can_communication.pos.start()
+
+        self.is_running = True
 
         thread = threading.Thread(target=self.running_calculation)
         thread.start()
@@ -102,6 +108,11 @@ class PositionRegulation:
             print(f"Vreme3: {time.time()}")
 
         return
+    
+    def get_position(self):
+        while data.running.is_set():
+            self.can_communication.pos.calculate_position()
+            sleep(self.can_communication.pos.delay)
 
     def calculate_position(self):
 
@@ -115,7 +126,7 @@ class PositionRegulation:
         # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
         # self.position.calculate_position()
 
-        self.can_communication.pos.calculate_position()
+        # self.can_communication.pos.calculate_position()
 
         sum_left = data.sum_encoder_left
         sum_right = data.sum_encoder_right
@@ -554,15 +565,16 @@ class PositionRegulation:
         # if debug:
         #     print(self.motor.get_read())
             
+          
     def send_vel_left(self):
         while data.running.is_set():
             self.maxon_left.rotate_with_rpm(self.MVL)
-            print(f"Vreme1: {time.time()}")
+            # print(f"Vreme1: {time.time()}")
             time.sleep(self.delay)
     def send_vel_right(self):
         while data.running.is_set():
             self.maxon_right.rotate_with_rpm(-self.MVR)
-            print(f"Vreme2: {time.time()}")
+            # print(f"Vreme2: {time.time()}")
             time.sleep(self.delay)
     
 
