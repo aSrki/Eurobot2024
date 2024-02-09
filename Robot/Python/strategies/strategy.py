@@ -2,6 +2,7 @@ from data import IDS
 from data import Sensors
 import data
 from strategies.steps import *
+from servo.XL430 import parallel_rotate
 
 
 class Strategy:
@@ -122,8 +123,8 @@ class Strategy:
             for s in sequence:
                 self.operations.append(s)
 
-    def push_cake(self, a, v=100, s=0, da=0):
-        '''a = uvucena 100, izvucena 590, v - velocity, s - sleep time, da - delay action in step'''
+    def move_mechanism(self, a, v=100, s=0, da=0):
+        '''a = napred: 355, nazad: 5, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(IDS.id_pusher.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
@@ -132,9 +133,9 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_cakes(self, a, v=100, s=0, da=0):
-        '''a - absolute angle, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_gripper.value, angle=a,
+    def move_front_arm(self, a, v=100, s=0, da=0):
+        '''a - gore: 120, dole: 60, v - velocity, s - sleep time, da - delay action in step'''
+        action = Action.move_servo(IDS.id_front_arm.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -142,9 +143,9 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def lift_cakes(self, a, v=100, s=0, da=0):
-        '''a - absolute angle, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_lift.value, angle=a,
+    def move_back_arm(self, a, v=100, s=0, da=0):
+        '''a - gore: 210, dole: 150, v - velocity, s - sleep time, da - delay action in step'''
+        action = Action.move_servo(IDS.id_back_arm.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -152,9 +153,9 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def move_door(self, a, v=100, s=0, da=0):
-        '''a = zatvoren 170, otvoren - 220, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_reservoir_door.value, angle=a,
+    def grip_front(self, a ,b, c, v=100, s=0, da=0):
+        '''a = zatvoren 180, otvoren - 90, v - velocity, s - sleep time, da - delay action in step'''
+        action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2, IDS.id_gripper_front_3], [a, b, c],
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -162,9 +163,9 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def load_cherry(self, a=0, v=100, s=0, da=0):
-        '''a = ubacivanje 160, izbacivanje 359, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_doser.value, angle=a,
+    def grip_back(self, a ,b, c, v=100, s=0, da=0):
+        '''a = zatvoren 180, otvoren - 90, v - velocity, s - sleep time, da - delay action in step'''
+        action = parallel_rotate([IDS.id_gripper_back_1.value, IDS.id_gripper_back_2, IDS.id_gripper_back_3], [a, b, c],
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -172,25 +173,26 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def move_pipe(self, a, v=100, s=0, da=0):
-        '''a = uvucena 80, izvucena 260, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_cherry_pipe.value, angle=a,
-                                   velocity=v, sleep=s, thread=self.thread)
-        if self.add_to_step:
-            action.delay_action = da
-            self.operations[-1].actions.append(action)
-        else:
-            self.operations.append(action)
+    #TODO: napraviti da deploy triangle i undeploy budu uvek -180 stepeni i ne prosledjuje im se ugao
+    # def deploy_triangle(self, a, v=100, s=0, da=0):
+    #     '''a = uvucena 80, izvucena 260, v - velocity, s - sleep time, da - delay action in step'''
+    #     action = Action.move_servo(IDS.id_cherry_pipe.value, angle=a,
+    #                                velocity=v, sleep=s, thread=self.thread)
+    #     if self.add_to_step:
+    #         action.delay_action = da
+    #         self.operations[-1].actions.append(action)
+    #     else:
+    #         self.operations.append(action)
 
-    def move_vacuum(self, a, v=100, s=0, da=0):
-        '''a = polozaj usisavanja - 150, uvucen polozaj - 165, v - velocity, s - sleep, da - delay action in step'''
-        action = Action.move_servo(IDS.id_vacuum.value, angle=a,
-                                   velocity=100, sleep=s, thread=self.thread)
-        if self.add_to_step:
-            action.delay_action = da
-            self.operations[-1].actions.append(action)
-        else:
-            self.operations.append(action)
+    # def move_vacuum(self, a, v=100, s=0, da=0):
+    #     '''a = polozaj usisavanja - 150, uvucen polozaj - 165, v - velocity, s - sleep, da - delay action in step'''
+    #     action = Action.move_servo(IDS.id_vacuum.value, angle=a,
+    #                                velocity=100, sleep=s, thread=self.thread)
+    #     if self.add_to_step:
+    #         action.delay_action = da
+    #         self.operations[-1].actions.append(action)
+    #     else:
+    #         self.operations.append(action)
 
 
     def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0):

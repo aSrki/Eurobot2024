@@ -111,14 +111,18 @@ class OdometryData:
 # --------------------------------
 
 class IDS(Enum):
-    id_bldc = 51
-    id_pusher = 1  # 90 zatvoren # 530 otvoren
-    id_gripper = 15  # otvoren 48; zatvoren 60
-    id_lift = 11  # donja - 0, gornja - 340
-    id_vacuum = 41  # 41 za XM  # sredina - 325, na desno manji ugao, na levo veci ugao
-    id_reservoir_door = 6  # zatvoren - 160, otvoren - 210
-    id_doser = 7  # load - 1, unload - 359
-    id_cherry_pipe = 4  # zatvoren - 1, otvoren - 190
+    # id_bldc = 51
+    id_centar = 12  # 355 napred # 5 nazad # 180 centar
+    id_gripper_front_1 = 10  # otvoren 90; zatvoren 180
+    id_gripper_front_2 = 2  # otvoren 90; zatvoren 180
+    id_gripper_front_3 = 6 # otvoren 180; zatvoren 270
+    id_gripper_back_1 = 9 # otvoren 90; zatvoren 180
+    id_gripper_back_2 = 7 # otvoren 90; zatvoren 180
+    id_gripper_back_3 = 3 # otvoren 0; zatvoren 90
+    id_trougao = 11  # donja - 0, gornja - 340
+    id_front_arm = 41  # 41 za XM  # spustena skroz - 60, podignuta 120
+    id_back_arm = 52  # spustena - 150, podignuta - 210
+    # id_doser = 7  # load - 1, unload - 359
 
 
 sleep = False
