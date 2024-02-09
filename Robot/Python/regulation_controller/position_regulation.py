@@ -53,9 +53,9 @@ class PositionRegulation:
     speed_right = 0
 
     RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
-    RAMP_INCREMENT_STOP = 200  # ikrimentira se za time: delay  #12
+    RAMP_INCREMENT_STOP = 200000  # ikrimentira se za time: delay  #12
 
-    ROT_RAMP_UP_INCREMENT = 300  # 12
+    ROT_RAMP_UP_INCREMENT = 100  # 12
     ROT_RAMP_DOWN_INCREMENT = 100  # 12
 
     
@@ -140,9 +140,11 @@ class PositionRegulation:
             print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
             # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
             # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
-            print('X-osa:\t\t\t{:.0f} mm'.format(data.x_current))
-            print('Y-osa:\t\t\t{:.0f} mm'.format(data.y_current))
-            print('UGAO osa:\t\t{:.0f}'.format(f), ' \n\n\n')
+            print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
+            print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
+            print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
+
+            print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
@@ -252,11 +254,11 @@ class PositionRegulation:
             KpK = 5 * pojacanje  # 6 #4 #Srdjan_bilo je 5
             KpR = 20 * pojacanje * rotpoj
 
-            TiR = 550000000  # 450 # self.TiRConst#1#~60,150
+            TiR = 15000  # 450 # self.TiRConst#1#~60,150
             TiK = 400000000  # ~2000
 
             TdK = 0  # bilo je 2
-            TdR = -3  # 2
+            TdR = -3.5  # 2
 
 
 
@@ -310,13 +312,16 @@ class PositionRegulation:
             if debug:
                 print("TRANSLATE")
 
+            # if d < 250:
+            #     rotpoj = 0.2
+
             KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 75 * pojacanje * rotpoj  # 1.2 bilo
+            KpR = 75 * pojacanje * rotpoj  # 75 bilo
 
             TiR = 660000000  #6600 # 200
-            TiK = 5000 #5200
+            TiK = 10000 #5200
 
-            TdK = 4 # 1
+            TdK = 3 # 1
             TdR = -5  # 3
 
         else:
@@ -327,7 +332,7 @@ class PositionRegulation:
 
             KpK = 2   # (0.85 * pojacanje  )/1.2#1
             KpR = 2   # (2 * pojacanje * 10)/2#40 ... 90
-            # 30,33
+
             TiR = 1000000  # self.TiRConst#1#~60,150
             TiK = 1000000  # ~2000
 

@@ -6,7 +6,7 @@ from strategies.strategy import Strategy
 strategy0 = Strategy()
 
 #=====TRANSLACIJA=====
-# strategy0.go_to_XY(3, 1100)
+# strategy0.go_to_XY(3, 200)
 # strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 500)
 # strategy0.go_to_XY(3, 3, False)
@@ -14,7 +14,7 @@ strategy0 = Strategy()
 # strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 1200)
 # strategy0.go_to_XY(3, 3, False)
-# strategy0.rotate_to(0)
+#strategy0.rotate_to(0)
 
 #=====KOCKA=====
 # strategy0.go_to_XY(3, 700)
@@ -28,7 +28,7 @@ strategy0 = Strategy()
 
 # =====ROTACIJA=====
 strategy0.rotate_to(90)
-# strategy0.rotate_to(0)
+strategy0.rotate_to(0)
 # strategy0.rotate_to(-90)
 # strategy0.rotate_to(0)
 # strategy0.rotate_to(180, s=1)

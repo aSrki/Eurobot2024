@@ -51,7 +51,7 @@ class Position:
         data.prev_enc_sum_right = curr_sum_enc_right
 
         print(
-            f"POSITION:   ENC1: {encoder_left} ENC2: {encoder_right}")
+            f"POSITION:   ENC1: {encoder_left} ENC2: {encoder_right}, Vreme: {time.time()}")
 
         # predjeni put u instanci vremena(trenutni)
         d = ((encoder_left + encoder_right) / 2) * \

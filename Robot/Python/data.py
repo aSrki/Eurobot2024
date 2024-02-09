@@ -88,9 +88,9 @@ class MovingData:
     '''used primerely in moving.py for tracing correctly moving'''
     # brzina pri kretanju
     ms_one_degre = 0.01  # 0.0084
-    robot_speed = 2.2/1000
+    robot_speed = 0.74/1000
 
-    pause_when_ending_moving = 0.1  # 0.05
+    pause_when_ending_moving = 0.2  # 0.05
 
     tim_chedova = False
 
