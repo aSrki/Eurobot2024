@@ -2,6 +2,7 @@ from enc import *
 import threading
 import time
 from math import *
+from XL430 import *
 # ID_1 MOTOR RIGHT
 # ID_4 MOTOR LEFT
 class Odom:
@@ -19,9 +20,9 @@ class Odom:
     w_r = 0
     v_l = 0
     w_l = 0
-    d_r = 86.0           # diameter
-    d_l = 86.0           # diameter
-    b = 119.0            # distance between the wheels
+    d_r = 91.5           # diameter 86.4
+    d_l = 93.1           # diameter 87.4
+    b = 117.5            # distance between the wheels 117.5
     v = 0
     w = 0
 
@@ -34,15 +35,14 @@ class Odom:
     time_curr = 0
     delta_time = 0
 
+    flag = 0 # forward
+    going = False
 
-    def __init__(self, curr_x, curr_y, curr_theta, curr_angle, d_r = 86.0, d_l = 86.0, b = 119.0):
+    def __init__(self, curr_x, curr_y, curr_theta, curr_angle):
         self.curr_x = curr_x
         self.curr_y = curr_y
         self.curr_theta = curr_theta
         self.curr_angle = curr_angle
-        self.d_r = d_r
-        self.d_l = d_l
-        self.b = b
         self.enc_r_old, self.enc_l_old = read_positions((1,4))      # enc -> t = 0
         print(self.enc_r_old, self.enc_l_old)
         self.time_old = time.time()
@@ -79,8 +79,8 @@ class Odom:
             elif self.deltaL > 40000:
                 self.deltaL = (-65535 - self.enc_l_old) + self.enc_l     # counting down    
 
-            print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
-            print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
+            # print(f"DELTA R = {self.deltaR}, ENC_R = {self.enc_r}, ENC_R_OLD = {self.enc_r_old}")
+            # print(f"DELTA L = {self.deltaL}, ENC_L = {self.enc_l}, ENC_L_OLD = {self.enc_l_old}")
 
 
             self.enc_r_old = self.enc_r     # update
@@ -105,11 +105,16 @@ class Odom:
             self.w = (self.v_r + self.v_l) / self.b
 
             # approximation average value
-            # FORWARD
-            self.curr_x -= self.v * cos(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
-            self.curr_y -= self.v * sin(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
-            self.curr_theta -= self.w * self.delta_time
-            # TODO: BACKWARD ... FLAG etc..
+            if self.flag == 0:
+                # FORWARD
+                self.curr_x -= self.v * cos(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
+                self.curr_y -= self.v * sin(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
+                self.curr_theta -= self.w * self.delta_time
+            else:
+                # BACKWARD
+                self.curr_x -= self.v * cos(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
+                self.curr_y -= self.v * sin(self.curr_theta + self.w * self.delta_time / 2.0) * self.delta_time
+                self.curr_theta -= self.w * self.delta_time                
 
             if self.curr_theta < -pi:
                 self.curr_angle = 2*pi + self.curr_theta
@@ -118,25 +123,102 @@ class Odom:
             else:
                 self.curr_angle = self.curr_theta
 
-            print(f"LINEAR SPEED: {self.v}")
-            print(f"ANGULAR SPEED: {self.w}")
-            print(f"CURRENT X: {self.curr_x}")
-            print(f"CURRENT Y: {self.curr_y}") 
-            print(f"CURRENT THETA: {self.curr_theta}") 
+            # print(f"LINEAR SPEED: {self.v}")
+            # print(f"ANGULAR SPEED: {self.w}")
+            # print(f"CURRENT X: {self.curr_x}")
+            # print(f"CURRENT Y: {self.curr_y}") 
+            # print(f"CURRENT THETA: {self.curr_theta}")
+            print(f"CURRENT ANGLE: {self.curr_angle}") 
 
 
-            time.sleep(0.01)
+            time.sleep(0.001)
 
     def run_odom(self):
         self.thread = threading.Thread(target=self.odom_update)
         self.thread.start()
 
     def stop_odom(self):
+        send_velocity_multiple([1, 4], [0, 0])
         self.thread.join()  # TODO: add stop
         print("STOPPED")
         sys.exit()
 
 
+    def go_to_XY(self, goal_x, goal_y):
+        print("_________________GO TO XY_________________")
+        angle = atan2(goal_y - self.curr_y, goal_x - self.curr_x)
+        goal_angle = angle
+        print(f"Goal angle {goal_angle}, angle {angle}")
+        angle -= self.curr_angle
+
+        if goal_angle < -pi:
+            goal_angle = 2*pi + goal_angle
+        elif goal_angle > pi:
+            goal_angle = goal_angle - 2*pi
+
+        if angle < -pi:
+            angle = 2*pi + angle
+        elif angle > pi:
+            angle = angle - 2*pi
+
+        # BUDZ
+        goal_angle = goal_angle * 0.775 
+
+        print(f"Angle after math: {angle}")
+        print(f"Goal angle after math: {goal_angle}")        
+        print(f"Current angle: {self.curr_angle}")
+        print(f"Current theta: {self.curr_theta}")
+       
+        if (abs(goal_angle - self.curr_angle) > pi - 0.1 and abs(goal_angle - self.curr_angle) < pi + 0.1):
+            # DISTANCE
+            self.flag = 1   # backward
+            while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 50:
+                print(f"CURRENT X: {self.curr_x}")
+                print(f"CURRENT Y: {self.curr_y}")
+                if self.going == False:
+                    send_velocity_multiple([1, 4], [100, -100])    # backward
+                    print(f"FLAG {self.flag}")
+                    self.going = True
+                time.sleep(0.0005)
+            send_velocity_multiple([1, 4], [0, 0])
+            self.going = False
+        else:
+            # ANGLE
+            self.flag = 0   # forward
+            if angle > 0:
+                while abs((goal_angle - self.curr_angle)) > 0.08:
+                    print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
+                    if self.going == False:
+                        send_velocity_multiple([1, 4], [-100, -100]) # rotation -
+                        self.going = True
+                    time.sleep(0.0005)
+                print(f"Izasao iz WHILE.... USLOV  angle > 0: {abs((goal_angle - self.curr_angle))}")
+                send_velocity_multiple([1, 4], [0, 0])
+                self.going = False
+            else:
+                while abs((goal_angle - self.curr_angle)) > 0.08:
+                    print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
+                    if self.going == False:
+                        send_velocity_multiple([1, 4], [100, 100]) # rotation +
+                        self.going = True
+                    time.sleep(0.0005)
+                print(f"Izasao iz WHILE.... USLOV angle < 0: {abs((goal_angle - self.curr_angle))}")
+                send_velocity_multiple([1, 4], [0, 0])
+                self.going = False
+
+            # DISTANCE
+            while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 50:
+                print(f"CURRENT X: {self.curr_x}, CURRENT Y: {self.curr_y}")               
+                if self.going == False:
+                    send_velocity_multiple([1, 4], [-100, 100])    # forward -100, 100
+                    print(f"FLAG {self.flag}")
+                    self.going = True
+                time.sleep(0.001)
+            send_velocity_multiple([1, 4], [0, 0])
+            self.going = False
+            
+        print(f"GO TO XY        Self current_x{self.curr_x}")
+        print(f"GO TO XY        Self current_y{self.curr_y}")     
 
 
 
