@@ -52,22 +52,34 @@ print("--------------------------------------")
 # ID_4 MOTOR LEFT
 try:
 	odom.run_odom()
-	send_velocity_multiple([1,4],[-50,50])	# forward
-	time.sleep(2)
-	send_velocity_multiple([1,4],[0,0])
-	time.sleep(1)
-	send_velocity_multiple([1,4],[50,-50])	# backward
-	time.sleep(2)
-	send_velocity_multiple([1,4],[0,0])
-	time.sleep(1)
-	send_velocity_multiple([1,4],[50,50])	# +
-	time.sleep(2)
-	send_velocity_multiple([1,4],[0,0])
-	time.sleep(1)
-	send_velocity_multiple([1,4],[-50,-50]) # -
-	time.sleep(2)
-	send_velocity_multiple([1,4],[0,0])
-	time.sleep(1)    
+	# send_velocity_multiple([1,4],[-50,50])	# forward
+	# time.sleep(2)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[50,-50])	# backward
+	# time.sleep(2)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[50,50])	# +
+	# time.sleep(2)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)
+	# send_velocity_multiple([1,4],[-50,-50]) # -
+	# time.sleep(2)
+	# send_velocity_multiple([1,4],[0,0])
+	# time.sleep(1)    
+
+	# square
+	odom.go_to_XY(300,100)
+	odom.go_to_XY(300,300)
+	# odom.go_to_XY(100,300)
+	# odom.go_to_XY(100,100)
+
+	# odom.go_to_XY(500,100)
+	# odom.go_to_XY(100,100)
+
+	# odom.go_to_XY(-500,100)
+
 except KeyboardInterrupt:
     odom.stop_odom()
 
