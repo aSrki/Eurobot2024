@@ -60,25 +60,29 @@ try:
 	# time.sleep(2)
 	# send_velocity_multiple([1,4],[0,0])
 	# time.sleep(1)
-	# send_velocity_multiple([1,4],[50,50])	# +
+	# send_velocity_multiple([1,4],[50,50])	# - 
 	# time.sleep(2)
 	# send_velocity_multiple([1,4],[0,0])
 	# time.sleep(1)
-	# send_velocity_multiple([1,4],[-50,-50]) # -
+	# send_velocity_multiple([1,4],[-50,-50]) # +
 	# time.sleep(2)
 	# send_velocity_multiple([1,4],[0,0])
 	# time.sleep(1)    
 
 	# square
-	odom.go_to_XY(300,100)
-	odom.go_to_XY(300,300)
+	# odom.go_to_XY(300,100)
+	# odom.go_to_XY(300,300)
 	# odom.go_to_XY(100,300)
 	# odom.go_to_XY(100,100)
+      
+	# odom.go_to_XY(400,100)
 
-	# odom.go_to_XY(500,100)
-	# odom.go_to_XY(100,100)
+	odom.go_to_XY(2000,100)
+	odom.go_to_XY(100,100)
+      
+	# odom.go_to_XY(-1000,100) 
 
-	# odom.go_to_XY(-500,100)
+	# odom.go_to_XY(100,300)
 
 except KeyboardInterrupt:
     odom.stop_odom()
