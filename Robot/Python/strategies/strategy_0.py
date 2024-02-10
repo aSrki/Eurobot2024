@@ -28,7 +28,7 @@ strategy0 = Strategy()
 
 # =====ROTACIJA=====
 strategy0.rotate_to(0)
-strategy0.rotate_to(180)
+strategy0.rotate_to(181)
 strategy0.rotate_to(0)
 strategy0.rotate_to(180)
 # strategy0.rotate_to(0)
