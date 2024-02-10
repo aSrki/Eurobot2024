@@ -25,6 +25,21 @@ def forward_steps(distance, angle=0, sleep=0, rotate_to_angle=0):
     return forward.operations
 
 
+def test_task():
+    tt = Strategy()
+
+    tt.activate_triangle()
+    tt.deactivate_triangle()
+
+    tt.move_front_arm(60)
+    tt.move_back_arm(150)
+
+    tt.move_mechanism(180)
+
+    tt.grip_back(180, 180, 270)
+    tt.grip_front(180, 180, 90)
+
+
 def pink1(xoff=0, yoff=0, attempts=0, off=data.offset):
 
     p1 = Strategy()
