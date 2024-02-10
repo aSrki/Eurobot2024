@@ -5,7 +5,7 @@ from strategies.strategy import Strategy
 
 strategy0 = Strategy()
 
-#=====TRANSLACIJA=====
+# =====TRANSLACIJA=====
 # strategy0.go_to_XY(3, 200)
 # strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 500)
@@ -14,9 +14,9 @@ strategy0 = Strategy()
 # strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 1200)
 # strategy0.go_to_XY(3, 3, False)
-#strategy0.rotate_to(0)
+# strategy0.rotate_to(0)
 
-#=====KOCKA=====
+# =====KOCKA=====
 # strategy0.go_to_XY(3, 500)
 # # strategy0.rotate_to(-90)
 # strategy0.go_to_XY(500, 500)
@@ -27,10 +27,10 @@ strategy0 = Strategy()
 # strategy0.rotate_to(0)
 
 # =====ROTACIJA=====
-strategy0.rotate_to(0)
-strategy0.rotate_to(180)
-strategy0.rotate_to(0)
-strategy0.rotate_to(180)
+# strategy0.rotate_to(0)
+# strategy0.rotate_to(180)
+# strategy0.rotate_to(0)
+# strategy0.rotate_to(180)
 # strategy0.rotate_to(0)
 # strategy0.rotate_to(180)
 # strategy0.rotate_to(0)
@@ -40,6 +40,24 @@ strategy0.rotate_to(180)
 # strategy0.rotate_to(0)
 # strategy0.rotate_to(180, s=1)
 # strategy0.rotate_to(0)
+
+# ========TEST===========================
+strategy0.go_to_XY(3, 500)
+strategy0.grip_front(90, 90, 180)
+strategy0.move_front_arm(75)
+strategy0.grip_front(175, 175, 265)
+strategy0.move_front_arm(100)
+strategy0.go_to_XY(3, 900)
+strategy0.move_front_arm(90)
+strategy0.grip_front(90, 90, 180)
+strategy0.move_front_arm(120)
+strategy0.set_distance_angle(-100, 0)
+strategy0.move_front_arm(65)
+strategy0.grip_front(180, 180, 270)
+strategy0.set_distance_angle(100, 0)
+strategy0.move_front_arm(100)
+strategy0.rotate_to(180)
+
 
 strategy0.end()
 
