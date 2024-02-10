@@ -262,7 +262,7 @@ class PositionRegulation:
             #     # print("poj do 180")
             #     rotpoj *= 1.2
 
-            KpK = 5 * pojacanje  # 6 #4 #Srdjan_bilo je 5
+            KpK = 6 * pojacanje  # 6 #4 #Srdjan_bilo je 5
             KpR = 20 * pojacanje * rotpoj
 
             TiR = 15000  # 450 # self.TiRConst#1#~60,150
