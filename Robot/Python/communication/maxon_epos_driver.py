@@ -7,7 +7,7 @@ class MaxonMotor:
         self.timeout = 500
         self.pErrorCode = c_uint()
         self.pDeviceErrorCode = c_uint()
-        self.path='/home/robot/robot/communication/libEposCmd.so'
+        self.path='/home/robot/Eurobot2024/Robot/Python/communication/libEposCmd.so'
         cdll.LoadLibrary(self.path)
         self.epos = CDLL(self.path)
         self.ID = id

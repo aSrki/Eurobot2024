@@ -123,9 +123,9 @@ class Strategy:
             for s in sequence:
                 self.operations.append(s)
 
-    def move_mechanism(self, a, v=100, s=0, da=0):
+    def move_mechanism(self, a, v=100, s=0.1, da=0):
         '''a = napred: 355, nazad: 5, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
-        action = Action.move_servo(IDS.id_pusher.value, angle=a,
+        action = Action.move_servo(IDS.id_centar.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -133,7 +133,7 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def move_front_arm(self, a, v=100, s=0, da=0):
+    def move_front_arm(self, a, v=50, s=0.1, da=0):
         '''a - gore: 120, dole: 60, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(IDS.id_front_arm.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
@@ -143,7 +143,7 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def move_back_arm(self, a, v=100, s=0, da=0):
+    def move_back_arm(self, a, v=50, s=0.1, da=0):
         '''a - gore: 210, dole: 150, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(IDS.id_back_arm.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
@@ -153,33 +153,89 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_front(self, a1, a2, a3, v=100, s=0, da=0):
+    def grip_front(self, a1, a2, a3, v=100, s=0.1, da=0):
         '''1: zatvoren 180, otvoren 90,
            2: zatvoren 180, otvoren 90,
            3: zatvoren 270, otvoren 180,
            v - velocity, s - sleep time, da - delay action in step'''
-        action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2, IDS.id_gripper_front_3], [a1, a2, a3],
-                                 velocity=v, sleep=s, thread=self.thread)
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_gripper_front_1.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
         if self.add_to_step:
-            action.delay_action = da
             self.operations[-1].actions.append(action)
         else:
             self.operations.append(action)
 
-    def grip_back(self, a1, a2, a3, v=100, s=0, da=0):
+        action = Action.move_servo(
+            IDS.id_gripper_front_2.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_front_3.value, angle=a3, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def grip_back(self, a1, a2, a3, v=100, s=0.1, da=0):
         '''1: zatvoren 180, otvoren 90,
            2: zatvoren 180, otvoren 90,
            3: zatvoren 90, otvoren 0,
            v - velocity, s - sleep time, da - delay action in step'''
-        action = parallel_rotate([IDS.id_gripper_back_1.value, IDS.id_gripper_back_2, IDS.id_gripper_back_3], [a1, a2, a3],
-                                 velocity=v, sleep=s, thread=self.thread)
+        action = Action.move_servo(
+            IDS.id_gripper_back_1.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
         if self.add_to_step:
-            action.delay_action = da
             self.operations[-1].actions.append(action)
         else:
             self.operations.append(action)
 
-    def activate_triangle(self, v=100, s=0, da=0):
+        action = Action.move_servo(
+            IDS.id_gripper_back_2.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_back_3.value, angle=a3, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def activate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
         action = Action.move_servo(IDS.id_trougao.value,
                                    velocity=v, sleep=s, thread=self.thread)
@@ -189,7 +245,7 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def deactivate_triangle(self, v=100, s=0, da=0):
+    def deactivate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
         action = Action.move_servo(IDS.id_trougao.value,
                                    velocity=v, sleep=s, thread=self.thread)

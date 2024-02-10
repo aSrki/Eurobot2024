@@ -11,7 +11,6 @@ else:
 import data
 import time
 from data import IDS
-from XL430 import parallel_rotate
 
 
 class Servo_Moving:
@@ -28,7 +27,7 @@ class Servo_Moving:
         #     print("Servo id is : ", __ID)
 
         # kucati if ID == neki broj pa vozi
-        if __ID == IDS.id_trougao.value:
+        if __ID == IDS.id_trougao:
             servo = ServoXL430(__ID, __velocity, "m")
             curr_pos = servo.read_current_position()
             servo.rotate(curr_pos - 179)
@@ -69,5 +68,6 @@ if __name__ == "__main__":
     while bool_test:
         input_id = int(input("input id: "))
         input_pos = int(input("input angle: "))
+        input_vel = int(input("input vel: "))
 
-        operations.operation(input_id, input_pos, 100)
+        operations.operation(input_id, input_pos, input_vel)
