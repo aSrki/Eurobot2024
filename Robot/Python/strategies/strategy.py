@@ -110,9 +110,9 @@ class Strategy:
         check = TimeCheck(time, flag)
         self.operations.append(check)
 
-    def check_cake(self):
-        check = CheckCakes()
-        self.operations.append(check)
+    # def check_cake(self):
+    #     check = CheckCakes()
+    #     self.operations.append(check)
 
     def add_sequence(self, sequence):
         '''sequence - lista operacija'''
@@ -153,9 +153,35 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_front(self, a ,b, c, v=100, s=0, da=0):
-        '''a = zatvoren 180, otvoren - 90, v - velocity, s - sleep time, da - delay action in step'''
-        action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2, IDS.id_gripper_front_3], [a, b, c],
+    def grip_front(self, a1, a2, a3, v=100, s=0, da=0):
+        '''1: zatvoren 180, otvoren 90,
+           2: zatvoren 180, otvoren 90,
+           3: zatvoren 270, otvoren 180,
+           v - velocity, s - sleep time, da - delay action in step'''
+        action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2, IDS.id_gripper_front_3], [a1, a2, a3],
+                                 velocity=v, sleep=s, thread=self.thread)
+        if self.add_to_step:
+            action.delay_action = da
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+    def grip_back(self, a1, a2, a3, v=100, s=0, da=0):
+        '''1: zatvoren 180, otvoren 90,
+           2: zatvoren 180, otvoren 90,
+           3: zatvoren 90, otvoren 0,
+           v - velocity, s - sleep time, da - delay action in step'''
+        action = parallel_rotate([IDS.id_gripper_back_1.value, IDS.id_gripper_back_2, IDS.id_gripper_back_3], [a1, a2, a3],
+                                 velocity=v, sleep=s, thread=self.thread)
+        if self.add_to_step:
+            action.delay_action = da
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+    def activate_triangle(self, v=100, s=0, da=0):
+        '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
+        action = Action.move_servo(IDS.id_trougao.value,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -163,37 +189,15 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_back(self, a ,b, c, v=100, s=0, da=0):
-        '''a = zatvoren 180, otvoren - 90, v - velocity, s - sleep time, da - delay action in step'''
-        action = parallel_rotate([IDS.id_gripper_back_1.value, IDS.id_gripper_back_2, IDS.id_gripper_back_3], [a, b, c],
+    def deactivate_triangle(self, v=100, s=0, da=0):
+        '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
+        action = Action.move_servo(IDS.id_trougao.value,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
             self.operations[-1].actions.append(action)
         else:
             self.operations.append(action)
-
-    #TODO: napraviti da deploy triangle i undeploy budu uvek -180 stepeni i ne prosledjuje im se ugao
-    # def deploy_triangle(self, a, v=100, s=0, da=0):
-    #     '''a = uvucena 80, izvucena 260, v - velocity, s - sleep time, da - delay action in step'''
-    #     action = Action.move_servo(IDS.id_cherry_pipe.value, angle=a,
-    #                                velocity=v, sleep=s, thread=self.thread)
-    #     if self.add_to_step:
-    #         action.delay_action = da
-    #         self.operations[-1].actions.append(action)
-    #     else:
-    #         self.operations.append(action)
-
-    # def move_vacuum(self, a, v=100, s=0, da=0):
-    #     '''a = polozaj usisavanja - 150, uvucen polozaj - 165, v - velocity, s - sleep, da - delay action in step'''
-    #     action = Action.move_servo(IDS.id_vacuum.value, angle=a,
-    #                                velocity=100, sleep=s, thread=self.thread)
-    #     if self.add_to_step:
-    #         action.delay_action = da
-    #         self.operations[-1].actions.append(action)
-    #     else:
-    #         self.operations.append(action)
-
 
     def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0):
         '''d - direction, g - gain, s - sleep, ss - sleep after detection, bs - sleep after backing, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags'''

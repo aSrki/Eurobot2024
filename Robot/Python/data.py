@@ -88,7 +88,7 @@ class MovingData:
     '''used primerely in moving.py for tracing correctly moving'''
     # brzina pri kretanju
     ms_one_degre = 0.01  # 0.0084
-    robot_speed = 5 #0.74/1000
+    robot_speed = 5  # 0.74/1000
 
     pause_when_ending_moving = 0.3  # 0.05
 
@@ -101,7 +101,7 @@ class MovingData:
 class OdometryData:
     # rodo chnge var to english
     inc = 20480
-    poluprecnik_tocka = 35.750 #35.756
+    poluprecnik_tocka = 35.750  # 35.756
     polurastojanje_ose_tockova = 152.76
     inc_R = (inc * polurastojanje_ose_tockova) / poluprecnik_tocka
     inc_deg = 360 / inc_R  # Inkremenata po stepenu
@@ -115,12 +115,12 @@ class IDS(Enum):
     id_centar = 12  # 355 napred # 5 nazad # 180 centar
     id_gripper_front_1 = 10  # otvoren 90; zatvoren 180
     id_gripper_front_2 = 2  # otvoren 90; zatvoren 180
-    id_gripper_front_3 = 6 # otvoren 180; zatvoren 270
-    id_gripper_back_1 = 9 # otvoren 90; zatvoren 180
-    id_gripper_back_2 = 7 # otvoren 90; zatvoren 180
-    id_gripper_back_3 = 3 # otvoren 0; zatvoren 90
+    id_gripper_front_3 = 6  # otvoren 180; zatvoren 270
+    id_gripper_back_1 = 9  # otvoren 90; zatvoren 180
+    id_gripper_back_2 = 7  # otvoren 90; zatvoren 180
+    id_gripper_back_3 = 3  # otvoren 0; zatvoren 90
     id_trougao = 11  # donja - 0, gornja - 340
-    id_front_arm = 41  # 41 za XM  # spustena skroz - 60, podignuta 120
+    id_front_arm = 41  # spustena skroz - 60, podignuta 120
     id_back_arm = 52  # spustena - 150, podignuta - 210
     # id_doser = 7  # load - 1, unload - 359
 
