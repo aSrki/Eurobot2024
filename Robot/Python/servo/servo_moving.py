@@ -27,9 +27,10 @@ class Servo_Moving:
         #     print("Servo id is : ", __ID)
 
         # kucati if ID == neki broj pa vozi
-        if __ID == IDS.id_trougao:
+        if __ID == IDS.id_trougao.value:
             servo = ServoXL430(__ID, __velocity, "m")
             curr_pos = servo.read_current_position()
+            print(f"TRENUTNA POS:  {curr_pos}\n\n\n")
             servo.rotate(curr_pos - 179)
         elif __ID < 53:
             if self.debug:

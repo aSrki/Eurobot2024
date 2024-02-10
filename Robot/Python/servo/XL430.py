@@ -7,6 +7,7 @@ BAUD_RATE = 115200
 TORQUE_ADDR = 64
 OPERATING_MODE_ADDR = 11
 PROFILE_VELOCITY_ADDR = 112
+CURRENT_POSITION = 132
 
 
 def send_velocity_multiple(ids, vels):
@@ -209,6 +210,11 @@ class ServoXL430:
 
     def __del__(self):
         self.portHandler.closePort()
+        
+    def read_current_position(self):
+        current_position, _, _ = self.handler.read4ByteTxRx(
+            self.portHandler, self.id, CURRENT_POSITION)
+        return int((current_position/4095)*360)
 
     def rotate(self, *args):
         if len(args) == 1:

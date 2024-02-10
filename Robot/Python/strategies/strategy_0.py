@@ -42,31 +42,61 @@ strategy0 = Strategy()
 # strategy0.rotate_to(0)
 
 # ========TEST===========================
-# strategy0.move_front_arm(120, s=0.1)
-# strategy0.move_back_arm(190)
-# strategy0.grip_front(90, 90, 180, s=0.1)
-# strategy0.go_to_XY(3, 500)
-# strategy0.move_front_arm(75, s=0.1)
-# strategy0.grip_front(175, 175, 265, s=0.1)
-# strategy0.move_front_arm(120)
-# strategy0.go_to_XY(3, 900)
-# # strategy0.move_front_arm(90)
-# strategy0.move_front_arm(105)
-# strategy0.grip_front(90, 90, 180)
-# # strategy0.move_front_arm(120)
-# strategy0.set_distance_angle(-100, 0)
-# strategy0.grip_front(180, 180, 270)
-# strategy0.move_front_arm(72)
-# strategy0.set_distance_angle(100, 0)
-# strategy0.move_mechanism(280)
-# strategy0.move_front_arm(80)
-# strategy0.move_front_arm(100)
+strategy0.move_front_arm(120, s=0.1)
+strategy0.move_back_arm(190)
+strategy0.grip_front(90, 90, 180, s=0.1)
+strategy0.move_mechanism(180)
+strategy0.go_to_XY(3, 500)
+strategy0.move_front_arm(80, s=0.1)
+strategy0.grip_front(175, 175, 265, s=0.1)
+strategy0.move_front_arm(120)
+strategy0.go_to_XY(3, 900)
+# strategy0.move_front_arm(90)
+strategy0.move_mechanism(60, s=0.2)
+strategy0.move_front_arm(95)
+strategy0.grip_front(90, 90, 180)
+strategy0.move_front_arm(120)
+strategy0.move_mechanism(180)
+strategy0.set_distance_angle(-100, 0)
+strategy0.grip_front(180, 180, 270)
+strategy0.move_front_arm(65)
+strategy0.set_distance_angle(100, 0)
+strategy0.move_mechanism(280)
+strategy0.move_front_arm(80)
+strategy0.move_front_arm(100, s=1)
+strategy0.grip_front(165, 165, 255, s=0.1)
 # strategy0.rotate_to(180)
 
 #==============test ruke=================
 
+# strategy0.move_front_arm(120, s=0.1)
+# strategy0.move_back_arm(190)
+# strategy0.move_mechanism(180)
+# strategy0.grip_front(90, 90, 180, s=1)
+
+# strategy0.move_front_arm(80, s=0.1)
+# strategy0.grip_front(175, 175, 265, s=0.1)
+# strategy0.move_front_arm(120, s=3)
+
+# strategy0.move_front_arm(100)
+# strategy0.grip_front(90, 90, 180)
+# strategy0.move_front_arm(120, s=3)
+
+# strategy0.grip_front(180, 180, 270)
+# strategy0.move_front_arm(65, s=3)
+
+# strategy0.move_mechanism(280)
+# strategy0.move_front_arm(80)
+# strategy0.move_front_arm(100,s = 1)
+
+# strategy0.grip_front(165, 165, 255, s=0.1)
 
 
+
+
+#===========test trougao==================
+# strategy0.activate_triangle(s=10)
+# strategy0.deactivate_triangle()
 
 strategy0.end()
 

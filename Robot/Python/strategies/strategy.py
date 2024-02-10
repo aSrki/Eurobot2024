@@ -237,7 +237,7 @@ class Strategy:
 
     def activate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
-        action = Action.move_servo(IDS.id_trougao.value,
+        action = Action.move_servo(IDS.id_trougao.value, angle=0,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
@@ -247,7 +247,7 @@ class Strategy:
 
     def deactivate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
-        action = Action.move_servo(IDS.id_trougao.value,
+        action = Action.move_servo(IDS.id_trougao.value, angle = 0,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
