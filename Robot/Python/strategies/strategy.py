@@ -15,7 +15,7 @@ class Strategy:
         self.operations = []
         self.thread = False
         self.add_to_step = False
-        self.rotate_to(data.f_current)
+        # self.rotate_to(data.f_current)
 
     def add_points(self, type, points):
         task_points = Points(type, points)
@@ -124,7 +124,7 @@ class Strategy:
                 self.operations.append(s)
 
     def move_mechanism(self, a, v=100, s=0.1, da=0):
-        '''a = napred: 355, nazad: 5, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
+        '''a = napred: 315, nazad: 5, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(IDS.id_centar.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
