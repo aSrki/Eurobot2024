@@ -42,6 +42,7 @@ def test_task():
     return tt.operations
 
 def prepare_front_arm():
+    # podigne i otvori
     pfa = Strategy()
 
     pfa.move_front_arm(120, s=0.1)

@@ -97,7 +97,7 @@ class Strategy:
 
     def end(self):
         end = End()
-        self.rotate_to(data.f_current)
+        #self.rotate_to(data.f_current)
         self.operations.append(end)
 
     def start_step_actions(self):

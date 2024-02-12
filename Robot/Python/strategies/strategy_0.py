@@ -5,6 +5,13 @@ from strategies.strategy import Strategy
 
 strategy0 = Strategy()
 
+strategy0.add_sequence(prepare_front_arm())
+strategy0.go_to_XY(700,2300)
+strategy0.rotate_to(180)
+
+
+strategy0.set_distance_angle()
+
 # =====TRANSLACIJA=====
 # strategy0.go_to_XY(3, 200)
 # strategy0.go_to_XY(3, 3, False)
@@ -54,16 +61,16 @@ strategy0 = Strategy()
 # strategy0.add_sequence(drop_front_plant())
 
 # ========TEST unazad===========================
-strategy0.rotate_to(data.f_current)
-strategy0.add_sequence(prepare_back_arm())
+# strategy0.rotate_to(data.f_current)
+# strategy0.add_sequence(prepare_back_arm())
 
-strategy0.go_to_XY(3, 500, False)
-strategy0.add_sequence(grip_back_plant())
+# strategy0.go_to_XY(3, 500, False)
+# strategy0.add_sequence(grip_back_plant())
 
-strategy0.go_to_XY(3, 900, False)
-strategy0.add_sequence(back_plant_in_pot())
+# strategy0.go_to_XY(3, 900, False)
+# strategy0.add_sequence(back_plant_in_pot())
 
-strategy0.add_sequence(drop_back_plant())
+# strategy0.add_sequence(drop_back_plant())
 
 #==============test ruke=================
 

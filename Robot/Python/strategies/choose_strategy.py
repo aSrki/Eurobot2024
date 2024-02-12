@@ -50,9 +50,9 @@ def choose_strategy():
     # elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
     #     data.time_strategy_type = 90  # 95
     #     # za strategiju 2 plate = 1
-    data.x_current = 3
-    data.y_current = 3
-    data.f_current = 0
+    data.x_current = 295
+    data.y_current = 2700
+    data.f_current = 180
     return strategy0.operations # 2
     
 
