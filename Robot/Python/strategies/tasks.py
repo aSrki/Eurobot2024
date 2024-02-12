@@ -48,7 +48,7 @@ def prepare_front_arm():
     pfa.move_front_arm(120, s=0.1)
     pfa.move_back_arm(190)
     pfa.grip_front(90, 90, 180, s=0.1)
-    pfa.move_mechanism(180)
+    pfa.move_mechanism(5)
 
     return pfa.operations
 
@@ -66,7 +66,8 @@ def grip_front_plant():
     gfp = Strategy()
 
     gfp.move_front_arm(80, s=0.1)
-    gfp.grip_front(170, 170, 260, s=0.1)
+    gfp.grip_front(175, 175, 265, s=0.1)
+    gfp.move_mechanism(80)
     gfp.move_front_arm(120)
 
     return gfp.operations
@@ -75,7 +76,7 @@ def grip_back_plant():
     gbp = Strategy()
 
     gbp.move_back_arm(160, s=0.1)
-    gbp.grip_back(170, 170, 80, s=0.1)
+    gbp.grip_back(175, 175, 85, s=0.1)
     gbp.move_back_arm(210)
 
     return gbp.operations

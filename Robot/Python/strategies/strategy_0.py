@@ -6,11 +6,21 @@ from strategies.strategy import Strategy
 strategy0 = Strategy()
 
 strategy0.add_sequence(prepare_front_arm())
-strategy0.go_to_XY(700,2300)
+strategy0.go_to_XY(720,2300)
 strategy0.rotate_to(180)
+strategy0.set_distance_angle(105,0)
+strategy0.add_sequence(grip_front_plant())
+strategy0.set_distance_angle(-320,0)
+strategy0.set_distance_angle(0,180)
+strategy0.add_sequence(prepare_back_arm())
+strategy0.set_distance_angle(-460,0)
+strategy0.add_sequence(grip_back_plant())
+strategy0.set_distance_angle(-40,0)
+strategy0.set_distance_angle(0,90)
+strategy0.set_distance_angle(400,0)
+strategy0.add_sequence(front_plant_in_pot())
 
 
-strategy0.set_distance_angle()
 
 # =====TRANSLACIJA=====
 # strategy0.go_to_XY(3, 200)
