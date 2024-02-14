@@ -20,9 +20,9 @@ class Odom:
     w_r = 0
     v_l = 0
     w_l = 0
-    d_r = 91.7           # diameter 91.7
-    d_l = 93.9           # diameter 93.9
-    b = 111.5            # distance between the wheels 117.5
+    d_r = 94.5           # diameter 91.7        94.5 dist 500
+    d_l = 93.9           # diameter 93.9        94.3 dist 500
+    b = 124.7            # distance between the wheels 124.5    measure 117.7
     v = 0
     w = 0
 
@@ -192,7 +192,7 @@ class Odom:
                 while abs((goal_angle - self.curr_angle)) > 0.09:
                     print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
                     if self.going == False:
-                        send_velocity_multiple([1, 4], [-100, -100]) # rotation +
+                        send_velocity_multiple([1, 4], [-71.5, -70.5]) # rotation +      -98.5, -100     -99.5   -98.5
                         self.going = True
                     time.sleep(0.0001)
                 print(f"Izasao iz WHILE.... USLOV  angle > 0: {abs((goal_angle - self.curr_angle))}")
@@ -213,7 +213,7 @@ class Odom:
             while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 50:
                 print(f"CURRENT X: {self.curr_x}, CURRENT Y: {self.curr_y}")               
                 if self.going == False:
-                    send_velocity_multiple([1, 4], [-100, 99])    # forward -100, 100
+                    send_velocity_multiple([1, 4], [-95.5, 100])    # forward -95.5, 100
                     print(f"FLAG {self.flag}")
                     self.going = True
                 time.sleep(0.0001)
