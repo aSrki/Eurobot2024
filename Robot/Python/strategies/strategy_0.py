@@ -5,6 +5,10 @@ from strategies.strategy import Strategy
 
 strategy0 = Strategy()
 
+# strategy0.set_distance_angle(1300, 0)
+# strategy0.set_distance_angle(-1300, 0)
+
+
 strategy0.add_sequence(prepare_front_arm())
 strategy0.go_to_XY(720,2300)
 strategy0.rotate_to(180)
@@ -20,7 +24,7 @@ strategy0.add_sequence(grip_back_plant())
 # strategy0.set_distance_angle(400,0)
 strategy0.go_to_XY(340,2010)
 strategy0.rotate_to(90)
-strategy0.set_distance_angle(20,0) #30 staro
+strategy0.set_distance_angle(30,0)
 strategy0.add_sequence(front_plant_in_pot())
 
 strategy0.end()

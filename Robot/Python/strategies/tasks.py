@@ -59,14 +59,13 @@ def prepare_back_arm():
     pba.move_back_arm(210, s=0.1)
     pba.move_front_arm(110)
     pba.grip_back(90, 90, 0, s=0.1)
-    pba.move_mechanism(100)
+    pba.move_mechanism(180)
 
     return pba.operations
 
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_mechanism(100)
     gfp.move_front_arm(80, s=0.1)
     gfp.grip_front(175, 175, 265, s=0.1)
     gfp.move_mechanism(80)
@@ -91,12 +90,12 @@ def front_plant_in_pot():
     fpip.move_front_arm(110)
     fpip.grip_front(180, 90, 180)
     fpip.move_front_arm(120)
-    fpip.move_mechanism(200) #180
+    fpip.move_mechanism(180)
     fpip.set_distance_angle(-100, 0)
     fpip.grip_front(180, 180, 270)
-    fpip.move_front_arm(65) #60 staro
-    fpip.set_distance_angle(70, 0)
-    fpip.move_mechanism(260, s=0.5, v=50)
+    fpip.move_front_arm(64)
+    fpip.set_distance_angle(85, 0)
+    fpip.move_mechanism(255, s=0.5, v=50)
     # fpip.move_front_arm(60,s=0.5)
     fpip.move_mechanism(180)
     fpip.set_distance_angle(-100,0)
