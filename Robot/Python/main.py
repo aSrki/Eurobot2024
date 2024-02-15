@@ -123,12 +123,6 @@ class Main:
         except Exception as e:
             custom_print(f"LIDAR ERROR: str{e}")
 
-        # cuva samo psolednjih 10 logova
-        try:
-            custom_print("Zatvara log")
-        except Exception as e:
-            custom_print(f"LOG ERROR: {e}")
-
 
 if __name__ == "__main__":
     main = Main()

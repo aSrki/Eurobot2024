@@ -70,18 +70,15 @@ try:
 	# time.sleep(1)    
 
 	# square
-	# odom.go_to_XY(300,100)
-	# odom.go_to_XY(300,300)
-	# odom.go_to_XY(100,300)
-	# odom.go_to_XY(100,100)
-      
-	# odom.go_to_XY(400,100)
-
-	odom.go_to_XY(2000,100)
+	odom.go_to_XY(300,100)
+	odom.go_to_XY(300,300)
+	odom.go_to_XY(100,300)
 	odom.go_to_XY(100,100)
       
-	# odom.go_to_XY(-1000,100) 
+	# odom.go_to_XY(1150,100)      
+	# odom.go_to_XY(-2000,100) 
 
+	# odom.go_to_XY(600,100)
 	# odom.go_to_XY(100,300)
 
 except KeyboardInterrupt:

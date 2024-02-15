@@ -42,32 +42,35 @@ def test_task():
     return tt.operations
 
 def prepare_front_arm():
-    # podigne i otvori
+    # podigne i otvori prednji mehanizam
     pfa = Strategy()
 
     pfa.move_front_arm(120, s=0.1)
     pfa.move_back_arm(190)
     pfa.grip_front(90, 90, 180, s=0.1)
-    pfa.move_mechanism(5)
+    pfa.move_mechanism(120)
 
     return pfa.operations
 
 def prepare_back_arm():
+    # podigne i otvori zadnji mehanizam
     pba = Strategy()
 
     pba.move_back_arm(210, s=0.1)
     pba.move_front_arm(110)
     pba.grip_back(90, 90, 0, s=0.1)
-    pba.move_mechanism(180)
+    pba.move_mechanism(100)
 
     return pba.operations
 
 def grip_front_plant():
     gfp = Strategy()
 
+    gfp.move_mechanism(100)
     gfp.move_front_arm(80, s=0.1)
     gfp.grip_front(175, 175, 265, s=0.1)
     gfp.move_mechanism(80)
+    gfp.set_distance_angle(-80,0)
     gfp.move_front_arm(120)
 
     return gfp.operations
@@ -85,18 +88,19 @@ def front_plant_in_pot():
     fpip = Strategy()
 
     fpip.move_mechanism(55, s=0.2)
-    fpip.move_front_arm(95)
-    fpip.grip_front(90, 90, 180)
+    fpip.move_front_arm(110)
+    fpip.grip_front(180, 90, 180)
     fpip.move_front_arm(120)
-    fpip.move_mechanism(180)
+    fpip.move_mechanism(200) #180
     fpip.set_distance_angle(-100, 0)
     fpip.grip_front(180, 180, 270)
-    fpip.move_front_arm(65)
-    fpip.set_distance_angle(100, 0)
-    fpip.move_mechanism(280)
-    fpip.move_front_arm(80,s=0.5)
+    fpip.move_front_arm(80) #60 staro
+    fpip.set_distance_angle(70, 0)
+    fpip.move_mechanism(260, s=0.5, v=50)
+    # fpip.move_front_arm(60,s=0.5)
     fpip.move_mechanism(180)
-    fpip.move_front_arm(120, s=0.5)
+    fpip.set_distance_angle(-100,0)
+    fpip.move_front_arm(120, s=0.5, v=15)
 
     return fpip.operations
 
