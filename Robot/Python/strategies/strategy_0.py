@@ -23,6 +23,7 @@ strategy0.rotate_to(90)
 strategy0.set_distance_angle(20,0) #30 staro
 strategy0.add_sequence(front_plant_in_pot())
 
+strategy0.end()
 
 
 # =====TRANSLACIJA=====
@@ -116,7 +117,6 @@ strategy0.add_sequence(front_plant_in_pot())
 # strategy0.activate_triangle(s=10)
 # strategy0.deactivate_triangle()
 
-strategy0.end()
 
 # strategy0.go_to_XY(3, 550, s=1)
 # strategy0.go_to_XY(3, 3, False, s=1)
