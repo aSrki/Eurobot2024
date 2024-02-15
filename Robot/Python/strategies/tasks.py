@@ -106,9 +106,8 @@ def back_plant_in_pot():
     bpip = Strategy()
 
     bpip.move_mechanism(270, s=0.2)
-    bpip.move_back_arm(165)
+    bpip.move_back_arm(200)
     bpip.grip_back(90, 90, 1)
-    bpip.move_back_arm(210)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(100, 0)
     bpip.grip_back(180, 180, 90)
