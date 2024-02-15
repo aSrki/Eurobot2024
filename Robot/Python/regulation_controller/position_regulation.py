@@ -52,7 +52,7 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
-    RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
+    RAMP_INCREMENT_START = 80  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 200000  # ikrimentira se za time: delay  #12
 
     ROT_RAMP_UP_INCREMENT = 100  # 12
@@ -295,6 +295,9 @@ class PositionRegulation:
             #     pojacanje *= 1.8  # 1.7
             #     rotpoj *= 1
 
+            if d<50:
+                rotpoj = 0
+
             if abs(W_d) <= 300:
                 pojacanje *= 0.75  # 1.15
                 # rotpoj *= 0.5  # 0.85
@@ -327,13 +330,13 @@ class PositionRegulation:
             #     rotpoj = 0.2
 
             KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 75 * pojacanje * rotpoj  # 75 bilo
+            KpR = 200 * pojacanje * rotpoj  # 75 bilo
 
-            TiR = 660000000  #6600 # 200
+            TiR = 4000  #6600 # 200
             TiK = 10000 #5200
 
             TdK = 3 # 1
-            TdR = -5  # 3
+            TdR = -4.5  # 3
 
         else:
             if debug:
