@@ -42,7 +42,8 @@ from odom import *
 print("--------------------------------------")
 print("--------------------------------------")
 print("--------------------------------------")
-odom = Odom(100, 100, 0, 0)
+odom = Odom(100, 1100, 0, 0)
+# odom = Odom(100, 100, 0, 0) #111 radi
 print("--------------------------------------")
 print("--------------------------------------")
 print("--------------------------------------")
@@ -70,16 +71,18 @@ try:
 	# time.sleep(1)    
 
 	# square
-	odom.go_to_XY(300,100)
-	odom.go_to_XY(300,300)
-	odom.go_to_XY(100,300)
-	odom.go_to_XY(100,100)
-      
-	# odom.go_to_XY(1150,100)      
-	# odom.go_to_XY(-2000,100) 
-
-	# odom.go_to_XY(600,100)
+	# odom.go_to_XY(300,100)
+	# odom.go_to_XY(300,300)
 	# odom.go_to_XY(100,300)
+	# odom.go_to_XY(100,100)
+      
+	# odom.go_to_XY(1900,100)      
+	# odom.go_to_XY(-1000,100)
+
+	# odom.go_to_XY(1800,1100) #111 radi
+
+	# strategy
+	odom.go_to_XY(1800, 0.0)
 
 except KeyboardInterrupt:
     odom.stop_odom()
