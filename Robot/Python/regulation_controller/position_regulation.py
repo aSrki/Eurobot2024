@@ -52,7 +52,7 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
-    RAMP_INCREMENT_START = 80  # ikrimentira se za time: delay #14
+    RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 200000  # ikrimentira se za time: delay  #12
 
     ROT_RAMP_UP_INCREMENT = 100  # 12
@@ -105,7 +105,7 @@ class PositionRegulation:
         while data.running.is_set():
             self.calculate_position()
             sleep(self.delay)
-            #print(f"Vreme3: {time.time()}")
+            print(f"Vreme3: {time.time()}")
 
         return
     
@@ -116,7 +116,7 @@ class PositionRegulation:
 
     def calculate_position(self):
 
-        debug = False
+        debug = True
         if self.count > self.max_count:
             self.count = 0
             debug = False
@@ -145,7 +145,7 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if debug:
+        if True:
             print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
             print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
@@ -295,9 +295,6 @@ class PositionRegulation:
             #     pojacanje *= 1.8  # 1.7
             #     rotpoj *= 1
 
-            if d<50:
-                rotpoj = 0
-
             if abs(W_d) <= 300:
                 pojacanje *= 0.75  # 1.15
                 # rotpoj *= 0.5  # 0.85
@@ -330,13 +327,13 @@ class PositionRegulation:
             #     rotpoj = 0.2
 
             KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 200 * pojacanje * rotpoj  # 75 bilo
+            KpR = 75 * pojacanje * rotpoj  # 75 bilo
 
-            TiR = 4000  #6600 # 200
+            TiR = 660000000  #6600 # 200
             TiK = 10000 #5200
 
             TdK = 3 # 1
-            TdR = -4.5  # 3
+            TdR = -5  # 3
 
         else:
             if debug:
