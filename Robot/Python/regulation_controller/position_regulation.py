@@ -105,7 +105,7 @@ class PositionRegulation:
         while data.running.is_set():
             self.calculate_position()
             sleep(self.delay)
-            print(f"Vreme3: {time.time()}")
+            #print(f"Vreme3: {time.time()}")
 
         return
     
@@ -116,7 +116,7 @@ class PositionRegulation:
 
     def calculate_position(self):
 
-        debug = True
+        debug = False
         if self.count > self.max_count:
             self.count = 0
             debug = False
@@ -145,7 +145,7 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if True:
+        if debug:
             print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
             print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
