@@ -94,7 +94,7 @@ def front_plant_in_pot():
     fpip.move_mechanism(200) #180
     fpip.set_distance_angle(-100, 0)
     fpip.grip_front(180, 180, 270)
-    fpip.move_front_arm(80) #60 staro
+    fpip.move_front_arm(65) #60 staro
     fpip.set_distance_angle(70, 0)
     fpip.move_mechanism(260, s=0.5, v=50)
     # fpip.move_front_arm(60,s=0.5)
