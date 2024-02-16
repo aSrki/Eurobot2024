@@ -97,7 +97,7 @@ class Strategy:
 
     def end(self):
         end = End()
-        #self.rotate_to(data.f_current)
+        # self.rotate_to(data.f_current)
         self.operations.append(end)
 
     def start_step_actions(self):
@@ -124,7 +124,7 @@ class Strategy:
                 self.operations.append(s)
 
     def move_mechanism(self, a, v=100, s=0.1, da=0):
-        '''a = napred: 315, nazad: 5, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
+        '''a = napred: 345, nazad: 15, centar: 180, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(IDS.id_centar.value, angle=a,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
@@ -247,7 +247,7 @@ class Strategy:
 
     def deactivate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
-        action = Action.move_servo(IDS.id_trougao.value, angle = 0,
+        action = Action.move_servo(IDS.id_trougao.value, angle=0,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da

@@ -25,21 +25,38 @@ def forward_steps(distance, angle=0, sleep=0, rotate_to_angle=0):
     return forward.operations
 
 
-def test_task():
-    tt = Strategy()
+# def test_task():
+#     ini = Strategy()
 
-    tt.activate_triangle()
-    tt.deactivate_triangle()
+#     ini.activate_triangle()
+#     ini.deactivate_triangle()
 
-    tt.move_front_arm(60)
-    tt.move_back_arm(150)
+#     ini.move_front_arm(60)
+#     ini.move_back_arm(150)
 
-    tt.move_mechanism(180)
+#     ini.move_mechanism(180)
 
-    tt.grip_back(180, 180, 270)
-    tt.grip_front(180, 180, 90)
+#     ini.grip_back(180, 180, 270)
+#     ini.grip_front(180, 180, 90)
 
-    return tt.operations
+#     return ini.operations
+
+def init_servos():
+    ini = Strategy()
+
+    ini.move_front_arm(110)
+    ini.move_back_arm(200)
+
+    ini.move_mechanism(180)
+
+    ini.grip_back(180, 180, 90)
+    ini.grip_front(180, 180, 270)
+
+    ini.move_front_arm(65)
+    ini.move_back_arm(155)
+
+    return ini.operations
+
 
 def prepare_front_arm():
     # podigne i otvori prednji mehanizam
@@ -48,9 +65,10 @@ def prepare_front_arm():
     pfa.move_front_arm(120, s=0.1)
     pfa.move_back_arm(190)
     pfa.grip_front(90, 90, 180, s=0.1)
-    pfa.move_mechanism(120)
+    pfa.move_mechanism(180, s=3)
 
     return pfa.operations
+
 
 def prepare_back_arm():
     # podigne i otvori zadnji mehanizam
@@ -63,63 +81,74 @@ def prepare_back_arm():
 
     return pba.operations
 
+
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(80, s=0.1)
+    gfp.move_front_arm(85, s=0.1, v=30)
     gfp.grip_front(175, 175, 265, s=0.1)
-    gfp.move_mechanism(80)
-    gfp.set_distance_angle(-80,0)
-    gfp.move_front_arm(120)
+    gfp.set_distance_angle(-80, 0)
+    # gfp.move_mechanism(80)
+    gfp.move_front_arm(120, s=3)
 
     return gfp.operations
+
 
 def grip_back_plant():
     gbp = Strategy()
 
     gbp.move_back_arm(160, s=0.1)
     gbp.grip_back(175, 175, 85, s=0.1)
-    gbp.move_back_arm(210)
+    gbp.move_back_arm(210, s=0.5)
 
     return gbp.operations
+
 
 def front_plant_in_pot():
     fpip = Strategy()
 
-    fpip.move_mechanism(55, s=0.2)
-    fpip.move_front_arm(110)
-    fpip.grip_front(180, 90, 180)
     fpip.move_front_arm(120)
+    fpip.move_mechanism(20, s=0.2)  # OVDE NE SME MANJE OD 65
+    fpip.move_front_arm(110, v=50)  # OVDE NE SME MANJE OD 85
+    fpip.grip_front(180, 90, 180)
+    fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
     fpip.set_distance_angle(-100, 0)
     fpip.grip_front(180, 180, 270)
     fpip.move_front_arm(66)
     fpip.set_distance_angle(80, 0)
     fpip.move_mechanism(240, s=0.5, v=50)
+    fpip.move_front_arm(85)
+    fpip.move_front_arm(65, s=0.5, v=85)
     fpip.move_mechanism(180)
-    fpip.set_distance_angle(-100,0)
-    fpip.move_front_arm(120, s=0.5, v=15)
+    fpip.move_front_arm(120, s=3, v=30)
+    fpip.set_distance_angle(-100, 0)
 
     return fpip.operations
+
 
 def back_plant_in_pot():
     bpip = Strategy()
 
-    bpip.move_mechanism(270, s=0.2)
-    bpip.move_back_arm(165)
-    bpip.grip_back(90, 90, 1)
     bpip.move_back_arm(210)
+    bpip.move_mechanism(340, s=0.2)
+    bpip.move_back_arm(200)  # dodati v = 50 ako cimaju biljke kada padaju
+    bpip.grip_back(90, 90, 1)
+    bpip.move_back_arm(210, s=0.5)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(100, 0)
     bpip.grip_back(180, 180, 90)
     bpip.move_back_arm(155)
-    bpip.set_distance_angle(-100, 0)
-    bpip.move_mechanism(40)
-    bpip.move_back_arm(170, s=0.5)
+    bpip.set_distance_angle(-80, 0)
+    bpip.move_mechanism(120)
+    bpip.move_back_arm(175)
+    bpip.move_back_arm(155, s=0.5, v=85)
     bpip.move_mechanism(180)
-    bpip.move_back_arm(210, s=0.5)
+    bpip.move_back_arm(210, s=3, v=30)
+    bpip.set_distance_angle(100, 0)
 
     return bpip.operations
+
 
 def drop_front_plant():
     dfp = Strategy()
@@ -131,6 +160,7 @@ def drop_front_plant():
     dfp.move_mechanism(180)
 
     return dfp.operations
+
 
 def drop_back_plant():
     dbp = Strategy()
@@ -144,13 +174,13 @@ def drop_back_plant():
     return dbp.operations
 
 
-# def pink1(xoff=0, yoff=0, attempts=0, off=data.offset):
+# def pink1(xoff=0, yoff=0, ainiempts=0, off=data.offset):
 
 #     p1 = Strategy()
 
 #     p1.grip_cakes(48)
 #     p1.go_to_XY(1775+xoff, 2425+yoff, ss=0.5, bs=0,
-#                 at=0+attempts, b=200, off=off)  # 1725 bilo za X
+#                 at=0+ainiempts, b=200, off=off)  # 1725 bilo za X
 #     p1.check_cake()
 #     p1.lift_cakes(10)
 #     p1.grip_cakes(60)
@@ -158,6 +188,3 @@ def drop_back_plant():
 #     p1.skip_to_flag("skip_grip")
 
 #     return p1.operations
-
-
-
