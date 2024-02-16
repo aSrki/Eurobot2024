@@ -20,8 +20,8 @@ class Odom:
     w_r = 0
     v_l = 0
     w_l = 0
-    d_r = 93.45           # diameter 91.7        94.5 dist 500
-    d_l = 93.9           # diameter 93.9        94.3 dist 500
+    d_r = 93.45           # diameter 91.7           93.45
+    d_l = 93.5           # diameter 93.9            93.9              radi  93.5
     b = 115.9            # distance between the wheels 124.7    measure 117.7     115
     v = 0
     w = 0
@@ -129,7 +129,7 @@ class Odom:
             # print(f"ANGULAR SPEED: {self.w}")
             # print(f"CURRENT X: {self.curr_x}")
             # print(f"CURRENT Y: {self.curr_y}") 
-            # print(f"CURRENT THETA: {self.curr_theta}")
+            print(f"CURRENT THETA: {self.curr_theta}")
             print(f"CURRENT ANGLE: {self.curr_angle}") 
 
 
@@ -191,7 +191,7 @@ class Odom:
             # ANGLE
             self.flag = 0   # forward
             if angle > 0:
-                while abs((goal_angle - self.curr_angle)) > 0.09:
+                while abs((goal_angle - self.curr_angle)) > 0.05:
                     print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
                     if self.going == False:
                         send_velocity_multiple([1, 4], [-41.5, -40.5]) # rotation +      -71.5, -70.5
@@ -201,10 +201,10 @@ class Odom:
                 send_velocity_multiple([1, 4], [0, 0])
                 self.going = False
             else:
-                while abs((goal_angle - self.curr_angle)) > 0.09:
+                while abs((goal_angle - self.curr_angle)) > 0.05:
                     print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
                     if self.going == False:
-                        send_velocity_multiple([1, 4], [40.5, 41.5]) # rotation -
+                        send_velocity_multiple([1, 4], [20.5, 21.5]) # rotation -
                         self.going = True
                     time.sleep(0.0001)
                 print(f"Izasao iz WHILE.... USLOV angle < 0: {abs((goal_angle - self.curr_angle))}")
