@@ -94,8 +94,8 @@ class MovingData:
 
     tim_chedova = False
 
-    angle_tolerance = 3  # dozvoljene greska
-    distance_tolerance = 10  # 20
+    angle_tolerance = 1  # dozvoljene greska
+    distance_tolerance = 5  # 20
 
 
 class OdometryData:

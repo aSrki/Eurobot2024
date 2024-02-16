@@ -10,26 +10,29 @@ strategy0 = Strategy()
 
 # =================================================
 
-# strategy0.add_sequence(prepare_front_arm())
-# strategy0.go_to_XY(720, 2300)
-# strategy0.rotate_to(180)
-# strategy0.set_distance_angle(120, 0)
-# strategy0.add_sequence(grip_front_plant())
-# # strategy0.set_distance_angle(-320,0)
-# strategy0.rotate_to(0)
-# strategy0.add_sequence(prepare_back_arm())
-# strategy0.set_distance_angle(-250,0)
-# strategy0.add_sequence(grip_back_plant())
-# # strategy0.set_distance_angle(-40,0)
-# # strategy0.set_distance_angle(0,90)
-# # strategy0.set_distance_angle(400,0)
-# strategy0.go_to_XY(340,2010)
-# strategy0.rotate_to(90)
-# strategy0.set_distance_angle(30,0)
-# strategy0.add_sequence(front_plant_in_pot())
-# strategy0.rotate_to(-90)
-# strategy0.add_sequence(back_plant_in_pot())
+strategy0.add_sequence(prepare_front_arm())
+strategy0.go_to_XY(720, 2300)
+strategy0.rotate_to(180)
+strategy0.set_distance_angle(120, 0)
+strategy0.add_sequence(grip_front_plant())
+# strategy0.set_distance_angle(-320,0)
+strategy0.rotate_to(0)
+strategy0.add_sequence(prepare_back_arm())
+strategy0.set_distance_angle(-250, 0)
+strategy0.add_sequence(grip_back_plant())
+# strategy0.set_distance_angle(-40,0)
+# strategy0.set_distance_angle(0,90)
+# strategy0.set_distance_angle(400,0)
+strategy0.go_to_XY(340, 2010)
+strategy0.rotate_to(90)
+strategy0.set_distance_angle(40, 0)
+strategy0.add_sequence(front_plant_in_pot())
+strategy0.go_to_XY(270, 2010, False)
+strategy0.rotate_to(-90)
+strategy0.set_distance_angle(-40, 0)
+strategy0.add_sequence(back_plant_in_pot())
 
+strategy0.end()
 
 # =====TRANSLACIJA=====
 # strategy0.go_to_XY(3, 200)
@@ -92,14 +95,21 @@ strategy0 = Strategy()
 # strategy0.add_sequence(drop_back_plant())
 
 
-# ==============test ruke=================
-strategy0.add_sequence(init_servos())
+# ==============test ruke prednja=================
+# strategy0.add_sequence(init_servos())
 
-strategy0.add_sequence(prepare_front_arm())
-strategy0.add_sequence(grip_front_plant())
-strategy0.add_sequence(front_plant_in_pot())
+# strategy0.add_sequence(prepare_front_arm())
+# strategy0.add_sequence(grip_front_plant())
+# strategy0.add_sequence(front_plant_in_pot())
 
-strategy0.end()
+# strategy0.end()
+
+# =================test ruke zadnja===================
+# strategy0.add_sequence(init_servos())
+
+# strategy0.add_sequence(prepare_back_arm())
+# strategy0.add_sequence(grip_back_plant())
+# strategy0.add_sequence(back_plant_in_pot())
 
 
 # ===========test trougao==================

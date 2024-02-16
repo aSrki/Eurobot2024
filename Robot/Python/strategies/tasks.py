@@ -63,9 +63,9 @@ def prepare_front_arm():
     pfa = Strategy()
 
     pfa.move_front_arm(120, s=0.1)
-    pfa.move_back_arm(190)
+    pfa.move_back_arm(210)
     pfa.grip_front(90, 90, 180, s=0.1)
-    pfa.move_mechanism(180, s=3)
+    pfa.move_mechanism(180)
 
     return pfa.operations
 
@@ -75,7 +75,7 @@ def prepare_back_arm():
     pba = Strategy()
 
     pba.move_back_arm(210, s=0.1)
-    pba.move_front_arm(110)
+    pba.move_front_arm(120)
     pba.grip_back(90, 90, 0, s=0.1)
     pba.move_mechanism(180)
 
@@ -86,10 +86,9 @@ def grip_front_plant():
     gfp = Strategy()
 
     gfp.move_front_arm(85, s=0.1, v=30)
-    gfp.grip_front(175, 175, 265, s=0.1)
-    gfp.set_distance_angle(-80, 0)
-    # gfp.move_mechanism(80)
-    gfp.move_front_arm(120, s=3)
+    gfp.grip_front(178, 178, 268, s=0.1)
+    gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
+    gfp.move_front_arm(120)
 
     return gfp.operations
 
@@ -97,9 +96,9 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(160, s=0.1)
-    gbp.grip_back(175, 175, 85, s=0.1)
-    gbp.move_back_arm(210, s=0.5)
+    gbp.move_back_arm(175, s=0.1, v=30)
+    gbp.grip_back(178, 178, 88, s=0.1)
+    gbp.move_back_arm(210)
 
     return gbp.operations
 
@@ -118,10 +117,10 @@ def front_plant_in_pot():
     fpip.move_front_arm(66)
     fpip.set_distance_angle(80, 0)
     fpip.move_mechanism(240, s=0.5, v=50)
-    fpip.move_front_arm(85)
-    fpip.move_front_arm(65, s=0.5, v=85)
+    fpip.move_front_arm(75)
+    # fpip.move_front_arm(65, s=0.5, v=85)
     fpip.move_mechanism(180)
-    fpip.move_front_arm(120, s=3, v=30)
+    fpip.move_front_arm(120, s=0.5, v=30)
     fpip.set_distance_angle(-100, 0)
 
     return fpip.operations
@@ -131,21 +130,22 @@ def back_plant_in_pot():
     bpip = Strategy()
 
     bpip.move_back_arm(210)
-    bpip.move_mechanism(340, s=0.2)
-    bpip.move_back_arm(200)  # dodati v = 50 ako cimaju biljke kada padaju
+    bpip.move_mechanism(330, s=1)
+    # dodati v = 50 ako cimaju biljke kada padaju
+    bpip.move_back_arm(190, v=30)
     bpip.grip_back(90, 90, 1)
-    bpip.move_back_arm(210, s=0.5)
+    bpip.move_mechanism(270, s=0.5)
+    bpip.move_back_arm(210, s=0.5, v=10)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(100, 0)
     bpip.grip_back(180, 180, 90)
-    bpip.move_back_arm(155)
-    bpip.set_distance_angle(-80, 0)
+    bpip.move_back_arm(155, v=30)
+    bpip.set_distance_angle(-60, 0)  # -80
     bpip.move_mechanism(120)
-    bpip.move_back_arm(175)
-    bpip.move_back_arm(155, s=0.5, v=85)
+    bpip.move_back_arm(180, s=0.5, v=30)
     bpip.move_mechanism(180)
-    bpip.move_back_arm(210, s=3, v=30)
     bpip.set_distance_angle(100, 0)
+    bpip.move_back_arm(210, v=15)  # v=30
 
     return bpip.operations
 
