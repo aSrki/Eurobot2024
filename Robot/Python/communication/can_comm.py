@@ -27,6 +27,7 @@ class CAN_COMM:
         self.pos = Position()
 
     def receive(self):
+
         while True:
             msg = self.can0.recv(10.0)
 
@@ -35,18 +36,18 @@ class CAN_COMM:
                 enc2 = int(msg.data[3] << 8 | msg.data[2])
 
                 if enc1 > 10000:
-                    enc1 -= 65535
+                    enc1 -= 65536
 
                 enc1 *= -1
 
                 if enc2 > 10000:
-                    enc2 -= 65535
+                    enc2 -= 65536
 
                 data.enc_left = enc1
                 data.enc_right = enc2
 
-                data.sum_encoder_left += enc1
-                data.sum_encoder_right += enc2
+                data.sum_encoder_left += data.enc_left
+                data.sum_encoder_right += data.enc_right
 
                 # self.pos.calculate_position()
 

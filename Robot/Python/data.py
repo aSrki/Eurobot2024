@@ -64,8 +64,8 @@ offset = 0
 skip_to = None
 num_of_skips = 0
 
-sum_encoder_left = 0
-sum_encoder_right = 0
+sum_encoder_left = 0.0
+sum_encoder_right = 0.0
 
 last_MVL = 0
 last_MVR = 0
@@ -100,13 +100,14 @@ class MovingData:
 
 class OdometryData:
     # rodo chnge var to english
-    inc = 20480
-
-    poluprecnik_tocka = 35.750  # 35.756
-    polurastojanje_ose_tockova = 152.45  # 152  # 151.9  # 152.76
+    faktor_razlike = 1.0  # 1.00378  # 0.9962343096
+    inc = 20480.0
+    poluprecnik_tocka = 35.840  # 35.75
+    polurastojanje_ose_tockova = 152.8  # 152.8  # 151.9  # 152.76
     inc_R = (inc * polurastojanje_ose_tockova) / poluprecnik_tocka
-    inc_deg = 360 / inc_R  # Inkremenata po stepenu
-    inc_mm = (2 * poluprecnik_tocka * 3.1416) / inc  # 1687 #Inkremenata po mm
+    inc_deg = 360.0 / inc_R  # Inkremenata po stepenu
+    inc_mm = (2.0 * poluprecnik_tocka * 3.1416) / \
+        inc  # 1687 #Inkremenata po mm
 
 
 # --------------------------------

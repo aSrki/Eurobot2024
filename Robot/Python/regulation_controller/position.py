@@ -39,8 +39,8 @@ class Position:
         # encoder_left = data.enc_left
         # encoder_right = data.enc_right
 
-        # print(
-        #     f"POSITION:   INC1: {data.sum_encoder_left} INC2: {data.sum_encoder_right}")
+        print(
+            f"POSITION:   INC1: {data.sum_encoder_left} INC2: {data.sum_encoder_right}")
 
         curr_sum_enc_left = data.sum_encoder_left
         encoder_left = curr_sum_enc_left - data.prev_enc_sum_left
@@ -55,16 +55,16 @@ class Position:
         # f"POSITION:   ENC1: {encoder_left} ENC2: {encoder_right}, Vreme: {time.time()}")
 
         # predjeni put u instanci vremena(trenutni)
-        d = ((encoder_left + encoder_right) / 2) * \
+        d = ((encoder_left + encoder_right) / 2.0) * \
             data.OdometryData.inc_mm  # inc_mm
 
         # ugao u instanci vremena
-        g = -((encoder_left - encoder_right) / 2) * data.OdometryData.inc_deg
+        g = -((encoder_left - encoder_right) / 2.0) * data.OdometryData.inc_deg
 
         # ukupan ugao
         f += g
 
-        rad = math.radians(90 - f)
+        rad = math.radians(90.0 - f)
 
         # promena(diferencijal) x i y kordinate
         dx = -d * math.cos(rad)
@@ -92,9 +92,9 @@ class Position:
         return d
 
     def print_position(self):
-        # print('X osa:\t\t\t{:.0f} mm'.format(data.x_current))
-        # print('Y osa:\t\t\t{:.0f} mm'.format(data.y_current))
-        # print('UGAO osa:\t\t{:.0f}'.format(data.f_current), ' \n')
+        print('X osa:\t\t\t{:.3f} mm'.format(data.x_current))
+        print('Y osa:\t\t\t{:.3f} mm'.format(data.y_current))
+        print('UGAO osa:\t\t{:.3f}'.format(data.f_current), ' \n')
         return
         # print('d duzina:\t\t\t{:.0f}'.format(d))
 
