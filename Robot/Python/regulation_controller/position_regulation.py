@@ -53,10 +53,10 @@ class PositionRegulation:
     speed_right = 0
 
     RAMP_INCREMENT_START = 80  # 80 # ikrimentira se za time: delay #14
-    RAMP_INCREMENT_STOP = 100  # 200000  # ikrimentira se za time: delay  #12
+    RAMP_INCREMENT_STOP = 100000  # 200000  # ikrimentira se za time: delay  #12
 
-    ROT_RAMP_UP_INCREMENT = 100  # 12
-    ROT_RAMP_DOWN_INCREMENT = 100  # 12
+    ROT_RAMP_UP_INCREMENT = 50  # 12
+    ROT_RAMP_DOWN_INCREMENT = 500  # 12
 
     delay = 0.01  # 0.03 # speed regulation ~30ms
 
@@ -70,9 +70,9 @@ class PositionRegulation:
         #     ki=1, kp=2, side='L')
 
         self.maxon_left = MaxonMotor(
-            1, 50000, 50000)
+            1, 1000000, 1000000)
         self.maxon_right = MaxonMotor(
-            2, 50000, 50000)
+            2, 1000000, 1000000)
 
         self.stop_position = False
 
@@ -142,16 +142,16 @@ class PositionRegulation:
         f = data.f_current
 
         if True:
-            print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
-            print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
-            print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
+            # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
+            # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
+            # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
             # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
             # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
             print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
             print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
             print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
 
-            print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
+            # print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
@@ -320,7 +320,7 @@ class PositionRegulation:
             #     rotpoj = 0.2
 
             KpK = 12 * pojacanje  # 12 # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 80 * pojacanje * rotpoj  # 75 bilo
+            KpR = 30 * pojacanje * rotpoj  # 75 bilo
 
             TiR = 6000  # 6600 # 200
             TiK = 10000  # 5200
@@ -377,24 +377,24 @@ class PositionRegulation:
         pid_R = Rp + Ri + Rd
         # ----------------------------------------
 
-        if debug:
-            print('KpK *******************  === ', KpK)
-            print('w d  = ', W_d, '    D = ', self.D, '        w f = ', W_F)
-            print('\ncist enr  == ', enR)
-            print('cist enk  == ', enK)
-            print('\ncist pid k  == ', pid_K)
-            print('cist pid r  == ', pid_R)
+        # if debug:
+        #     print('KpK *******************  === ', KpK)
+        #     print('w d  = ', W_d, '    D = ', self.D, '        w f = ', W_F)
+        #     print('\ncist enr  == ', enR)
+        #     print('cist enk  == ', enK)
+        #     print('\ncist pid k  == ', pid_K)
+        #     print('cist pid r  == ', pid_R)
 
-            print("\nKp", Kp)
-            print("Ki", Ki)
-            print("Kd", Kd)
+        #     print("\nKp", Kp)
+        #     print("Ki", Ki)
+        #     print("Kd", Kd)
 
-            print("\nRp", Rp)
-            print("Ri", Ri)
-            print("Rd", Rd)
+        #     print("\nRp", Rp)
+        #     print("Ri", Ri)
+        #     print("Rd", Rd)
 
-            print('======================pid_R ===========================', pid_R)
-            print('======================pid_K===========================', pid_K)
+        #     print('======================pid_R ===========================', pid_R)
+        #     print('======================pid_K===========================', pid_K)
 
         # # MIN PID_R
         # if -10 > pid_K > -self.min_pid_K:
@@ -528,16 +528,16 @@ class PositionRegulation:
             # self.W_d_s = W_d
             self.sending_stop = True
 
-            if debug:
-                print('======================STOP===========================', MVL)
-                print('======================STOP===========================', MVR)
-                print("\n")
+            # if debug:
+            #     print('======================STOP===========================', MVL)
+            #     print('======================STOP===========================', MVR)
+            #     print("\n")
 
         else:
-            if debug:
-                print('======================MVL===========================', MVL)
-                print('======================MVR===========================', MVR)
-                print("\n")
+            # if debug:
+            #     print('======================MVL===========================', MVL)
+            #     print('======================MVR===========================', MVR)
+            #     print("\n")
 
             # MVL = 2000
             # MVR = 2000
@@ -562,13 +562,13 @@ class PositionRegulation:
         while data.running.is_set():
             self.maxon_left.rotate_with_rpm(self.MVL)
             # print(f"Vreme1: {time.time()}")
-            time.sleep(self.delay)
+            time.sleep(0.005)
 
     def send_vel_right(self):
         while data.running.is_set():
             self.maxon_right.rotate_with_rpm(-self.MVR)
             # print(f"Vreme2: {time.time()}")
-            time.sleep(self.delay)
+            time.sleep(0.005)
 
 
 # position = Position()

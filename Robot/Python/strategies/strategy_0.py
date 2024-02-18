@@ -69,7 +69,15 @@ strategy0 = Strategy()
 
 # ========DISTANCE ANGLE ROTACIJA===================
 
-strategy0.set_distance_angle(0, 180)
+strategy0.rotate_to(0)
+strategy0.set_distance_angle(1200, 0)
+strategy0.rotate_to(0)
+strategy0.set_distance_angle(-1200, 0)
+strategy0.rotate_to(0)
+strategy0.set_distance_angle(1200, 0)
+strategy0.rotate_to(0)
+strategy0.set_distance_angle(-1200, 0)
+strategy0.rotate_to(0)
 # strategy0.set_distance_angle(-2000, 0)
 # strategy0.set_distance_angle(2000, 0)
 # strategy0.set_distance_angle(-2000, 0)
