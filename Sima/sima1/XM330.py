@@ -105,7 +105,7 @@ def parallel_rotate(ids, angles):
 
     for i in range(len(ids)):
         communication_result, servo_error = handler.write4ByteTxRx(
-            portHandler, ids[i], 112, 750)
+            portHandler, ids[i], 112, 570)
 
 
     for i in range(len(angles)):
