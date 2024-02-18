@@ -31,9 +31,9 @@ debug = True
 
 
 def choose_strategy():
-    #data.log.add_info_message(f"Chosen strategy {data.chosen_strategy}")
-    #data.log.add_info_message(f"Color of plate {data.color}")
-    #data.log.add_info_message(f"Plate number: {data.plate}")
+    # data.log.add_info_message(f"Chosen strategy {data.chosen_strategy}")
+    # data.log.add_info_message(f"Color of plate {data.color}")
+    # data.log.add_info_message(f"Plate number: {data.plate}")
 
     if debug:
         print(f"Chosen strategy {data.chosen_strategy}")
@@ -50,11 +50,10 @@ def choose_strategy():
     # elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
     #     data.time_strategy_type = 90  # 95
     #     # za strategiju 2 plate = 1
-    data.x_current = 295
-    data.y_current = 2700
-    data.f_current = 180
-    return strategy0.operations # 2
-    
+    data.x_current = 3  # 295
+    data.y_current = 3  # 2700
+    data.f_current = 0  # 180
+    return strategy0.operations  # 2
 
 
 # class choses_strategy():

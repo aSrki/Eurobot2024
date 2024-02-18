@@ -20,8 +20,8 @@ class Odom:
     w_r = 0
     v_l = 0
     w_l = 0
-    d_r = 93.45           # diameter 91.7           93.45
-    d_l = 93.5           # diameter 93.9            93.9              radi  93.5
+    d_r = 94.8           # diameter 91.7           93.45 praznija crna baterija         94.8 puna baterija
+    d_l = 93.45           # diameter 93.9            93.5  praznija crna baterija       93.45 puna baterija
     b = 115.9            # distance between the wheels 124.7    measure 117.7     115
     v = 0
     w = 0
@@ -194,7 +194,7 @@ class Odom:
                 while abs((goal_angle - self.curr_angle)) > 0.05:
                     print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
                     if self.going == False:
-                        send_velocity_multiple([1, 4], [-41.5, -40.5]) # rotation +      -71.5, -70.5
+                        send_velocity_multiple([1, 4], [-41.5, -40.5]) # rotation + -41.5, -40.5 prazna bat     -71.5, -70.5
                         self.going = True
                     time.sleep(0.0001)
                 print(f"Izasao iz WHILE.... USLOV  angle > 0: {abs((goal_angle - self.curr_angle))}")
@@ -204,7 +204,7 @@ class Odom:
                 while abs((goal_angle - self.curr_angle)) > 0.05:
                     print(f"Current angle {self.curr_angle}, goal angle {goal_angle}")
                     if self.going == False:
-                        send_velocity_multiple([1, 4], [20.5, 21.5]) # rotation -
+                        send_velocity_multiple([1, 4], [20.5, 21.5]) # rotation -   20.5, 21.5 prazna bat
                         self.going = True
                     time.sleep(0.0001)
                 print(f"Izasao iz WHILE.... USLOV angle < 0: {abs((goal_angle - self.curr_angle))}")
@@ -215,7 +215,7 @@ class Odom:
             while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 50:
                 print(f"CURRENT X: {self.curr_x}, CURRENT Y: {self.curr_y}")               
                 if self.going == False:
-                    send_velocity_multiple([1, 4], [-97.5, 98.5])    # forward -97.5, 98.5
+                    send_velocity_multiple([1, 4], [-97.5, 98.5])    # forward -97.5, 98.5 prazna bat
                     print(f"FLAG {self.flag}")
                     self.going = True
 
