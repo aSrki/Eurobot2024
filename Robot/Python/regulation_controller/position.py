@@ -39,8 +39,8 @@ class Position:
         # encoder_left = data.enc_left
         # encoder_right = data.enc_right
 
-        # print(
-        #     f"POSITION:   INC1: {data.sum_encoder_left} INC2: {data.sum_encoder_right}")
+        print(
+            f"POSITION:   INC1: {data.sum_encoder_left} INC2: {data.sum_encoder_right}")
 
         curr_sum_enc_left = data.sum_encoder_left
         encoder_left = curr_sum_enc_left - data.prev_enc_sum_left
@@ -92,9 +92,9 @@ class Position:
         return d
 
     def print_position(self):
-        # print('X osa:\t\t\t{:.3f} mm'.format(data.x_current))
-        # print('Y osa:\t\t\t{:.3f} mm'.format(data.y_current))
-        # print('UGAO osa:\t\t{:.3f}'.format(data.f_current), ' \n')
+        print('X osa:\t\t\t{:.3f} mm'.format(data.x_current))
+        print('Y osa:\t\t\t{:.3f} mm'.format(data.y_current))
+        print('UGAO osa:\t\t{:.3f}'.format(data.f_current), ' \n')
         return
         # print('d duzina:\t\t\t{:.0f}'.format(d))
 

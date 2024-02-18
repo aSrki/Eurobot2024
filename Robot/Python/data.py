@@ -100,7 +100,7 @@ class MovingData:
 
 class OdometryData:
     # rodo chnge var to english
-    faktor_razlike = 1.0  # 1.00378  # 0.9962343096
+    faktor_razlike = 1  # 0.9962343096  # 1.0  # 1.00378  #
     inc = 20480.0
     poluprecnik_tocka = 35.840  # 35.75
     polurastojanje_ose_tockova = 152.8  # 152.8  # 151.9  # 152.76

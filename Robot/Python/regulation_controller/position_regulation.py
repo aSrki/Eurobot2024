@@ -53,7 +53,7 @@ class PositionRegulation:
     speed_right = 0
 
     RAMP_INCREMENT_START = 80  # 80 # ikrimentira se za time: delay #14
-    RAMP_INCREMENT_STOP = 100000  # 200000  # ikrimentira se za time: delay  #12
+    RAMP_INCREMENT_STOP = 100  # 200000  # ikrimentira se za time: delay  #12
 
     ROT_RAMP_UP_INCREMENT = 50  # 12
     ROT_RAMP_DOWN_INCREMENT = 500  # 12
@@ -101,7 +101,7 @@ class PositionRegulation:
         while data.running.is_set():
             self.calculate_position()
             sleep(self.delay)
-            print(f"Vreme3: {time.time()}")
+            # print(f"Vreme3: {time.time()}")
 
         return
 
