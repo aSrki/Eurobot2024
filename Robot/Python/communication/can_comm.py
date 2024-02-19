@@ -27,21 +27,44 @@ class CAN_COMM:
         self.pos = Position()
 
     def receive(self):
-
+        first_time = True
+        enc1_old = 0
+        enc2_old = 0
         while True:
             msg = self.can0.recv(10.0)
-
             if len(msg.data) == 4:
-                enc1 = int(msg.data[1] << 8 | msg.data[0])
-                enc2 = int(msg.data[3] << 8 | msg.data[2])
+                enc1_new = int(msg.data[1] << 8 | msg.data[0])
+                enc2_new = int(msg.data[3] << 8 | msg.data[2])
 
-                if enc1 > 10000:
-                    enc1 -= 65536
+                if first_time:
+                    enc1_old = enc1_new
+                    enc2_old = enc2_new
+                    first_time = False
 
-                enc1 *= -1
+                enc1 = enc1_new - enc1_old
+                enc2 = enc2_new - enc2_old
 
-                if enc2 > 10000:
-                    enc2 -= 65536
+                if enc1 > 32767:
+                    enc1 -= 65535
+
+                elif enc1 < -32767:
+                    enc1 += 65535
+
+                if enc2 > 32767:
+                    enc2 -= 65535
+
+                elif enc2 < -32767:
+                    enc2 += 65535
+
+                enc1_old = enc1_new
+                enc2_old = enc2_new
+                # if enc1 > 10000:
+                #     enc1 -= 65536
+
+                enc1 *= -data.OdometryData.faktor_razlike
+
+                # if enc2 > 10000:
+                #     enc2 -= 65536
 
                 data.enc_left = enc1
                 data.enc_right = enc2
@@ -49,7 +72,7 @@ class CAN_COMM:
                 data.sum_encoder_left += data.enc_left
                 data.sum_encoder_right += data.enc_right
 
-                # self.pos.calculate_position()
+                self.pos.calculate_position()
 
             if msg is None:
                 print('Timeout occurred, no message.')
