@@ -10,8 +10,6 @@ if __name__ == "__main__":
 import data
 from regulation_controller.position import Position
 
-import math
-
 
 class CAN_COMM:
     def __init__(self):
@@ -66,11 +64,11 @@ class CAN_COMM:
                 # if enc2 > 10000:
                 #     enc2 -= 65536
 
-                data.enc_left = enc1
-                data.enc_right = enc2
+                # data.enc_left = enc1
+                # data.enc_right = enc2
 
-                data.sum_encoder_left += data.enc_left
-                data.sum_encoder_right += data.enc_right
+                data.sum_encoder_left += enc1
+                data.sum_encoder_right += enc2
 
                 self.pos.calculate_position()
 

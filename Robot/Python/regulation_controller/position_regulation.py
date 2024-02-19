@@ -105,7 +105,7 @@ class PositionRegulation:
         while data.running.is_set():
             self.calculate_position()
             sleep(self.delay)
-            print(f"Vreme3: {time.time()}")
+            # print(f"Vreme3: {time.time()}")
 
         return
     

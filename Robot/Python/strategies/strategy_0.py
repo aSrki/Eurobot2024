@@ -34,16 +34,18 @@ strategy0 = Strategy()
 
 
 # =====TRANSLACIJA=====
-# strategy0.go_to_XY(3, 1103)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 1103)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 1103)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 1103)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.rotate_to(0)
+strategy0.rotate_to(0)
+strategy0.go_to_XY(3, 1103)
+strategy0.go_to_XY(3, 3, False)
+strategy0.go_to_XY(3, 1103)
+strategy0.go_to_XY(3, 3, False)
+strategy0.go_to_XY(3, 1103)
+strategy0.go_to_XY(3, 3, False)
+strategy0.go_to_XY(3, 1103)
+strategy0.go_to_XY(3, 3, False)
+strategy0.rotate_to(0)
 
+strategy0.end()
 
 # =====KOCKA=====
 # strategy0.go_to_XY(3, 500)
@@ -66,22 +68,17 @@ strategy0 = Strategy()
 # strategy0.rotate_to(0)
 # strategy0.rotate_to(180)
 # strategy0.rotate_to(0)
-
+# ==========================DIStance angle translacija=======================
+# strategy0.rotate_to(0)
+# strategy0.set_distance_angle(1200, 0)
+# strategy0.rotate_to(0)
+# strategy0.set_distance_angle(-1200, 0)
+# strategy0.rotate_to(0)
+# strategy0.set_distance_angle(1200, 0)
+# strategy0.rotate_to(0)
+# strategy0.set_distance_angle(-1200, 0)
+# strategy0.rotate_to(0)
 # ========DISTANCE ANGLE ROTACIJA===================
-
-strategy0.rotate_to(0)
-strategy0.set_distance_angle(1000, 0)
-strategy0.set_distance_angle(-1000, 0)
-
-# strategy0.go_to_XY(3, 2303)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 2303)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 2303)
-# strategy0.go_to_XY(3, 3, False)
-# strategy0.go_to_XY(3, 2303)
-# strategy0.go_to_XY(3, 3, False)
-strategy0.rotate_to(0)
 
 # strategy0.set_distance_angle(-2000, 0)
 # strategy0.set_distance_angle(2000, 0)
@@ -96,8 +93,6 @@ strategy0.rotate_to(0)
 # strategy0.set_distance_angle(0, 90)
 # strategy0.set_distance_angle(0, 90)
 
-
-strategy0.end()
 
 # ========TEST unapred===========================
 
