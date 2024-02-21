@@ -103,7 +103,7 @@ class OdometryData:
     faktor_razlike = 0.997
     inc = 20480.0
     poluprecnik_tocka = 35.72  # 35.75
-    polurastojanje_ose_tockova = 152.53 #152.8  # 152.8  # 151.9  # 152.76
+    polurastojanje_ose_tockova = 152.53  # 152.8  # 152.8  # 151.9  # 152.76
     inc_R = (inc * polurastojanje_ose_tockova) / poluprecnik_tocka
     inc_deg = 360.0 / inc_R  # Inkremenata po stepenu
     inc_mm = (2.0 * poluprecnik_tocka * 3.1416) / \
