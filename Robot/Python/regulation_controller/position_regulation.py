@@ -2,8 +2,6 @@ import threading
 from time import sleep
 import time
 import data
-# from communication.driver_communication import DriverCommunication
-# from regulation_controller.position import Position
 from communication.can_comm import *
 from communication.maxon_epos_driver import MaxonMotor
 
@@ -68,9 +66,6 @@ class PositionRegulation:
         self.MVL = 0
         self.MVR = 0
 
-        # self.maxon = DriverCommunication(
-        #     ki=1, kp=2, side='L')
-
         self.maxon_left = MaxonMotor(
             1, 50000, 50000)
         self.maxon_right = MaxonMotor(
@@ -123,11 +118,6 @@ class PositionRegulation:
             # DriverCommunication.debug = False
         self.count += 1
 
-        # Suma inkrimenta na levom i desnom enkoderu se ucitavaju
-        # self.position.calculate_position()
-
-        # self.can_communication.pos.calculate_position()
-
         sum_left = data.sum_encoder_left
         sum_right = data.sum_encoder_right
 
@@ -159,17 +149,7 @@ class PositionRegulation:
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
-            # while data.last_MVL > 2000 or data.last_MVR > 2000:
-            #     data.last_MVL = int(0.3 * data.last_MVL)
-            #     data.last_MVR = int(0.3 * data.last_MVR)
-            #     # self.maxon.send_speed_left(data.last_MVL)
-            #     # self.maxon.send_speed_right(data.last_MVR)
-            #     self.maxon_left.rotate_with_rpm(data.last_MVL)
-            #     self.maxon_right.rotate_with_rpm(data.last_MVR)
-            #     sleep(.01)
 
-            # self.maxon.send_speed_left(0)
-            # self.maxon.send_speed_right(0)
             self.maxon_left.rotate_with_rpm(0)
             self.maxon_right.rotate_with_rpm(0)
         else:
@@ -232,35 +212,7 @@ class PositionRegulation:
             pojacanje = data.rotate_pojacanje
             rotpoj = 1
             if abs(self.en_R) < self.get_new_angle() * .1:
-                # print("naniiii")
                 pojacanje *= 1
-
-            # if self.get_new_angle() < 3:
-            #     # print("poj do 3")
-            #     rotpoj *= 3  # 6.7
-
-            # elif self.get_new_angle() < 10:
-            #     # print("poj do 10")
-            #     rotpoj *= 2.2
-
-            # elif self.get_new_angle() < 25:
-            #     # print("poj do 25")
-            #     rotpoj *= 1.8
-
-            # elif self.get_new_angle() < 45:
-            #     # print("poj do 45")
-            #     rotpoj *= 1.6
-
-            # elif self.get_new_angle() < 90:
-            #     # print("poj do 90")
-            #     rotpoj *= 1.5
-
-            # elif self.get_new_angle() < 140:
-            #     # print("poj do 140")
-            #     rotpoj *= 1.4
-            # else:
-            #     # print("poj do 180")
-            #     rotpoj *= 1.2
 
             KpK = 6 * pojacanje  # 6 #4 #Srdjan_bilo je 5
             KpR = 20 * pojacanje * rotpoj
@@ -271,60 +223,12 @@ class PositionRegulation:
             TdK = 0  # bilo je 2
             TdR = -3.5  # 2
 
-
-
-
-        #============TRANSlACIJAAAA======================================================================================
         elif self.sending_trans and not self.sending_stop:
             pojacanje = data.translate_pojacanje
             rotpoj = data.translate_rot_pojacanje
-
-            # if abs(W_d) > 1500:
-            #     pojacanje *= 0.9
-            #     rotpoj *= 1
-            #     self.max_pid = 10000
-            # elif abs(W_d) > 1000:
-            #     pojacanje *= 1
-            #     rotpoj *= 1
-
-            # elif abs(W_d) > 600:
-            #     pojacanje *= 1.1
-            #     rotpoj *= 1
-
-            # elif abs(W_d) > 400:
-            #     pojacanje *= 1.8  # 1.7
-            #     rotpoj *= 1
-
-            if abs(W_d) <= 300:
-                pojacanje *= 0.75  # 1.15
-                # rotpoj *= 0.5  # 0.85
-
-            # else:
-            #     pojacanje *= 2  # 1.3
-            #     rotpoj *= 0.6  # 1
-
-            # if (abs(W_d) * 0.05 > abs(enK) and W_d != 0):
-            #     pojacanje *= 1.3
-            #     rotpoj *= .4
-            # elif (abs(W_d) * 0.2 > abs(enK) and W_d != 0):
-            #     pojacanje *= 1.3
-            #     rotpoj *= .8
-
-            # elif (abs(W_d) * 0.35 > abs(enK) and W_d != 0):
-            #     pojacanje *= 1
-            #     rotpoj *= .85
-
-            # elif (abs(W_d) * 0.9 < abs(enK) and W_d != 0):
-            #     pojacanje *= .75
-            # elif (abs(W_d) * 0.8 < abs(enK) and W_d != 0):
-            #     pojacanje *= .9
-
             #============TRANSlACIJAAAA======================================================================================
             if debug:
                 print("TRANSLATE")
-
-            # if d < 250:
-            #     rotpoj = 0.2
 
             KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
             KpR = 30 * pojacanje * rotpoj  # 75 bilo
@@ -351,7 +255,7 @@ class PositionRegulation:
             TdR = 0  # 3
 
         # PID TRANSLACIJA________________________
-        esK = self.es_K  # sTARA GRESKA
+        esK = self.es_K  # STARA GRESKA
         # FILTRIRANA STARA I NOVA GRESKA ZA INTEGRALNO,I STARU GRESKU
         efK = 0.1 * enK + 0.9 * esK
         self.integral_K = self.integral_K + enK  # *  # INTEGRALIMO
@@ -402,13 +306,6 @@ class PositionRegulation:
 
             print('======================pid_R ===========================', pid_R)
             print('======================pid_K===========================', pid_K)
-
-        # # MIN PID_R
-        # if -10 > pid_K > -self.min_pid_K:
-        #     pid_K = -self.min_pid_K
-        # elif 10 < pid_K < self.min_pid_K:
-        #     pid_K = self.min_pid_K
-        # # -----------------------------------
 
         # RAMP FOR TRANSLATION
         dif_speed = pid_K - self.old_speed
@@ -489,50 +386,21 @@ class PositionRegulation:
         elif self.speed < -self.max_pid:
             self.speed = -self.max_pid
 
-        # if MVR > self.max_pid:
-        #     MVR = self.max_pid
-        # elif MVR < -self.max_pid:
-        #     MVR = -self.max_pid
-
         MVL = int(self.speed - self.rot_speed)
         MVR = int(self.speed + self.rot_speed)
 
         self.MVL = MVL
         self.MVR = MVR
 
-        # # ANTI WINDUP down
-        # if 0 > MVL > -self.min_pid:
-        #     MVL = -self.min_pid
-        # elif 0 < MVL < self.min_pid:
-        #     MVL = self.min_pid
-        #
-        # if 0 > MVR > -self.min_pid:
-        #     MVR = -self.min_pid
-        # elif 0 < MVR < self.min_pid:
-        #     MVR = self.min_pid
-
-        # SKALER
-        # MVL += self.min_pid * (abs(MVL) / (MVL + .0000000000001))
-        # MVR += self.min_pid * (abs(MVR) / (MVR + .0000000000001))
-
-        # MVL = input("MVL  : ")
-        #
-        # MVR = input("MVR  : ")
-
         if (enK >= -3) and (enK <= 3) and (-.5 <= enR <= .5):
             data.budz = True
-            # self.maxon.send_speed_left(0)
-            # self.maxon.send_speed_right(0)
 
             self.maxon_left.rotate_with_rpm(0)
             self.maxon_right.rotate_with_rpm(0)
 
             self.integral_K = 0
             self.integral_R = 0
-            # self.W_d = D
-            # self.W_F = f
-            # self.W_F_s = W_F
-            # self.W_d_s = W_d
+
             self.sending_stop = True
 
             if debug:
@@ -546,24 +414,10 @@ class PositionRegulation:
                 print('======================MVR===========================', MVR)
                 print("\n")
 
-            # MVL = 2000
-            # MVR = 2000
-
-            # self.maxon.send_speed_left(MVL)  # CHANAL 1 MVL
-            # self.maxon.send_speed_right(MVR)  # CHANAL2 MVR
-                
-            # self.maxon_right.rotate_with_rpm(-MVR)
-            # print(f"Vreme2: {time.time()}")
-            # self.maxon_left.rotate_with_rpm(MVL)
-            # print(f"Vreme1: {time.time()}")
-
             data.last_MVL = MVL
             data.last_MVR = MVR
 
             self.sending_stop = False
-
-        # if debug:
-        #     print(self.motor.get_read())
             
           
     def send_vel_left(self):
@@ -576,8 +430,4 @@ class PositionRegulation:
             self.maxon_right.rotate_with_rpm(-self.MVR)
             # print(f"Vreme2: {time.time()}")
             time.sleep(self.delay)
-    
 
-
-# position = Position()
-# position.start()

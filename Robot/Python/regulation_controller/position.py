@@ -67,8 +67,8 @@ class Position:
         rad = math.radians(90.0 - f)
 
         # promena(diferencijal) x i y kordinate
-        dx = -d * math.cos(rad)
-        dy = d * math.sin(rad)
+        dx = -d * math.cos(rad - math.radians(g/2))
+        dy = d * math.sin(rad - math.radians(g/2))
 
         # Trenutne kordinate posle promene
         x += dx

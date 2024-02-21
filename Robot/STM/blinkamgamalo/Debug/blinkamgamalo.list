@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000d713  00000000  00000000  0002003c  2**0
+ 12 .debug_info   0000d72a  00000000  00000000  0002003c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001ea4  00000000  00000000  0002d74f  2**0
+ 13 .debug_abbrev 00001ea4  00000000  00000000  0002d766  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000db8  00000000  00000000  0002f5f8  2**3
+ 14 .debug_aranges 00000db8  00000000  00000000  0002f610  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000cd0  00000000  00000000  000303b0  2**3
+ 15 .debug_ranges 00000cd0  00000000  00000000  000303c8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00020970  00000000  00000000  00031080  2**0
+ 16 .debug_macro  00020970  00000000  00000000  00031098  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000df3d  00000000  00000000  000519f0  2**0
+ 17 .debug_line   0000df3c  00000000  00000000  00051a08  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000c7c8d  00000000  00000000  0005f92d  2**0
+ 18 .debug_str    000c7c91  00000000  00000000  0005f944  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  001275ba  2**0
+ 19 .comment      00000050  00000000  00000000  001275d5  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000038f8  00000000  00000000  0012760c  2**2
+ 20 .debug_frame  000038f8  00000000  00000000  00127628  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -105,7 +105,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
- 80001d8:	f000 f9d6 	bl	8000588 <MX_GPIO_Init>
+ 80001d8:	f000 f9d4 	bl	8000584 <MX_GPIO_Init>
   MX_TIM7_Init();
  80001dc:	f000 f99c 	bl	8000518 <MX_TIM7_Init>
   MX_TIM1_Init();
@@ -719,181 +719,184 @@ static void MX_TIM7_Init(void)
 
   /* USER CODE END TIM7_Init 1 */
   htim7.Instance = TIM7;
- 8000528:	4b15      	ldr	r3, [pc, #84]	; (8000580 <MX_TIM7_Init+0x68>)
- 800052a:	4a16      	ldr	r2, [pc, #88]	; (8000584 <MX_TIM7_Init+0x6c>)
+ 8000528:	4b14      	ldr	r3, [pc, #80]	; (800057c <MX_TIM7_Init+0x64>)
+ 800052a:	4a15      	ldr	r2, [pc, #84]	; (8000580 <MX_TIM7_Init+0x68>)
  800052c:	601a      	str	r2, [r3, #0]
-  htim7.Init.Prescaler = 7200;
- 800052e:	4b14      	ldr	r3, [pc, #80]	; (8000580 <MX_TIM7_Init+0x68>)
- 8000530:	f44f 52e1 	mov.w	r2, #7200	; 0x1c20
+  htim7.Init.Prescaler = 7199;
+ 800052e:	4b13      	ldr	r3, [pc, #76]	; (800057c <MX_TIM7_Init+0x64>)
+ 8000530:	f641 421f 	movw	r2, #7199	; 0x1c1f
  8000534:	605a      	str	r2, [r3, #4]
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
- 8000536:	4b12      	ldr	r3, [pc, #72]	; (8000580 <MX_TIM7_Init+0x68>)
+ 8000536:	4b11      	ldr	r3, [pc, #68]	; (800057c <MX_TIM7_Init+0x64>)
  8000538:	2200      	movs	r2, #0
  800053a:	609a      	str	r2, [r3, #8]
-  htim7.Init.Period = 1000;
- 800053c:	4b10      	ldr	r3, [pc, #64]	; (8000580 <MX_TIM7_Init+0x68>)
- 800053e:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
- 8000542:	60da      	str	r2, [r3, #12]
+  htim7.Init.Period = 9;
+ 800053c:	4b0f      	ldr	r3, [pc, #60]	; (800057c <MX_TIM7_Init+0x64>)
+ 800053e:	2209      	movs	r2, #9
+ 8000540:	60da      	str	r2, [r3, #12]
   htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
- 8000544:	4b0e      	ldr	r3, [pc, #56]	; (8000580 <MX_TIM7_Init+0x68>)
- 8000546:	2280      	movs	r2, #128	; 0x80
- 8000548:	619a      	str	r2, [r3, #24]
+ 8000542:	4b0e      	ldr	r3, [pc, #56]	; (800057c <MX_TIM7_Init+0x64>)
+ 8000544:	2280      	movs	r2, #128	; 0x80
+ 8000546:	619a      	str	r2, [r3, #24]
   if (HAL_TIM_Base_Init(&htim7) != HAL_OK)
- 800054a:	480d      	ldr	r0, [pc, #52]	; (8000580 <MX_TIM7_Init+0x68>)
- 800054c:	f001 fd7c 	bl	8002048 <HAL_TIM_Base_Init>
- 8000550:	4603      	mov	r3, r0
- 8000552:	2b00      	cmp	r3, #0
- 8000554:	d001      	beq.n	800055a <MX_TIM7_Init+0x42>
+ 8000548:	480c      	ldr	r0, [pc, #48]	; (800057c <MX_TIM7_Init+0x64>)
+ 800054a:	f001 fd7d 	bl	8002048 <HAL_TIM_Base_Init>
+ 800054e:	4603      	mov	r3, r0
+ 8000550:	2b00      	cmp	r3, #0
+ 8000552:	d001      	beq.n	8000558 <MX_TIM7_Init+0x40>
   {
     Error_Handler();
- 8000556:	f000 f87d 	bl	8000654 <Error_Handler>
+ 8000554:	f000 f87e 	bl	8000654 <Error_Handler>
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
- 800055a:	2300      	movs	r3, #0
- 800055c:	607b      	str	r3, [r7, #4]
+ 8000558:	2300      	movs	r3, #0
+ 800055a:	607b      	str	r3, [r7, #4]
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- 800055e:	2300      	movs	r3, #0
- 8000560:	60fb      	str	r3, [r7, #12]
+ 800055c:	2300      	movs	r3, #0
+ 800055e:	60fb      	str	r3, [r7, #12]
   if (HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig) != HAL_OK)
- 8000562:	1d3b      	adds	r3, r7, #4
- 8000564:	4619      	mov	r1, r3
- 8000566:	4806      	ldr	r0, [pc, #24]	; (8000580 <MX_TIM7_Init+0x68>)
- 8000568:	f002 f902 	bl	8002770 <HAL_TIMEx_MasterConfigSynchronization>
- 800056c:	4603      	mov	r3, r0
- 800056e:	2b00      	cmp	r3, #0
- 8000570:	d001      	beq.n	8000576 <MX_TIM7_Init+0x5e>
+ 8000560:	1d3b      	adds	r3, r7, #4
+ 8000562:	4619      	mov	r1, r3
+ 8000564:	4805      	ldr	r0, [pc, #20]	; (800057c <MX_TIM7_Init+0x64>)
+ 8000566:	f002 f903 	bl	8002770 <HAL_TIMEx_MasterConfigSynchronization>
+ 800056a:	4603      	mov	r3, r0
+ 800056c:	2b00      	cmp	r3, #0
+ 800056e:	d001      	beq.n	8000574 <MX_TIM7_Init+0x5c>
   {
     Error_Handler();
- 8000572:	f000 f86f 	bl	8000654 <Error_Handler>
+ 8000570:	f000 f870 	bl	8000654 <Error_Handler>
   }
   /* USER CODE BEGIN TIM7_Init 2 */
 
   /* USER CODE END TIM7_Init 2 */
 
 }
- 8000576:	bf00      	nop
- 8000578:	3710      	adds	r7, #16
- 800057a:	46bd      	mov	sp, r7
- 800057c:	bd80      	pop	{r7, pc}
- 800057e:	bf00      	nop
- 8000580:	200000e8 	.word	0x200000e8
- 8000584:	40001400 	.word	0x40001400
+ 8000574:	bf00      	nop
+ 8000576:	3710      	adds	r7, #16
+ 8000578:	46bd      	mov	sp, r7
+ 800057a:	bd80      	pop	{r7, pc}
+ 800057c:	200000e8 	.word	0x200000e8
+ 8000580:	40001400 	.word	0x40001400
 
-08000588 <MX_GPIO_Init>:
+08000584 <MX_GPIO_Init>:
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
   */
 static void MX_GPIO_Init(void)
 {
- 8000588:	b480      	push	{r7}
- 800058a:	b083      	sub	sp, #12
- 800058c:	af00      	add	r7, sp, #0
+ 8000584:	b480      	push	{r7}
+ 8000586:	b083      	sub	sp, #12
+ 8000588:	af00      	add	r7, sp, #0
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
- 800058e:	4b0f      	ldr	r3, [pc, #60]	; (80005cc <MX_GPIO_Init+0x44>)
- 8000590:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
- 8000592:	4a0e      	ldr	r2, [pc, #56]	; (80005cc <MX_GPIO_Init+0x44>)
- 8000594:	f043 0304 	orr.w	r3, r3, #4
- 8000598:	64d3      	str	r3, [r2, #76]	; 0x4c
- 800059a:	4b0c      	ldr	r3, [pc, #48]	; (80005cc <MX_GPIO_Init+0x44>)
- 800059c:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
- 800059e:	f003 0304 	and.w	r3, r3, #4
- 80005a2:	607b      	str	r3, [r7, #4]
- 80005a4:	687b      	ldr	r3, [r7, #4]
+ 800058a:	4b0f      	ldr	r3, [pc, #60]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 800058c:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
+ 800058e:	4a0e      	ldr	r2, [pc, #56]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 8000590:	f043 0304 	orr.w	r3, r3, #4
+ 8000594:	64d3      	str	r3, [r2, #76]	; 0x4c
+ 8000596:	4b0c      	ldr	r3, [pc, #48]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 8000598:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
+ 800059a:	f003 0304 	and.w	r3, r3, #4
+ 800059e:	607b      	str	r3, [r7, #4]
+ 80005a0:	687b      	ldr	r3, [r7, #4]
   __HAL_RCC_GPIOA_CLK_ENABLE();
- 80005a6:	4b09      	ldr	r3, [pc, #36]	; (80005cc <MX_GPIO_Init+0x44>)
- 80005a8:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
- 80005aa:	4a08      	ldr	r2, [pc, #32]	; (80005cc <MX_GPIO_Init+0x44>)
- 80005ac:	f043 0301 	orr.w	r3, r3, #1
- 80005b0:	64d3      	str	r3, [r2, #76]	; 0x4c
- 80005b2:	4b06      	ldr	r3, [pc, #24]	; (80005cc <MX_GPIO_Init+0x44>)
- 80005b4:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
- 80005b6:	f003 0301 	and.w	r3, r3, #1
- 80005ba:	603b      	str	r3, [r7, #0]
- 80005bc:	683b      	ldr	r3, [r7, #0]
+ 80005a2:	4b09      	ldr	r3, [pc, #36]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 80005a4:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
+ 80005a6:	4a08      	ldr	r2, [pc, #32]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 80005a8:	f043 0301 	orr.w	r3, r3, #1
+ 80005ac:	64d3      	str	r3, [r2, #76]	; 0x4c
+ 80005ae:	4b06      	ldr	r3, [pc, #24]	; (80005c8 <MX_GPIO_Init+0x44>)
+ 80005b0:	6cdb      	ldr	r3, [r3, #76]	; 0x4c
+ 80005b2:	f003 0301 	and.w	r3, r3, #1
+ 80005b6:	603b      	str	r3, [r7, #0]
+ 80005b8:	683b      	ldr	r3, [r7, #0]
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
 }
- 80005be:	bf00      	nop
- 80005c0:	370c      	adds	r7, #12
- 80005c2:	46bd      	mov	sp, r7
- 80005c4:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80005c8:	4770      	bx	lr
- 80005ca:	bf00      	nop
- 80005cc:	40021000 	.word	0x40021000
+ 80005ba:	bf00      	nop
+ 80005bc:	370c      	adds	r7, #12
+ 80005be:	46bd      	mov	sp, r7
+ 80005c0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80005c4:	4770      	bx	lr
+ 80005c6:	bf00      	nop
+ 80005c8:	40021000 	.word	0x40021000
 
-080005d0 <HAL_TIM_PeriodElapsedCallback>:
+080005cc <HAL_TIM_PeriodElapsedCallback>:
 
 /* USER CODE BEGIN 4 */
-
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
- 80005d0:	b580      	push	{r7, lr}
- 80005d2:	b082      	sub	sp, #8
- 80005d4:	af00      	add	r7, sp, #0
- 80005d6:	6078      	str	r0, [r7, #4]
-	delta = TIM1->CNT;
- 80005d8:	4b18      	ldr	r3, [pc, #96]	; (800063c <HAL_TIM_PeriodElapsedCallback+0x6c>)
- 80005da:	6a5b      	ldr	r3, [r3, #36]	; 0x24
- 80005dc:	b21a      	sxth	r2, r3
- 80005de:	4b18      	ldr	r3, [pc, #96]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 80005e0:	801a      	strh	r2, [r3, #0]
-	TxData[1] = delta>>8;
- 80005e2:	4b17      	ldr	r3, [pc, #92]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 80005e4:	f9b3 3000 	ldrsh.w	r3, [r3]
- 80005e8:	121b      	asrs	r3, r3, #8
- 80005ea:	b21b      	sxth	r3, r3
- 80005ec:	b2da      	uxtb	r2, r3
- 80005ee:	4b15      	ldr	r3, [pc, #84]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 80005f0:	705a      	strb	r2, [r3, #1]
-	TxData[0] = delta&0x00FF;
- 80005f2:	4b13      	ldr	r3, [pc, #76]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 80005f4:	f9b3 3000 	ldrsh.w	r3, [r3]
- 80005f8:	b2da      	uxtb	r2, r3
- 80005fa:	4b12      	ldr	r3, [pc, #72]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 80005fc:	701a      	strb	r2, [r3, #0]
+ 80005cc:	b580      	push	{r7, lr}
+ 80005ce:	b082      	sub	sp, #8
+ 80005d0:	af00      	add	r7, sp, #0
+ 80005d2:	6078      	str	r0, [r7, #4]
+	tim_1_cnt = TIM1->CNT;
+ 80005d4:	4b18      	ldr	r3, [pc, #96]	; (8000638 <HAL_TIM_PeriodElapsedCallback+0x6c>)
+ 80005d6:	6a5b      	ldr	r3, [r3, #36]	; 0x24
+ 80005d8:	b29a      	uxth	r2, r3
+ 80005da:	4b18      	ldr	r3, [pc, #96]	; (800063c <HAL_TIM_PeriodElapsedCallback+0x70>)
+ 80005dc:	801a      	strh	r2, [r3, #0]
+	tim_2_cnt  = TIM2->CNT;
+ 80005de:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
+ 80005e2:	6a5b      	ldr	r3, [r3, #36]	; 0x24
+ 80005e4:	b29a      	uxth	r2, r3
+ 80005e6:	4b16      	ldr	r3, [pc, #88]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x74>)
+ 80005e8:	801a      	strh	r2, [r3, #0]
+	TxData[1] = tim_1_cnt>>8;
+ 80005ea:	4b14      	ldr	r3, [pc, #80]	; (800063c <HAL_TIM_PeriodElapsedCallback+0x70>)
+ 80005ec:	881b      	ldrh	r3, [r3, #0]
+ 80005ee:	b29b      	uxth	r3, r3
+ 80005f0:	0a1b      	lsrs	r3, r3, #8
+ 80005f2:	b29b      	uxth	r3, r3
+ 80005f4:	b2da      	uxtb	r2, r3
+ 80005f6:	4b13      	ldr	r3, [pc, #76]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x78>)
+ 80005f8:	705a      	strb	r2, [r3, #1]
+	TxData[0] = tim_1_cnt&0x00FF;
+ 80005fa:	4b10      	ldr	r3, [pc, #64]	; (800063c <HAL_TIM_PeriodElapsedCallback+0x70>)
+ 80005fc:	881b      	ldrh	r3, [r3, #0]
+ 80005fe:	b29b      	uxth	r3, r3
+ 8000600:	b2da      	uxtb	r2, r3
+ 8000602:	4b10      	ldr	r3, [pc, #64]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x78>)
+ 8000604:	701a      	strb	r2, [r3, #0]
 
-	delta = TIM2->CNT;
- 80005fe:	f04f 4380 	mov.w	r3, #1073741824	; 0x40000000
- 8000602:	6a5b      	ldr	r3, [r3, #36]	; 0x24
- 8000604:	b21a      	sxth	r2, r3
- 8000606:	4b0e      	ldr	r3, [pc, #56]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 8000608:	801a      	strh	r2, [r3, #0]
-	TxData[3] = delta>>8;
- 800060a:	4b0d      	ldr	r3, [pc, #52]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 800060c:	f9b3 3000 	ldrsh.w	r3, [r3]
- 8000610:	121b      	asrs	r3, r3, #8
- 8000612:	b21b      	sxth	r3, r3
- 8000614:	b2da      	uxtb	r2, r3
- 8000616:	4b0b      	ldr	r3, [pc, #44]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 8000618:	70da      	strb	r2, [r3, #3]
-	TxData[2] = delta&0x00FF;
- 800061a:	4b09      	ldr	r3, [pc, #36]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x70>)
- 800061c:	f9b3 3000 	ldrsh.w	r3, [r3]
- 8000620:	b2da      	uxtb	r2, r3
- 8000622:	4b08      	ldr	r3, [pc, #32]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 8000624:	709a      	strb	r2, [r3, #2]
+	TxData[3] = tim_2_cnt>>8;
+ 8000606:	4b0e      	ldr	r3, [pc, #56]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x74>)
+ 8000608:	881b      	ldrh	r3, [r3, #0]
+ 800060a:	b29b      	uxth	r3, r3
+ 800060c:	0a1b      	lsrs	r3, r3, #8
+ 800060e:	b29b      	uxth	r3, r3
+ 8000610:	b2da      	uxtb	r2, r3
+ 8000612:	4b0c      	ldr	r3, [pc, #48]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x78>)
+ 8000614:	70da      	strb	r2, [r3, #3]
+	TxData[2] = tim_2_cnt&0x00FF;
+ 8000616:	4b0a      	ldr	r3, [pc, #40]	; (8000640 <HAL_TIM_PeriodElapsedCallback+0x74>)
+ 8000618:	881b      	ldrh	r3, [r3, #0]
+ 800061a:	b29b      	uxth	r3, r3
+ 800061c:	b2da      	uxtb	r2, r3
+ 800061e:	4b09      	ldr	r3, [pc, #36]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x78>)
+ 8000620:	709a      	strb	r2, [r3, #2]
 
 	HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
- 8000626:	4b08      	ldr	r3, [pc, #32]	; (8000648 <HAL_TIM_PeriodElapsedCallback+0x78>)
- 8000628:	4a06      	ldr	r2, [pc, #24]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 800062a:	4908      	ldr	r1, [pc, #32]	; (800064c <HAL_TIM_PeriodElapsedCallback+0x7c>)
- 800062c:	4808      	ldr	r0, [pc, #32]	; (8000650 <HAL_TIM_PeriodElapsedCallback+0x80>)
- 800062e:	f000 fb3a 	bl	8000ca6 <HAL_CAN_AddTxMessage>
+ 8000622:	4b09      	ldr	r3, [pc, #36]	; (8000648 <HAL_TIM_PeriodElapsedCallback+0x7c>)
+ 8000624:	4a07      	ldr	r2, [pc, #28]	; (8000644 <HAL_TIM_PeriodElapsedCallback+0x78>)
+ 8000626:	4909      	ldr	r1, [pc, #36]	; (800064c <HAL_TIM_PeriodElapsedCallback+0x80>)
+ 8000628:	4809      	ldr	r0, [pc, #36]	; (8000650 <HAL_TIM_PeriodElapsedCallback+0x84>)
+ 800062a:	f000 fb3c 	bl	8000ca6 <HAL_CAN_AddTxMessage>
 //    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
 }
- 8000632:	bf00      	nop
- 8000634:	3708      	adds	r7, #8
- 8000636:	46bd      	mov	sp, r7
- 8000638:	bd80      	pop	{r7, pc}
- 800063a:	bf00      	nop
- 800063c:	40012c00 	.word	0x40012c00
- 8000640:	20000134 	.word	0x20000134
+ 800062e:	bf00      	nop
+ 8000630:	3708      	adds	r7, #8
+ 8000632:	46bd      	mov	sp, r7
+ 8000634:	bd80      	pop	{r7, pc}
+ 8000636:	bf00      	nop
+ 8000638:	40012c00 	.word	0x40012c00
+ 800063c:	20000134 	.word	0x20000134
+ 8000640:	20000136 	.word	0x20000136
  8000644:	20000178 	.word	0x20000178
  8000648:	2000017c 	.word	0x2000017c
  800064c:	20000160 	.word	0x20000160
@@ -6691,7 +6694,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
 #else
       HAL_TIM_PeriodElapsedCallback(htim);
  800256e:	6878      	ldr	r0, [r7, #4]
- 8002570:	f7fe f82e 	bl	80005d0 <HAL_TIM_PeriodElapsedCallback>
+ 8002570:	f7fe f82c 	bl	80005cc <HAL_TIM_PeriodElapsedCallback>
 #endif /* USE_HAL_TIM_REGISTER_CALLBACKS */
     }
   }

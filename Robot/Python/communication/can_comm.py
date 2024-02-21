@@ -28,12 +28,13 @@ class CAN_COMM:
         first_time = True
         enc1_old = 0
         enc2_old = 0
+
         while True:
             msg = self.can0.recv(10.0)
             if len(msg.data) == 4:
                 enc1_new = int(msg.data[1] << 8 | msg.data[0])
                 enc2_new = int(msg.data[3] << 8 | msg.data[2])
-
+                
                 if first_time:
                     enc1_old = enc1_new
                     enc2_old = enc2_new
@@ -59,7 +60,7 @@ class CAN_COMM:
                 # if enc1 > 10000:
                 #     enc1 -= 65536
 
-                enc1 *= -data.OdometryData.faktor_razlike
+                enc1 *= -(1.0/data.OdometryData.faktor_razlike)
 
                 # if enc2 > 10000:
                 #     enc2 -= 65536

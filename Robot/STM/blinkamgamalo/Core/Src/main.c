@@ -50,7 +50,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim7;
 
 /* USER CODE BEGIN PV */
-int16_t delta = 0;
+static volatile uint16_t tim_1_cnt = 0, tim_2_cnt = 0;
 
 CAN_FilterTypeDef canfilterconfig;
 
@@ -364,9 +364,9 @@ static void MX_TIM7_Init(void)
 
   /* USER CODE END TIM7_Init 1 */
   htim7.Instance = TIM7;
-  htim7.Init.Prescaler = 7200;
+  htim7.Init.Prescaler = 7199;
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim7.Init.Period = 1000;
+  htim7.Init.Period = 9;
   htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim7) != HAL_OK)
   {
@@ -403,16 +403,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
-	delta = TIM1->CNT;
-	TxData[1] = delta>>8;
-	TxData[0] = delta&0x00FF;
+	tim_1_cnt = TIM1->CNT;
+	tim_2_cnt  = TIM2->CNT;
+	TxData[1] = tim_1_cnt>>8;
+	TxData[0] = tim_1_cnt&0x00FF;
 
-	delta = TIM2->CNT;
-	TxData[3] = delta>>8;
-	TxData[2] = delta&0x00FF;
+	TxData[3] = tim_2_cnt>>8;
+	TxData[2] = tim_2_cnt&0x00FF;
 
 	HAL_CAN_AddTxMessage(&hcan1, &TxHeader, TxData, &TxMailbox);
 //    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);
