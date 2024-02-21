@@ -90,7 +90,7 @@ class MovingData:
     ms_one_degre = 0.01  # 0.0084
     robot_speed = 0.75  # 0.74/1000
 
-    pause_when_ending_moving = 0.3  # 0.15
+    pause_when_ending_moving = 1  # 0.3 # 0.15
 
     tim_chedova = False
 

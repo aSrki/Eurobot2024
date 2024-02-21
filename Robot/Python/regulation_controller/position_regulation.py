@@ -8,7 +8,7 @@ from communication.maxon_epos_driver import MaxonMotor
 
 class PositionRegulation:
     count = 0
-    max_count = 100000 #1000
+    max_count = 100000  # 1000
 
     # Stanja pida
     sending_trans = False
@@ -43,7 +43,7 @@ class PositionRegulation:
     ess_K = 0
     ess_R = 0
 
-    t = 0.03
+    t = 0.03  # TODO: 0.03
 
     min_pid = 0
     max_pid = 3000
@@ -54,15 +54,15 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
+    CURVE_INC = 0.1
+
     RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 200000  # ikrimentira se za time: delay  #12
 
     ROT_RAMP_UP_INCREMENT = 100  # 12
     ROT_RAMP_DOWN_INCREMENT = 100  # 12
 
-    
-
-    delay = 0.01 #0.03 # speed regulation ~30ms
+    delay = 0.01  # 0.03 # speed regulation ~30ms
 
     def __init__(self):
         self.W_F = data.f_current
@@ -103,7 +103,7 @@ class PositionRegulation:
             sleep(self.delay)
             # print(f"Vreme3: {time.time()}")
         return
-    
+
     def get_position(self):
         while data.running.is_set():
             self.can_communication.pos.calculate_position()
@@ -135,16 +135,16 @@ class PositionRegulation:
         f = data.f_current
 
         if True:
-            print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
-            print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
-            print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
+            # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
+            # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
+            # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
             # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
             # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
             print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
             print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
             print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
 
-            print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
+            # print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
             # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
@@ -194,24 +194,23 @@ class PositionRegulation:
         elif self.en_R < -180:
             self.en_R = 360 + self.en_R
 
-
         if (self.sending_trans or self.sending_rot) and not self.sending_stop:
             pojacanje = data.translate_pojacanje
             rotpoj = 1
             rotpoj = data.rotate_pojacanje
-            #============TRANSlACIJAAAA======================================================================================
-            #============ROTACIJAAAAAAA======================================================================================
+            # ============TRANSlACIJAAAA======================================================================================
+            # ============ROTACIJAAAAAAA======================================================================================
             if debug:
                 print("MOVING FROM POS REG")
 
-            KpK = 12 * pojacanje  #7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 3 * pojacanje * rotpoj  # 75 bilo
+            KpK = 12 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
+            KpR = 80 * pojacanje * rotpoj  # 75 bilo
 
-            TiR = 660000000  #6600 # 200
-            TiK = 100000000 #5200
+            TiR = 660000000  # 6600 # 200
+            TiK = 100000000  # 5200
 
-            TdK = 0 # 1
-            TdR = 0  # 3
+            TdK = 1  # 1
+            TdR = 1  # 3
 
         else:
             if debug:
@@ -232,7 +231,7 @@ class PositionRegulation:
         esK = self.es_K  # STARA GRESKA
         essK = self.ess_K
         # FILTRIRANA STARA I NOVA GRESKA ZA INTEGRALNO,I STARU GRESKU
-        #efK = 0.1 * enK + 0.9 * esK
+        # efK = 0.1 * enK + 0.9 * esK
         self.integral_K = self.integral_K + enK  # *  # INTEGRALIMO
         integralK = self.integral_K
 
@@ -247,7 +246,7 @@ class PositionRegulation:
         esR = self.es_R  # STARA GRESKA U UGLU
         essR = self.ess_R
         # FILTRIRANA STARA I NOVA GRESKA ZA INTEGRALNO,I STARU GRESKU
-        #efR = 0.1 * enR + 0.9 * esR
+        # efR = 0.1 * enR + 0.9 * esR
         self.integral_R = self.integral_R + enR  # *  # INTEGRALIMO
         integralR = self.integral_R
 
@@ -289,68 +288,70 @@ class PositionRegulation:
             print('======================pid_K===========================', pid_K)
 
         # RAMP FOR TRANSLATION
-        
-        t = self.t
 
-        dif_speed = pid_K - self.old_speed
         if self.sending_trans:
+            dif_speed = pid_K - self.old_speed
             if W_d >= 0:
                 # if dif_speed < -self.RAMP_INCREMENT_STOP:
                 #     if debug:
                 #         print("RAMP DOWN TRANSLATION")
                 #     self.speed -= self.RAMP_INCREMENT_STOP
-                t += 1.5
-                curve = self.calculate_curve(t)
+                curve = self.calculate_curve(self.t)
+                self.t += self.CURVE_INC
 
                 if dif_speed > curve:
                     if debug:
-                        print("RAMP UP TRANSLATION")
-                    self.speed += curve
+                        print("CURVE UP TRANSLATION")
+                    self.speed = curve
                 else:
                     self.speed = pid_K
-                    t = 0.03
+                    self.t = 0.03
             else:
-                if dif_speed < -self.RAMP_INCREMENT_START:
-                    self.speed -= self.RAMP_INCREMENT_START
+                curve = self.calculate_curve(self.t)
+                self.t += self.CURVE_INC
+                if dif_speed < -curve:
+                    self.speed = -curve
                     if debug:
-                        print("RAMP UP TRANSLATION")
+                        print("CURVE UP TRANSLATION")
                 # elif dif_speed > self.RAMP_INCREMENT_STOP:
                 #     self.speed += self.RAMP_INCREMENT_STOP
                 #     if debug:
                 #         print("RAMP DOWN TRANSLATION")
                 else:
                     self.speed = pid_K
+                    self.t = 0.03
         else:
             self.speed = pid_K
         self.old_speed = self.speed
-
-
 
         # RAMP FOR ROTATION NOT DONE YET
         if self.sending_rot:
             dif_rot_speed = pid_R - self.old_rot_speed
 
             if self.en_R > 0:
-                t += 1.5
-                curve = self.calculate_curve(t)
+                curve = self.calculate_curve(self.t)
+                self.t += self.CURVE_INC
                 # if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
                 #     # print("RAMP DOWN ROTATION")
                 #     self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
                 if dif_rot_speed > curve:
                     # print("RAMP UP ROTATION")
-                    self.rot_speed += curve
+                    self.rot_speed = curve
                 else:
                     self.rot_speed = pid_R
-                    t = 0.03
+                    self.t = 0.03
             else:
-                if dif_rot_speed < -self.ROT_RAMP_UP_INCREMENT:
-                    self.rot_speed -= self.ROT_RAMP_UP_INCREMENT
+                curve = self.calculate_curve(self.t)
+                self.t += self.CURVE_INC
+                if dif_rot_speed < -curve:
+                    self.rot_speed = -curve
                     # print("RAMP UP ROTATION")
                 # elif dif_rot_speed > self.ROT_RAMP_DOWN_INCREMENT:
                 #     self.rot_speed += self.ROT_RAMP_DOWN_INCREMENT
                     # print("RAMP DOWN ROTATION")
                 else:
                     self.rot_speed = pid_R
+                    self.t = 0.03
         else:
             self.rot_speed = pid_R
         self.old_rot_speed = self.rot_speed
@@ -414,18 +415,17 @@ class PositionRegulation:
 
     def calculate_curve(self, t):
         result = 0.002*(t**5) - 0.14*(t**4) + 3.233*(t**3) - 19.5*(t**2) + 43*t
-        print("Result: {0}".format(result))
+        print("CURVE Result: {0}".format(result))
         return result
-            
-          
+
     def send_vel_left(self):
         while data.running.is_set():
             self.maxon_left.rotate_with_rpm(self.MVL)
             # print(f"Vreme1: {time.time()}")
             time.sleep(self.delay)
+
     def send_vel_right(self):
         while data.running.is_set():
             self.maxon_right.rotate_with_rpm(-self.MVR)
             # print(f"Vreme2: {time.time()}")
             time.sleep(self.delay)
-

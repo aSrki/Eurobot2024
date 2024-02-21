@@ -35,9 +35,9 @@ strategy0 = Strategy()
 
 # =====TRANSLACIJA=====
 strategy0.rotate_to(0)
-# strategy0.go_to_XY(3, 1503)
-# strategy0.go_to_XY(3, 3, False)
-strategy0.rotate_to(90)
+strategy0.go_to_XY(3, 103)
+strategy0.go_to_XY(3, 3, False)
+# strategy0.rotate_to(90)
 # strategy0.go_to_XY(3, 1103)
 # strategy0.go_to_XY(3, 3, False)
 # strategy0.go_to_XY(3, 1103)
