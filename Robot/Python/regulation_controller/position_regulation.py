@@ -46,7 +46,7 @@ class PositionRegulation:
     t = 0.03  # TODO: 0.03
 
     min_pid = 0
-    max_pid = 3000
+    max_pid = 4000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -54,7 +54,8 @@ class PositionRegulation:
     speed_left = 0
     speed_right = 0
 
-    CURVE_INC = 0.1
+    CURVE_INC_TRANS = 0.2
+    CURVE_INC_ROT = 0.5
 
     RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 200000  # ikrimentira se za time: delay  #12
@@ -194,32 +195,43 @@ class PositionRegulation:
         elif self.en_R < -180:
             self.en_R = 360 + self.en_R
 
-        if (self.sending_trans or self.sending_rot) and not self.sending_stop:
+        if self.sending_rot and not self.sending_stop:
             pojacanje = data.translate_pojacanje
             rotpoj = 1
-            rotpoj = data.rotate_pojacanje
             # ============TRANSlACIJAAAA======================================================================================
             # ============ROTACIJAAAAAAA======================================================================================
             if debug:
                 print("MOVING FROM POS REG")
 
-            KpK = 12 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 80 * pojacanje * rotpoj  # 75 bilo
+            KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
+            KpR = 5 * pojacanje * rotpoj  # 75 bilo
 
             TiR = 660000000  # 6600 # 200
-            TiK = 100000000  # 5200
+            TiK = 660000000  # 5200
 
-            TdK = 1  # 1
-            TdR = 1  # 3
+            TdK = .1  # 1
+            TdR = .4  # 3
 
+        elif self.sending_trans and not self.sending_stop:
+            pojacanje = data.translate_pojacanje
+            rotpoj = 1
+
+            KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
+            KpR = 55 * pojacanje * rotpoj  # 75 bilo
+
+            TiR = 660000000  # 6600 # 200
+            TiK = 660000000  # 5200
+
+            TdK = .1  # 1
+            TdR = .8  # 3
         else:
             if debug:
                 print("STOP")
 
             pojacanje = 1
 
-            KpK = 2   # (0.85 * pojacanje  )/1.2#1
-            KpR = 2   # (2 * pojacanje * 10)/2#40 ... 90
+            KpK = 1   # (0.85 * pojacanje  )/1.2#1
+            KpR = 1   # (2 * pojacanje * 10)/2#40 ... 90
 
             TiR = 1000000  # self.TiRConst#1#~60,150
             TiK = 1000000  # ~2000
@@ -290,14 +302,14 @@ class PositionRegulation:
         # RAMP FOR TRANSLATION
 
         if self.sending_trans:
-            dif_speed = pid_K - self.old_speed
+            dif_speed = pid_K
             if W_d >= 0:
                 # if dif_speed < -self.RAMP_INCREMENT_STOP:
                 #     if debug:
                 #         print("RAMP DOWN TRANSLATION")
                 #     self.speed -= self.RAMP_INCREMENT_STOP
                 curve = self.calculate_curve(self.t)
-                self.t += self.CURVE_INC
+                self.t += self.CURVE_INC_TRANS
 
                 if dif_speed > curve:
                     if debug:
@@ -305,10 +317,10 @@ class PositionRegulation:
                     self.speed = curve
                 else:
                     self.speed = pid_K
-                    self.t = 0.03
+                    # self.t = 0.03
             else:
                 curve = self.calculate_curve(self.t)
-                self.t += self.CURVE_INC
+                self.t += self.CURVE_INC_TRANS
                 if dif_speed < -curve:
                     self.speed = -curve
                     if debug:
@@ -319,18 +331,17 @@ class PositionRegulation:
                 #         print("RAMP DOWN TRANSLATION")
                 else:
                     self.speed = pid_K
-                    self.t = 0.03
+                    # self.t = 0.03
         else:
             self.speed = pid_K
-        self.old_speed = self.speed
 
         # RAMP FOR ROTATION NOT DONE YET
         if self.sending_rot:
-            dif_rot_speed = pid_R - self.old_rot_speed
+            dif_rot_speed = pid_R
 
             if self.en_R > 0:
                 curve = self.calculate_curve(self.t)
-                self.t += self.CURVE_INC
+                self.t += self.CURVE_INC_ROT
                 # if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
                 #     # print("RAMP DOWN ROTATION")
                 #     self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
@@ -342,7 +353,7 @@ class PositionRegulation:
                     self.t = 0.03
             else:
                 curve = self.calculate_curve(self.t)
-                self.t += self.CURVE_INC
+                self.t += self.CURVE_INC_ROT
                 if dif_rot_speed < -curve:
                     self.rot_speed = -curve
                     # print("RAMP UP ROTATION")
@@ -354,7 +365,6 @@ class PositionRegulation:
                     self.t = 0.03
         else:
             self.rot_speed = pid_R
-        self.old_rot_speed = self.rot_speed
 
         if debug:
             print("speed : ****************************  -> ", self.speed)
@@ -380,8 +390,8 @@ class PositionRegulation:
         elif self.speed < -self.max_pid:
             self.speed = -self.max_pid
 
-        MVL = int(self.speed - self.rot_speed/2)
-        MVR = int(self.speed + self.rot_speed/2)
+        MVL = int(self.speed - self.rot_speed)
+        MVR = int(self.speed + self.rot_speed)
 
         self.MVL = MVL
         self.MVR = MVR

@@ -71,7 +71,7 @@ class CAN_COMM:
                 data.sum_encoder_left += enc1
                 data.sum_encoder_right += enc2
 
-                self.pos.calculate_position()
+                # self.pos.calculate_position()
 
             if msg is None:
                 print('Timeout occurred, no message.')
