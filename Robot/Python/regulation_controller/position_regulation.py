@@ -46,7 +46,7 @@ class PositionRegulation:
     t = 0.03  # TODO: 0.03
 
     min_pid = 0
-    max_pid = 4000
+    max_pid = 3000
 
     cur_encoder_left = 0
     cur_encoder_right = 0

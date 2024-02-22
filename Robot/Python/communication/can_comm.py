@@ -34,7 +34,7 @@ class CAN_COMM:
             if len(msg.data) == 4:
                 enc1_new = int(msg.data[1] << 8 | msg.data[0])
                 enc2_new = int(msg.data[3] << 8 | msg.data[2])
-                
+
                 if first_time:
                     enc1_old = enc1_new
                     enc2_old = enc2_new
