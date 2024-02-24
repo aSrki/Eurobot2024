@@ -18,7 +18,7 @@
 # from strategies import strategy_15_agresivna1
 
 from strategies.strategy_0 import strategy0
-from strategies.strategy_1 import strategy1
+# from strategies.strategy_1 import strategy1
 
 if __name__ == '__main__':
     import sys
@@ -51,10 +51,10 @@ def choose_strategy():
     # elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
     #     data.time_strategy_type = 90  # 95
     #     # za strategiju 2 plate = 1
-    data.x_current = 195 # 295
-    data.y_current = 155  # 2700
-    data.f_current = 0  # 180
-    return strategy1.operations  # 2
+    data.x_current = 3  # 195 # 295
+    data.y_current = 3  # 155  # 2700
+    data.f_current = 0  # 0  # 180
+    return strategy0.operations  # 2
 
 
 # class choses_strategy():

@@ -107,8 +107,8 @@ def front_plant_in_pot():
     fpip = Strategy()
 
     fpip.move_front_arm(120)
-    fpip.move_mechanism(20, s=0.2)  # OVDE NE SME MANJE OD 65
-    fpip.move_front_arm(110, v=50)  # OVDE NE SME MANJE OD 85
+    fpip.move_mechanism(20, s=0.2)
+    fpip.move_front_arm(110, v=50)
     fpip.grip_front(180, 90, 180)
     fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
@@ -119,9 +119,9 @@ def front_plant_in_pot():
     fpip.move_mechanism(240, s=0.5, v=50)
     fpip.move_front_arm(75)
     # fpip.move_front_arm(65, s=0.5, v=85)
+    fpip.set_distance_angle(-100, 0)
     fpip.move_mechanism(180)
     fpip.move_front_arm(120, s=0.5, v=30)
-    fpip.set_distance_angle(-100, 0)
 
     return fpip.operations
 
@@ -129,7 +129,7 @@ def front_plant_in_pot():
 def back_plant_in_pot():
     bpip = Strategy()
 
-    bpip.move_back_arm(210)
+    bpip.move_back_arm(210, s=0.5)
     bpip.move_mechanism(330, s=1)
     # dodati v = 50 ako cimaju biljke kada padaju
     bpip.move_back_arm(190, v=30)
@@ -155,7 +155,7 @@ def drop_front_plant():
 
     dfp.move_mechanism(310)
     dfp.move_front_arm(75)
-    dfp.grip_front(165, 165, 255, s=0.1)
+    dfp.grip_front(110, 165, 255, s=0.1)
     dfp.move_front_arm(120)
     dfp.move_mechanism(180)
 
