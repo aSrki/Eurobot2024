@@ -56,13 +56,13 @@ class PositionRegulation:
     speed_right = 0
 
     CURVE_INC_TRANS = 0.2
-    CURVE_INC_ROT = 0.2
+    CURVE_INC_ROT = 0.25
 
     RAMP_INCREMENT_START = 100  # ikrimentira se za time: delay #14
     RAMP_INCREMENT_STOP = 50  # ikrimentira se za time: delay  #12
 
     ROT_RAMP_UP_INCREMENT = 100  # 12
-    ROT_RAMP_DOWN_INCREMENT = 100  # 12
+    ROT_RAMP_DOWN_INCREMENT = 50  # 12
 
     delay = 0.01  # 0.03 # speed regulation ~30ms
 
@@ -307,7 +307,7 @@ class PositionRegulation:
             if W_d >= 0:
 
                 curve = self.calculate_curve_trans(self.t_trans)
-                self.t_trans += self.CURVE_INC_TRANS
+                self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
 
                 if dif_speed < -self.RAMP_INCREMENT_STOP:
                     if debug:
@@ -323,7 +323,7 @@ class PositionRegulation:
                     self.t_rot = 0.03
             else:
                 curve = self.calculate_curve_trans(self.t_trans)
-                self.t_trans += self.CURVE_INC_TRANS
+                self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
                 if pid_K < -curve:
                     if debug:
                         print("CURVE UP TRANSLATION")
@@ -345,7 +345,7 @@ class PositionRegulation:
             if self.en_R > 0:
 
                 curve = self.calculate_curve_rot(self.t_rot)
-                self.t_rot += self.CURVE_INC_ROT
+                self.t_rot += self.CURVE_INC_ROT * data.rotate_pojacanje
 
                 if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
                     print("RAMP DOWN ROTATION")
@@ -358,7 +358,7 @@ class PositionRegulation:
                     self.t_trans = 0.03
             else:
                 curve = self.calculate_curve_rot(self.t_rot)
-                self.t_rot += self.CURVE_INC_ROT
+                self.t_rot += self.CURVE_INC_ROT * data.rotate_pojacanje
 
                 if pid_R < -curve:
                     self.rot_speed = -curve
