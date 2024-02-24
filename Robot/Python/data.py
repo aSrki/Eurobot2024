@@ -88,14 +88,14 @@ class MovingData:
     '''used primerely in moving.py for tracing correctly moving'''
     # brzina pri kretanju
     ms_one_degre = 0.01  # 0.0084
-    robot_speed = 0.75  # 0.74/1000
+    robot_speed = 5/1000
 
     pause_when_ending_moving = .25  # 0.3 # 0.15
 
     tim_chedova = False
 
     angle_tolerance = 2  # dozvoljene greska
-    distance_tolerance = 3  # 20
+    distance_tolerance = 5  # 20
 
 
 class OdometryData:

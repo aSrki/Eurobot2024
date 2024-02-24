@@ -204,7 +204,7 @@ class PositionRegulation:
                 print("MOVING FROM POS REG")
 
             KpK = 5 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 35 * pojacanje * rotpoj  # 75 bilo
+            KpR = 25 * pojacanje * rotpoj  # 75 bilo
 
             TiR = 6600  # 6600 # 200
             TiK = 660000000  # 5200
