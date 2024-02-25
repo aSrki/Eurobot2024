@@ -85,8 +85,8 @@ def prepare_back_arm():
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(85, s=0.1, v=30)
-    gfp.grip_front(177, 177, 267, s=0.1)
+    gfp.move_front_arm(90, s=0.1, v=30)
+    gfp.grip_front(180, 180, 270, s=0.1)
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120)
 
@@ -96,8 +96,8 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(175, s=0.1, v=30)
-    gbp.grip_back(177, 177, 87, s=0.1)
+    gbp.move_back_arm(178, s=0.1, v=30)
+    gbp.grip_back(180, 180, 90, s=0.1)
     gbp.move_back_arm(210)
 
     return gbp.operations
@@ -114,13 +114,14 @@ def front_plant_in_pot():
     fpip.move_mechanism(180)
     fpip.set_distance_angle(-80, 0)
     fpip.grip_front(180, 180, 270)
-    fpip.move_front_arm(75)
+    fpip.move_front_arm(72)
     #fpip.set_distance_angle(60, 0)
     fpip.move_mechanism(345, s=0.5, v=50)
     # fpip.move_front_arm(65, s=0.5, v=85)
-    fpip.set_distance_angle(-100, 0, s = 0.1)
+    fpip.set_distance_angle(-100, 0, s=0.1)
+    fpip.move_front_arm(120, v=20)
     fpip.move_mechanism(180)
-    fpip.move_front_arm(120, s=0.5, v=20)
+    #fpip.move_front_arm(120, s=0.5, v=20)
 
     return fpip.operations
 
@@ -129,17 +130,17 @@ def back_plant_in_pot():
     bpip = Strategy()
 
     bpip.move_back_arm(210, s=0.5)
-    bpip.move_mechanism(330, s=1)
+    bpip.move_mechanism(345, s=1)
     # dodati v = 50 ako cimaju biljke kada padaju
-    bpip.move_back_arm(190, v=30)
+   # bpip.move_back_arm(190, v=30)
     bpip.grip_back(90, 90, 1)
     bpip.move_mechanism(270, s=0.5)
-    bpip.move_back_arm(210, s=0.5, v=10)
+   # bpip.move_back_arm(210, s=0.5, v=10)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(100, 0)
     bpip.grip_back(180, 180, 90)
     bpip.move_back_arm(155, v=30)
-    bpip.set_distance_angle(-70, 0)  # -60
+    bpip.set_distance_angle(-60, 0)  # -60
    # bpip.move_mechanism(120)
     bpip.move_back_arm(165)
     bpip.set_distance_angle(100, 0)
@@ -153,8 +154,8 @@ def back_plant_in_pot():
 def drop_front_plant():
     dfp = Strategy()
 
-    dfp.move_mechanism(180)
-    dfp.move_front_arm(90)
+    dfp.move_mechanism(160)
+    dfp.move_front_arm(88)
     dfp.grip_front(110, 165, 255, s=0.1)
     dfp.move_front_arm(120)
     dfp.move_mechanism(180)
@@ -166,9 +167,9 @@ def drop_back_plant():
     dbp = Strategy()
 
     dbp.move_mechanism(10)
-    dbp.move_back_arm(170)
+    dbp.move_back_arm(168)
     dbp.grip_back(165, 165, 75, s=0.1)
-    dbp.move_mechanism(60)
+    dbp.move_mechanism(75)
     dbp.move_back_arm(210, v=40)
     #dbp.move_mechanism(180)
 

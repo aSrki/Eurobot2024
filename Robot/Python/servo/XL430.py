@@ -25,7 +25,7 @@ VELOCITY_P = 78
 VELOCITY_I = 76
 
 
-def parallel_rotateXL430(ids, angles):
+def parallel_rotate(ids, angles):
     portHandler = PortHandler(data.SERVO_PORT)
     portHandler.openPort()
 
@@ -47,26 +47,17 @@ def parallel_rotateXL430(ids, angles):
 
     for i in range(len(ids)):
         # Choosing operating mode
-        if (m[i] == "m"):
-            print("Multi mode on")
-            communication_result, servo_error = handler.write1ByteTxRx(
-                portHandler, ids[i], MODE, 4)
-            if debug:
-                print("MULTIMODE : %s" %
-                      handler.getTxRxResult(communication_result))
-            if servo_error != 0:
-                print("MULTIMODE : %s" %
-                      handler.getRxPacketError(servo_error))
-        else:
-            print("Single mode on")
-            communication_result, servo_error = handler.write1ByteTxRx(
-                portHandler, ids[i], MODE, 3)
-            if debug:
-                print("SINGLEMODE : %s" %
-                      handler.getTxRxResult(communication_result))
-            if servo_error != 0:
-                print("SINGLEMODE : %s" %
-                      handler.getRxPacketError(servo_error))
+    
+    
+        print("Single mode on")
+        communication_result, servo_error = handler.write1ByteTxRx(
+            portHandler, ids[i], MODE, 3)
+        if debug:
+            print("SINGLEMODE : %s" %
+                    handler.getTxRxResult(communication_result))
+        if servo_error != 0:
+            print("SINGLEMODE : %s" %
+                    handler.getRxPacketError(servo_error))
 
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(

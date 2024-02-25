@@ -210,7 +210,7 @@ class PositionRegulation:
             TiK = 660000000  # 5200
 
             TdK = 0  # 1
-            TdR = 0.15  # 3 #1
+            TdR = 0  # 3 #1
 
             # ============TRANSlACIJAAAA======================================================================================
         elif self.sending_trans and not self.sending_stop:
@@ -347,10 +347,10 @@ class PositionRegulation:
                 curve = self.calculate_curve_rot(self.t_rot)
                 self.t_rot += self.CURVE_INC_ROT * data.rotate_pojacanje
 
-                if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
-                    print("RAMP DOWN ROTATION")
-                    self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
-                elif pid_R > curve:
+                # if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
+                #     print("RAMP DOWN ROTATION")
+                #     self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
+                if pid_R > curve:
                     # print("RAMP UP ROTATION")
                     self.rot_speed = curve
                 else:
@@ -364,9 +364,9 @@ class PositionRegulation:
                     self.rot_speed = -curve
                     # print("RAMP UP ROTATION")
 
-                elif dif_rot_speed > self.ROT_RAMP_DOWN_INCREMENT:
-                    self.rot_speed += self.ROT_RAMP_DOWN_INCREMENT
-                    print("RAMP DOWN ROTATION")
+                # elif dif_rot_speed > self.ROT_RAMP_DOWN_INCREMENT:
+                #     self.rot_speed += self.ROT_RAMP_DOWN_INCREMENT
+                #     print("RAMP DOWN ROTATION")
 
                 else:
                     self.rot_speed = pid_R
