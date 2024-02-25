@@ -43,7 +43,7 @@ class PositionRegulation:
     ess_K = 0
     ess_R = 0
 
-    t_trans = 0.03  # TODO: 0.03
+    t_trans = 0.03
     t_rot = 0.03
 
     min_pid = 0
@@ -206,7 +206,7 @@ class PositionRegulation:
             KpK = 5 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
             KpR = 20 * pojacanje * rotpoj  # 75 bilo
 
-            TiR = 6600  # 6600 # 200
+            TiR = 4000  # 6600 # 200
             TiK = 660000000  # 5200
 
             TdK = 0  # 1
@@ -347,10 +347,10 @@ class PositionRegulation:
                 curve = self.calculate_curve_rot(self.t_rot)
                 self.t_rot += self.CURVE_INC_ROT * data.rotate_pojacanje
 
-                # if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
-                #     print("RAMP DOWN ROTATION")
-                #     self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
-                if pid_R > curve:
+                if dif_rot_speed < -self.ROT_RAMP_DOWN_INCREMENT:
+                    print("RAMP DOWN ROTATION")
+                    self.rot_speed -= self.ROT_RAMP_DOWN_INCREMENT
+                elif pid_R > curve:
                     # print("RAMP UP ROTATION")
                     self.rot_speed = curve
                 else:
@@ -362,11 +362,11 @@ class PositionRegulation:
 
                 if pid_R < -curve:
                     self.rot_speed = -curve
-                    # print("RAMP UP ROTATION")
+                    print("RAMP UP ROTATION")
 
-                # elif dif_rot_speed > self.ROT_RAMP_DOWN_INCREMENT:
-                #     self.rot_speed += self.ROT_RAMP_DOWN_INCREMENT
-                #     print("RAMP DOWN ROTATION")
+                elif dif_rot_speed > self.ROT_RAMP_DOWN_INCREMENT:
+                    self.rot_speed += self.ROT_RAMP_DOWN_INCREMENT
+                    print("RAMP DOWN ROTATION")
 
                 else:
                     self.rot_speed = pid_R
@@ -377,6 +377,7 @@ class PositionRegulation:
 
         self.old_rot_speed = self.rot_speed
         self.old_speed = self.speed
+        
         if debug:
             print("speed : ****************************  -> ", self.speed)
         # -----------------------------------------
