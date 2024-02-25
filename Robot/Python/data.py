@@ -14,6 +14,8 @@ running = threading.Event()
 
 points = 0
 
+SERVO_PORT = "/dev/ttyUSB0"
+
 elapsed_time = 0
 start_time = 0
 
