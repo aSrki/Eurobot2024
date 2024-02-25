@@ -204,13 +204,13 @@ class PositionRegulation:
                 print("MOVING FROM POS REG")
 
             KpK = 5 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 25 * pojacanje * rotpoj  # 75 bilo
+            KpR = 20 * pojacanje * rotpoj  # 75 bilo
 
             TiR = 6600  # 6600 # 200
             TiK = 660000000  # 5200
 
             TdK = 0  # 1
-            TdR = 1  # 3
+            TdR = 0.15  # 3 #1
 
             # ============TRANSlACIJAAAA======================================================================================
         elif self.sending_trans and not self.sending_stop:
