@@ -89,15 +89,15 @@ class TypeOfAction(Enum):
 class MovingData:
     '''used primerely in moving.py for tracing correctly moving'''
     # brzina pri kretanju
-    ms_one_degre = 0.01  # 0.0084
+    ms_one_degre = 0.02  # 0.0084
     robot_speed = 5/1000
 
-    pause_when_ending_moving = 0.5  # 0.3 # 0.15
+    pause_when_ending_moving = 0.1  # 0.3 # 0.15
 
     tim_chedova = False
 
-    angle_tolerance = 0.5  # dozvoljene greska
-    distance_tolerance = 5  # 20
+    angle_tolerance = 3  # dozvoljene greska
+    distance_tolerance = 10  # 20
 
 
 class OdometryData:

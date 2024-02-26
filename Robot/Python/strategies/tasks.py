@@ -25,22 +25,6 @@ def forward_steps(distance, angle=0, sleep=0, rotate_to_angle=0):
     return forward.operations
 
 
-# def test_task():
-#     ini = Strategy()
-
-#     ini.activate_triangle()
-#     ini.deactivate_triangle()
-
-#     ini.move_front_arm(60)
-#     ini.move_back_arm(150)
-
-#     ini.move_mechanism(180)
-
-#     ini.grip_back(180, 180, 270)
-#     ini.grip_front(180, 180, 90)
-
-#     return ini.operations
-
 def init_servos():
     ini = Strategy()
 
@@ -58,35 +42,49 @@ def init_servos():
     return ini.operations
 
 
-def prepare_front_arm():
+def prepare_arms():
     # podigne i otvori prednji mehanizam
-    pfa = Strategy()
+    pa = Strategy()
 
-    pfa.move_front_arm(120, s=0.1)
-    pfa.move_back_arm(210)
-    pfa.grip_front(90, 90, 180, s=0.1)
-    pfa.move_mechanism(180)
+    pa.start_parallel()
+    pa.move_front_arm(120, s=0.1)
+    pa.move_back_arm(210)
+    pa.grip_front(180, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+    pa.grip_back(90, 90, 0, s=0.1)
+    pa.move_mechanism(180)
+    pa.end_parallel()
 
-    return pfa.operations
+    return pa.operations
+
+# def prepare_front_arm():
+#     # podigne i otvori prednji mehanizam
+#     pfa = Strategy()
+
+#     pfa.move_front_arm(120, s=0.1)
+#     pfa.move_back_arm(210)
+#     pfa.grip_front(180, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+#     pfa.move_mechanism(180)
+
+#     return pfa.operations
 
 
-def prepare_back_arm():
-    # podigne i otvori zadnji mehanizam
-    pba = Strategy()
+# def prepare_back_arm():
+#     # podigne i otvori zadnji mehanizam
+#     pba = Strategy()
 
-    pba.move_back_arm(210, s=0.1)
-    pba.move_front_arm(120)
-    pba.grip_back(90, 90, 0, s=0.1)
-    pba.move_mechanism(180)
+#     pba.move_back_arm(210, s=0.1)
+#     pba.move_front_arm(120)
+#     pba.grip_back(90, 90, 0, s=0.1)
+#     pba.move_mechanism(180)
 
-    return pba.operations
+#     return pba.operations
 
 
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(90, s=0.1, v=30)
-    gfp.grip_front(180, 180, 270, s=0.1)
+    gfp.move_front_arm(78, s=0.1, v=30) #87
+    gfp.grip_front(180, 170, 260, s=0.1)
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120)
 
@@ -96,8 +94,8 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(178, s=0.1, v=30)
-    gbp.grip_back(180, 180, 90, s=0.1)
+    gbp.move_back_arm(168, s=0.1, v=30) #177
+    gbp.grip_back(170, 170, 80, s=0.1)
     gbp.move_back_arm(210)
 
     return gbp.operations
@@ -107,17 +105,19 @@ def front_plant_in_pot():
     fpip = Strategy()
 
     fpip.move_front_arm(120)
-    fpip.move_mechanism(20, s=0.2)
-    fpip.move_front_arm(110, v=50)
-    fpip.grip_front(180, 90, 180)
+    fpip.move_mechanism(60) #20
+    fpip.move_front_arm(85, v=50, s=0.1)
+    fpip.grip_front(180, 100, 180)
     fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
-    fpip.set_distance_angle(-80, 0)
+    fpip.set_distance_angle(-120, 0)
     fpip.grip_front(180, 180, 270)
-    fpip.move_front_arm(72)
+    fpip.move_front_arm(68)
     #fpip.set_distance_angle(60, 0)
-    fpip.move_mechanism(345, s=0.5, v=50)
-    # fpip.move_front_arm(65, s=0.5, v=85)
+    fpip.set_distance_angle(50, 0)
+    fpip.move_mechanism(330, s=0.5) #345
+    fpip.move_front_arm(73, s=0.5, v=30)
+    # fpip.grip_front(90, 180, 270)
     fpip.set_distance_angle(-100, 0, s=0.1)
     fpip.move_front_arm(120, v=20)
     fpip.move_mechanism(180)
@@ -130,17 +130,17 @@ def back_plant_in_pot():
     bpip = Strategy()
 
     bpip.move_back_arm(210, s=0.5)
-    bpip.move_mechanism(345, s=1)
+    bpip.move_mechanism(300)
     # dodati v = 50 ako cimaju biljke kada padaju
-   # bpip.move_back_arm(190, v=30)
+    bpip.move_back_arm(180, v=30)
     bpip.grip_back(90, 90, 1)
-    bpip.move_mechanism(270, s=0.5)
-   # bpip.move_back_arm(210, s=0.5, v=10)
+    # bpip.move_mechanism(270, s=0.5)
+    bpip.move_back_arm(210, s=0.5, v=20)
     bpip.move_mechanism(180)
-    bpip.set_distance_angle(100, 0)
+    bpip.set_distance_angle(130, 0)
     bpip.grip_back(180, 180, 90)
     bpip.move_back_arm(155, v=30)
-    bpip.set_distance_angle(-60, 0)  # -60
+    bpip.set_distance_angle(-100, 0)  # -60
    # bpip.move_mechanism(120)
     bpip.move_back_arm(165)
     bpip.set_distance_angle(100, 0)

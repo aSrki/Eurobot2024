@@ -49,16 +49,16 @@ strategy0 = Strategy()
 # strategy0.end()
 
 # # =====KOCKA=====
-strategy0.rotate_to(0)
-strategy0.go_to_XY(3, 500, g=0.5)
-# strategy0.rotate_to(-90)
-strategy0.go_to_XY(-500, 500)
-# strategy0.rotate_to(180)
-strategy0.go_to_XY(-500, 3)
-# strategy0.rotate_to(-90)
-strategy0.go_to_XY(3, 3)
-strategy0.rotate_to(0)
-strategy0.end()
+# strategy0.rotate_to(0)
+# strategy0.go_to_XY(3, 500, g=0.5)
+# # strategy0.rotate_to(-90)
+# strategy0.go_to_XY(-500, 500)
+# # strategy0.rotate_to(180)
+# strategy0.go_to_XY(-500, 3)
+# # strategy0.rotate_to(-90)
+# strategy0.go_to_XY(3, 3)
+# strategy0.rotate_to(0)
+# strategy0.end()
 
 
 # =====ROTACIJA=====
