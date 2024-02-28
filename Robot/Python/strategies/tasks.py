@@ -105,8 +105,8 @@ def front_plant_in_pot():
     fpip = Strategy()
 
     fpip.move_front_arm(120)
-    fpip.move_mechanism(60) #20
-    fpip.move_front_arm(85, v=50, s=0.1)
+    fpip.move_mechanism(30) #20 #60
+    fpip.move_front_arm(90, v=30, s=0.1) #85
     fpip.grip_front(180, 100, 180)
     fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
@@ -114,8 +114,8 @@ def front_plant_in_pot():
     fpip.grip_front(180, 180, 270)
     fpip.move_front_arm(68)
     #fpip.set_distance_angle(60, 0)
-    fpip.set_distance_angle(50, 0)
-    fpip.move_mechanism(330, s=0.5) #345
+    fpip.set_distance_angle(45, 0) #50 #45
+    fpip.move_mechanism(315, s=0.5) #345 
     fpip.move_front_arm(73, s=0.5, v=30)
     # fpip.grip_front(90, 180, 270)
     fpip.set_distance_angle(-100, 0, s=0.1)
@@ -139,7 +139,7 @@ def back_plant_in_pot():
     bpip.move_mechanism(180)
     bpip.set_distance_angle(130, 0)
     bpip.grip_back(180, 180, 90)
-    bpip.move_back_arm(155, v=30)
+    bpip.move_back_arm(155, v=20)
     bpip.set_distance_angle(-100, 0)  # -60
    # bpip.move_mechanism(120)
     bpip.move_back_arm(165)
