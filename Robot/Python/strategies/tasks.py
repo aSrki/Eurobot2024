@@ -49,7 +49,7 @@ def prepare_arms():
     pa.start_parallel()
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
-    pa.grip_front(180, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+    pa.grip_front(90, 90, 180, s=0.1) #ignorisemo onu sto nas smara
     pa.grip_back(90, 90, 0, s=0.1)
     pa.move_mechanism(180)
     pa.end_parallel()
@@ -84,7 +84,7 @@ def grip_front_plant():
     gfp = Strategy()
 
     gfp.move_front_arm(78, s=0.1, v=30) #87
-    gfp.grip_front(180, 170, 260, s=0.1)
+    gfp.grip_front(168, 168, 258, s=0.1)
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120)
 
@@ -95,7 +95,7 @@ def grip_back_plant():
     gbp = Strategy()
 
     gbp.move_back_arm(168, s=0.1, v=30) #177
-    gbp.grip_back(170, 170, 80, s=0.1)
+    gbp.grip_back(168, 168, 77, s=0.1)
     gbp.move_back_arm(210)
 
     return gbp.operations

@@ -119,11 +119,11 @@ class IDS(Enum):
     id_centar = 12  # 355 napred # 5 nazad # 180 centar
     id_gripper_front_1 = 10  # otvoren 90; zatvoren 180
     id_gripper_front_2 = 2  # otvoren 90; zatvoren 180
-    id_gripper_front_3 = 6  # otvoren 180; zatvoren 270
+    id_gripper_front_3 = 11  # otvoren 180; zatvoren 270
     id_gripper_back_1 = 9  # otvoren 90; zatvoren 180
     id_gripper_back_2 = 7  # otvoren 90; zatvoren 180
     id_gripper_back_3 = 3  # otvoren 0; zatvoren 90
-    id_trougao = 11  # donja - 0, gornja - 340
+    id_trougao = 6  # donja - 0, gornja - 340
     id_front_arm = 41  # spustena skroz - 60, podignuta 120
     id_back_arm = 52  # spustena - 150, podignuta - 210
     # id_doser = 7  # load - 1, unload - 359

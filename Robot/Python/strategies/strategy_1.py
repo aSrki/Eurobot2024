@@ -12,7 +12,7 @@ strategy1.go_to_XY(195, 735)  # rotira panele
 strategy1.deactivate_triangle()
 strategy1.add_sequence(prepare_arms())  # priprema za hvatanje
 strategy1.go_to_XY(500, 1210)  # dolazi do tanjira 4
-strategy1.rotate_to(0)
+strategy1.rotate_to(3)
 strategy1.set_distance_angle(95, 0)
 strategy1.add_sequence(grip_front_plant())
 strategy1.rotate_to(180)
