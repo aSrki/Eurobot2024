@@ -42,14 +42,28 @@ def init_servos():
     return ini.operations
 
 
-def prepare_arms():
-    # podigne i otvori prednji mehanizam
+def prepare_arms5():
+    # podigne i otvori prednji mehanizam kada skupljamo 5 biljki
     pa = Strategy()
 
     pa.start_parallel()
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
     pa.grip_front(180, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+    pa.grip_back(90, 90, 0, s=0.1)
+    pa.move_mechanism(180)
+    pa.end_parallel()
+
+    return pa.operations
+
+def prepare_arms6():
+    # podigne i otvori prednji mehanizam kada skupljamo 6 biljki
+    pa = Strategy()
+
+    pa.start_parallel()
+    pa.move_front_arm(120, s=0.1)
+    pa.move_back_arm(210)
+    pa.grip_front(90, 90, 180, s=0.1) #ignorisemo onu sto nas smara
     pa.grip_back(90, 90, 0, s=0.1)
     pa.move_mechanism(180)
     pa.end_parallel()
@@ -83,7 +97,7 @@ def prepare_arms():
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(75, s=0.1, v=30) #87
+    gfp.move_front_arm(80, s=0.1, v=30) #87
     gfp.grip_front(169, 169, 258, s=0.1)
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120)
@@ -94,7 +108,7 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(165, s=0.1, v=30) #177
+    gbp.move_back_arm(170, s=0.1, v=30) #177
     gbp.grip_back(169, 169, 79, s=0.1)
     gbp.move_back_arm(210)
 
@@ -166,14 +180,40 @@ def drop_front_plant():
 def drop_back_plant():
     dbp = Strategy()
 
-    dbp.move_mechanism(15)
+    dbp.move_mechanism(25)
     dbp.move_back_arm(168)
+    dbp.move_mechanism(8)
     dbp.grip_back(165, 165, 75, s=0.1)
     dbp.move_mechanism(75)
     dbp.move_back_arm(210, v=40)
     #dbp.move_mechanism(180)
 
     return dbp.operations
+
+def release_front_plant():
+    rfp = Strategy()
+
+    rfp.move_front_arm(120)
+    rfp.move_mechanism(180) #20 #60
+    rfp.move_front_arm(80, v=30, s=0.1) #85
+    rfp.grip_front(90, 120, 180)
+    rfp.move_front_arm(120, s=0.5)
+    rfp.move_mechanism(180)
+
+    return rfp.operations
+
+def release_back_plant():
+    rbp = Strategy()
+
+    rbp.move_back_arm(210)
+    rbp.move_mechanism(180) #20 #60
+    rbp.move_back_arm(170, v=30, s=0.1) #85
+    rbp.grip_back(90, 120, 0)
+    rbp.move_back_arm(210, s=0.5)
+    rbp.move_mechanism(180)
+
+    return rbp.operations
+
 
 
 # def pink1(xoff=0, yoff=0, ainiempts=0, off=data.offset):
