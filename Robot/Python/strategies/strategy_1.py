@@ -7,7 +7,7 @@ strategy1 = Strategy()
 
 strategy1.rotate_to(0)
 strategy1.activate_triangle()
-strategy1.go_to_XY(195, 735)  # rotira panele
+strategy1.go_to_XY(195, 735, g = 0.4, s = 1.5)  # rotira panele
 # strategy1.move_front_arm(110)  # podize ruke da ne pojebe potove
 strategy1.deactivate_triangle()
 strategy1.add_sequence(prepare_arms())  # priprema za hvatanje
@@ -29,11 +29,12 @@ strategy1.go_to_XY(1377, 300, False)
 strategy1.rotate_to(0)
 strategy1.set_distance_angle(-100, 0) #-120
 strategy1.add_sequence(back_plant_in_pot())
-strategy1.go_to_XY(1377, 145, False)
+strategy1.go_to_XY(1377, 157, False)
 strategy1.add_sequence(drop_back_plant())
 strategy1.set_distance_angle(100, 0)
-strategy1.go_to_XY(1387, 155)
+strategy1.go_to_XY(1400, 250)
 strategy1.rotate_to(180)
+strategy1.set_distance_angle(80, 0)
 strategy1.add_sequence(drop_front_plant())
 
 

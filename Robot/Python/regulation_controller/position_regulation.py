@@ -112,7 +112,7 @@ class PositionRegulation:
             sleep(self.can_communication.pos.delay)
 
     def calculate_position(self):
-        debug = True
+        debug = False
         if self.count > self.max_count:
             self.count = 0
             debug = False
@@ -136,7 +136,7 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if True:
+        if False:
             # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
             # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
@@ -169,6 +169,8 @@ class PositionRegulation:
         self.stop_position = False
 
     def regulation(self, d, f, debug):
+        # KSENIJA DODALA OBRISI
+        debug = False
         # ------------------------------------------------------------------------------------------
         # REGULACIJA, FUCK YEAH
         # --------------------------------------------------------------------------------------------
@@ -437,12 +439,12 @@ class PositionRegulation:
 
     def calculate_curve_trans(self, t):
         result = 0.002*(t**5) - 0.14*(t**4) + 3.233*(t**3) - 19.5*(t**2) + 43*t
-        print("CURVE Trans Result: {0}".format(result))
+        #print("CURVE Trans Result: {0}".format(result))
         return result
 
     def calculate_curve_rot(self, t):
         result = 0.002*(t**5) - 0.14*(t**4) + 3.233*(t**3) - 19.5*(t**2) + 43*t
-        print("CURVE Rot Result: {0}".format(result))
+        #print("CURVE Rot Result: {0}".format(result))
         return result
 
     def send_vel_left(self):
