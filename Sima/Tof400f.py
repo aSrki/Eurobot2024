@@ -90,14 +90,18 @@
 
 import serial
 import time
-
+import sys 
 def read_distance(serial_port):
     # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
-    serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
-    time.sleep(0.1)
+    # serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
     read = serial_port.read(7) # response 7 bytes: SlaveAddr, FuncNumb, NumOfDataBytes, DataHigh, DataLow, ... , CRC_CheckLow, CRC_CheckHigh
     # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
-    return (read[3]<<8) + read[4]
+    print(read)
+    print(sys.getsizeof(read))
+    if sys.getsizeof(read) == 24:
+        return (read[3]<<8) + read[4]
+    else:
+        return None
 
 if __name__ == "__main__":
     print("CODE STARTED")
@@ -106,8 +110,8 @@ if __name__ == "__main__":
     try:
         while True:
             distance = read_distance(serial_port)
-            print("Distance:", int(distance))
-            time.sleep(0.5)
+            print("Distance:", distance)
+            # time.sleep(0.1)
 
     except KeyboardInterrupt:
         serial_port.close()
