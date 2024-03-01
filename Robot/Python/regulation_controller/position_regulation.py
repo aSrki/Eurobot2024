@@ -136,7 +136,7 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if False:
+        if True:
             # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
             # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
             # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
