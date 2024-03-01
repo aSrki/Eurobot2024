@@ -92,21 +92,22 @@ import serial
 import time
 
 def read_distance(serial_port):
-    serial_port.write(b'READ_DISTANCE\n')
+    # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
+    serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
     time.sleep(0.1)
-    response = serial_port.readline().decode().strip()
-    return response
+    read = serial_port.read(7) # response 7 bytes: SlaveAddr, FuncNumb, NumOfDataBytes, DataHigh, DataLow, ... , CRC_CheckLow, CRC_CheckHigh
+    # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
+    return (read[3]<<8) + read[4]
 
 if __name__ == "__main__":
     print("CODE STARTED")
-    serial_port = serial.Serial('/dev/ttyAMA0', baudrate = 9600, timeout = 1)
+    serial_port = serial.Serial(port ='/dev/ttyAMA0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
 
     try:
         while True:
             distance = read_distance(serial_port)
-            print("Distance:", distance)
-            time.sleep(1)
+            print("Distance:", int(distance))
+            time.sleep(0.5)
 
     except KeyboardInterrupt:
         serial_port.close()
-
