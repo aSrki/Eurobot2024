@@ -2,7 +2,6 @@ from strategies.tasks import *
 from strategies.steps import *
 from strategies.strategy import Strategy
 
-
 strategy1 = Strategy()
 
 strategy1.rotate_to(0)
@@ -35,8 +34,6 @@ strategy1.rotate_to(180)
 strategy1.set_distance_angle(-230, -3, s = 0.1)
 strategy1.add_sequence(grip_back_plant())
 
-
-
 strategy1.go_to_XY(1342, 600)  # 1352 je po crtezu -35mm da uhvati prve dve
 strategy1.go_to_XY(1342, 275)
 # strategy1.rotate_to(180)
@@ -54,19 +51,4 @@ strategy1.rotate_to(177)
 strategy1.set_distance_angle(80, 0)
 strategy1.add_sequence(drop_front_plant())
 
-
 strategy1.end()
-
-
-# ==============================================TEST
-# strategy1.rotate_to(0)
-# strategy1.go_to_XY(3, 500)
-# # strategy1.rotate_to(-90)
-# strategy1.go_to_XY(500, 500)
-# # strategy1.rotate_to(180)
-# strategy1.go_to_XY(500, 3)
-# # strategy1.rotate_to(-90)
-# strategy1.go_to_XY(3, 3)
-# strategy1.rotate_to(0)
-# strategy1.end()
-
