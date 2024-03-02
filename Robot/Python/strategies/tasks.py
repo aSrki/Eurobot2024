@@ -141,13 +141,17 @@ def memristor_front():
     mmsf = Strategy()
 
     mmsf.move_front_arm(120, v=30)
-    mmsf.move_mechanism(300)
+    mmsf.move_back_arm(210, v=30)
+    mmsf.move_mechanism(270)
     mmsf.move_front_arm(90, v=30)
     mmsf.grip_front(90, 120, 180, s=0.1)
     mmsf.move_front_arm(120, v=30)
     mmsf.grip_front(180, 180, 270, s=0.1)
-    mmsf.move_mechanism(180)
-    mmsf.move_front_arm(85, v=30)
+    mmsf.move_mechanism(140)
+    mmsf.move_front_arm(75, v=30)
+    mmsf.set_distance_angle(-100, 0)
+    
+
 
     return mmsf.operations
 
@@ -156,12 +160,13 @@ def memristor_back():
     mmsb = Strategy()
 
     mmsb.move_back_arm(210, v=30)
-    mmsb.move_mechanism(20)
+    mmsb.move_front_arm(120, v=30)
+    mmsb.move_mechanism(15)
     mmsb.move_back_arm(170, v=30)
     mmsb.grip_back(150, 120, 150, s=0.1)
     mmsb.move_back_arm(210, v=30)
     mmsb.grip_back(215, 180, 215, s=0.1)
-    mmsb.move_mechanism(180)
+    mmsb.move_mechanism(160)
     mmsb.set_distance_angle(100, 0)
     mmsb.move_front_arm(165, v=30)
     mmsb.set_distance_angle(-100, 0)

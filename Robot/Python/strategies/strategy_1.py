@@ -79,11 +79,9 @@ strategy1.go_to_XY(1377, 600)  # 1352 je po crtezu -35mm da uhvati prve dve
 strategy1.go_to_XY(1377, 285)
 
 strategy1.add_sequence(memristor_front())
-strategy1.set_distance_angle(-100, 0)
 strategy1.go_to_XY(1377, 305, False)
 strategy1.rotate_to(0)
-strategy1.set_distance_angle(-120, 0)  # -120
-strategy1.set_distance_angle(30, 0)
+strategy1.set_distance_angle(-85, 0)  
 strategy1.add_sequence(memristor_back())
 
 
