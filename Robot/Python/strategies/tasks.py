@@ -94,10 +94,15 @@ def prepare_arms6():
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(80, s=0.1, v=30)  # 87
-    gfp.grip_front(169, 169, 258, s=0.1)
+    gfp.set_distance_angle(95, 0)
+    gfp.start_parallel()
+    gfp.move_front_arm(80, s=0.1, v=7)  # 87
+    gfp.grip_front(169, 169, 258)
+    gfp.end_parallel()
+    gfp.start_step_actions()
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
-    gfp.move_front_arm(120)
+    gfp.move_front_arm(120, v=40)
+    gfp.end_step_actions()
 
     return gfp.operations
 
@@ -105,9 +110,12 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(170, s=0.1, v=30)  # 177
-    gbp.grip_back(208, 173, 208, s=0.1)
+    gbp.start_step_actions()
+    gbp.set_distance_angle(-230, 0)
+    gbp.move_back_arm(170, v=4)  # 177
+    gbp.grip_back(208, 173, 208)
     gbp.move_back_arm(210)
+    gbp.end_step_actions()
 
     return gbp.operations
 
@@ -137,52 +145,6 @@ def front_plant_in_pot():
     return fpip.operations
 
 
-def memristor_front():
-    mmsf = Strategy()
-
-    mmsf.move_front_arm(120, v=30)
-    mmsf.move_back_arm(210, v=30)
-    mmsf.move_mechanism(270)
-    mmsf.move_front_arm(90, v=30)
-    mmsf.grip_front(90, 120, 180, s=0.1)
-    mmsf.move_front_arm(120, v=30)
-    mmsf.grip_front(180, 180, 270, s=0.1)
-    mmsf.move_mechanism(140)
-    mmsf.move_front_arm(75, v=30)
-    mmsf.set_distance_angle(-100, 0)
-    
-
-
-    return mmsf.operations
-
-
-def memristor_back():
-    mmsb = Strategy()
-
-    mmsb.move_back_arm(210, v=30)
-    mmsb.move_front_arm(120, v=30)
-    mmsb.move_mechanism(15)
-    mmsb.move_back_arm(170, v=30)
-    mmsb.grip_back(150, 120, 150, s=0.1)
-    mmsb.move_back_arm(200, v=30)
-    mmsb.grip_back(215, 180, 215, s=0.1)
-    mmsb.move_mechanism(160)
-    mmsb.set_distance_angle(150, 0)
-    mmsb.move_back_arm(170, v=30)
-    mmsb.move_front_arm(100, v=30)
-    mmsb.set_distance_angle(-130, 0)
-    mmsb.set_distance_angle(50, 0)
-    mmsb.move_back_arm(210, v=30)
-    mmsb.set_distance_angle(-120, 0)
-    mmsb.move_mechanism(7)
-    mmsb.move_back_arm(180, v=30)
-    mmsb.grip_back(200, 165, 200, s=0.1)
-    mmsb.move_back_arm(210, v=30)
-    mmsb.move_mechanism(180)
-
-    return mmsb.operations
-
-
 def back_plant_in_pot():
     bpip = Strategy()
 
@@ -206,6 +168,50 @@ def back_plant_in_pot():
     bpip.move_back_arm(210, v=20)  # v=30
 
     return bpip.operations
+
+
+def memristor_front():
+    mmsf = Strategy()
+
+    mmsf.move_front_arm(120, v=30)
+    mmsf.move_back_arm(210, v=30)
+    mmsf.move_mechanism(270)
+    mmsf.move_front_arm(90, v=30)
+    mmsf.grip_front(90, 120, 180, s=0.1)
+    mmsf.move_front_arm(120, v=30)
+    mmsf.grip_front(180, 180, 270, s=0.1)
+    mmsf.move_mechanism(140)
+    mmsf.move_front_arm(75, v=30)
+    mmsf.set_distance_angle(-100, 0)
+
+    return mmsf.operations
+
+
+def memristor_back():
+    mmsb = Strategy()
+
+    mmsb.move_back_arm(210, v=30)
+    mmsb.move_front_arm(120, v=30)
+    mmsb.move_mechanism(15)
+    mmsb.move_back_arm(170, v=30)
+    mmsb.grip_back(150, 120, 150, s=0.1)
+    mmsb.move_back_arm(200, v=30)
+    mmsb.grip_back(215, 180, 215, s=0.1)
+    mmsb.move_mechanism(160)
+    mmsb.set_distance_angle(150, 0)
+    mmsb.move_back_arm(165, v=30)
+    mmsb.move_front_arm(100, v=30)
+    mmsb.set_distance_angle(-130, 0)
+    mmsb.set_distance_angle(50, 0)
+    mmsb.move_back_arm(210, v=30)
+    mmsb.set_distance_angle(-120, 0)
+    mmsb.move_mechanism(7)
+    mmsb.move_back_arm(180, v=30)
+    mmsb.grip_back(200, 165, 200, s=0.1)
+    mmsb.move_back_arm(210, v=30)
+    mmsb.move_mechanism(180)
+
+    return mmsb.operations
 
 
 def drop_front_plant():
