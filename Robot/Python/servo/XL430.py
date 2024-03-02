@@ -46,9 +46,7 @@ def parallel_rotate(ids, angles):
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
     for i in range(len(ids)):
-        # Choosing operating mode
-    
-    
+        # Choosing operating mode    
         print("Single mode on")
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], MODE, 3)
@@ -76,9 +74,6 @@ def parallel_rotate(ids, angles):
     velocity_added = False
 
     for i in range(len(ids)):
-
-    
-
         # Allocate goal position value into byte array
         param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_LOWORD(
             dxl_goal_position[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_position[i]))]
