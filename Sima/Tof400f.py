@@ -93,7 +93,8 @@ import time
 import sys 
 def read_distance(serial_port):
     # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
-    # serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
+    serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
+    # serial_port.write([0x10,0x03,0x00,0x10,0x00,0x01,0x95,0x86])
     read = serial_port.read(7) # response 7 bytes: SlaveAddr, FuncNumb, NumOfDataBytes, DataHigh, DataLow, ... , CRC_CheckLow, CRC_CheckHigh
     # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
     print(read)
