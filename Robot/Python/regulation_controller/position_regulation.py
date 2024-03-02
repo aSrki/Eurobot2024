@@ -47,7 +47,7 @@ class PositionRegulation:
     t_rot = 0.03
 
     min_pid = 0
-    max_pid = 4500
+    max_pid = 3000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -208,7 +208,7 @@ class PositionRegulation:
             KpK = 5 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
             KpR = 20 * pojacanje * rotpoj  # 75 bilo
 
-            TiR = 6600  #4000 # 6600 # 200
+            TiR = 6600  # 4000 # 6600 # 200
             TiK = 660000000  # 5200
 
             TdK = 0  # 1
@@ -379,7 +379,7 @@ class PositionRegulation:
 
         self.old_rot_speed = self.rot_speed
         self.old_speed = self.speed
-        
+
         if debug:
             print("speed : ****************************  -> ", self.speed)
         # -----------------------------------------
@@ -439,12 +439,12 @@ class PositionRegulation:
 
     def calculate_curve_trans(self, t):
         result = 0.002*(t**5) - 0.14*(t**4) + 3.233*(t**3) - 19.5*(t**2) + 43*t
-        #print("CURVE Trans Result: {0}".format(result))
+        # print("CURVE Trans Result: {0}".format(result))
         return result
 
     def calculate_curve_rot(self, t):
         result = 0.002*(t**5) - 0.14*(t**4) + 3.233*(t**3) - 19.5*(t**2) + 43*t
-        #print("CURVE Rot Result: {0}".format(result))
+        # print("CURVE Rot Result: {0}".format(result))
         return result
 
     def send_vel_left(self):

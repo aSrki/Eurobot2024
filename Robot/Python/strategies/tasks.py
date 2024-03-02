@@ -48,11 +48,12 @@ def prepare_arms5():
 
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
-    pa.grip_front(180, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+    pa.grip_front(180, 90, 180, s=0.1)  # ignorisemo onu sto nas smara
     pa.grip_back(90, 90, 0, s=0.1)
     pa.move_mechanism(180)
 
     return pa.operations
+
 
 def prepare_arms6():
     # podigne i otvori prednji mehanizam kada skupljamo 6 biljki
@@ -60,7 +61,7 @@ def prepare_arms6():
 
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
-    pa.grip_front(90, 90, 180, s=0.1) #ignorisemo onu sto nas smara
+    pa.grip_front(90, 90, 180, s=0.1)
     pa.grip_back(90, 90, 0, s=0.1)
     pa.move_mechanism(180)
 
@@ -93,7 +94,7 @@ def prepare_arms6():
 def grip_front_plant():
     gfp = Strategy()
 
-    gfp.move_front_arm(80, s=0.1, v=30) #87
+    gfp.move_front_arm(80, s=0.1, v=30)  # 87
     gfp.grip_front(169, 169, 258, s=0.1)
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120)
@@ -104,7 +105,7 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.move_back_arm(170, s=0.1, v=30) #177
+    gbp.move_back_arm(170, s=0.1, v=30)  # 177
     gbp.grip_back(173, 173, 83, s=0.1)
     gbp.move_back_arm(210)
 
@@ -115,25 +116,66 @@ def front_plant_in_pot():
     fpip = Strategy()
 
     fpip.move_front_arm(120)
-    fpip.move_mechanism(30) #20 #60
-    fpip.move_front_arm(90, v=30, s=0.1) #85
+    fpip.move_mechanism(30)  # 20 #60
+    fpip.move_front_arm(90, v=30, s=0.1)  # 85
     fpip.grip_front(180, 120, 180)
     fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
     fpip.set_distance_angle(-120, 0)
     fpip.grip_front(185, 185, 275)
     fpip.move_front_arm(68)
-    #fpip.set_distance_angle(60, 0)
+    # fpip.set_distance_angle(60, 0)
     fpip.set_distance_angle(48, 0)
-    fpip.move_mechanism(315, s=0.5) #345 
+    fpip.move_mechanism(315, s=0.5)  # 345
     fpip.move_front_arm(73, s=0.5, v=30)
     # fpip.grip_front(90, 180, 270)
-    fpip.set_distance_angle(-50, 0, s=0.1)      
+    fpip.set_distance_angle(-50, 0, s=0.1)
     fpip.move_front_arm(120, v=20)
-    fpip.move_mechanism(180)             
-    #fpip.move_front_arm(120, s=0.5, v=20)
+    fpip.move_mechanism(180)
+    # fpip.move_front_arm(120, s=0.5, v=20)
 
     return fpip.operations
+
+
+def memristor_front():
+    mmsf = Strategy()
+
+    mmsf.move_front_arm(120, v=30)
+    mmsf.move_mechanism(300)
+    mmsf.move_front_arm(90, v=30)
+    mmsf.grip_front(90, 120, 180, s=0.1)
+    mmsf.move_front_arm(120, v=30)
+    mmsf.grip_front(180, 180, 270, s=0.1)
+    mmsf.move_mechanism(180)
+    mmsf.move_front_arm(85, v=30)
+
+    return mmsf.operations
+
+
+def memristor_back():
+    mmsb = Strategy()
+
+    mmsb.move_back_arm(210, v=30)
+    mmsb.move_mechanism(20)
+    mmsb.move_back_arm(170, v=30)
+    mmsb.grip_back(120, 120, 30, s=0.1)
+    mmsb.move_back_arm(210, v=30)
+    mmsb.grip_back(180, 180, 90, s=0.1)
+    mmsb.move_mechanism(180)
+    mmsb.set_distance_angle(100, 0)
+    mmsb.move_front_arm(165, v=30)
+    mmsb.set_distance_angle(-100, 0)
+    mmsb.move_back_arm(170, v=30)
+    mmsb.set_distance_angle(50, 0)
+    mmsb.move_back_arm(210, v=30)
+    mmsb.set_distance_angle(-120, 0)
+    mmsb.move_mechanism(5)
+    mmsb.move_back_arm(180, v=30)
+    mmsb.grip_back(165, 165, 75, s=0.1)
+    mmsb.move_back_arm(210, v=30)
+    mmsb.move_mechanism(180)
+
+    return mmsb.operations
 
 
 def back_plant_in_pot():
@@ -164,8 +206,8 @@ def back_plant_in_pot():
 def drop_front_plant():
     dfp = Strategy()
 
-    dfp.move_mechanism(350)#170
-    dfp.move_front_arm(95)#88
+    dfp.move_mechanism(350)  # 170
+    dfp.move_front_arm(95)  # 88
     dfp.grip_front(110, 165, 255, s=0.1)
     dfp.move_front_arm(120)
     dfp.move_mechanism(180)
@@ -176,63 +218,66 @@ def drop_front_plant():
 def drop_back_plant():
     dbp = Strategy()
 
-    dbp.move_mechanism(180)#25
-    dbp.move_back_arm(190) #168
+    dbp.move_mechanism(180)  # 25
+    dbp.move_back_arm(190)  # 168
     # dbp.move_mechanism(8)
     dbp.grip_back(165, 165, 75, s=0.1)
-    #dbp.move_mechanism(75) #75
+    # dbp.move_mechanism(75) #75
     dbp.move_back_arm(210, v=40)
-    #dbp.move_mechanism(180)
+    # dbp.move_mechanism(180)
 
     return dbp.operations
+
 
 def release_front_plant():
     rfp = Strategy()
 
     rfp.move_front_arm(120)
-    rfp.move_mechanism(180) #20 #60
-    rfp.move_front_arm(80, v=30, s=0.1) #85
+    rfp.move_mechanism(180)  # 20 #60
+    rfp.move_front_arm(80, v=30, s=0.1)  # 85
     rfp.grip_front(90, 90, 180)
     rfp.move_front_arm(120, s=0.5)
     rfp.move_mechanism(180)
 
     return rfp.operations
 
+
 def release_back_plant():
     rbp = Strategy()
 
     rbp.move_back_arm(210)
-    rbp.move_mechanism(180) #20 #60
-    rbp.move_back_arm(170, v=30, s=0.1) #85
+    rbp.move_mechanism(180)  # 20 #60
+    rbp.move_back_arm(170, v=30, s=0.1)  # 85
     rbp.grip_back(90, 90, 0)
     rbp.move_back_arm(210, s=0.5)
     rbp.move_mechanism(180)
 
     return rbp.operations
 
+
 def leave_front_plant():
     lfp = Strategy()
 
     lfp.move_front_arm(120)
-    lfp.move_mechanism(340) 
-    lfp.move_front_arm(80, v=30, s=0.1) 
+    lfp.move_mechanism(340)
+    lfp.move_front_arm(80, v=30, s=0.1)
     lfp.grip_front(90, 90, 180)
     lfp.move_front_arm(120, s=0.5)
     lfp.move_mechanism(180)
 
     return lfp.operations
 
+
 def leave_back_plant():
     lbp = Strategy()
     lbp.move_back_arm(210)
-    lbp.move_mechanism(150) 
-    lbp.move_back_arm(190, v=30, s=0.1) 
+    lbp.move_mechanism(150)
+    lbp.move_back_arm(190, v=30, s=0.1)
     lbp.grip_back(90, 90, 0)
     lbp.move_back_arm(210, s=0.5)
     lbp.move_mechanism(180)
 
     return lbp.operations
-
 
 
 # def pink1(xoff=0, yoff=0, ainiempts=0, off=data.offset):
