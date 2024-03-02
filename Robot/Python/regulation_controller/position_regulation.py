@@ -47,7 +47,7 @@ class PositionRegulation:
     t_rot = 0.03
 
     min_pid = 0
-    max_pid = 3000
+    max_pid = 4500
 
     cur_encoder_left = 0
     cur_encoder_right = 0
