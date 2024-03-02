@@ -198,9 +198,9 @@ class Strategy:
                 self.operations.append(action)
 
     def grip_back(self, a1, a2, a3, v=100, s=0.1, da=0):
-        '''1: zatvoren 180, otvoren 90,
+        '''1: zatvoren 215, otvoren 120,
            2: zatvoren 180, otvoren 90,
-           3: zatvoren 90, otvoren 0,
+           3: zatvoren 215, otvoren 120,
            v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(
             IDS.id_gripper_back_1.value, angle=a1, velocity=v, sleep=s, thread=True

@@ -33,7 +33,7 @@ def init_servos():
 
     ini.move_mechanism(180)
 
-    ini.grip_back(180, 180, 90)
+    ini.grip_back(215, 180, 215)
     ini.grip_front(180, 180, 270)
 
     ini.move_front_arm(65)
@@ -49,7 +49,7 @@ def prepare_arms5():
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
     pa.grip_front(180, 90, 180, s=0.1)  # ignorisemo onu sto nas smara
-    pa.grip_back(90, 90, 0, s=0.1)
+    pa.grip_back(215, 90, 120, s=0.1)
     pa.move_mechanism(180)
 
     return pa.operations
@@ -62,7 +62,7 @@ def prepare_arms6():
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
     pa.grip_front(90, 90, 180, s=0.1)
-    pa.grip_back(90, 90, 0, s=0.1)
+    pa.grip_back(120, 90, 120, s=0.1)
     pa.move_mechanism(180)
 
     return pa.operations
@@ -85,7 +85,7 @@ def prepare_arms6():
 
 #     pba.move_back_arm(210, s=0.1)
 #     pba.move_front_arm(120)
-#     pba.grip_back(90, 90, 0, s=0.1)
+#     pba.grip_back(120, 90, 120, s=0.1)
 #     pba.move_mechanism(180)
 
 #     return pba.operations
@@ -106,7 +106,7 @@ def grip_back_plant():
     gbp = Strategy()
 
     gbp.move_back_arm(170, s=0.1, v=30)  # 177
-    gbp.grip_back(173, 173, 83, s=0.1)
+    gbp.grip_back(208, 173, 208, s=0.1)
     gbp.move_back_arm(210)
 
     return gbp.operations
@@ -158,9 +158,9 @@ def memristor_back():
     mmsb.move_back_arm(210, v=30)
     mmsb.move_mechanism(20)
     mmsb.move_back_arm(170, v=30)
-    mmsb.grip_back(120, 120, 30, s=0.1)
+    mmsb.grip_back(150, 120, 150, s=0.1)
     mmsb.move_back_arm(210, v=30)
-    mmsb.grip_back(180, 180, 90, s=0.1)
+    mmsb.grip_back(215, 180, 215, s=0.1)
     mmsb.move_mechanism(180)
     mmsb.set_distance_angle(100, 0)
     mmsb.move_front_arm(165, v=30)
@@ -171,7 +171,7 @@ def memristor_back():
     mmsb.set_distance_angle(-120, 0)
     mmsb.move_mechanism(5)
     mmsb.move_back_arm(180, v=30)
-    mmsb.grip_back(165, 165, 75, s=0.1)
+    mmsb.grip_back(200, 165, 200, s=0.1)
     mmsb.move_back_arm(210, v=30)
     mmsb.move_mechanism(180)
 
@@ -185,12 +185,12 @@ def back_plant_in_pot():
     bpip.move_mechanism(300)
     # dodati v = 50 ako cimaju biljke kada padaju
     bpip.move_back_arm(180, v=30)
-    bpip.grip_back(90, 90, 1)
+    bpip.grip_back(120, 90, 120)
     # bpip.move_mechanism(270, s=0.5)
     bpip.move_back_arm(210, s=0.5, v=20)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(130, 0)
-    bpip.grip_back(185, 185, 95)
+    bpip.grip_back(215, 180, 215)
     # bpip.move_back_arm(155, v=20)
     bpip.move_back_arm(162)
     bpip.set_distance_angle(-105, 0)  # -60
@@ -221,7 +221,7 @@ def drop_back_plant():
     dbp.move_mechanism(180)  # 25
     dbp.move_back_arm(190)  # 168
     # dbp.move_mechanism(8)
-    dbp.grip_back(165, 165, 75, s=0.1)
+    dbp.grip_back(200, 165, 200, s=0.1)
     # dbp.move_mechanism(75) #75
     dbp.move_back_arm(210, v=40)
     # dbp.move_mechanism(180)
@@ -248,7 +248,7 @@ def release_back_plant():
     rbp.move_back_arm(210)
     rbp.move_mechanism(180)  # 20 #60
     rbp.move_back_arm(170, v=30, s=0.1)  # 85
-    rbp.grip_back(90, 90, 0)
+    rbp.grip_back(120, 90, 120)
     rbp.move_back_arm(210, s=0.5)
     rbp.move_mechanism(180)
 
@@ -273,7 +273,7 @@ def leave_back_plant():
     lbp.move_back_arm(210)
     lbp.move_mechanism(150)
     lbp.move_back_arm(190, v=30, s=0.1)
-    lbp.grip_back(90, 90, 0)
+    lbp.grip_back(120, 90, 120)
     lbp.move_back_arm(210, s=0.5)
     lbp.move_mechanism(180)
 
