@@ -84,7 +84,7 @@ try:
 	# strategy
 	odom.go_to_XY(1800, 300)
 	odom.go_to_XY(1800, 0)
-	odom.go_to_XY(-1500, 1100)
+	# odom.go_to_XY(-1500, 1100)
 except KeyboardInterrupt:
     odom.stop_odom()
 
