@@ -6,8 +6,8 @@ strategy1 = Strategy()
 
 strategy1.rotate_to(0)
 strategy1.start_step_actions()
-strategy1.activate_triangle()
 strategy1.go_to_XY(195, 750, g=0.4, s=1.5)  # rotira panele
+strategy1.activate_triangle()
 strategy1.end_step_actions()
 # strategy1.move_front_arm(110)  # podize ruke da ne pojebe potove
 
@@ -24,7 +24,7 @@ strategy1.add_sequence(grip_front_plant())
 strategy1.rotate_to(180)
 # strategy1.set_distance_angle(-230, 0) #ubaceno u task da bi bilo brze
 strategy1.add_sequence(grip_back_plant())
-strategy1.go_to_XY(250, 300)
+strategy1.go_to_XY(350, 300)
 strategy1.add_sequence(release_front_plant())
 strategy1.set_distance_angle(-170, 0)
 strategy1.rotate_to(-30)  # 0
@@ -105,6 +105,6 @@ strategy1.go_to_XY(1700, 712, False)  # 762
 strategy1.go_to_XY(1850, 712, False)  # 762
 strategy1.add_sequence(leave_back_plant())
 strategy1.set_distance_angle(100, 0)
-strategy1.go_to_XY(1775, 500)
+strategy1.go_to_XY(1775, 700)
 
 strategy1.end()

@@ -95,14 +95,14 @@ def grip_front_plant():
     gfp = Strategy()
 
     gfp.set_distance_angle(95, 0)
+
     gfp.start_parallel()
-    gfp.move_front_arm(80, s=0.1, v=7)  # 87
+    gfp.move_front_arm(80, v=30)  # 87
     gfp.grip_front(169, 169, 258)
-    gfp.end_parallel()
-    gfp.start_step_actions()
+    gfp.end_parallel(0.2)
+
     gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
-    gfp.move_front_arm(120, v=40)
-    gfp.end_step_actions()
+    gfp.move_front_arm(120, v=30)
 
     return gfp.operations
 
@@ -110,12 +110,12 @@ def grip_front_plant():
 def grip_back_plant():
     gbp = Strategy()
 
-    gbp.start_step_actions()
     gbp.set_distance_angle(-230, 0)
-    gbp.move_back_arm(170, v=4)  # 177
+    gbp.start_parallel()
+    gbp.move_back_arm(170, v=30)
     gbp.grip_back(208, 173, 208)
+    gbp.end_parallel(0.2)
     gbp.move_back_arm(210)
-    gbp.end_step_actions()
 
     return gbp.operations
 
@@ -170,51 +170,84 @@ def back_plant_in_pot():
     return bpip.operations
 
 
-def memristor_front():
+def memristor_front():  # za saksije van stola i biljke u limu
     mmsf = Strategy()
 
+    mmsf.start_parallel()  # treba snimati i vaditi stvari iz paralela ako ne rade
     mmsf.move_front_arm(120, v=30)
     mmsf.move_back_arm(210, v=30)
     mmsf.move_mechanism(270)
-    mmsf.move_front_arm(90, v=30)
+    mmsf.end_parallel(0.1)
+
+    mmsf.move_front_arm(93, v=30)
     mmsf.grip_front(90, 120, 180, s=0.1)
+
+    mmsf.start_parallel()
     mmsf.move_front_arm(120, v=30)
     mmsf.grip_front(180, 180, 270, s=0.1)
-    mmsf.move_mechanism(140)
-    mmsf.move_front_arm(75, v=30)
+    mmsf.move_mechanism(180)
+    mmsf.end_parallel(0.1)
+
     mmsf.set_distance_angle(-100, 0)
+
+    mmsf.set_distance_angle(30, 0)
+
+    mmsf.start_parallel()
+    mmsf.move_front_arm(75, v=30)
+    mmsf.move_mechanism(280)
+    mmsf.end_parallel(0.2)
+    mmsf.move_mechanism(180)
 
     return mmsf.operations
 
 
-def memristor_back():
+def memristor_back():  # nastavak ovog gore
     mmsb = Strategy()
 
+    mmsb.start_parallel()
     mmsb.move_back_arm(210, v=30)
     mmsb.move_front_arm(120, v=30)
     mmsb.move_mechanism(15)
-    mmsb.move_back_arm(170, v=30)
-    mmsb.grip_back(150, 120, 150, s=0.1)
+    mmsb.end_parallel(0.1)
+
+    mmsb.start_parallel()
+    mmsb.move_back_arm(175, v=15)
+    mmsb.grip_back(150, 120, 150)
+    mmsb.end_parallel(0.1)
+
+    mmsb.start_parallel()
     mmsb.move_back_arm(200, v=30)
     mmsb.grip_back(215, 180, 215, s=0.1)
-    mmsb.move_mechanism(160)
+    mmsb.move_mechanism(180)
+    mmsb.end_parallel(0.1)
+
     mmsb.set_distance_angle(150, 0)
+    mmsb.start_parallel()
     mmsb.move_back_arm(165, v=30)
     mmsb.move_front_arm(100, v=30)
-    mmsb.set_distance_angle(-130, 0)
-    mmsb.set_distance_angle(50, 0)
-    mmsb.move_back_arm(210, v=30)
+    mmsb.end_parallel(0.1)
+
     mmsb.set_distance_angle(-120, 0)
+    mmsb.set_distance_angle(50, 0)
+
+    mmsb.start_parallel()
+    mmsb.move_back_arm(210, v=15)
     mmsb.move_mechanism(7)
-    mmsb.move_back_arm(180, v=30)
-    mmsb.grip_back(200, 165, 200, s=0.1)
+    mmsb.end_parallel(0.1)
+    mmsb.set_distance_angle(-120, 0)
+
+    mmsb.move_back_arm(175, v=15)  # 180
+    mmsb.grip_back(190, 155, 190, s=0.1)
+
+    mmsb.start_parallel()
     mmsb.move_back_arm(210, v=30)
     mmsb.move_mechanism(180)
+    mmsb.end_parallel(0.1)
 
     return mmsb.operations
 
 
-def drop_front_plant():
+def drop_front_plant():  # ne koriste se sada
     dfp = Strategy()
 
     dfp.move_mechanism(350)  # 170
@@ -226,7 +259,7 @@ def drop_front_plant():
     return dfp.operations
 
 
-def drop_back_plant():
+def drop_back_plant():  # ne koriste se sada
     dbp = Strategy()
 
     dbp.move_mechanism(180)  # 25
@@ -240,7 +273,7 @@ def drop_back_plant():
     return dbp.operations
 
 
-def release_front_plant():
+def release_front_plant():  # u terenu biljke bez saksija
     rfp = Strategy()
 
     rfp.move_front_arm(120)
@@ -253,7 +286,7 @@ def release_front_plant():
     return rfp.operations
 
 
-def release_back_plant():
+def release_back_plant():  # u terenu biljke bez saksija
     rbp = Strategy()
 
     rbp.move_back_arm(210)
@@ -266,7 +299,7 @@ def release_back_plant():
     return rbp.operations
 
 
-def leave_front_plant():
+def leave_front_plant():  # van terena biljke bez saksija
     lfp = Strategy()
 
     lfp.move_front_arm(120)
@@ -279,7 +312,7 @@ def leave_front_plant():
     return lfp.operations
 
 
-def leave_back_plant():
+def leave_back_plant():  # van terena biljke bez saksija
     lbp = Strategy()
     lbp.move_back_arm(210)
     lbp.move_mechanism(150)
