@@ -13,8 +13,9 @@ strategy1.end_step_actions()
 
 strategy1.start_step_actions()
 strategy1.go_to_XY(500, 1210)  # dolazi do tanjira 4
-strategy1.add_sequence(prepare_arms6())  # priprema za hvatanje
+
 strategy1.deactivate_triangle()
+strategy1.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy1.end_step_actions()
 
 
@@ -24,7 +25,7 @@ strategy1.add_sequence(grip_front_plant())
 strategy1.rotate_to(180)
 # strategy1.set_distance_angle(-230, 0) #ubaceno u task da bi bilo brze
 strategy1.add_sequence(grip_back_plant())
-strategy1.go_to_XY(350, 300)
+strategy1.go_to_XY(300, 300)#350
 strategy1.add_sequence(release_front_plant())
 strategy1.set_distance_angle(-170, 0)
 strategy1.rotate_to(-30)  # 0
@@ -32,7 +33,7 @@ strategy1.add_sequence(release_back_plant())
 # strategy1.set_distance_angle(100, 0)
 
 strategy1.start_step_actions()
-strategy1.go_to_XY(690, 710)
+strategy1.go_to_XY(700, 710)#690
 strategy1.add_sequence(prepare_arms6())
 strategy1.end_step_actions()
 

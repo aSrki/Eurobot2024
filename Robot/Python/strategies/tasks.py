@@ -97,11 +97,11 @@ def grip_front_plant():
     gfp.set_distance_angle(95, 0)
 
     gfp.start_parallel()
-    gfp.move_front_arm(80, v=30)  # 87
-    gfp.grip_front(169, 169, 258)
+    gfp.move_front_arm(77, v=30)  # 87
+    gfp.grip_front(173, 173, 263)
     gfp.end_parallel(0.2)
 
-    gfp.set_distance_angle(-80, 0)  # stavljeno da ne smeta drugim biljkama
+    gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120, v=30)
 
     return gfp.operations
@@ -192,10 +192,8 @@ def memristor_front():  # za saksije van stola i biljke u limu
 
     mmsf.set_distance_angle(30, 0)
 
-    mmsf.start_parallel()
+
     mmsf.move_front_arm(75, v=30)
-    mmsf.move_mechanism(280)
-    mmsf.end_parallel(0.2)
     mmsf.move_mechanism(180)
 
     return mmsf.operations
@@ -219,10 +217,10 @@ def memristor_back():  # nastavak ovog gore
     mmsb.move_back_arm(200, v=30)
     mmsb.grip_back(215, 180, 215, s=0.1)
     mmsb.move_mechanism(180)
+    mmsb.move_mechanism(280)
     mmsb.end_parallel(0.1)
-
-    mmsb.set_distance_angle(150, 0)
     mmsb.start_parallel()
+    mmsb.set_distance_angle(100, 0)
     mmsb.move_back_arm(165, v=30)
     mmsb.move_front_arm(100, v=30)
     mmsb.end_parallel(0.1)
@@ -230,10 +228,10 @@ def memristor_back():  # nastavak ovog gore
     mmsb.set_distance_angle(-120, 0)
     mmsb.set_distance_angle(50, 0)
 
-    mmsb.start_parallel()
+    
     mmsb.move_back_arm(210, v=15)
     mmsb.move_mechanism(7)
-    mmsb.end_parallel(0.1)
+    
     mmsb.set_distance_angle(-120, 0)
 
     mmsb.move_back_arm(175, v=15)  # 180
