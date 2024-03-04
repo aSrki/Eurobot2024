@@ -83,10 +83,10 @@ def grip_front_plant():
 
     gfp.set_distance_angle(95, 0)
 
-    gfp.start_parallel()
-    gfp.move_front_arm(77, v=30)  # 87
-    gfp.grip_front(208, 208, 208)
-    gfp.end_parallel(0.2)
+    # gfp.start_parallel()
+    gfp.move_front_arm(77, v=30)  # 72
+    gfp.grip_front(198, 198, 198)
+    # gfp.end_parallel(0.4)
 
     gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
     gfp.move_front_arm(120, v=30)
@@ -98,10 +98,10 @@ def grip_back_plant():
     gbp = Strategy()
 
     gbp.set_distance_angle(-230, 0)
-    gbp.start_parallel()
-    gbp.move_back_arm(170, v=30)
-    gbp.grip_back(208, 208, 208)
-    gbp.end_parallel(0.2)
+    # gbp.start_parallel()
+    gbp.move_back_arm(170, v=30)  # 165
+    gbp.grip_back(198, 198, 198)
+    # gbp.end_parallel(0.4)
     gbp.move_back_arm(210)
 
     return gbp.operations
@@ -162,24 +162,23 @@ def memristor_front():  # za saksije van stola i biljke u limu
     mmsf.start_parallel()  # treba snimati i vaditi stvari iz paralela ako ne rade
     mmsf.move_front_arm(120, v=30)
     mmsf.move_back_arm(210, v=30)
-    mmsf.move_mechanism(270)
-    mmsf.end_parallel(0.1)
+    mmsf.move_mechanism(210)
+    mmsf.end_parallel(0.5)
 
-    mmsf.move_front_arm(93, v=30)
+    mmsf.move_front_arm(87, v=30)
     mmsf.grip_front(120, 120, 120, s=0.1)
 
     mmsf.start_parallel()
     mmsf.move_front_arm(120, v=30)
-    mmsf.grip_front(215, 215, 215, s=0.1)
+    mmsf.grip_front(215, 215, 215)
     mmsf.move_mechanism(180)
-    mmsf.end_parallel(0.1)
+    mmsf.end_parallel(0.5)
 
-    mmsf.set_distance_angle(-100, 0)
+    mmsf.set_distance_angle(-90, 0)
+    mmsf.move_front_arm(72, v=30)
+    mmsf.move_mechanism(350)
+    # mmsf.set_distance_angle(40, 0)
 
-    mmsf.set_distance_angle(30, 0)
-
-
-    mmsf.move_front_arm(75, v=30)
     mmsf.move_mechanism(180)
 
     return mmsf.operations
@@ -192,41 +191,41 @@ def memristor_back():  # nastavak ovog gore
     mmsb.move_back_arm(210, v=30)
     mmsb.move_front_arm(120, v=30)
     mmsb.move_mechanism(15)
-    mmsb.end_parallel(0.1)
+    mmsb.end_parallel(0.5)
 
     mmsb.start_parallel()
-    mmsb.move_back_arm(175, v=15)
+    mmsb.move_back_arm(185, v=15)
     mmsb.grip_back(150, 150, 150)
-    mmsb.end_parallel(0.1)
+    mmsb.end_parallel(0.5)
 
     mmsb.start_parallel()
     mmsb.move_back_arm(200, v=30)
     mmsb.grip_back(215, 215, 215, s=0.1)
     mmsb.move_mechanism(180)
-    mmsb.move_mechanism(280)
-    mmsb.end_parallel(0.1)
-    mmsb.start_parallel()
+    mmsb.end_parallel(0.5)
+
     mmsb.set_distance_angle(100, 0)
+
+    mmsb.start_parallel()
     mmsb.move_back_arm(165, v=30)
     mmsb.move_front_arm(100, v=30)
-    mmsb.end_parallel(0.1)
+    mmsb.end_parallel(0.5)
 
-    mmsb.set_distance_angle(-120, 0)
+    mmsb.set_distance_angle(-70, 0)
     mmsb.set_distance_angle(50, 0)
 
-    
     mmsb.move_back_arm(210, v=15)
-    mmsb.move_mechanism(7)
-    
+    mmsb.move_mechanism(60)  # bilo 7
+
     mmsb.set_distance_angle(-120, 0)
 
-    mmsb.move_back_arm(175, v=15)  # 180
-    mmsb.grip_back(200, 200, 200, s=0.1)
+    mmsb.move_back_arm(180, v=15)  # 180
+    mmsb.grip_back(190, 190, 190, s=0.1)
 
     mmsb.start_parallel()
     mmsb.move_back_arm(210, v=30)
     mmsb.move_mechanism(180)
-    mmsb.end_parallel(0.1)
+    mmsb.end_parallel(0.5)
 
     return mmsb.operations
 

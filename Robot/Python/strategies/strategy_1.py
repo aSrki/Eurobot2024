@@ -24,7 +24,7 @@ strategy1.add_sequence(grip_front_plant())
 strategy1.rotate_to(180)
 # strategy1.set_distance_angle(-230, 0) #ubaceno u task da bi bilo brze
 strategy1.add_sequence(grip_back_plant())
-strategy1.go_to_XY(300, 300)#350
+strategy1.go_to_XY(250, 300)  # 350
 strategy1.add_sequence(release_front_plant())
 strategy1.set_distance_angle(-170, 0)
 strategy1.rotate_to(-30)  # 0
@@ -32,7 +32,7 @@ strategy1.add_sequence(release_back_plant())
 # strategy1.set_distance_angle(100, 0)
 
 strategy1.start_step_actions()
-strategy1.go_to_XY(700, 710)#690
+strategy1.go_to_XY(700, 710)  # 690
 strategy1.add_sequence(prepare_arms6())
 strategy1.end_step_actions()
 
@@ -76,13 +76,13 @@ strategy1.add_sequence(grip_back_plant())
 # strategy1.add_sequence(drop_back_plant())
 # ======================KRAJ ================================
 
-strategy1.go_to_XY(1377, 600)  # 1352 je po crtezu -35mm da uhvati prve dve
-strategy1.go_to_XY(1377, 285)
+strategy1.go_to_XY(1382, 600)  # 1377 je po crtezu -35mm da uhvati prve dve
+strategy1.go_to_XY(1382, 285)
 
 strategy1.add_sequence(memristor_front())
-strategy1.go_to_XY(1377, 305, False)
-strategy1.rotate_to(0)
 strategy1.set_distance_angle(-85, 0)
+strategy1.go_to_XY(1377, 210, False)  # x = 305 bilo je i 240
+strategy1.rotate_to(0)
 strategy1.add_sequence(memristor_back())
 
 
