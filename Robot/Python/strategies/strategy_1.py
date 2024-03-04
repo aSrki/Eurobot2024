@@ -6,14 +6,13 @@ strategy1 = Strategy()
 
 strategy1.rotate_to(0)
 strategy1.start_step_actions()
-strategy1.go_to_XY(195, 750, g=0.4, s=1.5)  # rotira panele
+strategy1.go_to_XY(195, 750, g=0.4, s=1.5)  # rotira panele #y = 750
 strategy1.activate_triangle()
 strategy1.end_step_actions()
 # strategy1.move_front_arm(110)  # podize ruke da ne pojebe potove
 
 strategy1.start_step_actions()
 strategy1.go_to_XY(500, 1210)  # dolazi do tanjira 4
-
 strategy1.deactivate_triangle()
 strategy1.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy1.end_step_actions()
