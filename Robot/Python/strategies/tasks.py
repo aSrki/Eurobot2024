@@ -33,26 +33,13 @@ def init_servos():
 
     ini.move_mechanism(180)
 
-    ini.grip_back(215, 180, 215)
-    ini.grip_front(180, 180, 270)
+    ini.grip_back(215, 215, 215)
+    ini.grip_front(215, 215, 215)
 
     ini.move_front_arm(65)
     ini.move_back_arm(155)
 
     return ini.operations
-
-
-def prepare_arms5():
-    # podigne i otvori prednji mehanizam kada skupljamo 5 biljki
-    pa = Strategy()
-
-    pa.move_front_arm(120, s=0.1)
-    pa.move_back_arm(210)
-    pa.grip_front(180, 90, 180, s=0.1)  # ignorisemo onu sto nas smara
-    pa.grip_back(215, 90, 120, s=0.1)
-    pa.move_mechanism(180)
-
-    return pa.operations
 
 
 def prepare_arms6():
@@ -61,8 +48,8 @@ def prepare_arms6():
 
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
-    pa.grip_front(90, 90, 180, s=0.1)
-    pa.grip_back(120, 90, 120, s=0.1)
+    pa.grip_front(120, 120, 120, s=0.1)
+    pa.grip_back(120, 120, 120, s=0.1)
     pa.move_mechanism(180)
 
     return pa.operations
@@ -98,7 +85,7 @@ def grip_front_plant():
 
     gfp.start_parallel()
     gfp.move_front_arm(77, v=30)  # 87
-    gfp.grip_front(173, 173, 263)
+    gfp.grip_front(208, 208, 208)
     gfp.end_parallel(0.2)
 
     gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
@@ -113,7 +100,7 @@ def grip_back_plant():
     gbp.set_distance_angle(-230, 0)
     gbp.start_parallel()
     gbp.move_back_arm(170, v=30)
-    gbp.grip_back(208, 173, 208)
+    gbp.grip_back(208, 208, 208)
     gbp.end_parallel(0.2)
     gbp.move_back_arm(210)
 
@@ -126,17 +113,16 @@ def front_plant_in_pot():
     fpip.move_front_arm(120)
     fpip.move_mechanism(30)  # 20 #60
     fpip.move_front_arm(90, v=30, s=0.1)  # 85
-    fpip.grip_front(180, 120, 180)
+    fpip.grip_front(208, 120, 120)
     fpip.move_front_arm(120, s=0.5)
     fpip.move_mechanism(180)
     fpip.set_distance_angle(-120, 0)
-    fpip.grip_front(185, 185, 275)
+    fpip.grip_front(208, 215, 215)
     fpip.move_front_arm(68)
     # fpip.set_distance_angle(60, 0)
     fpip.set_distance_angle(48, 0)
     fpip.move_mechanism(315, s=0.5)  # 345
     fpip.move_front_arm(73, s=0.5, v=30)
-    # fpip.grip_front(90, 180, 270)
     fpip.set_distance_angle(-50, 0, s=0.1)
     fpip.move_front_arm(120, v=20)
     fpip.move_mechanism(180)
@@ -152,12 +138,12 @@ def back_plant_in_pot():
     bpip.move_mechanism(300)
     # dodati v = 50 ako cimaju biljke kada padaju
     bpip.move_back_arm(180, v=30)
-    bpip.grip_back(120, 90, 120)
+    bpip.grip_back(120, 120, 120)
     # bpip.move_mechanism(270, s=0.5)
     bpip.move_back_arm(210, s=0.5, v=20)
     bpip.move_mechanism(180)
     bpip.set_distance_angle(130, 0)
-    bpip.grip_back(215, 180, 215)
+    bpip.grip_back(215, 215, 215)
     # bpip.move_back_arm(155, v=20)
     bpip.move_back_arm(162)
     bpip.set_distance_angle(-105, 0)  # -60
@@ -180,11 +166,11 @@ def memristor_front():  # za saksije van stola i biljke u limu
     mmsf.end_parallel(0.1)
 
     mmsf.move_front_arm(93, v=30)
-    mmsf.grip_front(90, 120, 180, s=0.1)
+    mmsf.grip_front(120, 120, 120, s=0.1)
 
     mmsf.start_parallel()
     mmsf.move_front_arm(120, v=30)
-    mmsf.grip_front(180, 180, 270, s=0.1)
+    mmsf.grip_front(215, 215, 215, s=0.1)
     mmsf.move_mechanism(180)
     mmsf.end_parallel(0.1)
 
@@ -210,12 +196,12 @@ def memristor_back():  # nastavak ovog gore
 
     mmsb.start_parallel()
     mmsb.move_back_arm(175, v=15)
-    mmsb.grip_back(150, 120, 150)
+    mmsb.grip_back(150, 150, 150)
     mmsb.end_parallel(0.1)
 
     mmsb.start_parallel()
     mmsb.move_back_arm(200, v=30)
-    mmsb.grip_back(215, 180, 215, s=0.1)
+    mmsb.grip_back(215, 215, 215, s=0.1)
     mmsb.move_mechanism(180)
     mmsb.move_mechanism(280)
     mmsb.end_parallel(0.1)
@@ -235,7 +221,7 @@ def memristor_back():  # nastavak ovog gore
     mmsb.set_distance_angle(-120, 0)
 
     mmsb.move_back_arm(175, v=15)  # 180
-    mmsb.grip_back(190, 155, 190, s=0.1)
+    mmsb.grip_back(200, 200, 200, s=0.1)
 
     mmsb.start_parallel()
     mmsb.move_back_arm(210, v=30)
@@ -250,7 +236,7 @@ def drop_front_plant():  # ne koriste se sada
 
     dfp.move_mechanism(350)  # 170
     dfp.move_front_arm(95)  # 88
-    dfp.grip_front(110, 165, 255, s=0.1)
+    dfp.grip_front(200, 200, 200, s=0.1)
     dfp.move_front_arm(120)
     dfp.move_mechanism(180)
 
@@ -263,7 +249,7 @@ def drop_back_plant():  # ne koriste se sada
     dbp.move_mechanism(180)  # 25
     dbp.move_back_arm(190)  # 168
     # dbp.move_mechanism(8)
-    dbp.grip_back(200, 165, 200, s=0.1)
+    dbp.grip_back(200, 200, 200, s=0.1)
     # dbp.move_mechanism(75) #75
     dbp.move_back_arm(210, v=40)
     # dbp.move_mechanism(180)
@@ -277,7 +263,7 @@ def release_front_plant():  # u terenu biljke bez saksija
     rfp.move_front_arm(120)
     rfp.move_mechanism(180)  # 20 #60
     rfp.move_front_arm(80, v=30, s=0.1)  # 85
-    rfp.grip_front(90, 90, 180)
+    rfp.grip_front(120, 120, 120)
     rfp.move_front_arm(120, s=0.5)
     rfp.move_mechanism(180)
 
@@ -290,7 +276,7 @@ def release_back_plant():  # u terenu biljke bez saksija
     rbp.move_back_arm(210)
     rbp.move_mechanism(180)  # 20 #60
     rbp.move_back_arm(170, v=30, s=0.1)  # 85
-    rbp.grip_back(120, 90, 120)
+    rbp.grip_back(120, 120, 120)
     rbp.move_back_arm(210, s=0.5)
     rbp.move_mechanism(180)
 
@@ -303,7 +289,7 @@ def leave_front_plant():  # van terena biljke bez saksija
     lfp.move_front_arm(120)
     lfp.move_mechanism(340)
     lfp.move_front_arm(80, v=30, s=0.1)
-    lfp.grip_front(90, 90, 180)
+    lfp.grip_front(120, 120, 120)
     lfp.move_front_arm(120, s=0.5)
     lfp.move_mechanism(180)
 
@@ -315,7 +301,7 @@ def leave_back_plant():  # van terena biljke bez saksija
     lbp.move_back_arm(210)
     lbp.move_mechanism(150)
     lbp.move_back_arm(190, v=30, s=0.1)
-    lbp.grip_back(120, 90, 120)
+    lbp.grip_back(120, 120, 120)
     lbp.move_back_arm(210, s=0.5)
     lbp.move_mechanism(180)
 
