@@ -136,9 +136,10 @@ class Odom:
             # print(f"LINEAR SPEED: {self.v}")
             # print(f"ANGULAR SPEED: {self.w}")
             # print(f"CURRENT X: {self.curr_x}")
-            # print(f"CURRENT Y: {self.curr_y}") 
-            print(f"CURRENT THETA: {self.curr_theta}")
-            print(f"CURRENT ANGLE: {self.curr_angle}")
+            # # print(f"CURRENT Y: {self.curr_y}") 
+            # print(f"CURRENT THETA: {self.curr_theta}")
+            # print(f"CURRENT ANGLE: {self.curr_angle}")
+            # print(f"enc left {self.enc_l}, enc right {self.enc_r}")
 
             if self.read_distance() < 300:
                 self.detected = 1
@@ -198,8 +199,8 @@ class Odom:
             # DISTANCE
             self.flag = 1   # backward
             while abs(sqrt((goal_y - self.curr_y)**2 + (goal_x - self.curr_x)**2)) > 50:
-                print(f"CURRENT X: {self.curr_x}")
-                print(f"CURRENT Y: {self.curr_y}")
+                # print(f"CURRENT X: {self.curr_x}")
+                # print(f"CURRENT Y: {self.curr_y}")
                 if self.going == False:
                     send_velocity_multiple([1, 4], [100, -100])    # backward
                     print(f"FLAG {self.flag}")
@@ -269,6 +270,7 @@ class Odom:
         # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
         # print(read)
         # print(sys.getsizeof(read))
+
         if sys.getsizeof(read) == 24:
             return (read[3]<<8) + read[4]
         else:
