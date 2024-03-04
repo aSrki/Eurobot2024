@@ -11,11 +11,10 @@ from data import Sensors
 class Switches:
     debug = False
     GPIO.setmode(GPIO.BCM)
-    FRONT_LEFT = 9
-    FRONT_RIGHT = 25
-    BACK_LEFT = 11
-    BACK_RIGHT = 8
-    CAKE = 16
+    FRONT_LEFT = 17
+    FRONT_RIGHT = 27
+    BACK_LEFT = 22
+    BACK_RIGHT = 21
 
     CINC = 7
 
@@ -24,7 +23,6 @@ class Switches:
     GPIO.setup(FRONT_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(BACK_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(BACK_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(CAKE, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     GPIO.setup(CINC, GPIO.IN)
 
@@ -70,7 +68,6 @@ class Switches:
                 data.sensor_back_right = GPIO.input(self.BACK_RIGHT)
 
         data.cinc = GPIO.input(self.CINC)
-        data.cake_sensor = GPIO.input(self.CAKE)
 
         if self.debug:
             print(

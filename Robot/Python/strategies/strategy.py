@@ -154,9 +154,9 @@ class Strategy:
             self.operations.append(action)
 
     def grip_front(self, a1, a2, a3, v=100, s=0.1, da=0):
-        '''1: zatvoren 180, otvoren 90,
-           2: zatvoren 180, otvoren 90,
-           3: zatvoren 270, otvoren 180,
+        '''1: zatvoren 215, otvoren 120,
+           2: zatvoren 215, otvoren 120,
+           3: zatvoren 215, otvoren 120,
            v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:
@@ -199,7 +199,7 @@ class Strategy:
 
     def grip_back(self, a1, a2, a3, v=100, s=0.1, da=0):
         '''1: zatvoren 215, otvoren 120,
-           2: zatvoren 180, otvoren 90,
+           2: zatvoren 215, otvoren 120,
            3: zatvoren 215, otvoren 120,
            v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(

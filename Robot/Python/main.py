@@ -1,7 +1,7 @@
 import data
 from strategies.choose_strategy import choose_strategy
 import time
-#from sensors import SensorsDetection
+from sensors import SensorsDetection
 #from lidar.lidar_detection import LidarDetection
 
 DEBUG = True
@@ -39,8 +39,8 @@ class Main:
             data.operations = choose_strategy().copy()
 
             # pokretanje senzora za detekciju
-            #sensors = SensorsDetection()
-            #sensors.start()
+            sensors = SensorsDetection()
+            sensors.start()
 
             from execute import Execute
 

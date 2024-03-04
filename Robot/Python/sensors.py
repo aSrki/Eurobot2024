@@ -9,7 +9,6 @@ DEBUG = True
 def custom_print(msg):
     if DEBUG:
         print(msg)
-    data.log.add_info_message(str(msg))
 
 
 class SensorsDetection:
