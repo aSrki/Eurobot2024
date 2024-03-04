@@ -19,6 +19,7 @@
 
 from strategies.strategy_0 import strategy0
 from strategies.strategy_1 import strategy1
+from strategies.strategy_2 import strategy2
 
 if __name__ == '__main__':
     import sys
@@ -41,20 +42,18 @@ def choose_strategy():
         print(f"Color of plate {data.color}")
         print(f"Plate number: {data.plate}")
 
-    # if data.plate == 5 and data.color == "blue" and data.chosen_strategy == "passive":
-    #     data.time_strategy_type = 90  # 95
-    #     # za strategiju 1 plate = 5
-    #     data.x_current = 1820  # 1680 bez strartace
-    #     data.y_current = 1790
-    #     data.f_current = 0
-    #     return strategy1.operations  # strategy1
-    # elif data.plate == 1 and data.color == "green" and data.chosen_strategy == "passive":
-    #     data.time_strategy_type = 90  # 95
-    #     # za strategiju 2 plate = 1
-    data.x_current = 195  # 295
-    data.y_current = 155  # 2700
-    data.f_current = 0
-    return strategy1.operations  # 2
+    if data.color == "blue":
+        data.time_strategy_type = 90  # 95
+        data.x_current = 195 # menjati
+        data.y_current = 2845 # menjati 
+        data.f_current = 0 # menjati
+        return strategy2.operations  # strategy1
+    elif data.color == "yellow":
+        data.time_strategy_type = 90  # 95
+        data.x_current = 195  # 295
+        data.y_current = 155  # 2700
+        data.f_current = 0
+        return strategy1.operations  # 2
 
 
 # class choses_strategy():

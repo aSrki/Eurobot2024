@@ -3,8 +3,7 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-plate = None
-color = None
+color = "yellow"
 
 time_strategy_type = 95000
 

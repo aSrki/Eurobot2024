@@ -3,6 +3,8 @@ import threading
 import time
 from math import *
 from XL430 import *
+import serial
+import sys
 # ID_1 MOTOR RIGHT
 # ID_4 MOTOR LEFT
 class Odom:
@@ -38,6 +40,11 @@ class Odom:
     flag = 0 # forward
     going = False
 
+    serial_port = None
+    detected = 0
+    stopped = 0
+    correct_goal = 0
+
     def __init__(self, curr_x, curr_y, curr_theta, curr_angle):
         self.curr_x = curr_x
         self.curr_y = curr_y
@@ -46,6 +53,7 @@ class Odom:
         self.enc_r_old, self.enc_l_old = read_positions((1,4))      # enc -> t = 0
         print(self.enc_r_old, self.enc_l_old)
         self.time_old = time.time()
+        self.serial_port = serial.Serial(port ='/dev/ttyAMA0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
 
     def odom_update(self):
         while True:
@@ -130,7 +138,13 @@ class Odom:
             # print(f"CURRENT X: {self.curr_x}")
             # print(f"CURRENT Y: {self.curr_y}") 
             print(f"CURRENT THETA: {self.curr_theta}")
-            print(f"CURRENT ANGLE: {self.curr_angle}") 
+            print(f"CURRENT ANGLE: {self.curr_angle}")
+
+            if self.read_distance() < 300:
+                self.detected = 1
+                self.stopped = 1
+            else:
+                self.detected = 0
 
 
             time.sleep(0.001)
@@ -148,6 +162,12 @@ class Odom:
 
     def go_to_XY(self, goal_x, goal_y):
         print("_________________GO TO XY_________________")
+
+        # RESET zbog rekurzije ovde
+        self.going = False
+        self.stopped = 0
+        self.correct_goal = 0
+
         angle = atan2(goal_y - self.curr_y, goal_x - self.curr_x)
         goal_angle = angle
         print(f"Goal angle {goal_angle}, angle {angle}")
@@ -219,16 +239,40 @@ class Odom:
                     print(f"FLAG {self.flag}")
                     self.going = True
 
+                while self.detected:
+                    send_velocity_multiple([1, 4], [0, 0])
+                    self.going = False
+                    self.stopped = 1
+                    time.sleep(0.5)
+                
+                if abs((goal_angle - self.curr_angle)) > 0.25:
+                    self.correct_goal = 1
+
+                    break
                 time.sleep(0.0001)
+
             send_velocity_multiple([1, 4], [0, 0])
-            self.going = False
+
+            if self.correct_goal:
+                self.go_to_XY(goal_x, goal_y)
             
         print(f"GO TO XY        Self current_x{self.curr_x}")
         print(f"GO TO XY        Self current_y{self.curr_y}")     
 
 
 
-
+    def read_distance(self):
+        # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
+        self.serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
+        # serial_port.write([0x10,0x03,0x00,0x10,0x00,0x01,0x95,0x86])
+        read = self.serial_port.read(7) # response 7 bytes: SlaveAddr, FuncNumb, NumOfDataBytes, DataHigh, DataLow, ... , CRC_CheckLow, CRC_CheckHigh
+        # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
+        # print(read)
+        # print(sys.getsizeof(read))
+        if sys.getsizeof(read) == 24:
+            return (read[3]<<8) + read[4]
+        else:
+            return None
     
 
 
