@@ -78,31 +78,31 @@ def prepare_arms6():
 #     return pba.operations
 
 
-def grip_front_plant():
+def grip_front_plant(p=0):
     gfp = Strategy()
 
-    gfp.set_distance_angle(95, 0)
+    gfp.set_distance_angle(95 + p, 0)
 
     # gfp.start_parallel()
     gfp.move_front_arm(77, v=30)  # 72
-    gfp.grip_front(198, 198, 198)
+    gfp.grip_front(195, 195, 195)
     # gfp.end_parallel(0.4)
 
+    gfp.move_front_arm(90, v=30)
     gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
-    gfp.move_front_arm(120, v=30)
 
     return gfp.operations
 
 
-def grip_back_plant():
+def grip_back_plant(p=0):
     gbp = Strategy()
 
-    gbp.set_distance_angle(-230, 0)
+    gbp.set_distance_angle(-230 - p, 0)
     # gbp.start_parallel()
     gbp.move_back_arm(170, v=30)  # 165
-    gbp.grip_back(198, 198, 198)
+    gbp.grip_back(200, 200, 200)
     # gbp.end_parallel(0.4)
-    gbp.move_back_arm(210)
+    gbp.move_back_arm(180)
 
     return gbp.operations
 
@@ -162,21 +162,23 @@ def memristor_front():  # za saksije van stola i biljke u limu
     mmsf.start_parallel()  # treba snimati i vaditi stvari iz paralela ako ne rade
     mmsf.move_front_arm(120, v=30)
     mmsf.move_back_arm(210, v=30)
-    mmsf.move_mechanism(210)
+    mmsf.move_mechanism(230)  # bilo 210
     mmsf.end_parallel(0.5)
 
-    mmsf.move_front_arm(87, v=30)
+    mmsf.move_front_arm(90, v=30)
     mmsf.grip_front(120, 120, 120, s=0.1)
 
     mmsf.start_parallel()
-    mmsf.move_front_arm(120, v=30)
+    mmsf.move_front_arm(120, v=15)
     mmsf.grip_front(215, 215, 215)
     mmsf.move_mechanism(180)
     mmsf.end_parallel(0.5)
 
-    mmsf.set_distance_angle(-90, 0)
+    mmsf.set_distance_angle(-80, 0)
     mmsf.move_front_arm(72, v=30)
     mmsf.move_mechanism(350)
+    mmsf.set_distance_angle(0, -3)
+    mmsf.set_distance_angle(0, 3)
     # mmsf.set_distance_angle(40, 0)
 
     mmsf.move_mechanism(180)
@@ -193,10 +195,10 @@ def memristor_back():  # nastavak ovog gore
     mmsb.move_mechanism(15)
     mmsb.end_parallel(0.5)
 
-    mmsb.start_parallel()
+    # mmsb.start_parallel()
     mmsb.move_back_arm(185, v=15)
     mmsb.grip_back(150, 150, 150)
-    mmsb.end_parallel(0.5)
+    # mmsb.end_parallel(0.5)
 
     mmsb.start_parallel()
     mmsb.move_back_arm(200, v=30)
@@ -204,18 +206,20 @@ def memristor_back():  # nastavak ovog gore
     mmsb.move_mechanism(180)
     mmsb.end_parallel(0.5)
 
-    mmsb.set_distance_angle(100, 0)
+    mmsb.set_distance_angle(120, 0)  # 100
 
     mmsb.start_parallel()
     mmsb.move_back_arm(165, v=30)
     mmsb.move_front_arm(100, v=30)
     mmsb.end_parallel(0.5)
 
-    mmsb.set_distance_angle(-70, 0)
+    mmsb.set_distance_angle(-80, 0)  # -70
     mmsb.set_distance_angle(50, 0)
 
+    # mmsb.start_parallel()
     mmsb.move_back_arm(210, v=15)
     mmsb.move_mechanism(60)  # bilo 7
+    # mmsb.end_parallel(0.5)
 
     mmsb.set_distance_angle(-120, 0)
 
@@ -259,12 +263,10 @@ def drop_back_plant():  # ne koriste se sada
 def release_front_plant():  # u terenu biljke bez saksija
     rfp = Strategy()
 
-    rfp.move_front_arm(120)
-    rfp.move_mechanism(180)  # 20 #60
-    rfp.move_front_arm(80, v=30, s=0.1)  # 85
+    rfp.move_mechanism(160)  # 20 #60
+    rfp.move_front_arm(85, v=30, s=0.1)  # 85
     rfp.grip_front(120, 120, 120)
     rfp.move_front_arm(120, s=0.5)
-    rfp.move_mechanism(180)
 
     return rfp.operations
 
@@ -272,12 +274,10 @@ def release_front_plant():  # u terenu biljke bez saksija
 def release_back_plant():  # u terenu biljke bez saksija
     rbp = Strategy()
 
-    rbp.move_back_arm(210)
-    rbp.move_mechanism(180)  # 20 #60
-    rbp.move_back_arm(170, v=30, s=0.1)  # 85
+    rbp.move_mechanism(200)
+    rbp.move_back_arm(175, v=30, s=0.1)
     rbp.grip_back(120, 120, 120)
     rbp.move_back_arm(210, s=0.5)
-    rbp.move_mechanism(180)
 
     return rbp.operations
 
