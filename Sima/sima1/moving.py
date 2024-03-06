@@ -6,8 +6,9 @@ from data import *
 def rotate(deg):
     global left_theta
     global right_theta
+
     theta = int((((deg * L/2)/d)))
-    print(f"Theta {theta}")
+
     if deg >= 0:
         left_theta -= theta
         right_theta -= theta
@@ -16,25 +17,28 @@ def rotate(deg):
         left_theta -= theta
         right_theta -= theta
         parallel_rotate([1, 4], [left_theta, right_theta])
-    time.sleep(2)
+    time.sleep(.5)
+    print(f"Theta {theta}")
+    print(f"LTheta {left_theta}")
+    print(f"RTheta {right_theta}")
 
 def translate(len):
     global left_theta
     global right_theta
     theta = int((len/(2*d*pi))*360)
     if len >= 0:
-        left_theta -= theta
-        right_theta += theta
+        left_theta += theta
+        right_theta -= theta
         parallel_rotate([1, 4], [left_theta, right_theta])
     else:
-        left_theta -= theta
-        right_theta += theta
+        left_theta += theta
+        right_theta -= theta
         parallel_rotate([1, 4], [left_theta, right_theta])    
-    time.sleep(5)
+    time.sleep((len/300))
 
 def init_sima():
-    parallel_rotate([1, 4], [0, 0])
-    time.sleep(10)
+    parallel_rotate([1, 4], [0, 0], 4000)
+    time.sleep(5)
     print("Init done!")
 
 def go_to_xy(x, y):

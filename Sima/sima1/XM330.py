@@ -66,7 +66,7 @@ def send_velocity_multiple(ids, vels):
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
 
-def parallel_rotate(ids, angles):
+def parallel_rotate(ids, angles, v = 600):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)
@@ -105,7 +105,7 @@ def parallel_rotate(ids, angles):
 
     for i in range(len(ids)):
         communication_result, servo_error = handler.write4ByteTxRx(
-            portHandler, ids[i], 112, 570)
+            portHandler, ids[i], 112, v)
 
 
     for i in range(len(angles)):
