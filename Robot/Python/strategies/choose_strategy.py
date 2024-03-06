@@ -40,13 +40,13 @@ def choose_strategy():
     if debug:
         print(f"Chosen strategy {data.chosen_strategy}")
         print(f"Color of plate {data.color}")
-        print(f"Plate number: {data.plate}")
+        # print(f"Plate number: {data.plate}")
 
     if data.color == "blue":
         data.time_strategy_type = 90  # 95
-        data.x_current = 195 # menjati
-        data.y_current = 2845 # menjati 
-        data.f_current = 0 # menjati
+        data.x_current = 195
+        data.y_current = -155 
+        data.f_current = 0
         return strategy2.operations  # strategy1
     elif data.color == "yellow":
         data.time_strategy_type = 90  # 95

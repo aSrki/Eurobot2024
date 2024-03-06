@@ -84,11 +84,11 @@ def grip_front_plant(p=0):
     gfp.set_distance_angle(95 + p, 0)
 
     # gfp.start_parallel()
-    gfp.move_front_arm(77, v=30)  # 72
-    gfp.grip_front(195, 195, 195)
+    gfp.move_front_arm(72, v=30)  # 72
+    gfp.grip_front(195, 195, 195, s=0.3)
     # gfp.end_parallel(0.4)
 
-    gfp.move_front_arm(90, v=30)
+    gfp.move_front_arm(95, v=15)
     gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
 
     return gfp.operations
@@ -99,10 +99,10 @@ def grip_back_plant(p=0):
 
     gbp.set_distance_angle(-230 - p, 0)
     # gbp.start_parallel()
-    gbp.move_back_arm(170, v=30)  # 165
+    gbp.move_back_arm(165, v=30)  # 165
     gbp.grip_back(200, 200, 200)
     # gbp.end_parallel(0.4)
-    gbp.move_back_arm(180)
+    gbp.move_back_arm(185)
 
     return gbp.operations
 
