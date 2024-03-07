@@ -126,6 +126,8 @@ class IDS(Enum):
     id_trougao = 6  # donja - 0, gornja - 340
     id_front_arm = 41  # spustena skroz - 60, podignuta 120
     id_back_arm = 52  # spustena - 150, podignuta - 210
+    id_grtalica_leva = 5
+    id_grtalica_desna = 1
     # id_doser = 7  # load - 1, unload - 359
 
 

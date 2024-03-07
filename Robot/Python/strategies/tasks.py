@@ -36,8 +36,8 @@ def init_servos():
     ini.grip_back(215, 215, 215)
     ini.grip_front(215, 215, 215)
 
-    ini.move_front_arm(65)
-    ini.move_back_arm(155)
+    ini.move_front_arm(65, v=30)
+    ini.move_back_arm(155, v=30)
 
     return ini.operations
 
@@ -84,25 +84,24 @@ def grip_front_plant(p=0):
     gfp.set_distance_angle(95 + p, 0)
 
     # gfp.start_parallel()
-    gfp.move_front_arm(72, v=30)  # 72
-    gfp.grip_front(198, 198, 198, s=0.3)
-    # gfp.end_parallel(0.4)
+    gfp.move_front_arm(69, v=30)  # 87 #72
+    gfp.grip_front(200, 200, 200, s=0.3)
+    # gfp.end_parallel(0.2)
 
-    gfp.move_front_arm(95, v=15)
     # gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
-
+    gfp.move_front_arm(110, v=15)  # 95
     return gfp.operations
 
 
 def grip_back_plant(p=0):
     gbp = Strategy()
 
-    gbp.set_distance_angle(-230 - p, 0)
+    gbp.set_distance_angle(-230 - p, 0)  # -230
     # gbp.start_parallel()
-    gbp.move_back_arm(165, v=30)  # 165
-    gbp.grip_back(198, 198, 198)
-    # gbp.end_parallel(0.4)
-    gbp.move_back_arm(185, v=15)
+    gbp.move_back_arm(159, v=30) #162
+    gbp.grip_back(200, 200, 200, s=0.3)
+    # gbp.end_parallel(0.2)
+    gbp.move_back_arm(200, v=15)  # 185
 
     return gbp.operations
 
@@ -162,7 +161,7 @@ def memristor_front():  # za saksije van stola i biljke u limu
     mmsf.start_parallel()  # treba snimati i vaditi stvari iz paralela ako ne rade
     mmsf.move_front_arm(120, v=30)
     mmsf.move_back_arm(210, v=30)
-    mmsf.move_mechanism(230)  # bilo 210
+    mmsf.move_mechanism(230)
     mmsf.end_parallel(0.5)
 
     mmsf.move_front_arm(90, v=30)
