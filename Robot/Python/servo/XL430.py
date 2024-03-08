@@ -286,11 +286,6 @@ class ServoXL430:
                 data.stop = True
                 data.dead_servo = self.id
                 return
-<<<<<<< HEAD
-            
-            
-=======
->>>>>>> parent of 8217393 (Merge branch 'main' of https://github.com/aSrki/Eurobot2024)
 
         time.sleep(sleep/1000)
 
