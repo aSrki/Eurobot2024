@@ -211,17 +211,6 @@ class ServoXL430:
             current_position -= 4294967296
 
         return int((current_position/4095)*360)
-    
-    def read_current_load(self):
-        try:
-            current_load, _, _ = self.handler.read2ByteTxRx(
-                self.portHandler, self.id, 126)
-
-        except Exception as e:
-            current_load, _, _ = self.handler.read2ByteTxRx(
-                self.portHandler, self.id, 126)
-
-        return current_load
 
     def rotate(self, *args):
         if len(args) == 1:
@@ -297,8 +286,11 @@ class ServoXL430:
                 data.stop = True
                 data.dead_servo = self.id
                 return
+<<<<<<< HEAD
             
             
+=======
+>>>>>>> parent of 8217393 (Merge branch 'main' of https://github.com/aSrki/Eurobot2024)
 
         time.sleep(sleep/1000)
 
