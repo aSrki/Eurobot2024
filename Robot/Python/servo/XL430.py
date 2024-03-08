@@ -260,8 +260,6 @@ class ServoXL430:
 
 
         while (abs(abs(current_position) - abs(servo_angle)) > tolerance) and data.elapsed_time < data.time_strategy_type:
-            # communication_result, servo_error = self.handler.write1ByteTxRx(self.portHandler, id, 64, 0)
-            # communication_result, servo_error = self.handler.write1ByteTxRx(self.portHandler, id, 64, 1)
             time.sleep(.01)
             try:
                 current_position, result, servo_error = self.handler.read4ByteTxRx(
@@ -272,6 +270,15 @@ class ServoXL430:
 
             except:
                 servo_error = 1
+
+            load = self.read_current_load()
+            if load > 30000:
+                load -= 65535
+
+            if load > 850:
+                print(f"LOAD detected : {load}")
+                goal_angle = int(((current_position - 13)/4095)*365)
+                self.rotate(goal_angle)
 
             if servo_error != 0:
                 print("DEAD SERVO : %s" % str(self.id))
@@ -291,9 +298,7 @@ class ServoXL430:
                 data.dead_servo = self.id
                 return
             
-            if self.read_current_load() > 500:
-                goal_angle = int(((self.read_current_position() - 13)/4095)*365)
-                self.rotate(goal_angle)
+            
 
         time.sleep(sleep/1000)
 
