@@ -7,3 +7,5 @@ right_theta = 0
 curr_x = 2000 - 145/2
 curr_y = 1500 - 75
 curr_a = 90
+
+distance = 10000

@@ -94,6 +94,7 @@ import sys
 def read_distance(serial_port:serial.Serial):
     print("Citam distancu")
     # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
+    read = None
     try:
         serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF])
     except Exception as e:
@@ -114,8 +115,9 @@ if __name__ == "__main__":
     print("CODE STARTED")
 
     try:
-        serial_port = serial.Serial(port ='/dev/ttyAMA0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
+        serial_port = serial.Serial(port ='/dev/ttyS0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
     except Exception as e:
+        serial_port = None
         print(e)
 
     try:

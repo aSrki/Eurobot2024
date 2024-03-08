@@ -7,8 +7,12 @@ import time
 
 
 parallel_rotate([1, 4], [0, 0])
-time.sleep(0.5)
-parallel_rotate([1, 4], [-1800, 1800])
-time.sleep(2.0)
-parallel_rotate([1, 4], [0, 0])
+time.sleep(1)
+l, r = read_curr_pos_group()
+print(f"L:{l}, R:{r}")
+
+parallel_rotate([1, 4], [360, -360])
+time.sleep(1)
+l, r = read_curr_pos_group()
+print(f"L:{l}, R:{r}")
 

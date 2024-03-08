@@ -20,7 +20,7 @@ strategy2.add_sequence(grip_back_plant())
 strategy2.rotate_to(180)
 
 strategy2.set_distance_angle(230, 3, s=0.1)
-strategy2.add_sequence(grip_front_plant)
+strategy2.add_sequence(grip_front_plant())
 strategy2.go_to_XY(250, 300)
 strategy2.add_sequence(release_front_plant())
 strategy2.set_distance_angle(-170, 0)
