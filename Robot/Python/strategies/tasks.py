@@ -49,7 +49,7 @@ def prepare_arms6():
     pa.move_front_arm(120, s=0.1)
     pa.move_back_arm(210)
     pa.grip_front(120, 120, 120, s=0.1)
-    pa.grip_back(120, 120, 120, s=0.1)
+    pa.grip_back(140, 140, 140, s=0.1)
     pa.move_mechanism(180)
 
     return pa.operations
@@ -137,7 +137,7 @@ def back_plant_in_pot():
     bpip.move_mechanism(300)
     # dodati v = 50 ako cimaju biljke kada padaju
     bpip.move_back_arm(180, v=30)
-    bpip.grip_back(120, 120, 120)
+    bpip.grip_back(140, 140, 140)
     # bpip.move_mechanism(270, s=0.5)
     bpip.move_back_arm(210, s=0.5, v=20)
     bpip.move_mechanism(180)
@@ -275,7 +275,7 @@ def release_back_plant():  # u terenu biljke bez saksija
 
     rbp.move_mechanism(200)
     rbp.move_back_arm(175, v=30, s=0.1)
-    rbp.grip_back(120, 120, 120)
+    rbp.grip_back(140, 140, 140)
     rbp.move_back_arm(210, s=0.5)
 
     return rbp.operations
@@ -299,7 +299,7 @@ def leave_back_plant():  # van terena biljke bez saksija
     lbp.move_back_arm(210)
     lbp.move_mechanism(150)
     lbp.move_back_arm(190, v=30, s=0.1)
-    lbp.grip_back(120, 120, 120)
+    lbp.grip_back(140, 140, 140)
     lbp.move_back_arm(210, s=0.5)
     lbp.move_mechanism(180)
 

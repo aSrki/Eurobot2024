@@ -8,7 +8,7 @@ strategy2.rotate_to(0)
 strategy2.start_step_actions()
 strategy2.go_to_XY(195, -750, False, g=0.4, s=1.5)  # rotira panele #y = 750
 strategy2.activate_triangle()
-strategy2.deactivate_grtalca()
+strategy2.deactivate_prednja_grtalca()
 strategy2.end_step_actions()
 # strategy2.move_front_arm(110)  # podize ruke da ne pojebe potove
 
@@ -29,14 +29,14 @@ strategy2.go_to_XY(1320, -1500)  # ide do biljaka kod sime
 strategy2.start_step_actions()
 strategy2.rotate_to(-90)
 strategy2.move_mechanism(260)
-strategy2.activate_grtalca()
+strategy2.activate_prednja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.add_sequence(grip_front_plant())  # 0
 
 strategy2.start_step_actions()
 strategy2.go_to_XY(1750, -762)  # dolazi ispred plantera
-strategy2.deactivate_grtalca()
+strategy2.deactivate_prednja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.start_step_actions()  # dolazi i priprema ruku
@@ -46,7 +46,7 @@ strategy2.end_step_actions()
 
 strategy2.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 strategy2.move_back_arm(175, v=15)
-strategy2.grip_back(120, 120, 120)
+strategy2.grip_back(140, 140, 140)
 strategy2.move_back_arm(210)
 strategy2.move_mechanism(180)
 
@@ -73,7 +73,7 @@ strategy2.end_step_actions()
 strategy2.add_sequence(grip_back_plant(-120))  # -70
 strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
 strategy2.rotate_to(180)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
-strategy2.activate_grtalca()
+strategy2.activate_prednja_grtalca()
 strategy2.add_sequence(grip_front_plant(100))  # 130
 # strategy2.go_to_XY(980, -1000, False)  # pa na jos 6 komada
 # strategy2.rotate_to(-90)
@@ -88,7 +88,7 @@ strategy2.rotate_to(180)
 strategy2.set_distance_angle(-10, 0)
 strategy2.move_mechanism(160)  # 180
 strategy2.move_back_arm(170, v=30)
-strategy2.grip_back(120, 120, 120)
+strategy2.grip_back(140, 140, 140)
 strategy2.move_back_arm(210, v=30)
 strategy2.set_distance_angle(220, 0)
 
@@ -129,7 +129,7 @@ strategy2.move_front_arm(120, v=30)
 strategy2.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy2.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
 # strategy2.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
-strategy2.deactivate_grtalca()
+strategy2.deactivate_prednja_grtalca()
 strategy2.move_mechanism(180)
 # # strategy2.set_distance_angle(-100, 0)
 # # strategy2.rotate_to(-90)  # zarotira
