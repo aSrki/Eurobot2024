@@ -97,7 +97,7 @@ class Strategy:
 
     def end(self):
         end = End()
-        #self.rotate_to(data.f_current)
+        # self.rotate_to(data.f_current)
         self.operations.append(end)
 
     def start_step_actions(self):
@@ -247,13 +247,145 @@ class Strategy:
 
     def deactivate_triangle(self, v=100, s=0.1, da=0):
         '''a = ne prosledjuje mu se ugao samo pozivas funkciju sa odgovarajucim imenom'''
-        action = Action.move_servo(IDS.id_trougao.value, angle = 0,
+        action = Action.move_servo(IDS.id_trougao.value, angle=0,
                                    velocity=v, sleep=s, thread=self.thread)
         if self.add_to_step:
             action.delay_action = da
             self.operations[-1].actions.append(action)
         else:
             self.operations.append(action)
+
+    def activate_prednja_grtalca(self, a1=100, a2=250, v=100, s=0.1, da=0):
+        '''v - velocity, s - sleep time, da - delay action in step'''
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_grtalica_prednja_leva.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_grtalica_prednja_desna.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def deactivate_prednja_grtalca(self, a1=340, a2=5, v=100, s=0.1, da=0):
+        '''v - velocity, s - sleep time, da - delay action in step'''
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_grtalica_prednja_leva.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_grtalica_prednja_desna.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def activate_zadnja_grtalca(self, a1=100, a2=250, v=100, s=0.1, da=0):
+        '''v - velocity, s - sleep time, da - delay action in step'''
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_grtalica_zadnja_leva.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_grtalica_zadnja_desna.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def deactivate_zadnja_grtalca(self, a1=340, a2=5, v=100, s=0.1, da=0):
+        '''v - velocity, s - sleep time, da - delay action in step'''
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_grtalica_zadnja_leva.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_grtalica_zadnja_desna.value, angle=a2, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
 
     def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0):
         '''d - direction, g - gain, s - sleep, ss - sleep after detection, bs - sleep after backing, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags'''

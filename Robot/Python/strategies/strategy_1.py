@@ -14,31 +14,30 @@ strategy1.end_step_actions()
 strategy1.start_step_actions()
 strategy1.go_to_XY(500, 1210)  # dolazi do tanjira 4
 strategy1.deactivate_triangle()
-strategy1.add_sequence(prepare_arms6())  # priprema za hvatanje
+# strategy1.add_sequence(prepare_arms())  # priprema za hvatanje
 strategy1.end_step_actions()
 
 
 strategy1.rotate_to(0)
 # strategy1.set_distance_angle(95, 0) #ubaceno u task da bi bilo brze
 strategy1.add_sequence(grip_front_plant())
+strategy1.set_distance_angle(0, 179)
 strategy1.rotate_to(180)
 # strategy1.set_distance_angle(-230, 0) #ubaceno u task da bi bilo brze
 strategy1.add_sequence(grip_back_plant())
-strategy1.go_to_XY(300, 300)#350
+strategy1.go_to_XY(250, 300)  # 350
 strategy1.add_sequence(release_front_plant())
 strategy1.set_distance_angle(-170, 0)
 strategy1.rotate_to(-30)  # 0
 strategy1.add_sequence(release_back_plant())
 # strategy1.set_distance_angle(100, 0)
 
-strategy1.start_step_actions()
-strategy1.go_to_XY(700, 710)#690
-strategy1.add_sequence(prepare_arms6())
-strategy1.end_step_actions()
+strategy1.go_to_XY(700, 680)  # 690
+# strategy1.add_sequence(prepare_arms())
 
 strategy1.rotate_to(6)
 # strategy1.set_distance_angle(95, 0) # ubaceno u task
-strategy1.add_sequence(grip_front_plant())
+strategy1.add_sequence(grip_front_plant())  # 30
 strategy1.rotate_to(180)
 # strategy1.add_sequence(prepare_back_arm())
 # strategy1.set_distance_angle(-230, -3, s=0.1) #ubaceno u task
@@ -76,19 +75,22 @@ strategy1.add_sequence(grip_back_plant())
 # strategy1.add_sequence(drop_back_plant())
 # ======================KRAJ ================================
 
-strategy1.go_to_XY(1377, 600)  # 1352 je po crtezu -35mm da uhvati prve dve
-strategy1.go_to_XY(1377, 285)
+strategy1.go_to_XY(1382, 600)  # 1377 je po crtezu -35mm da uhvati prve dve
+strategy1.start_step_actions()
+strategy1.go_to_XY(1382, 285)
+strategy1.move_front_arm(120)
+strategy1.end_step_actions()
 
 strategy1.add_sequence(memristor_front())
-strategy1.go_to_XY(1377, 305, False)
-strategy1.rotate_to(0)
 strategy1.set_distance_angle(-85, 0)
+strategy1.go_to_XY(1377, 210, False)  # x = 305 bilo je i 240
+strategy1.rotate_to(0)
 strategy1.add_sequence(memristor_back())
 
 
 strategy1.start_step_actions()
 strategy1.go_to_XY(1300, 700)
-strategy1.add_sequence(prepare_arms6())
+# strategy1.add_sequence(prepare_arms())
 strategy1.end_step_actions()
 
 strategy1.rotate_to(0)
@@ -106,5 +108,6 @@ strategy1.go_to_XY(1850, 712, False)  # 762
 strategy1.add_sequence(leave_back_plant())
 strategy1.set_distance_angle(100, 0)
 strategy1.go_to_XY(1775, 700)
+# strategy1.go_to_XY(195, 1655)
 
 strategy1.end()

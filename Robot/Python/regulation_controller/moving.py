@@ -26,6 +26,7 @@ class Moving:
 
 # -------------------------------PARAMETRI ZA REGULACIJU KOD RAZLICITIH KRETANJA-------------------------------------
 
+
     def rotation_parameters(self):
         self.position.W_F_s = self.position.W_F
         # PARAMETRI:
@@ -123,8 +124,12 @@ class Moving:
         data.sensors = sensors
         data.lidar = lidar
 
-        x = __x + math.sin(math.radians(data.f_current))*offset
-        y = __y - math.cos(math.radians(data.f_current))*offset
+        if __y < 0:
+            x = __x - math.sin(math.radians(data.f_current))*offset
+            y = __y + math.cos(math.radians(data.f_current))*offset
+        else:
+            x = __x + math.sin(math.radians(data.f_current))*offset
+            y = __y - math.cos(math.radians(data.f_current))*offset
         # Definisemo zeljenu distancu
         distance = path.distance(x, y)
 
@@ -135,8 +140,8 @@ class Moving:
         if self.DEBUG_FOR_GO:
             print('\nSALJE regulaciji distancu = ', distance, "\n")
             print(f'\n KOORDINATE:{x}, {y}\n')
-            #data.log.add_info_message(f'OFFSET: {offset}')
-            #data.log.add_info_message(f'\n KOORDINATE:{x}, {y}\n')
+            # data.log.add_info_message(f'OFFSET: {offset}')
+            # data.log.add_info_message(f'\n KOORDINATE:{x}, {y}\n')
 
         # Salje regulaciji zeljenu distancu i postavlja regulacione parametre
         self.translation_parameters()
@@ -243,6 +248,7 @@ class Moving:
     # ******************************************************************************************
 # ----------------------------------------------------------------------------------------------------------------
 
+
     def while_translate(self, distance, __x, __y, is_coordinate_moving):
 
         timer = 0
@@ -273,6 +279,7 @@ class Moving:
 
 # ----------------------------------------------------------------------------------------------------------------
 
+
     def while_rotation(self, rotation):
 
         timer = 0
@@ -301,6 +308,7 @@ class Moving:
 
 
 # ----------------------------------------------------------------------------------------------------------------
+
 
     def rotation_time(self, wanted_angle, current_angle):
         # vreme u milisekundamo po stepenu

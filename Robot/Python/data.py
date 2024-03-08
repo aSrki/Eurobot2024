@@ -3,7 +3,8 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-color = "yellow"
+# color = "yellow"
+color = "blue"
 
 time_strategy_type = 95000
 
@@ -125,6 +126,10 @@ class IDS(Enum):
     id_trougao = 6  # donja - 0, gornja - 340
     id_front_arm = 41  # spustena skroz - 60, podignuta 120
     id_back_arm = 52  # spustena - 150, podignuta - 210
+    id_grtalica_prednja_leva = 5
+    id_grtalica_prednja_desna = 8
+    id_grtalica_zadnja_leva = 1
+    id_grtalica_zadnja_desna = 4
     # id_doser = 7  # load - 1, unload - 359
 
 
