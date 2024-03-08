@@ -66,7 +66,62 @@ def send_velocity_multiple(ids, vels):
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
 
-def parallel_rotate(ids, angles):
+def read_curr_pos_group():
+    SERVO_PORT = "/dev/ttyUSB0"
+
+    portHandler = PortHandler(SERVO_PORT)
+    portHandler.openPort()
+    
+    # Baud rate set via Wizard (default value is 57600)
+    portHandler.setBaudRate(115200)
+
+    handler = Protocol2PacketHandler()
+
+    groupSyncRead = GroupSyncRead(portHandler, handler, 116, 4)
+
+    dxl_addparam_result = groupSyncRead.addParam(1)
+    if dxl_addparam_result != True:
+        print("[ID:%03d] groupSyncRead addparam failed" % 1)
+        quit()
+
+    # Add parameter storage for Dynamixel#2 present position value
+    dxl_addparam_result = groupSyncRead.addParam(4)
+    if dxl_addparam_result != True:
+        print("[ID:%03d] groupSyncRead addparam failed" % 4)
+        quit()
+
+    dxl_comm_result = groupSyncRead.txRxPacket()
+    if dxl_comm_result != COMM_SUCCESS:
+        print("%s" % handler.getTxRxResult(dxl_comm_result))
+
+    # Check if groupsyncread data of Dynamixel#1 is available
+    dxl_getdata_result = groupSyncRead.isAvailable(1, 116, 4)
+    if dxl_getdata_result != True:
+        print("[ID:%03d] groupSyncRead getdata failed" % 1)
+        quit()
+
+    # Check if groupsyncread data of Dynamixel#2 is available
+    dxl_getdata_result = groupSyncRead.isAvailable(4, 116, 4)
+    if dxl_getdata_result != True:
+        print("[ID:%03d] groupSyncRead getdata failed" % 4)
+        quit()
+
+    # Get Dynamixel#1 present position value
+    dxl1_present_position = groupSyncRead.getData(1, 116, 4)
+    if dxl1_present_position > 2000000000:
+        dxl1_present_position -= 4294967296
+
+    # Get Dynamixel#2 present position value
+    dxl2_present_position = groupSyncRead.getData(4, 116, 4)
+    if dxl2_present_position > 2000000000:
+        dxl2_present_position -= 4294967296
+
+    groupSyncRead.clearParam()
+
+    return dxl1_present_position, dxl2_present_position
+
+
+def parallel_rotate(ids, angles, v = 4000):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)
@@ -79,17 +134,13 @@ def parallel_rotate(ids, angles):
 
     for id in ids:
         communication_result, servo_error = handler.write1ByteTxRx(portHandler, id, 64, 0)
-        print("TORQUE : %s" % handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
     for i in range(len(ids)):
         # Choosing operating mode
-        print("Multi mode on")
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], 11, 4)
-        print("MULTIMODE : %s" %
-                handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("MULTIMODE : %s" %
                     handler.getRxPacketError(servo_error))
@@ -98,14 +149,13 @@ def parallel_rotate(ids, angles):
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], 64, 1)
-        print("TORQUE : %s" % handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
 
     for i in range(len(ids)):
         communication_result, servo_error = handler.write4ByteTxRx(
-            portHandler, ids[i], 112, 570)
+            portHandler, ids[i], 112, v)
 
 
     for i in range(len(angles)):

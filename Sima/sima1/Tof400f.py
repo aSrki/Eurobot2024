@@ -1,6 +1,7 @@
 import serial
 import time
 import sys 
+
 def read_distance(serial_port):
     # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
     serial_port.write([0x00,0x03,0x00,0x10,0x00,0x01,0x84,0x1E])
