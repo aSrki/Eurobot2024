@@ -2,7 +2,7 @@ from moving import *
 from Tof400f import *
 from tof_sensor import *
 
-tof_port = serial.Serial('/dev/ttyS0')
+tof_port = serial.Serial(port ='/dev/ttyS0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
 
 while True:
     read_distance(tof_port)
