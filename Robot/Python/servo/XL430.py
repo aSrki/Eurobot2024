@@ -1,5 +1,6 @@
 from dynamixel_sdk import *
 import time
+import threading
 from enum import Enum
 
 if __name__ == "__main__":
@@ -211,6 +212,15 @@ class ServoXL430:
             current_position -= 4294967296
 
         return int((current_position/4095)*360)
+    
+    def read_current_load(self):
+        load, _, _ = self.handler.read2ByteTxRx(
+                self.portHandler, self.id, 126)\
+
+        if load > 30000:
+            load -= 65535
+        
+        return load
 
     def rotate(self, *args):
         if len(args) == 1:
@@ -261,13 +271,13 @@ class ServoXL430:
                 servo_error = 1
 
             load = self.read_current_load()
-            if load > 30000:
-                load -= 65535
-
+        
             if load > 850:
-                print(f"LOAD detected : {load}")
-                goal_angle = int(((current_position - 13)/4095)*365)
-                self.rotate(goal_angle)
+                # print(f"LOAD detected : {load}")
+                goal_angle = int(((current_position - 11)/4095)*365)
+                threading.Thread(target=self.rotate, args = [goal_angle]).start()
+                # self.rotate(goal_angle)
+                return
 
             if servo_error != 0:
                 print("DEAD SERVO : %s" % str(self.id))

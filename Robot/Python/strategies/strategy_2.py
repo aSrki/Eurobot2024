@@ -5,6 +5,8 @@ from strategies.strategy import Strategy
 strategy2 = Strategy()
 
 strategy2.rotate_to(0)
+strategy2.back_sensors_on()
+strategy2.front_sensors_on()
 strategy2.start_step_actions()
 strategy2.go_to_XY(195, -1000, False, g=0.4, s=1.5)  # rotira panele #y = 750
 strategy2.activate_triangle()
@@ -150,5 +152,8 @@ strategy2.start_step_actions()
 strategy2.go_to_XY(1500, -400, False)
 strategy2.add_sequence(init_servos())
 strategy2.end_step_actions()
+
+strategy2.back_sensors_off()
+strategy2.front_sensors_off()
 
 strategy2.end()

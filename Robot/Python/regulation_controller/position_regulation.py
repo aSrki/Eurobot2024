@@ -73,9 +73,9 @@ class PositionRegulation:
         self.MVR = 0
 
         self.maxon_left = MaxonMotor(
-            1, 50000, 50000)
+            1, 100000, 50000)
         self.maxon_right = MaxonMotor(
-            2, 50000, 50000)
+            2, 100000, 50000)
 
         self.stop_position = False
 
@@ -449,12 +449,14 @@ class PositionRegulation:
 
     def send_vel_left(self):
         while data.running.is_set():
-            self.maxon_left.rotate_with_rpm(self.MVL)
-            # print(f"Vreme1: {time.time()}")
-            time.sleep(self.delay)
+            if not self.stop_position:
+                self.maxon_left.rotate_with_rpm(self.MVL)
+                # print(f"Vreme1: {time.time()}")
+                time.sleep(self.delay)
 
     def send_vel_right(self):
         while data.running.is_set():
-            self.maxon_right.rotate_with_rpm(-self.MVR)
-            # print(f"Vreme2: {time.time()}")
-            time.sleep(self.delay)
+            if not self.stop_position:
+                self.maxon_right.rotate_with_rpm(-self.MVR)
+                # print(f"Vreme2: {time.time()}")
+                time.sleep(self.delay)
