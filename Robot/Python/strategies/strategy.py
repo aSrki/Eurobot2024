@@ -321,7 +321,7 @@ class Strategy:
             else:
                 self.operations.append(action)
 
-    def activate_zadnja_grtalca(self, a1=100, a2=250, v=100, s=0.1, da=0):
+    def activate_zadnja_grtalca(self, a1=250, a2=100, v=100, s=0.1, da=0):
         '''v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:
@@ -354,7 +354,7 @@ class Strategy:
             else:
                 self.operations.append(action)
 
-    def deactivate_zadnja_grtalca(self, a1=340, a2=5, v=100, s=0.1, da=0):
+    def deactivate_zadnja_grtalca(self, a1=5, a2=350, v=100, s=0.1, da=0):
         '''v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:
