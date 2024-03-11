@@ -6,33 +6,37 @@ strategy2 = Strategy()
 
 strategy2.rotate_to(0)
 strategy2.back_sensors_on()
-strategy2.front_sensors_on()
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1000, False, g=0.4, s=1.5)  # rotira panele #y = 750
+strategy2.go_to_XY(195, -1100, False, g=0.4)  # rotira panele #y = 750
 strategy2.activate_triangle()
 strategy2.deactivate_prednja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1800, False, g=0.4, s=1.5)
+strategy2.go_to_XY(195, -1800, False, g=0.4)
 strategy2.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy2.end_step_actions()
 
 strategy2.deactivate_triangle()
 
-# strategy2.start_step_actions()
+strategy2.start_step_actions()
 strategy2.go_to_XY(500, -1500, False, off=290)  # dolazi do tanjira 4 -1210
-# strategy2.end_step_actions()
+strategy2.move_mechanism(100)
+strategy2.activate_zadnja_grtalca()
+strategy2.end_step_actions()
 
 
 # strategy2.start_step_actions()
 # strategy2.rotate_to(0)  # uzima biljke iz donjeg tanjira
-strategy2.move_mechanism(100)
 # strategy2.end_step_actions()
 strategy2.add_sequence(grip_back_plant(-20))  # -20
 
+strategy2.back_sensors_off()
+strategy2.front_sensors_on()
+
 strategy2.start_step_actions()
 strategy2.go_to_XY(1270, -1500)  # 1320 ide do biljaka kod sime
+strategy2.deactivate_zadnja_grtalca()
 strategy2.move_mechanism(260)
 strategy2.activate_prednja_grtalca()
 strategy2.end_step_actions()
@@ -46,6 +50,8 @@ strategy2.go_to_XY(1750, -762)  # dolazi ispred plantera
 strategy2.deactivate_prednja_grtalca()
 strategy2.end_step_actions()
 
+strategy2.front_sensors_off()
+
 strategy2.start_step_actions()  # dolazi i priprema ruku
 strategy2.go_to_XY(1850, -762, False)
 strategy2.move_back_arm(210, v=15)
@@ -57,6 +63,7 @@ strategy2.grip_back(140, 140, 140)
 strategy2.move_back_arm(210)
 strategy2.move_mechanism(180)
 
+strategy2.front_sensors_on()
 strategy2.go_to_XY(1382, -650)  # ide unapred prema sledecem planteru
 
 strategy2.start_step_actions()  # podize ruku
@@ -66,9 +73,12 @@ strategy2.end_step_actions()
 
 strategy2.move_mechanism(340)  # ostavlja biljke u drugi plenter
 strategy2.move_front_arm(77, v=15)
-strategy2.grip_front(120, 120, 120, s=0.1)
+strategy2.grip_front(140, 140, 140, s=0.1)
 strategy2.move_front_arm(120, v=30)
 strategy2.move_mechanism(180)
+
+strategy2.front_sensors_off()
+strategy2.back_sensors_on()
 
 strategy2.start_step_actions()  # ide na sledece biljke
 strategy2.go_to_XY(1300, -700, False)
@@ -79,17 +89,26 @@ strategy2.end_step_actions()
 # strategy2.rotate_to(0)  # hvata biljke 6 komada
 strategy2.add_sequence(grip_back_plant(-120))  # -70
 strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+strategy2.back_sensors_off()
+
 strategy2.rotate_to(180)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+
+strategy2.front_sensors_on()
 strategy2.activate_prednja_grtalca()
 strategy2.add_sequence(grip_front_plant(130))  # 130
 # strategy2.go_to_XY(980, -1000, False)  # pa na jos 6 komada
 # strategy2.rotate_to(-90)
+
+strategy2.front_sensors_off()
+strategy2.back_sensors_on()
 
 strategy2.go_to_XY(612, -600, False)  # ide da ih ostavi kako zna i ume
 strategy2.start_step_actions()
 strategy2.go_to_XY(612, -285, False)  # 350
 strategy2.move_back_arm(210, v=15)  # podize ruku
 strategy2.end_step_actions()
+
+strategy2.back_sensors_off()
 
 strategy2.rotate_to(180)
 # strategy2.set_distance_angle(-10, 0)
@@ -109,7 +128,7 @@ strategy2.go_to_XY(600, -325)  # 285
 # strategy2.move_back_arm(190, v=15)
 strategy2.move_mechanism(170)  # izbaci ruku
 strategy2.move_front_arm(80, v=30)
-strategy2.grip_front(120, 120, 120)
+strategy2.grip_front(140, 140, 140)
 strategy2.move_front_arm(120, v=30)
 
 
@@ -148,12 +167,13 @@ strategy2.move_mechanism(180)
 # strategy2.add_sequence(release_back_plant())  # ostavi i zadnje bilje
 
 # vraca se kuci skloniti false ako ostavlja dva seta (6 ili 3)
+strategy2.back_sensors_on()
+
 strategy2.start_step_actions()
 strategy2.go_to_XY(1500, -400, False)
 strategy2.add_sequence(init_servos())
 strategy2.end_step_actions()
 
-strategy2.back_sensors_off()
-strategy2.front_sensors_off()
+strategy2.all_off()
 
 strategy2.end()

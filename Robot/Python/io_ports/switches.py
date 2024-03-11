@@ -3,7 +3,7 @@ import time
 import threading
 if __name__ == "__main__":
     import sys
-    sys.path.append("/home/mali/robot")
+    sys.path.append("/home/robot/Eurobot2024/Robot/Python")
 import data
 from data import Sensors
 
@@ -71,7 +71,7 @@ class Switches:
 
         if self.debug:
             print(
-            f"FRONT --> left: { data.sensor_front_left}  right: {data.sensor_front_right} BACK -->> left: {data.sensor_back_left}  right: {data.sensor_back_right}")
+                f"FRONT --> left: { data.sensor_front_left}  right: {data.sensor_front_right} BACK -->> left: {data.sensor_back_left}  right: {data.sensor_back_right}")
             print(f"BACK : {data.sensor_back_left} , {data.sensor_back_right}")
             print("CINCa : ", GPIO.input(self.CINC))
             print(f"CAKE HERE <3: {data.cake_sensor}")
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     data.sensors = None
     switches = Switches()
     switches.debug = True
-    
+
     while True:
         switches.check()
         time.sleep(0.1)
