@@ -36,7 +36,7 @@ strategy2.back_sensors_off()
 strategy2.front_sensors_on()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(1270, -1500)  # 1320 ide do biljaka kod sime
+strategy2.go_to_XY(1260, -1500)  # 1320 ide do biljaka kod sime  ...posl 1270
 strategy2.deactivate_zadnja_grtalca()
 strategy2.move_mechanism(260)
 strategy2.activate_prednja_grtalca()
@@ -54,7 +54,7 @@ strategy2.end_step_actions()
 strategy2.front_sensors_off()
 
 strategy2.start_step_actions()  # dolazi i priprema ruku
-strategy2.go_to_XY(1850, -762, False)
+strategy2.go_to_XY(1830, -762, False) # 1850
 strategy2.move_back_arm(210, v=15)
 strategy2.end_step_actions()
 
@@ -157,6 +157,7 @@ strategy2.move_front_arm(120, v=30)
 # # strategy2.move_mechanism(320)  # pruzi ruku
 # # strategy2.move_front_arm(77, v=30)  # obgrli biljke
 # # strategy2.set_distance_angle(-20, 0)  # ode unazad
+strategy2.set_distance_angle(20, 0, g=0.5)
 strategy2.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy2.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
 # strategy2.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
