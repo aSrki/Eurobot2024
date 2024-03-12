@@ -4,7 +4,7 @@ import threading
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
 # color = "yellow"
-color = "blue"
+color = "yellow"
 
 time_strategy_type = 95000
 
@@ -113,6 +113,7 @@ class OdometryData:
         inc  # 1687 #Inkremenata po mm
 
 # --------------------------------
+
 
 class IDS(Enum):
     # id_bldc = 51

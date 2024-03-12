@@ -20,6 +20,7 @@
 from strategies.strategy_0 import strategy0
 from strategies.strategy_1 import strategy1
 from strategies.strategy_2 import strategy2
+from strategies.strategy_4 import strategy4
 
 if __name__ == '__main__':
     import sys
@@ -45,15 +46,15 @@ def choose_strategy():
     if data.color == "blue":
         data.time_strategy_type = 110  # 95  ... 90
         data.x_current = 195
-        data.y_current = -155 
+        data.y_current = -155
         data.f_current = 0
         return strategy2.operations  # strategy1
     elif data.color == "yellow":
-        data.time_strategy_type = 90  # 95
+        data.time_strategy_type = 110  # 95
         data.x_current = 195  # 295
         data.y_current = 155  # 2700
         data.f_current = 0
-        return strategy1.operations  # 2
+        return strategy4.operations  # 2
 
 
 # class choses_strategy():

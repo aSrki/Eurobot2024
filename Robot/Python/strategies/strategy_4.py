@@ -36,7 +36,7 @@ strategy4.front_sensors_off()
 strategy4.back_sensors_on()
 
 strategy4.start_step_actions()
-strategy4.go_to_XY(1270, -1500, False)  # 1320 ide do biljaka kod sime
+strategy4.go_to_XY(1270, 1500, False)  # 1320 ide do biljaka kod sime
 strategy4.deactivate_prednja_grtalca()
 strategy4.move_mechanism(100)
 strategy4.activate_zadnja_grtalca()
@@ -47,14 +47,14 @@ strategy4.rotate_to(90)
 strategy4.add_sequence(grip_back_plant(-80))  # 0
 
 strategy4.start_step_actions()
-strategy4.go_to_XY(1750, -762, False)  # dolazi ispred plantera
+strategy4.go_to_XY(1750, 762, False)  # dolazi ispred plantera
 strategy4.deactivate_zadnja_grtalca()
 strategy4.end_step_actions()
 
 strategy4.back_sensors_off()
 
 strategy4.start_step_actions()  # dolazi i priprema ruku
-strategy4.go_to_XY(1850, -762)
+strategy4.go_to_XY(1850, 762)
 strategy4.move_front_arm(120, v=15)
 strategy4.end_step_actions()
 
