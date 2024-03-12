@@ -153,11 +153,8 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_front(self, a1, a2, a3, v=100, s=0.1, da=0):
-        '''1: zatvoren 215, otvoren 120,
-           2: zatvoren 215, otvoren 120,
-           3: zatvoren 215, otvoren 120,
-           v - velocity, s - sleep time, da - delay action in step'''
+    def grip_front(self, a1=230, v=100, s=0.1, da=0):
+        '''podrazumeva 230, u intervalu od 140 do 230, v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:
         #     action.delay_action = da
@@ -173,7 +170,7 @@ class Strategy:
             self.operations.append(action)
 
         action = Action.move_servo(
-            IDS.id_gripper_front_2.value, angle=a2, velocity=v, sleep=s, thread=True
+            IDS.id_gripper_front_2.value, angle=a1, velocity=v, sleep=s, thread=True
         )
         if self.add_to_step:
             self.operations[-1].actions.append(action)
@@ -181,7 +178,7 @@ class Strategy:
             self.operations.append(action)
 
         action = Action.move_servo(
-            IDS.id_gripper_front_3.value, angle=a3, velocity=v, sleep=s, thread=True
+            IDS.id_gripper_front_3.value, angle=a1, velocity=v, sleep=s, thread=True
         )
         if self.add_to_step:
             self.operations[-1].actions.append(action)
@@ -197,11 +194,8 @@ class Strategy:
             else:
                 self.operations.append(action)
 
-    def grip_back(self, a1, a2, a3, v=100, s=0.1, da=0):
-        '''1: zatvoren 215, otvoren 120,
-           2: zatvoren 215, otvoren 120,
-           3: zatvoren 215, otvoren 120,
-           v - velocity, s - sleep time, da - delay action in step'''
+    def grip_back(self, a1=240, v=100, s=0.1, da=0):
+        '''podrazumeva 230, u intervalu od 140 do 230, v - velocity, s - sleep time, da - delay action in step'''
         action = Action.move_servo(
             IDS.id_gripper_back_1.value, angle=a1, velocity=v, sleep=s, thread=True
         )
@@ -211,7 +205,7 @@ class Strategy:
             self.operations.append(action)
 
         action = Action.move_servo(
-            IDS.id_gripper_back_2.value, angle=a2, velocity=v, sleep=s, thread=True
+            IDS.id_gripper_back_2.value, angle=a1, velocity=v, sleep=s, thread=True
         )
         if self.add_to_step:
             self.operations[-1].actions.append(action)
@@ -219,7 +213,83 @@ class Strategy:
             self.operations.append(action)
 
         action = Action.move_servo(
-            IDS.id_gripper_back_3.value, angle=a3, velocity=v, sleep=s, thread=True
+            IDS.id_gripper_back_3.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def ungrip_front(self, a1=140, v=100, s=0.1, da=0):
+        '''podrazumeva 140, u intervalu od 140 do 230, v - velocity, s - sleep time, da - delay action in step'''
+        # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
+        # if self.add_to_step:
+        #     action.delay_action = da
+        #     self.operations[-1].actions.append(action)
+        # else:
+        #     self.operations.append(action)
+        action = Action.move_servo(
+            IDS.id_gripper_front_1.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_front_2.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_front_3.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        if not self.thread:
+            action = Action.wait(s)
+
+            if self.add_to_step:
+                action.delay_action = da
+                self.operations[-1].actions.append(action)
+            else:
+                self.operations.append(action)
+
+    def ungrip_back(self, a1=140, v=100, s=0.1, da=0):
+        '''podrazumeva 140, u intervalu od 140 do 230, v - velocity, s - sleep time, da - delay action in step'''
+        action = Action.move_servo(
+            IDS.id_gripper_back_1.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_back_2.value, angle=a1, velocity=v, sleep=s, thread=True
+        )
+        if self.add_to_step:
+            self.operations[-1].actions.append(action)
+        else:
+            self.operations.append(action)
+
+        action = Action.move_servo(
+            IDS.id_gripper_back_3.value, angle=a1, velocity=v, sleep=s, thread=True
         )
         if self.add_to_step:
             self.operations[-1].actions.append(action)
@@ -288,7 +358,7 @@ class Strategy:
             else:
                 self.operations.append(action)
 
-    def deactivate_prednja_grtalca(self, a1=340, a2=5, v=100, s=0.1, da=0):
+    def deactivate_prednja_grtalca(self, a1=350, a2=10, v=100, s=0.1, da=0):
         '''v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:

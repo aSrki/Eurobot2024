@@ -26,7 +26,48 @@ VELOCITY_P = 78
 VELOCITY_I = 76
 
 
+def rotate(handler, portHandler, id, angle):
+
+    servo_angle = int((int(angle)/360)*4095)
+
+    # setting goal position angle (4095 = 360deg)
+    communication_result, servo_error = handler.write4ByteTxRx(
+        portHandler, id, GOAL_POSITION, servo_angle)
+    if debug:
+        print("POSITION : %s" %
+              handler.getTxRxResult(communication_result))
+    if servo_error != 0:
+        print("POSITION : %s" % handler.getRxPacketError(servo_error))
+
+    return
+
+
+def read_current_load(handler, portHandler, id):
+    load, _, _ = handler.read2ByteTxRx(portHandler, id, 126)
+
+    if load > 30000:
+        load -= 65535
+
+    return load
+
+
+def read_current_position(handler, portHandler, id):
+    try:
+        current_position, _, _ = handler.read4ByteTxRx(
+            portHandler, id, CURRENT_POSITION)
+
+    except Exception as e:
+        current_position, _, _ = handler.read4ByteTxRx(
+            portHandler, id, CURRENT_POSITION)
+
+    if current_position > 2147483648:
+        current_position -= 4294967296
+
+    return int((current_position/4095)*360)
+
+
 def parallel_rotate(ids, angles):
+    print("JA SAM SADA U PARALELI OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO")
     portHandler = PortHandler(data.SERVO_PORT)
     portHandler.openPort()
 
@@ -36,7 +77,7 @@ def parallel_rotate(ids, angles):
     handler = Protocol2PacketHandler()
 
     for i in range(len(angles)):
-            angles[i] = int((angles[i] / 360)*4095)
+        angles[i] = int((angles[i] / 360)*4095)
 
     for id in ids:
         communication_result, servo_error = handler.write1ByteTxRx(
@@ -47,16 +88,16 @@ def parallel_rotate(ids, angles):
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
     for i in range(len(ids)):
-        # Choosing operating mode    
+        # Choosing operating mode
         print("Single mode on")
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], MODE, 3)
         if debug:
             print("SINGLEMODE : %s" %
-                    handler.getTxRxResult(communication_result))
+                  handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("SINGLEMODE : %s" %
-                    handler.getRxPacketError(servo_error))
+                  handler.getRxPacketError(servo_error))
 
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(
@@ -102,7 +143,99 @@ def parallel_rotate(ids, angles):
     # Clear syncwrite parameter storage
     groupSyncWritePosition.clearParam()
 
-    return
+    max_load = 500
+    num_success = len(ids)
+    success_cnt = 0
+
+    array_ids = [2, 3, 7, 8, 9, 11]
+
+    if any(i in array_ids for i in ids):
+        # print("uso sam u onaj IF")
+        while success_cnt < num_success:
+            # print("uso sam u onaj WHILE")
+            for i in range(num_success):
+                # print("uso sam u onaj FOR")
+                if (int(ids[i]) == data.IDS.id_gripper_back_1.value):
+                    # print("servo 9")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 9: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_gripper_back_2.value):
+                    # print("servo 7")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 7: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_gripper_back_3.value):
+                    # print("servo 3")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 3: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_gripper_front_1.value):
+                    # print("servo 11")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 11: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_gripper_front_2.value):
+                    # print("servo 2")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 2: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_gripper_front_3.value):
+                    # print("servo 8")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 8: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                # print(f"success_num: {success_cnt}")
+
+        return
 
 
 class ServoXL430:
@@ -212,14 +345,14 @@ class ServoXL430:
             current_position -= 4294967296
 
         return int((current_position/4095)*360)
-    
+
     def read_current_load(self):
         load, _, _ = self.handler.read2ByteTxRx(
-                self.portHandler, self.id, 126)\
+            self.portHandler, self.id, 126)\
 
         if load > 30000:
             load -= 65535
-        
+
         return load
 
     def rotate(self, *args):
@@ -257,7 +390,6 @@ class ServoXL430:
 
         tolerance = 50
 
-
         while (abs(abs(current_position) - abs(servo_angle)) > tolerance) and data.elapsed_time < data.time_strategy_type:
             time.sleep(.01)
             try:
@@ -271,13 +403,21 @@ class ServoXL430:
                 servo_error = 1
 
             load = self.read_current_load()
-        
-            if load > 850:
-                # print(f"LOAD detected : {load}")
+            print(f"LOAD : {load}")
+
+            if (load > 500) and (self.id == 11 or self.id == 8 or self.id == 2 or self.id == 9 or self.id == 7 or self.id == 3):
+                print(f"LOAD detected : {load}")
                 goal_angle = int(((current_position - 11)/4095)*365)
-                threading.Thread(target=self.rotate, args = [goal_angle]).start()
+                threading.Thread(target=self.rotate, args=[goal_angle]).start()
                 # self.rotate(goal_angle)
                 return
+
+            # elif (load > 700) and (self.id == 9 or self.id == 7 or self.id == 3):
+            #     print(f"LOAD detected : {load}")
+            #     goal_angle = int(((current_position - 11)/4095)*365)
+            #     threading.Thread(target=self.rotate, args=[goal_angle]).start()
+            #     # self.rotate(goal_angle)
+            #     return
 
             if servo_error != 0:
                 print("DEAD SERVO : %s" % str(self.id))

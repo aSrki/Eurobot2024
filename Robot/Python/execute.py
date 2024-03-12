@@ -201,6 +201,8 @@ class Execute:
                 # TODO: proveriti jer je jako sus
                 if data.is_front != None:
                     self.get_steps_for_detection()
+                elif data.is_back != None:
+                    self.get_steps_for_detection()
 
         custom_print("END")
         return
@@ -239,8 +241,8 @@ class Execute:
             steps = backing_steps(
                 self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)
 
-        else:
-            custom_print("BACK DETECTED")
+        elif data.is_back:
+            print("BACK DETECTED")
 
             steps = forward_steps(
                 self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)

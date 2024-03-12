@@ -136,18 +136,18 @@ class PositionRegulation:
         d = ((encoder_left + encoder_right) / 2) * data.OdometryData.inc_mm
         f = data.f_current
 
-        if True:
-            # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
-            # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
-            # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
-            # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
-            # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
-            print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
-            print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
-            print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
+        # if True:
+        # print(f"INC1: {data.enc_left} INC2: {data.enc_right}")
+        # print('\n\n\nLevi enkoder:\t{}'.format(data.sum_encoder_left))
+        # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
+        # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
+        # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
+        # print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
+        # print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
+        # print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
 
-            # print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
-            # # print('d duzina:\t\t\t{:.0f}'.format(d))
+        # print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
+        # # print('d duzina:\t\t\t{:.0f}'.format(d))
 
         if self.stop_position:
 

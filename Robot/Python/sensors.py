@@ -6,6 +6,7 @@ import time
 
 DEBUG = True
 
+
 def custom_print(msg):
     if DEBUG:
         print(msg)
@@ -33,8 +34,11 @@ class SensorsDetection:
 
             if (self.front_sensors() or self.back_sensors() or self.lidar_back_sensors() or self.lidar_front_sensor()) and not data.stop:
                 data.stop = True
-                data.is_front = (data.sensors == Sensors.FRONT_ON) or (data.lidar == Sensors.FRONT_ON)
-                    
+                data.is_front = (data.sensors == Sensors.FRONT_ON) or (
+                    data.lidar == Sensors.FRONT_ON)
+                data.is_back = (data.sensors == Sensors.BACK_ON) or (
+                    data.lidar == Sensors.BACK_ON)
+
                 data.sensors = Sensors.ALL_OFF
                 data.lidar = Sensors.ALL_OFF
 
