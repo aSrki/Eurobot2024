@@ -1,0 +1,155 @@
+from strategies.tasks import *
+from strategies.steps import *
+from strategies.strategy import Strategy
+
+strategy2 = Strategy()
+
+strategy2.rotate_to(0)
+strategy2.front_sensors_on()
+strategy2.start_step_actions()
+strategy2.go_to_XY(195, 1200, g=0.4)  # rotira panele #y = 750
+strategy2.activate_triangle()
+strategy2.deactivate_prednja_grtalca()
+strategy2.deactivate_zadnja_grtalca()
+strategy2.end_step_actions()
+
+strategy2.start_step_actions()
+strategy2.go_to_XY(195, 1850, g=0.4)
+strategy2.add_sequence(prepare_arms6())  # priprema za hvatanje
+strategy2.end_step_actions()
+
+strategy2.deactivate_triangle()
+
+strategy2.start_step_actions()
+strategy2.go_to_XY(500, 1500, off=290)  # dolazi do tanjira 4 -1210
+strategy2.move_mechanism(260)
+strategy2.activate_prednja_grtalca()
+strategy2.end_step_actions()
+
+
+# strategy2.start_step_actions()
+# strategy2.rotate_to(0)  # uzima biljke iz donjeg tanjira
+# strategy2.end_step_actions()
+strategy2.add_sequence(grip_front_plant(110))  # -20
+
+strategy2.front_sensors_off()
+strategy2.back_sensors_on()
+
+strategy2.start_step_actions()
+strategy2.go_to_XY(1270, -1500, False)  # 1320 ide do biljaka kod sime
+strategy2.deactivate_prednja_grtalca()
+strategy2.move_mechanism(100)
+strategy2.activate_zadnja_grtalca()
+strategy2.end_step_actions()
+
+strategy2.rotate_to(90)
+
+strategy2.add_sequence(grip_back_plant(-80))  # 0
+
+strategy2.start_step_actions()
+strategy2.go_to_XY(1750, -762, False)  # dolazi ispred plantera
+strategy2.deactivate_zadnja_grtalca()
+strategy2.end_step_actions()
+
+strategy2.back_sensors_off()
+
+strategy2.start_step_actions()  # dolazi i priprema ruku
+strategy2.go_to_XY(1850, -762)
+strategy2.move_front_arm(120, v=15)
+strategy2.end_step_actions()
+
+strategy2.move_mechanism(270)  # ostavlja prednje u planter bez saksija
+strategy2.move_front_arm(85, v=15)
+strategy2.ungrip_front()
+strategy2.move_front_arm(120)
+strategy2.move_mechanism(180)
+
+strategy2.back_sensors_on()
+strategy2.go_to_XY(1382, 650, False)  # ide unapred prema sledecem planteru
+
+strategy2.start_step_actions()  # podize ruku
+strategy2.go_to_XY(1382, 185, False)  # -285
+strategy2.move_back_arm(210, v=15)
+strategy2.end_step_actions()
+
+strategy2.move_mechanism(20)  # ostavlja biljke u drugi plenter
+strategy2.move_back_arm(167, v=15)
+strategy2.ungrip_back()
+strategy2.move_back_arm(210, v=30)
+strategy2.move_mechanism(180)
+
+strategy2.back_sensors_off()
+strategy2.front_sensors_on()
+
+strategy2.start_step_actions()  # ide na sledece biljke
+strategy2.go_to_XY(1300, 700)
+strategy2.rotate_to(3)  # OVO IZVADITI AKO IDEMO NA 3 TANJIRA
+strategy2.add_sequence(prepare_arms6())
+strategy2.end_step_actions()
+
+# strategy2.rotate_to(0)  # hvata biljke 6 komada
+strategy2.add_sequence(grip_front_plant())  # -70
+strategy2.set_distance_angle(-60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+strategy2.front_sensors_off()
+
+strategy2.rotate_to(180)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+
+strategy2.back_sensors_on()
+strategy2.activate_zadnja_grtalca()
+strategy2.add_sequence(grip_back_plant())  # 130
+# strategy2.go_to_XY(980, -1000, False)  # pa na jos 6 komada
+# strategy2.rotate_to(-90)
+
+strategy2.back_sensors_off()
+strategy2.front_sensors_on()
+
+strategy2.go_to_XY(612, 600)  # ide da ih ostavi kako zna i ume
+strategy2.start_step_actions()
+strategy2.go_to_XY(612, 285)  # 350
+strategy2.move_front_arm(120, v=15)  # podize ruku
+strategy2.end_step_actions()
+
+strategy2.front_sensors_off()
+
+strategy2.rotate_to(180)
+# strategy2.set_distance_angle(-10, 0)
+strategy2.move_mechanism(230)  # 180
+strategy2.move_front_arm(80, v=30)
+strategy2.ungrip_front()
+strategy2.move_front_arm(110, v=30)
+
+strategy2.start_step_actions()
+strategy2.set_distance_angle(-220, 0)
+strategy2.grip_front()
+strategy2.end_step_actions()
+
+
+strategy2.move_back_arm(210, v=30)
+strategy2.go_to_XY(600, 325, False)  # 285
+# strategy2.move_back_arm(190, v=15)
+strategy2.move_mechanism(190)  # izbaci ruku
+strategy2.move_back_arm(170, v=30)
+strategy2.ungrip_back()
+strategy2.move_back_arm(210, v=30)
+
+strategy2.set_distance_angle(0, -90, g=0.3)  # zatorira ka tanjiru
+strategy2.set_distance_angle(-100, 0, g=0.5)  # udje u tanjur
+# strategy2.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
+strategy2.deactivate_zadnja_grtalca()
+strategy2.move_mechanism(180)
+# # strategy2.set_distance_angle(-100, 0)
+# # strategy2.rotate_to(-90)  # zarotira
+
+# strategy2.add_sequence(release_back_plant())  # ostavi i zadnje bilje
+
+# vraca se kuci skloniti false ako ostavlja dva seta (6 ili 3)
+strategy2.front_sensors_on()
+
+strategy2.start_step_actions()
+strategy2.go_to_XY(1500, 400)
+strategy2.add_sequence(init_servos())
+strategy2.end_step_actions()
+
+strategy2.all_off()
+
+strategy2.end()
