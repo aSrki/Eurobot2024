@@ -1,41 +1,65 @@
-import serial
+# # -*- coding: utf-8 -*-import serial
 import time
-import sys 
+import binascii
+import serial
 
-def read_distance(serial_port):
-    # SlaveAddr, FuncNumb, RegisterHighAddr, RegisterLowAddr, DataHigh, DataLow, CRC_CheckLow, CRC_CheckHigh
-    # serial_port.write([0x00,0x03,0x00,0x10,0x00,0x01,0x84,0x1E])
-    serial_port.write([0x01,0x03,0x00,0x10,0x00,0x01,0x85,0xCF]) # Read distance 
-    # serial_port.write([0x02,0x03,0x00,0x10,0x00,0x01,0x85,0xFC])
-    # serial_port.write([0x03,0x03,0x00,0x10,0x00,0x01,0x84,0x2D])
-    # serial_port.write([0x04,0x03,0x00,0x10,0x00,0x01,0x85,0x9A])
-    # serial_port.write([0x05,0x03,0x00,0x10,0x00,0x01,0x84,0x4B])
-    # serial_port.write([0x06,0x03,0x00,0x10,0x00,0x01,0x84,0x78])
+class SerialHandler:
+    def __init__(self, port='/dev/ttyS0', baud_rate=115200):
+        self.serial = serial.Serial(port, baud_rate)
+        if self.serial.isOpen():
+            print("Serial connection opened successfully")
+        else:
+            print("Failed to open serial connection")
 
-    # --------------------------------------------------------------------#
-    # serial_port.write([0x01, 0x06, 0x00, 0x01, 0xAA, 0x55, 0x8E, 0X66]) # Restore default parameter
-    # --------------------------------------------------------------------#
-    # serial_port.write([0x00, 0x06, 0x00, 0x02, 0x00, 0x05, 0xC3, 0XE9])
+    def __del__(self):
+        if self.serial.isOpen():
+            self.serial.close()
+            print("Serial connection closed")
 
-    read = serial_port.read(7) # response 7 bytes: SlaveAddr, FuncNumb, NumOfDataBytes, DataHigh, DataLow, ... , CRC_CheckLow, CRC_CheckHigh
-    # 3. BYTE HIGH DATA REGISTER 4. BYTE LOW DATA REGISTER
-    print(read)
-    print(sys.getsizeof(read))
-    if sys.getsizeof(read) == 24:
-        return (read[3]<<8) + read[4]
-    else:
-        return None
+    def cl(self, a):
+        dat1 = a[0:1]
+
+        if dat1 == 'a':
+            dat1 = 10
+        elif dat1 == 'b':
+            dat1 = 11
+        elif dat1 == 'c':
+            dat1 = 12
+        elif dat1 == 'd':
+            dat1 = 13
+        elif dat1 == 'e':
+            dat1 = 14
+        elif dat1 == 'f':
+            dat1 = 15
+            
+        return dat1
+
+    def read_data(self):
+        time.sleep(0.01) 
+        num = self.serial.inWaiting()
+        if num: 
+            try:   
+                data = str(binascii.b2a_hex(self.serial.read(num)))
+                if(len(data) > 8):
+                    dat1 = data[6:7]
+                    dat2 = data[7:8]
+                    dat3 = data[8:9]
+                    dat4 = data[9:10]
+                    jl = (((int(self.cl(dat1)) * 16) + int(self.cl(dat2))) * 256) + ((int(self.cl(dat3)) * 16) + int(self.cl(dat4)))
+                    return jl
+            except Exception as e:
+                print("Error reading data:", e)
+                return None
+
+def main():
+    # Instantiate SerialHandler
+    serial_handler = SerialHandler()
+
+    while True:
+        # Read data
+        jl = serial_handler.read_data()
+        if jl is not None:
+            print("Received data:", jl)
 
 if __name__ == "__main__":
-    print("CODE STARTED")
-    serial_port = serial.Serial(port ='/dev/ttyS0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
-
-    try:
-        while True:
-            distance = read_distance(serial_port)
-            print("Distance:", distance)
-            print("while")
-            # time.sleep(0.1)
-
-    except KeyboardInterrupt:
-        serial_port.close()
+    main()
