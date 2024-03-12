@@ -77,7 +77,7 @@ def read_curr_pos_group():
 
     handler = Protocol2PacketHandler()
 
-    groupSyncRead = GroupSyncRead(portHandler, handler, 116, 4)
+    groupSyncRead = GroupSyncRead(portHandler, handler, 132, 4)
 
     dxl_addparam_result = groupSyncRead.addParam(1)
     if dxl_addparam_result != True:
@@ -95,24 +95,24 @@ def read_curr_pos_group():
         print("%s" % handler.getTxRxResult(dxl_comm_result))
 
     # Check if groupsyncread data of Dynamixel#1 is available
-    dxl_getdata_result = groupSyncRead.isAvailable(1, 116, 4)
+    dxl_getdata_result = groupSyncRead.isAvailable(1, 132, 4)
     if dxl_getdata_result != True:
         print("[ID:%03d] groupSyncRead getdata failed" % 1)
         quit()
 
     # Check if groupsyncread data of Dynamixel#2 is available
-    dxl_getdata_result = groupSyncRead.isAvailable(4, 116, 4)
+    dxl_getdata_result = groupSyncRead.isAvailable(4, 132, 4)
     if dxl_getdata_result != True:
         print("[ID:%03d] groupSyncRead getdata failed" % 4)
         quit()
 
     # Get Dynamixel#1 present position value
-    dxl1_present_position = groupSyncRead.getData(1, 116, 4)
+    dxl1_present_position = groupSyncRead.getData(1, 132, 4)
     if dxl1_present_position > 2000000000:
         dxl1_present_position -= 4294967296
 
     # Get Dynamixel#2 present position value
-    dxl2_present_position = groupSyncRead.getData(4, 116, 4)
+    dxl2_present_position = groupSyncRead.getData(4, 132, 4)
     if dxl2_present_position > 2000000000:
         dxl2_present_position -= 4294967296
 
@@ -121,7 +121,7 @@ def read_curr_pos_group():
     return dxl1_present_position, dxl2_present_position
 
 
-def parallel_rotate(ids, angles, v = 4000):
+def parallel_rotate(ids, angles, v = 700):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)

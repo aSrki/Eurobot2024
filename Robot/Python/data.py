@@ -111,7 +111,6 @@ class OdometryData:
     inc_mm = (2.0 * poluprecnik_tocka * 3.1416) / \
         inc  # 1687 #Inkremenata po mm
 
-
 # --------------------------------
 
 class IDS(Enum):

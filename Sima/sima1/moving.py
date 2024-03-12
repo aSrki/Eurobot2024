@@ -3,6 +3,13 @@ import time
 from math import *
 from data import *
 
+def stop_sima():
+    l, r = read_curr_pos_group()
+    l = l*360/4095
+    r = r*360/4095
+    print(f"L:{l} R:{r}")
+    parallel_rotate([1, 4], [int(l), int(r)])
+
 def rotate(deg):
     global left_theta
     global right_theta
@@ -33,13 +40,19 @@ def translate(len):
     else:
         left_theta += theta
         right_theta -= theta
-        parallel_rotate([1, 4], [left_theta, right_theta])    
-    time.sleep((len/300))
+        parallel_rotate([1, 4], [left_theta, right_theta])   
+    print(f"left_theta:{left_theta}, right_theta:{right_theta}")
+    # time.sleep((len/300))
 
 def init_sima():
-    parallel_rotate([1, 4], [0, 0], 4000)
-    time.sleep(5)
-    print("Init done!")
+    global left_theta
+    global right_theta
+    l, r = read_curr_pos_group()
+    left_theta = l*360/4095
+    right_theta = r*360/4095
+    parallel_rotate([1, 4], [left_theta, right_theta], 4000)
+    time.sleep(.5)
+
 
 def go_to_xy(x, y):
     dx = x - curr_x
