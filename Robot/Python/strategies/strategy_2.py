@@ -54,7 +54,7 @@ strategy2.end_step_actions()
 strategy2.front_sensors_off()
 
 strategy2.start_step_actions()  # dolazi i priprema ruku
-strategy2.go_to_XY(1830, -762, False) # 1850
+strategy2.go_to_XY(1830, -762, False)  # 1850
 strategy2.move_back_arm(210, v=15)
 strategy2.end_step_actions()
 
@@ -132,31 +132,6 @@ strategy2.move_front_arm(80, v=30)
 strategy2.ungrip_front()
 strategy2.move_front_arm(120, v=30)
 
-
-# strategy2.grip_back(215, 215, 215)
-# strategy2.move_back_arm(165, v=30)
-# strategy2.set_distance_angle(-60, 0)
-# strategy2.move_mechanism(60)
-# strategy2.move_mechanism(180)
-# strategy2.set_distance_angle(0, 90)
-# strategy2.grip_back(190, 190, 190)
-# strategy2.set_distance_angle(0, 90)
-# strategy2.grip_front(215, 215, 215)
-# strategy2.move_back_arm(190, v=30)
-# strategy2.move_mechanism(340)
-# strategy2.move_mechanism(180)
-# strategy2.set_distance_angle(0, 90, g=0.5)
-# strategy2.grip_front(190, 190, 190)
-
-
-# strategy2.move_mechanism(140)
-# strategy2.move_front_arm(105, v=30)  # spusta bilje
-# strategy2.grip_front(120, 120, 120, s=0.3)  # ispusti ih iz saka
-# strategy2.move_front_arm(110, v=30)  # spusta bilje
-# strategy2.grip_front(215, 215, 215)  # zatvori sake
-# # strategy2.move_mechanism(320)  # pruzi ruku
-# # strategy2.move_front_arm(77, v=30)  # obgrli biljke
-# # strategy2.set_distance_angle(-20, 0)  # ode unazad
 strategy2.set_distance_angle(20, 0, g=0.5)
 strategy2.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy2.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
