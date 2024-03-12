@@ -143,15 +143,11 @@ def parallel_rotate(ids, angles):
     # Clear syncwrite parameter storage
     groupSyncWritePosition.clearParam()
 
-    max_load = 750
+    max_load = 500
     num_success = len(ids)
     success_cnt = 0
 
     array_ids = [2, 3, 7, 8, 9, 11]
-
-    # print(f"Current IDS: {ids}")
-
-    # if (2 in ids) or (8 in ids) or (11 in ids) or (3 in ids) or (7 in ids) or (9 in ids):
 
     if any(i in array_ids for i in ids):
         # print("uso sam u onaj IF")
@@ -165,6 +161,7 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 9: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
@@ -177,6 +174,7 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 7: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
@@ -189,6 +187,7 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 3: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
@@ -201,6 +200,7 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 11: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
@@ -213,6 +213,7 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 2: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
@@ -225,14 +226,13 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
+                    # print(f"load 8: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
-                # print(f"angles: {angles[i]}")
-                # print(f"curr_POS: {current_position}")
                 # print(f"success_num: {success_cnt}")
 
         return
@@ -405,7 +405,7 @@ class ServoXL430:
             load = self.read_current_load()
             print(f"LOAD : {load}")
 
-            if (load > 700) and (self.id == 11 or self.id == 8 or self.id == 2 or self.id == 9 or self.id == 7 or self.id == 3):
+            if (load > 500) and (self.id == 11 or self.id == 8 or self.id == 2 or self.id == 9 or self.id == 7 or self.id == 3):
                 print(f"LOAD detected : {load}")
                 goal_angle = int(((current_position - 11)/4095)*365)
                 threading.Thread(target=self.rotate, args=[goal_angle]).start()

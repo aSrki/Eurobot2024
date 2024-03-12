@@ -7,13 +7,14 @@ strategy2 = Strategy()
 strategy2.rotate_to(0)
 strategy2.back_sensors_on()
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1100, False, g=0.4)  # rotira panele #y = 750
+strategy2.go_to_XY(195, -1200, False, g=0.4)  # rotira panele #y = 750
 strategy2.activate_triangle()
 strategy2.deactivate_prednja_grtalca()
+strategy2.deactivate_zadnja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1800, False, g=0.4)
+strategy2.go_to_XY(195, -1850, False, g=0.4)
 strategy2.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy2.end_step_actions()
 
@@ -43,7 +44,7 @@ strategy2.end_step_actions()
 
 strategy2.rotate_to(-90)
 
-strategy2.add_sequence(grip_front_plant())  # 0
+strategy2.add_sequence(grip_front_plant(50))  # 0
 
 strategy2.start_step_actions()
 strategy2.go_to_XY(1750, -762)  # dolazi ispred plantera
@@ -59,7 +60,7 @@ strategy2.end_step_actions()
 
 strategy2.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 strategy2.move_back_arm(175, v=15)
-strategy2.grip_back(140, 140, 140)
+strategy2.ungrip_back()
 strategy2.move_back_arm(210)
 strategy2.move_mechanism(180)
 
@@ -73,7 +74,7 @@ strategy2.end_step_actions()
 
 strategy2.move_mechanism(340)  # ostavlja biljke u drugi plenter
 strategy2.move_front_arm(77, v=15)
-strategy2.grip_front(140, 140, 140, s=0.1)
+strategy2.ungrip_front()
 strategy2.move_front_arm(120, v=30)
 strategy2.move_mechanism(180)
 
@@ -114,12 +115,12 @@ strategy2.rotate_to(180)
 # strategy2.set_distance_angle(-10, 0)
 strategy2.move_mechanism(130)  # 180
 strategy2.move_back_arm(170, v=30)
-strategy2.grip_back(140, 140, 140)
+strategy2.ungrip_back()
 strategy2.move_back_arm(200, v=30)
 
 strategy2.start_step_actions()
 strategy2.set_distance_angle(220, 0)
-strategy2.grip_back(215, 215, 215)
+strategy2.grip_back()
 strategy2.end_step_actions()
 
 
@@ -128,7 +129,7 @@ strategy2.go_to_XY(600, -325)  # 285
 # strategy2.move_back_arm(190, v=15)
 strategy2.move_mechanism(170)  # izbaci ruku
 strategy2.move_front_arm(80, v=30)
-strategy2.grip_front(140, 140, 140)
+strategy2.ungrip_front()
 strategy2.move_front_arm(120, v=30)
 
 

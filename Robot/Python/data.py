@@ -118,12 +118,12 @@ class OdometryData:
 class IDS(Enum):
     # id_bldc = 51
     id_centar = 12  # 355 napred # 5 nazad # 180 centar
-    id_gripper_front_1 = 11  # otvoren 140; zatvoren 300
-    id_gripper_front_2 = 2  # otvoren 140; zatvoren 300
-    id_gripper_front_3 = 8  # otvoren 140; zatvoren 300
-    id_gripper_back_1 = 9  # otvoren 140; zatvoren 300
-    id_gripper_back_2 = 7  # otvoren 140; zatvoren 300
-    id_gripper_back_3 = 3  # otvoren 140; zatvoren 300
+    id_gripper_front_1 = 11  # otvoren 140; zatvoren 230
+    id_gripper_front_2 = 2  # otvoren 140; zatvoren 230
+    id_gripper_front_3 = 8  # otvoren 140; zatvoren 230
+    id_gripper_back_1 = 9  # otvoren 140; zatvoren 230
+    id_gripper_back_2 = 7  # otvoren 140; zatvoren 230
+    id_gripper_back_3 = 3  # otvoren 140; zatvoren 230
     id_trougao = 6  # donja - 0, gornja - 340
     id_front_arm = 41  # spustena skroz - 60, podignuta 120
     id_back_arm = 52  # spustena - 150, podignuta - 210
