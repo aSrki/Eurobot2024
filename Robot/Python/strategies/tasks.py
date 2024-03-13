@@ -78,10 +78,10 @@ def prepare_arms6():
 #     return pba.operations
 
 
-def grip_front_plant(p=0):
+def grip_front_plant():
     gfp = Strategy()
 
-    gfp.set_distance_angle(95 + p, 0)
+    #gfp.set_distance_angle(95 + p, 0)
 
     # gfp.start_parallel()
     gfp.move_front_arm(72, v=30)  # 87 #72
@@ -92,18 +92,45 @@ def grip_front_plant(p=0):
     gfp.move_front_arm(110, v=15)  # 95
     return gfp.operations
 
+def grip3_front_plant(p=0):
+    gfp3 = Strategy()
 
-def grip_back_plant(p=0):
+    gfp3.set_distance_angle(95 + p, 0)
+
+    # gfp.start_parallel()
+    gfp3.move_front_arm(72, v=30)  # 87 #72
+    gfp3.grip_front(s=0.3)
+    # gfp.end_parallel(0.2)
+    gfp3.set_distance_angle(-60,0)
+    # gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
+    gfp3.move_front_arm(110, v=15)  # 95
+    return gfp3.operations
+
+def grip_back_plant():
     gbp = Strategy()
 
-    gbp.set_distance_angle(-230 - p, 0)  # -230
+    #gbp.set_distance_angle(-230 - p, 0)  # -230
     # gbp.start_parallel()
     gbp.move_back_arm(159, v=30)  # 162
-    gbp.grip_back(s=0.3)
+    gbp.grip_back()
+    #gbp.set_distance_angle(20,0)
     # gbp.end_parallel(0.2)
     gbp.move_back_arm(200, v=15)  # 185
 
     return gbp.operations
+
+def grip3_back_plant(p=0):
+    gbp3 = Strategy()
+
+    gbp3.set_distance_angle(-230 - p, 0)  # -230
+    # gbp3.start_parallel()
+    gbp3.move_back_arm(159, v=30)  # 162
+    gbp3.grip_back(s=0.3)
+    gbp3.set_distance_angle(60,0)
+    # gbp3.end_parallel(0.2)
+    gbp3.move_back_arm(200, v=15)  # 185
+
+    return gbp3.operations
 
 
 def release_front_plant():  # u terenu biljke bez saksija

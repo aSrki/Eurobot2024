@@ -14,14 +14,14 @@ strategy2.deactivate_zadnja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1850, False, g=0.4)
+strategy2.go_to_XY(195, -1800, False, g=0.4) #-1850
 strategy2.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy2.end_step_actions()
 
 strategy2.deactivate_triangle()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(500, -1500, False, off=290)  # dolazi do tanjira 4 -1210
+strategy2.go_to_XY(500, -1500, False, off=120)  # dolazi do tanjira 4 -1210
 strategy2.move_mechanism(100)
 strategy2.activate_zadnja_grtalca()
 strategy2.end_step_actions()
@@ -30,21 +30,21 @@ strategy2.end_step_actions()
 # strategy2.start_step_actions()
 # strategy2.rotate_to(0)  # uzima biljke iz donjeg tanjira
 # strategy2.end_step_actions()
-strategy2.add_sequence(grip_back_plant(-20))  # -20
+strategy2.add_sequence(grip_back_plant())  # -20
 
 strategy2.back_sensors_off()
 strategy2.front_sensors_on()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(1260, -1500)  # 1320 ide do biljaka kod sime  ...posl 1270
+strategy2.go_to_XY(1500, -1500, off=120) #off = 60 # 1320 ide do biljaka kod sime  ...posl 1270
 strategy2.deactivate_zadnja_grtalca()
 strategy2.move_mechanism(260)
 strategy2.activate_prednja_grtalca()
 strategy2.end_step_actions()
 
-strategy2.rotate_to(-90)
+# strategy2.rotate_to(-90)
 
-strategy2.add_sequence(grip_front_plant(50))  # 0
+strategy2.add_sequence(grip_front_plant())  
 
 strategy2.start_step_actions()
 strategy2.go_to_XY(1750, -762)  # dolazi ispred plantera
@@ -54,14 +54,14 @@ strategy2.end_step_actions()
 strategy2.front_sensors_off()
 
 strategy2.start_step_actions()  # dolazi i priprema ruku
-strategy2.go_to_XY(1830, -762, False)  # 1850
+strategy2.go_to_XY(1820, -762, False)  # 1850
 strategy2.move_back_arm(210, v=15)
 strategy2.end_step_actions()
 
 strategy2.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 strategy2.move_back_arm(175, v=15)
 strategy2.ungrip_back()
-strategy2.move_back_arm(210)
+strategy2.move_back_arm(210, v = 30)
 strategy2.move_mechanism(180)
 
 strategy2.front_sensors_on()
@@ -88,15 +88,17 @@ strategy2.add_sequence(prepare_arms6())
 strategy2.end_step_actions()
 
 # strategy2.rotate_to(0)  # hvata biljke 6 komada
-strategy2.add_sequence(grip_back_plant(-120))  # -70
-strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+strategy2.add_sequence(grip3_back_plant(-120))  # -70
+#strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
 strategy2.back_sensors_off()
 
 strategy2.rotate_to(180)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
 
+
 strategy2.front_sensors_on()
 strategy2.activate_prednja_grtalca()
-strategy2.add_sequence(grip_front_plant(130))  # 130
+strategy2.set_distance_angle(230, 0)
+strategy2.add_sequence(grip_front_plant())  # 130
 # strategy2.go_to_XY(980, -1000, False)  # pa na jos 6 komada
 # strategy2.rotate_to(-90)
 
@@ -113,26 +115,28 @@ strategy2.back_sensors_off()
 
 strategy2.rotate_to(180)
 # strategy2.set_distance_angle(-10, 0)
-strategy2.move_mechanism(130)  # 180
-strategy2.move_back_arm(170, v=30)
+strategy2.move_mechanism(140)  # 180 130
+strategy2.move_back_arm(190, v=30) # 170
 strategy2.ungrip_back()
 strategy2.move_back_arm(200, v=30)
 
 strategy2.start_step_actions()
-strategy2.set_distance_angle(220, 0)
+strategy2.set_distance_angle(100, 0)
 strategy2.grip_back()
+strategy2.activate_prednja_grtalca(350, 340) #izbacuje desnu grtalcu
 strategy2.end_step_actions()
 
 
 strategy2.move_front_arm(110, v=30)
-strategy2.go_to_XY(600, -325)  # 285
+strategy2.go_to_XY(624, -300)  # 285 325
+strategy2.rotate_to(0)
 # strategy2.move_back_arm(190, v=15)
-strategy2.move_mechanism(170)  # izbaci ruku
-strategy2.move_front_arm(80, v=30)
+strategy2.move_mechanism(160)  # izbaci ruku 170
+strategy2.move_front_arm(90, v=30) #90
 strategy2.ungrip_front()
 strategy2.move_front_arm(120, v=30)
 
-strategy2.set_distance_angle(20, 0, g=0.5)
+strategy2.set_distance_angle(50, 0)
 strategy2.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy2.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
 # strategy2.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
