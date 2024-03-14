@@ -2,6 +2,8 @@ from strategies.tasks import *
 from strategies.steps import *
 from strategies.strategy import Strategy
 
+# Plava strana 6 solarnih, 3 seta biljaka
+
 strategy2 = Strategy()
 
 strategy2.rotate_to(0)
@@ -14,7 +16,7 @@ strategy2.deactivate_zadnja_grtalca()
 strategy2.end_step_actions()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(195, -1800, False, g=0.4) #-1850
+strategy2.go_to_XY(195, -1800, False, g=0.4)  # -1850
 strategy2.add_sequence(prepare_arms6())  # priprema za hvatanje
 strategy2.end_step_actions()
 
@@ -36,7 +38,8 @@ strategy2.back_sensors_off()
 strategy2.front_sensors_on()
 
 strategy2.start_step_actions()
-strategy2.go_to_XY(1500, -1500, off=120) #off = 60 # 1320 ide do biljaka kod sime  ...posl 1270
+# off = 60 # 1320 ide do biljaka kod sime  ...posl 1270
+strategy2.go_to_XY(1500, -1500, off=120)
 strategy2.deactivate_zadnja_grtalca()
 strategy2.move_mechanism(260)
 strategy2.activate_prednja_grtalca()
@@ -44,7 +47,7 @@ strategy2.end_step_actions()
 
 # strategy2.rotate_to(-90)
 
-strategy2.add_sequence(grip_front_plant())  
+strategy2.add_sequence(grip_front_plant())
 
 strategy2.start_step_actions()
 strategy2.go_to_XY(1750, -762)  # dolazi ispred plantera
@@ -61,7 +64,7 @@ strategy2.end_step_actions()
 strategy2.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 strategy2.move_back_arm(175, v=15)
 strategy2.ungrip_back()
-strategy2.move_back_arm(210, v = 30)
+strategy2.move_back_arm(210, v=30)
 strategy2.move_mechanism(180)
 
 strategy2.front_sensors_on()
@@ -89,7 +92,7 @@ strategy2.end_step_actions()
 
 # strategy2.rotate_to(0)  # hvata biljke 6 komada
 strategy2.add_sequence(grip3_back_plant(-120))  # -70
-#strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
+# strategy2.set_distance_angle(60, 0)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
 strategy2.back_sensors_off()
 
 strategy2.rotate_to(180)  # OVO IZVADITI AKO IDEMO NA 4 TANJIRA
@@ -116,14 +119,14 @@ strategy2.back_sensors_off()
 strategy2.rotate_to(180)
 # strategy2.set_distance_angle(-10, 0)
 strategy2.move_mechanism(140)  # 180 130
-strategy2.move_back_arm(190, v=30) # 170
+strategy2.move_back_arm(190, v=30)  # 170
 strategy2.ungrip_back()
 strategy2.move_back_arm(200, v=30)
 
 strategy2.start_step_actions()
 strategy2.set_distance_angle(100, 0)
 strategy2.grip_back()
-strategy2.activate_prednja_grtalca(350, 340) #izbacuje desnu grtalcu
+strategy2.activate_prednja_grtalca(350, 340)  # izbacuje desnu grtalcu
 strategy2.end_step_actions()
 
 
@@ -132,7 +135,7 @@ strategy2.go_to_XY(624, -300)  # 285 325
 strategy2.rotate_to(0)
 # strategy2.move_back_arm(190, v=15)
 strategy2.move_mechanism(160)  # izbaci ruku 170
-strategy2.move_front_arm(90, v=30) #90
+strategy2.move_front_arm(90, v=30)  # 90
 strategy2.ungrip_front()
 strategy2.move_front_arm(120, v=30)
 

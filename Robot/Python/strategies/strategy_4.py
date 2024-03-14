@@ -2,6 +2,8 @@ from strategies.tasks import *
 from strategies.steps import *
 from strategies.strategy import Strategy
 
+# Zuta strana 6 solarnih, 3 seta biljaka
+
 strategy4 = Strategy()
 
 strategy4.rotate_to(0)
@@ -36,7 +38,7 @@ strategy4.front_sensors_off()
 strategy4.back_sensors_on()
 
 strategy4.start_step_actions()
-strategy4.go_to_XY(1500, 1500, False, off = 120)  # 1320 ide do biljaka kod sime
+strategy4.go_to_XY(1500, 1500, False, off=120)  # 1320 ide do biljaka kod sime
 strategy4.deactivate_prednja_grtalca()
 strategy4.move_mechanism(100)
 strategy4.activate_zadnja_grtalca()
@@ -61,7 +63,7 @@ strategy4.end_step_actions()
 strategy4.move_mechanism(270)  # ostavlja prednje u planter bez saksija
 strategy4.move_front_arm(85, v=15)
 strategy4.ungrip_front()
-strategy4.move_front_arm(120, v = 30)
+strategy4.move_front_arm(120, v=30)
 strategy4.move_mechanism(180)
 
 strategy4.back_sensors_on()
