@@ -1,73 +1,60 @@
 from XM330 import *
 import time
 from math import *
-from data import *
+import data
 
 def stop_sima():
-    l, r = read_curr_pos_group()
-    l = l*360/4095
-    r = r*360/4095
-    print(f"L:{l} R:{r}")
-    parallel_rotate([1, 4], [int(l), int(r)])
+    while True:
+        # print("U tredu sam")
+        stopped = False
+        if data.distance < 200:
+            print("U detekciji sam")
+            l, r = read_curr_pos_group()
+            l = l*360/4095
+            r = r*360/4095
+            print(f"DETENKCIJAAAAAAAAAAAAAAAAAAAAAAAAAAA L:{l} R:{r}")
+            if not stopped:
+                stopped = True
+                parallel_rotate([1, 4], [int(l), int(r)])
+        if stopped and data.distance >= 200:
+            parallel_rotate([1,4], [data.old_left, data.old_right])
+            time.sleep(1)
+        time.sleep(0.05)
 
 def rotate(deg):
-    global left_theta
-    global right_theta
-
-    theta = int((((deg * L/2)/d)))
-
+    theta = int((((deg * data.L/2)/data.d)))
     if deg >= 0:
-        left_theta -= theta
-        right_theta -= theta
-        parallel_rotate([1, 4], [left_theta, right_theta])
+        data.left_theta -= theta
+        data.right_theta -= theta
     else:
-        left_theta -= theta
-        right_theta -= theta
-        parallel_rotate([1, 4], [left_theta, right_theta])
+        data.left_theta -= theta
+        data.right_theta -= theta
+    data.old_left = data.left_theta
+    data.old_right = data.right_theta
+    parallel_rotate([1, 4], [data.left_theta, data.right_theta])
     time.sleep(.5)
-    print(f"Theta {theta}")
-    print(f"LTheta {left_theta}")
-    print(f"RTheta {right_theta}")
 
 def translate(len):
-    global left_theta
-    global right_theta
-    theta = int((len/(2*d*pi))*360)
+    theta = int((len/(2*data.d*pi))*360)
     if len >= 0:
-        left_theta += theta
-        right_theta -= theta
-        parallel_rotate([1, 4], [left_theta, right_theta])
+        data.left_theta += theta
+        data.right_theta -= theta
     else:
-        left_theta += theta
-        right_theta -= theta
-        parallel_rotate([1, 4], [left_theta, right_theta])   
-    print(f"left_theta:{left_theta}, right_theta:{right_theta}")
-    # time.sleep((len/300))
+        data.left_theta += theta
+        data.right_theta -= theta
+    data.old_left = data.left_theta
+    data.old_right = data.right_theta
+    parallel_rotate([1, 4], [data.left_theta, data.right_theta])
+    time.sleep((len/300))
 
 def init_sima():
-    global left_theta
-    global right_theta
+    init_servos([1,4])
     l, r = read_curr_pos_group()
-    left_theta = l*360/4095
-    right_theta = r*360/4095
-    parallel_rotate([1, 4], [left_theta, right_theta], 4000)
+    data.left_theta = l*360/4095
+    data.right_theta = r*360/4095
+    parallel_rotate([1, 4], [data.left_theta, data.right_theta], 4000)
     time.sleep(.5)
 
-
-def go_to_xy(x, y):
-    dx = x - curr_x
-    dy = y - curr_y
-    theta = degrees(atan2(dy, dx)) + curr_a
-    d = sqrt((dy ** 2) + (dx ** 2))
-    print(f"dx : {dx}")
-    print(f"dy : {dy}")
-    print(f"theta : {theta}")
-    print(f"d : {d}")
-
-    rotate(theta)
-    time.sleep(1)
-    translate(d)
-    time.sleep(1.5)
 
 if __name__ == "__main__":
     init_sima()

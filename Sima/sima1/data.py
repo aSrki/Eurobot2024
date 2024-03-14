@@ -9,3 +9,6 @@ curr_y = 1500 - 75
 curr_a = 90
 
 distance = 10000
+
+old_left = 0
+old_right = 0

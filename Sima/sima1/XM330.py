@@ -120,8 +120,8 @@ def read_curr_pos_group():
 
     return dxl1_present_position, dxl2_present_position
 
+def init_servos(ids):
 
-def parallel_rotate(ids, angles, v = 700):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)
@@ -133,7 +133,7 @@ def parallel_rotate(ids, angles, v = 700):
     handler = Protocol2PacketHandler()
 
     for id in ids:
-        communication_result, servo_error = handler.write1ByteTxRx(portHandler, id, 64, 0)
+        _, servo_error = handler.write1ByteTxRx(portHandler, id, 64, 0)
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
@@ -144,8 +144,19 @@ def parallel_rotate(ids, angles, v = 700):
         if servo_error != 0:
             print("MULTIMODE : %s" %
                     handler.getRxPacketError(servo_error))
-    
 
+def parallel_rotate(ids, angles, v = 300):
+    SERVO_PORT = "/dev/ttyUSB0"
+
+    portHandler = PortHandler(SERVO_PORT)
+    portHandler.openPort()
+    
+    # Baud rate set via Wizard (default value is 57600)
+    portHandler.setBaudRate(115200)
+
+    handler = Protocol2PacketHandler()
+    
+    for i in range(len(ids)):
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], 64, 1)
