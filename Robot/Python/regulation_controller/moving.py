@@ -127,12 +127,15 @@ class Moving:
         if __y < 0:
             x = __x - math.sin(math.radians(data.f_current))*offset
             y = __y + math.cos(math.radians(data.f_current))*offset
-            if data.f_current > 180:
+            if direction_is_forward:
                 x = __x + math.sin(math.radians(data.f_current))*offset
                 y = __y - math.cos(math.radians(data.f_current))*offset
         else:
             x = __x + math.sin(math.radians(data.f_current))*offset
             y = __y - math.cos(math.radians(data.f_current))*offset
+            if not direction_is_forward:
+                x = __x - math.sin(math.radians(data.f_current))*offset
+                y = __y + math.cos(math.radians(data.f_current))*offset
         # Definisemo zeljenu distancu
         distance = path.distance(x, y)
 

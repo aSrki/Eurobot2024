@@ -9,18 +9,19 @@ strategy3 = Strategy()
 strategy3.rotate_to(0)
 strategy3.back_sensors_on()
 strategy3.start_step_actions()
-strategy3.go_to_XY(195, -900, False, g=0.4)  # rotira panele #y = 750
+strategy3.go_to_XY(195, -800, False, g=0.4)  # rotira panele #y = 750
 strategy3.activate_triangle()
 strategy3.deactivate_prednja_grtalca()
 strategy3.deactivate_zadnja_grtalca()
+strategy3.add_sequence(prepare_back_arm())  # priprema za hvatanje
 strategy3.end_step_actions()
 
+strategy3.add_points("unload", 15)
 
 strategy3.start_step_actions()
 strategy3.go_to_XY(500, -1500, False, off=120)  # dolazi do tanjira 4 -1210
 strategy3.deactivate_triangle()
-strategy3.add_sequence(prepare_arms6())  # priprema za hvatanje
-strategy3.move_mechanism(100)
+# strategy3.move_mechanism(100)
 strategy3.activate_zadnja_grtalca()
 strategy3.end_step_actions()
 
@@ -32,8 +33,9 @@ strategy3.front_sensors_on()
 strategy3.start_step_actions()
 # off = 60 # 1320 ide do biljaka kod sime  ...posl 1270
 strategy3.go_to_XY(1500, -1500, off=120)
+strategy3.add_sequence(prepare_front_arm())
 strategy3.deactivate_zadnja_grtalca()
-strategy3.move_mechanism(260)
+# strategy3.move_mechanism(260)
 strategy3.activate_prednja_grtalca()
 strategy3.end_step_actions()
 
@@ -59,6 +61,8 @@ strategy3.ungrip_back()
 strategy3.move_back_arm(210, v=30)
 strategy3.move_mechanism(180)
 
+strategy3.add_points("unload", 24)
+
 strategy3.front_sensors_on()
 strategy3.go_to_XY(1382, -650)  # ide unapred prema sledecem planteru
 
@@ -72,6 +76,8 @@ strategy3.move_front_arm(77, v=15)
 strategy3.ungrip_front()
 strategy3.move_front_arm(120, v=30)
 strategy3.move_mechanism(180)
+
+strategy3.add_points("unload", 24)
 
 strategy3.front_sensors_off()
 strategy3.back_sensors_on()
@@ -134,8 +140,12 @@ strategy3.move_front_arm(120, v=30)
 strategy3.set_distance_angle(50, 0)
 strategy3.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy3.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
-# strategy3.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy3.deactivate_prednja_grtalca()
+
+strategy3.add_points("unload", 20)
+
+strategy3.set_distance_angle(-100, 0)
+# strategy3.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy3.move_mechanism(180)
 
 strategy3.back_sensors_on()
@@ -143,15 +153,20 @@ strategy3.back_sensors_on()
 strategy3.start_step_actions()
 strategy3.go_to_XY(700, -1000, False, off=120)
 strategy3.activate_zadnja_grtalca()
+strategy3.move_mechanism(80)
 strategy3.end_step_actions()
 
-strategy3.move_back_arm(170, v=30)
+strategy3.move_back_arm(165, v=30)
 
-strategy3.start_step_actions()
 strategy3.go_to_XY(1500, -400, False)
-strategy3.move_back_arm(210, v=10)
+strategy3.start_parallel()
+strategy3.move_back_arm(210)
+strategy3.move_mechanism(180)
 strategy3.deactivate_zadnja_grtalca()
-strategy3.end_step_actions()
+strategy3.end_parallel()
+
+# 10 sto se vratio robot i 6 poena zbog 3 resistant koje je zgrnuo
+strategy3.add_points("unload", 16)
 
 strategy3.all_off()
 
