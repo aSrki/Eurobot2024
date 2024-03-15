@@ -54,6 +54,17 @@ class Main:
             #     print("Waiting for CINC")
             #     continue
 
+            
+
+            # import socket
+
+            # socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # socket1.settimeout(0.5)
+
+            # socket1.connect((data.SIMA_IP, 1234))
+            # socket1.sendall(b'START')
+            # socket1.close()
+
             data.start_time = time.time()
 
             #self.lidar.start()

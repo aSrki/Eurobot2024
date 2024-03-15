@@ -8,6 +8,16 @@ TORQUE_ADDR = 64
 OPERATING_MODE_ADDR = 11
 PROFILE_VELOCITY_ADDR = 112
 
+SERVO_PORT = "/dev/ttyUSB0"
+
+portHandler = PortHandler(SERVO_PORT)
+portHandler.openPort()
+
+# Baud rate set via Wizard (default value is 57600)
+portHandler.setBaudRate(115200)
+
+handler = Protocol2PacketHandler()
+
 def send_velocity_multiple(ids, vels):
     vels[0] = int((vels[0] / 100)*32767)
     vels[1] = int((vels[1] / 100)*32767)
@@ -66,16 +76,8 @@ def send_velocity_multiple(ids, vels):
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
 
-def read_curr_pos_group():
-    SERVO_PORT = "/dev/ttyUSB0"
+def read_curr_pos_group(portHandler, handler):
 
-    portHandler = PortHandler(SERVO_PORT)
-    portHandler.openPort()
-    
-    # Baud rate set via Wizard (default value is 57600)
-    portHandler.setBaudRate(115200)
-
-    handler = Protocol2PacketHandler()
 
     groupSyncRead = GroupSyncRead(portHandler, handler, 132, 4)
 

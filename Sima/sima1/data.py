@@ -1,6 +1,11 @@
 L = 125
 d = 72/2
 
+stopped = False
+detect = True
+
+IP = '192.168.0.23'
+
 left_theta = 0
 right_theta = 0
 

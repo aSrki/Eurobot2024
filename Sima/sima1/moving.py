@@ -4,21 +4,20 @@ from math import *
 import data
 
 def stop_sima():
+    data.stopped = False
     while True:
-        # print("U tredu sam")
-        stopped = False
-        if data.distance < 200:
+        if data.distance == 1 and not data.stopped and data.detect:
             print("U detekciji sam")
-            l, r = read_curr_pos_group()
+            l, r = read_curr_pos_group(portHandler, handler)
             l = l*360/4095
             r = r*360/4095
             print(f"DETENKCIJAAAAAAAAAAAAAAAAAAAAAAAAAAA L:{l} R:{r}")
-            if not stopped:
-                stopped = True
-                parallel_rotate([1, 4], [int(l), int(r)])
-        if stopped and data.distance >= 200:
+            data.stopped = True
+            parallel_rotate([1, 4], [int(l), int(r)])
+        if data.distance == 0 and data.stopped:
             parallel_rotate([1,4], [data.old_left, data.old_right])
             time.sleep(1)
+            data.stopped = False
         time.sleep(0.05)
 
 def rotate(deg):
@@ -32,9 +31,14 @@ def rotate(deg):
     data.old_left = data.left_theta
     data.old_right = data.right_theta
     parallel_rotate([1, 4], [data.left_theta, data.right_theta])
-    time.sleep(.5)
+    time.sleep(1)
+    data.detect = True
 
-def translate(len):
+def translate(len, detect = True):
+    data.detect = detect
+    if not detect:
+        while data.stopped == 1:
+            time.sleep(0.01)
     theta = int((len/(2*data.d*pi))*360)
     if len >= 0:
         data.left_theta += theta
@@ -45,11 +49,11 @@ def translate(len):
     data.old_left = data.left_theta
     data.old_right = data.right_theta
     parallel_rotate([1, 4], [data.left_theta, data.right_theta])
-    time.sleep((len/300))
+    time.sleep((len/150))
 
 def init_sima():
     init_servos([1,4])
-    l, r = read_curr_pos_group()
+    l, r = read_curr_pos_group(portHandler, handler)
     data.left_theta = l*360/4095
     data.right_theta = r*360/4095
     parallel_rotate([1, 4], [data.left_theta, data.right_theta], 4000)
