@@ -18,6 +18,7 @@ strategy5.end_step_actions()
 
 strategy5.add_points("unload", 15)
 
+strategy5.set_skip_flag(1)
 
 strategy5.start_step_actions()
 strategy5.go_to_XY(500, 1500, off=120)  # dolazi do tanjira 4 -1210
@@ -30,6 +31,8 @@ strategy5.add_sequence(grip_front_plant())  # -20 #110
 
 strategy5.front_sensors_off()
 strategy5.back_sensors_on()
+
+strategy5.skip_to_flag(1)
 
 strategy5.start_step_actions()
 strategy5.go_to_XY(1500, 1500, False, off=120)  # 1320 ide do biljaka kod sime
