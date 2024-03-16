@@ -2,9 +2,16 @@ import data
 from strategies.choose_strategy import choose_strategy
 import time
 from sensors import SensorsDetection
+import socket
 #from lidar.lidar_detection import LidarDetection
 
 DEBUG = True
+
+# PROMENITI OVAJ IP NA SIMIN
+# PROMENITI U LINIJI 69, heh, BOJU POCETNU
+# za menjanje stratrgije na simi i prebacivanje putanja je /home/sima1/sima/Dynamixel-XL430-W250
+# fajl sa koordinatama je strategy.py 
+sima1_IP = '192.168.0.24'
 
 
 def custom_print(msg):
@@ -54,16 +61,17 @@ class Main:
             #     print("Waiting for CINC")
             #     continue
 
-            
+            host = sima1_IP 
+            port = 12345
 
-            # import socket
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-            # socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            # socket1.settimeout(0.5)
+            s.connect((host, port))
 
-            # socket1.connect((data.SIMA_IP, 1234))
-            # socket1.sendall(b'START')
-            # socket1.close()
+            data = "blue"
+            s.sendall(data.encode())
+
+            s.close()
 
             data.start_time = time.time()
 

@@ -16,6 +16,8 @@ points = 0
 
 SERVO_PORT = "/dev/ttyUSB0"
 
+sima1_IP = '192.168.0.24'
+
 elapsed_time = 0
 start_time = 0
 

@@ -12,7 +12,6 @@ def init_sensor():
 def read_distance():
     while True:
         data.distance = GPIO.input(5)
-        print(data.distance)
         time.sleep(0.01)
 
 def run_sensor(port : serial.Serial):
