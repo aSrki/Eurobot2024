@@ -61,17 +61,21 @@ class Main:
             #     print("Waiting for CINC")
             #     continue
 
-            host = sima1_IP
-            port = 12345
+            # =================sima==============
 
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # host = sima1_IP
+            # port = 12345
 
-            s.connect((host, port))
+            # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-            data = "blue"
-            s.sendall(data.encode())
+            # s.connect((host, port))
 
-            s.close()
+            # sima_color = "blue"
+            # s.sendall(sima_color.encode())
+
+            # s.close()
+
+            # =================kraj sima==============
 
             data.start_time = time.time()
 

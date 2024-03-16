@@ -62,7 +62,7 @@ class Execute:
                     break
 
                 if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout:
-                    custom_print(f"TIMEOUT: {time.time()}")
+                    custom_print(f"TIMEOUT: {data.elapsed_time}")
 
                     data.TIMEOUT_FOR_LAST_STEPS = False
                     data.end_of_match = True
@@ -79,6 +79,7 @@ class Execute:
                 custom_print(data.skip_to)
 
                 if isinstance(self.operation, End) and not self.skipping:
+                    # data.running.clear()
                     data.operations.clear()
                     continue
 
@@ -103,6 +104,7 @@ class Execute:
                         data.skip_to = "timeout"
                         self.raised_timeout = True
                         self.skipping = True
+                        print(f"TIMEOUT TIME: {data.elapsed_time}")
 
                     elif self.operation.time < data.elapsed_time:
                         self.skipping = True

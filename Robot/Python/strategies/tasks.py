@@ -39,6 +39,9 @@ def init_servos():
     ini.move_front_arm(65, v=30)
     ini.move_back_arm(155, v=30)
 
+    ini.deactivate_prednja_grtalca()
+    ini.deactivate_zadnja_grtalca()
+
     return ini.operations
 
 

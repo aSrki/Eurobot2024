@@ -3,8 +3,8 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-color = "yellow"
-# color = "blue"
+# color = "yellow"
+color = "blue"
 
 time_strategy_type = 95000
 
@@ -57,7 +57,7 @@ end_of_match = False
 lidar_view = 450
 
 distance_when_backing = 100
-num_of_attemps = 2
+num_of_attemps = 0
 is_front = None
 is_back = None
 is_detection_front = None

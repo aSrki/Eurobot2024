@@ -45,13 +45,13 @@ def choose_strategy():
         # print(f"Plate number: {data.plate}")
 
     if data.color == "blue":
-        data.time_strategy_type = 110  # 95  ... 90
+        data.time_strategy_type = 95  # 95  ... 90
         data.x_current = 195
         data.y_current = -155
         data.f_current = 0
         return strategy3.operations  # strategy1
     elif data.color == "yellow":
-        data.time_strategy_type = 110  # 95
+        data.time_strategy_type = 95   # 95
         data.x_current = 195  # 295
         data.y_current = 155  # 2700
         data.f_current = 0
