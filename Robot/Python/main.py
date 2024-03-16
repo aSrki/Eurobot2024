@@ -3,28 +3,28 @@ from strategies.choose_strategy import choose_strategy
 import time
 from sensors import SensorsDetection
 import socket
-#from lidar.lidar_detection import LidarDetection
+# from lidar.lidar_detection import LidarDetection
 
 DEBUG = True
 
 # PROMENITI OVAJ IP NA SIMIN
 # PROMENITI U LINIJI 69, heh, BOJU POCETNU
 # za menjanje stratrgije na simi i prebacivanje putanja je /home/sima1/sima/Dynamixel-XL430-W250
-# fajl sa koordinatama je strategy.py 
-sima1_IP = '192.168.0.24'
+# fajl sa koordinatama je strategy.py
+sima1_IP = '192.168.1.143'
 
 
 def custom_print(msg):
     if DEBUG:
         print(msg)
-    #data.log.add_info_message(str(msg))
+    # data.log.add_info_message(str(msg))
 
 
 class Main:
     debug = True
     start_time = 0
     first_basket = True
-    
+
     def start(self):
         try:
             custom_print("STARTING")
@@ -53,15 +53,15 @@ class Main:
 
             # pokretanje execute threada
             self.execute = Execute()
-            #self.lidar = LidarDetection()
+            # self.lidar = LidarDetection()
 
-            #self.basket_comm = BasketCommunication()
+            # self.basket_comm = BasketCommunication()
 
             # while data.cinc == 0:
             #     print("Waiting for CINC")
             #     continue
 
-            host = sima1_IP 
+            host = sima1_IP
             port = 12345
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -75,7 +75,7 @@ class Main:
 
             data.start_time = time.time()
 
-            #self.lidar.start()
+            # self.lidar.start()
             self.execute.start()
 
             # main thread proverava sve vreme da li je kraj meca
@@ -86,8 +86,8 @@ class Main:
                 data.elapsed_time = time.time() - data.start_time
 
                 if data.elapsed_time > 95 and self.first_basket:
-                    #self.basket_comm.start()
-                    #self.basket_comm.get_basket_points()
+                    # self.basket_comm.start()
+                    # self.basket_comm.get_basket_points()
                     self.first_basket = False
 
                 # elif data.elapsed_time > 99.5:
@@ -136,8 +136,8 @@ class Main:
             custom_print(f"ESP ERROR: {str(e)}")
         try:
             custom_print("Gasim lidar")
-            #self.lidar.stop()
-            #if self.lidar.lidar_thread.is_alive():
+            # self.lidar.stop()
+            # if self.lidar.lidar_thread.is_alive():
             #    self.lidar.lidar_thread.join()
         except Exception as e:
             custom_print(f"LIDAR ERROR: str{e}")
