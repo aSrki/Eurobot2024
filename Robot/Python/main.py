@@ -63,17 +63,24 @@ class Main:
 
             # =================sima==============
 
-            # host = sima1_IP
-            # port = 12345
+            try:
+                host = sima1_IP
+                port = 12345
 
-            # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-            # s.connect((host, port))
+                s.settimeout(0.1)
 
-            # sima_color = "blue"
-            # s.sendall(sima_color.encode())
+                s.connect((host, port))
 
-            # s.close()
+                sima_color = "blue"
+                s.sendall(sima_color.encode())
+
+                s.close()
+
+            except Exception as e:
+                print(f"Sime nisu na mrezi: {e}")
+                pass
 
             # =================kraj sima==============
 

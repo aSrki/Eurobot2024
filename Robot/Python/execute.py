@@ -79,8 +79,10 @@ class Execute:
                 custom_print(data.skip_to)
 
                 if isinstance(self.operation, End) and not self.skipping:
-                    # data.running.clear()
+                    data.running.clear()
                     data.operations.clear()
+                    self.moving.position.maxon_right.rotate_with_rpm(0)
+                    self.moving.position.maxon_left.rotate_with_rpm(0)
                     continue
 
                 elif isinstance(self.operation, Skip):
