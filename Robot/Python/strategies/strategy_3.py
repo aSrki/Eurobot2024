@@ -30,7 +30,7 @@ strategy3.end_step_actions()
 
 strategy3.add_sequence(grip_back_plant())  # -20
 
-strategy3.set_skip_flag("")  # restartovanje flag-a
+strategy3.skip_to_flag("reset")  # restartovanje flag-a
 
 strategy3.back_sensors_off()
 strategy3.front_sensors_on()
@@ -152,10 +152,10 @@ strategy3.set_distance_angle(50, 0)
 strategy3.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy3.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
 strategy3.deactivate_prednja_grtalca()
+strategy3.set_distance_angle(-100, 0)
 
 strategy3.add_points("unload", 20)
 
-strategy3.set_distance_angle(-100, 0)
 # strategy3.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy3.move_mechanism(180)
 
@@ -168,8 +168,10 @@ strategy3.move_mechanism(80)
 strategy3.end_step_actions()
 
 strategy3.move_back_arm(165, v=30)
+strategy3.add_points("unload", 6)
 
 strategy3.go_to_XY(1500, -400, False)
+
 strategy3.start_parallel()
 strategy3.move_back_arm(210)
 strategy3.move_mechanism(180)
@@ -177,7 +179,7 @@ strategy3.deactivate_zadnja_grtalca()
 strategy3.end_parallel()
 
 # 10 sto se vratio robot i 6 poena zbog 3 resistant koje je zgrnuo
-strategy3.add_points("unload", 16)
+strategy3.add_points("unload", 10)
 
 strategy3.all_off()
 
@@ -338,6 +340,7 @@ strategy3.move_mechanism(80)
 strategy3.end_step_actions()
 
 strategy3.move_back_arm(165, v=30)
+strategy3.add_points("unload", 6)
 
 strategy3.go_to_XY(1500, -400, False)
 strategy3.start_parallel()
@@ -347,9 +350,9 @@ strategy3.deactivate_zadnja_grtalca()
 strategy3.end_parallel()
 
 # 10 sto se vratio robot i 6 poena zbog 3 resistant koje je zgrnuo
-strategy3.add_points("unload", 16)
-
 strategy3.all_off()
+
+strategy3.add_points("unload", 10)
 
 strategy3.end()
 
@@ -359,7 +362,14 @@ strategy3.skip_to_flag("timeout")
 
 strategy3.back_sensors_on()
 
-strategy3.go_to_XY(1510, -400, False)
+strategy3.go_to_XY(1600, -400, False)
+
+strategy3.start_parallel()
+strategy3.move_back_arm(210)
+strategy3.move_mechanism(180)
+strategy3.deactivate_zadnja_grtalca()
+strategy3.end_parallel()
+strategy3.add_points("unload", 10)
 
 strategy3.all_off()
 

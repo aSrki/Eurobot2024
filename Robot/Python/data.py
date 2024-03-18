@@ -3,8 +3,8 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-# color = "yellow"
-color = "blue"
+color = "yellow"
+# color = "blue"
 
 time_strategy_type = 95000
 
@@ -61,8 +61,8 @@ num_of_attemps = 0
 is_front = None
 is_back = None
 is_detection_front = None
-stop_time = 1  # kada staje
-backing_time = 1  # kada se vraca nazad
+stop_time = 0.5  # kada staje
+backing_time = 0.5  # kada se vraca nazad
 
 offset = 0
 
@@ -92,7 +92,7 @@ class TypeOfAction(Enum):
 class MovingData:
     '''used primerely in moving.py for tracing correctly moving'''
     # brzina pri kretanju
-    ms_one_degre = 0.02  # 0.0084
+    ms_one_degre = 0.025  # 0.0084
     robot_speed = 5/1000
 
     pause_when_ending_moving = 0.1  # 0.3 # 0.15
