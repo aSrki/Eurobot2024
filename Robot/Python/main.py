@@ -75,7 +75,7 @@ class Main:
 
                 sima_color = "blue"
                 s.sendall(sima_color.encode())
-
+                print("POSLAO SIMI")
                 s.close()
 
             except Exception as e:

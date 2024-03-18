@@ -16,34 +16,50 @@ tof_port = serial.Serial(port ='/dev/ttyS0', baudrate = 115200, bytesize = 8, pa
 init_sima()
 init_sensor()
 
-threading.Thread(target=read_distance).start()
-threading.Thread(target=stop_sima).start()
-
 while True:
+    print("STARTED")
+
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
+
     conn, addr = s.accept()
     comm_data = conn.recv(1024).decode()
+
     print(f"Received {comm_data}")
     conn.close()
 
-    time.sleep(90)
+    distance_acquire_thread = threading.Thread(target=read_distance, daemon=True)
+    stop_sima_thread = threading.Thread(target=stop_sima)
+
+    time.sleep(5)
+
+    data.stop_threads = False
+
+    distance_acquire_thread.start()
+    stop_sima_thread.start()
 
     if comm_data == 'yellow':
         translate(200)
-        rotate(90)
-        translate(900)
-        rotate(-90)
-        translate(400)
-        rotate(90)
-        translate(600, False)
+        rotate(95)
+        translate(700)
+        translate(370, False)
+        print("yellow gotov")
+
     elif comm_data == 'blue':
         translate(200)
-        rotate(-90)
-        translate(900)
-        rotate(90)
-        translate(400)
-        rotate(-90)
-        translate(600, False)
+        rotate(-95)
+        translate(700)
+        translate(370, False)
+        print("blue gotov")
+
+    data.stop_threads = True
+
+    distance_acquire_thread.join()
+    stop_sima_thread.join()
+
+    data.stop_threads = False
+
+    stop_moving()
+
     print("DONE")
