@@ -1,8 +1,12 @@
+import threading
+
 L = 125
 d = 72/2
 
 stopped = False
 detect = True
+
+stop_threads = False
 
 IP = '192.168.0.23'
 

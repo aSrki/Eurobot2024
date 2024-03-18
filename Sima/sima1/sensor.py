@@ -10,9 +10,10 @@ def init_sensor():
     GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def read_distance():
-    while True:
+    while not data.stop_threads:
         data.distance = GPIO.input(5)
-        time.sleep(0.01)
+        time.sleep(0.1)
+
 
 def run_sensor(port : serial.Serial):
     tof_thread = threading.Thread(target=read_distance, args=[port])

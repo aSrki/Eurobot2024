@@ -75,7 +75,7 @@ class Main:
 
             #     s.connect((host, port))
 
-            #     s.sendall(data.color.encode())
+            # s.sendall(data.color.encode())
 
             #     s.close()
 

@@ -3,9 +3,16 @@ import time
 from math import *
 import data
 
+def stop_moving():
+    l, r = read_curr_pos_group(portHandler, handler)
+    l = l*360/4095
+    r = r*360/4095
+    parallel_rotate([1, 4], [int(l), int(r)])
+
 def stop_sima():
+    print("radi tred")
     data.stopped = False
-    while True:
+    while not data.stop_threads:
         if data.distance == 1 and not data.stopped and data.detect:
             print("U detekciji sam")
             l, r = read_curr_pos_group(portHandler, handler)
@@ -18,9 +25,12 @@ def stop_sima():
             parallel_rotate([1,4], [data.old_left, data.old_right])
             time.sleep(1)
             data.stopped = False
+            print("stojim")
         time.sleep(0.05)
 
+
 def rotate(deg):
+    data.detect = False
     theta = int((((deg * data.L/2)/data.d)))
     if deg >= 0:
         data.left_theta -= theta
@@ -32,6 +42,7 @@ def rotate(deg):
     data.old_right = data.right_theta
     parallel_rotate([1, 4], [data.left_theta, data.right_theta])
     time.sleep(1)
+    print("rotiram")
     data.detect = True
 
 def translate(len, detect = True):
@@ -46,9 +57,11 @@ def translate(len, detect = True):
     else:
         data.left_theta += theta
         data.right_theta -= theta
+
     data.old_left = data.left_theta
     data.old_right = data.right_theta
     parallel_rotate([1, 4], [data.left_theta, data.right_theta])
+    print("idem")
     time.sleep((len/150))
 
 def init_sima():
