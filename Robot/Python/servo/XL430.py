@@ -143,8 +143,8 @@ def parallel_rotate(ids, angles):
     # Clear syncwrite parameter storage
     groupSyncWritePosition.clearParam()
 
-    ANGLE_TOLERANCE = 4
-    MAX_ANGLE = 225
+    MAX_ANGLE_BACK = 220
+    MAX_ANGLE_FRONT = 215
     max_load = 500
     num_success = len(ids)
     success_cnt = 0
@@ -172,7 +172,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
@@ -189,7 +189,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
@@ -206,7 +206,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
@@ -223,7 +223,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
@@ -240,7 +240,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1
@@ -257,7 +257,7 @@ def parallel_rotate(ids, angles):
                         print("LOAAAADDDDD")
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
-                        if abs(current_position - MAX_ANGLE) < ANGLE_TOLERANCE:
+                        if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
                         success_cnt += 1

@@ -57,7 +57,7 @@ end_of_match = False
 lidar_view = 450
 
 distance_when_backing = 100
-num_of_attemps = 0
+num_of_attemps = 2
 is_front = None
 is_back = None
 is_detection_front = None

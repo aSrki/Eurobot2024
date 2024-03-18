@@ -9,7 +9,7 @@ strategy3 = Strategy()
 strategy3.rotate_to(0)
 strategy3.back_sensors_on()
 strategy3.start_step_actions()
-strategy3.go_to_XY(195, -800, False, g=0.4)  # rotira panele #y = 750
+strategy3.go_to_XY(195, -830, False, g=0.4)  # rotira panele #y = 750
 strategy3.activate_triangle()
 strategy3.deactivate_prednja_grtalca()
 strategy3.deactivate_zadnja_grtalca()

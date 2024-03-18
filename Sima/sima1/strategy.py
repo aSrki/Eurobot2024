@@ -11,7 +11,8 @@ first_stopped = False
 host = '0.0.0.0'
 port = 12345
 
-tof_port = serial.Serial(port ='/dev/ttyS0', baudrate = 115200, bytesize = 8, parity = 'N', stopbits = 1, timeout = 1)
+tof_port = serial.Serial(port='/dev/ttyS0', baudrate=115200,
+                         bytesize=8, parity='N', stopbits=1, timeout=1)
 
 init_sima()
 init_sensor()
@@ -29,10 +30,11 @@ while True:
     print(f"Received {comm_data}")
     conn.close()
 
-    distance_acquire_thread = threading.Thread(target=read_distance, daemon=True)
+    distance_acquire_thread = threading.Thread(
+        target=read_distance, daemon=True)
     stop_sima_thread = threading.Thread(target=stop_sima)
 
-    time.sleep(5)
+    time.sleep(90)
 
     data.stop_threads = False
 

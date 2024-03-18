@@ -90,6 +90,7 @@ def grip_front_plant():
     # gfp.start_parallel()
     gfp.move_front_arm(72, v=30)  # 72
     gfp.grip_front()
+    gfp.check_object()
     # gfp.end_parallel(0.2)
 
     # gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
