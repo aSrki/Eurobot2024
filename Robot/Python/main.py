@@ -65,23 +65,23 @@ class Main:
 
             # =================sima==============
 
-            # try:
-            #     host = sima1_IP
-            #     port = 12345
+            try:
+                host = sima1_IP
+                port = 12345
 
-            #     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-            #     s.settimeout(0.1)
+                s.settimeout(0.1)
 
-            #     s.connect((host, port))
+                s.connect((host, port))
 
-            # s.sendall(data.color.encode())
+                s.sendall(data.color.encode())
 
-            #     s.close()
+                s.close()
 
-            # except Exception as e:
-            #     print(f"Sime nisu na mrezi: {e}")
-            #     pass
+            except Exception as e:
+                print(f"Sime nisu na mrezi: {e}")
+                pass
 
             # =================kraj sima==============
 
