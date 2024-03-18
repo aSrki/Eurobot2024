@@ -302,20 +302,21 @@ strategy5.start_step_actions()
 strategy5.set_distance_angle(-100, 0)
 strategy5.grip_front()
 strategy5.deactivate_zadnja_grtalca()
+strategy5.move_back_arm(210, v=30)
 strategy5.end_step_actions()
 
 
-strategy5.move_back_arm(210, v=30)
-strategy5.go_to_XY(590, 300, False)  # (624, 285)
+strategy5.go_to_XY(590, 330, False)  # (624, 285)
 strategy5.rotate_to(0)
 # strategy5.move_back_arm(190, v=15)
-strategy5.move_mechanism(200)  # izbaci ruku
+# bilo 200 kada je prethodni GOTO bio na 300 po Y# izbaci ruku
+strategy5.move_mechanism(150)
 strategy5.move_back_arm(180, v=30)
 strategy5.ungrip_back()
 strategy5.move_back_arm(210, v=30)
 
 strategy5.deactivate_zadnja_grtalca(20, 20)
-strategy5.set_distance_angle(-50, 0)
+strategy5.set_distance_angle(-80, 0)
 strategy5.set_distance_angle(0, -90, g=0.3)  # zatorira ka tanjiru
 strategy5.set_distance_angle(-100, 0, g=0.5)  # udje u tanjur
 strategy5.deactivate_zadnja_grtalca()

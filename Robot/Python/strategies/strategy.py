@@ -110,9 +110,9 @@ class Strategy:
         check = TimeCheck(time, flag)
         self.operations.append(check)
 
-    # def check_cake(self):
-    #     check = CheckCakes()
-    #     self.operations.append(check)
+    def check_object(self):
+        check = CheckObject()
+        self.operations.append(check)
 
     def add_sequence(self, sequence):
         '''sequence - lista operacija'''

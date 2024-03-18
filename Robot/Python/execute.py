@@ -112,7 +112,16 @@ class Execute:
                         self.skipping = True
 
                     continue
+                elif isinstance(self.operation, CheckObject) and not self.skipping:
+                    if data.object_sensor == 0:
+                        custom_print("OBJECT IN ROBOT")
+                    else:
+                        self.last_flag = data.skip_to
+                        data.skip_to = "skip_object"
+                        self.skipping = True
+                        custom_print("NO OBJECT")
 
+                    continue
                 # TODO: preimenovati imena flagova na relevantne
                 elif isinstance(self.operation, Points) and not self.skipping:
                     if self.operation.type == "sort":

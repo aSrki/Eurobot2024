@@ -127,7 +127,7 @@ class TimeCheck:
         self.skip_to_flag = flag
 
 
-class CheckCakes:
+class CheckObject:
 
     def __init__(self):
         pass

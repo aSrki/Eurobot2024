@@ -228,7 +228,7 @@ strategy3.end_step_actions()
 strategy3.back_sensors_off()
 
 strategy3.start_step_actions()  # dolazi i priprema ruku
-strategy3.go_to_XY(1820, -762, False)  # 1850
+strategy3.go_to_XY(1850, -762, False)  # 1850
 strategy3.move_back_arm(210, v=15)
 strategy3.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 strategy3.end_step_actions()
@@ -289,9 +289,9 @@ strategy3.add_sequence(grip_front_plant())  # 130
 strategy3.front_sensors_off()
 strategy3.back_sensors_on()
 
-strategy3.go_to_XY(612, -600, False)  # ide da ih ostavi kako zna i ume
+strategy3.go_to_XY(624, -600, False)  # ide da ih ostavi kako zna i ume
 strategy3.start_step_actions()
-strategy3.go_to_XY(612, -285, False)  # 350
+strategy3.go_to_XY(624, -285, False)  # 350
 strategy3.move_back_arm(210, v=15)  # podize ruku
 strategy3.end_step_actions()
 
@@ -307,20 +307,22 @@ strategy3.move_back_arm(200, v=30)
 strategy3.start_step_actions()
 strategy3.set_distance_angle(100, 0)
 strategy3.grip_back()
-strategy3.activate_prednja_grtalca(350, 340)  # izbacuje desnu grtalcu
+strategy3.deactivate_prednja_grtalca()  # izbacuje desnu grtalcu
+strategy3.move_front_arm(110, v=30)
 strategy3.end_step_actions()
 
 
-strategy3.move_front_arm(110, v=30)
-strategy3.go_to_XY(624, -300)  # 285 325
+strategy3.go_to_XY(590, -330)  # 285 325
 strategy3.rotate_to(0)
 # strategy3.move_back_arm(190, v=15)
-strategy3.move_mechanism(160)  # izbaci ruku 170
+# bilo 160 kada je prethodni GOTO bio na 300 po Y # izbaci ruku 170
+strategy3.move_mechanism(210)
 strategy3.move_front_arm(90, v=30)  # 90
 strategy3.ungrip_front()
 strategy3.move_front_arm(120, v=30)
 
-strategy3.set_distance_angle(50, 0)
+strategy3.activate_prednja_grtalca(350, 340)
+strategy3.set_distance_angle(80, 0)
 strategy3.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 strategy3.set_distance_angle(100, 0, g=0.5)  # udje u tanjur
 strategy3.deactivate_prednja_grtalca()
@@ -359,6 +361,7 @@ strategy3.end()
 # ==========================TIMEOUT ===========================
 
 strategy3.skip_to_flag("timeout")
+strategy3.skip_to_flag("skip_object")
 
 strategy3.back_sensors_on()
 

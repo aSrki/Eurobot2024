@@ -119,6 +119,7 @@ def grip_back_plant():
     # gbp.start_parallel()
     gbp.move_back_arm(159, v=30)  # 162
     gbp.grip_back()
+    gbp.check_object()
     # gbp.set_distance_angle(20,0)
     # gbp.end_parallel(0.2)
     gbp.move_back_arm(200, v=15)  # 185
