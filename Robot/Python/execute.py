@@ -117,6 +117,7 @@ class Execute:
                         custom_print("OBJECT IN ROBOT")
                     else:
                         self.last_flag = data.skip_to
+                        data.points -= 24
                         data.skip_to = "skip_object"
                         self.skipping = True
                         custom_print("NO OBJECT")

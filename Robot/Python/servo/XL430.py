@@ -464,7 +464,7 @@ class ServoXL430:
 
                 print("[ID:%03d] reboot Succeeded\n" % self.id)
 
-                data.stop = True
+                # data.stop = True
                 data.dead_servo = self.id
                 return
 

@@ -7,8 +7,7 @@ from strategies.strategy import Strategy
 strategy3 = Strategy()
 
 strategy3.rotate_to(0)
-strategy3.back_sensors_on()
-strategy3.front_lidar_on()
+strategy3.back_all_on()
 strategy3.start_step_actions()
 strategy3.go_to_XY(195, -830, False, g=0.4)  # rotira panele #y = 750
 strategy3.activate_triangle()

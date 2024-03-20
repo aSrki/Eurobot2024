@@ -7,9 +7,9 @@ from strategies.strategy import Strategy
 strategy5 = Strategy()
 
 strategy5.rotate_to(0)
-strategy5.front_sensors_on()
+strategy5.front_all_on()
 strategy5.start_step_actions()
-strategy5.go_to_XY(195, 800, g=0.4)  # rotira panele #y = 750
+strategy5.go_to_XY(195, 830, g=0.4)  # rotira panele #y = 750
 strategy5.activate_triangle()
 strategy5.deactivate_prednja_grtalca()
 strategy5.deactivate_zadnja_grtalca()
