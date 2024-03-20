@@ -3,7 +3,7 @@ from strategies.choose_strategy import choose_strategy
 import time
 from sensors import SensorsDetection
 import socket
-# from lidar.lidar_detection import LidarDetection
+from lidar.lidar_detection import LidarDetection
 
 DEBUG = True
 
@@ -53,7 +53,7 @@ class Main:
 
             # pokretanje execute threada
             self.execute = Execute()
-            # self.lidar = LidarDetection()
+            self.lidar = LidarDetection()
 
             # self.basket_comm = BasketCommunication()
 
@@ -87,7 +87,7 @@ class Main:
 
             data.start_time = time.time()
 
-            # self.lidar.start()
+            self.lidar.start()
             self.execute.start()
 
             # main thread proverava sve vreme da li je kraj meca

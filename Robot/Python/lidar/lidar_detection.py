@@ -23,12 +23,12 @@ class LidarDetection:
         self.lidar = None
         self.max_num_of_scans = 3
         self.transform = TransformMatrix(50)
-        self.front_cone = 120
-        self.back_cone = 120
+        self.front_cone = 100
+        self.back_cone = 100
         self.distance = 1000
         self.lidar_thread = None
         self.init()
-
+        
     def start(self):
         self.lidar_thread = threading.Thread(target=self.scan)
         self.lidar_thread.start()
@@ -65,7 +65,7 @@ class LidarDetection:
 
                 for (_, angle, distance) in scan:
                     angle = min([359, math.floor(angle)])
-                    # scan_data[angle] = distance
+                    scan_data[angle] = distance
 
                     # proverava prednju stranu ako je ukkljucena detekcija
                     if ((angle > 360 - self.front_cone/2) or
@@ -80,7 +80,7 @@ class LidarDetection:
                                 x, data.x_current, y, data.y_current)
 
                             if dist < data.lidar_view:
-                                # print("Detected")
+                                print("LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
                                 data.front_lidar_detection = True
                     # proverava zadnju stranu ako je ukljucena detekcija
                     elif ((angle < 180 + self.back_cone/2) and
@@ -95,7 +95,7 @@ class LidarDetection:
                                 x, data.x_current, y, data.y_current)
 
                             if dist < data.lidar_view:
-                                # print("Detected")
+                                print("LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
                                 data.back_lidar_detection = True
                     else:
                         # print("LIDAR ALL OFF")
@@ -103,8 +103,6 @@ class LidarDetection:
                         data.front_lidar_detection = False
 
                         # plt.plot(y, x, "-ro")
-
-                    # print(scan_data)
 
             # plt.draw()
             # plt.pause(0.01)

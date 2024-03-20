@@ -14,7 +14,8 @@ running = threading.Event()
 
 points = 0
 
-SERVO_PORT = "/dev/ttyUSB0"
+SERVO_PORT = "/dev/ttySERVO"
+LIDAR_PORT = "/dev/ttyLIDAR"
 
 sima1_IP = '192.168.0.24'
 
@@ -54,7 +55,7 @@ end_of_match = False
 
 # parametri za detekciju
 
-lidar_view = 450
+lidar_view = 1000
 
 distance_when_backing = 100
 num_of_attemps = 2
