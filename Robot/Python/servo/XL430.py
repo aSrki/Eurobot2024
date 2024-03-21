@@ -267,6 +267,77 @@ def parallel_rotate(ids, angles):
             data.object_sensor = 1
             print("all grippers empty")
         return
+    
+    # Grtalica reboot
+    array_grtalica = [1, 4, 5, 10]
+    max_load_grtalica = 950
+    if any(i in array_grtalica for i in ids):
+        # print("uso sam u onaj IF")
+        while success_cnt < num_success:
+            # print("uso sam u onaj WHILE")
+            for i in range(num_success):
+                # print("uso sam u onaj FOR")
+                if (int(ids[i]) == data.IDS.id_grtalica_zadnja_leva.value):
+                    # print("servo 1")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    print(
+                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(f"load 1: {current_load}")
+                    if current_load > max_load_grtalica:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_grtalica_zadnja_desna.value):
+                    # print("servo 4")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    print(
+                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(f"load 4: {current_load}")
+                    if current_load > max_load_grtalica:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_grtalica_prednja_leva.value):
+                    # print("servo 5")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    print(
+                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(f"load 5: {current_load}")
+                    if current_load > max_load_grtalica:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1
+                elif (ids[i] == data.IDS.id_grtalica_prednja_desna.value):
+                    # print("servo 10")
+                    id = ids[i]
+                    current_position = read_current_position(
+                        handler, portHandler, id)
+                    current_load = read_current_load(handler, portHandler, id)
+                    print(
+                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(f"load 10: {current_load}")
+                    if current_load > max_load:
+                        print("LOAAAADDDDD")
+                        rotate(handler, portHandler, id, current_position - 1)
+                        success_cnt += 1
+                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                        success_cnt += 1                        
+        return
 
 
 class ServoXL430:

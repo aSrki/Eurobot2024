@@ -75,7 +75,7 @@ class LidarDetection:
                         x, y = self.transform.lidar2table(
                             data.x_current, data.y_current, distance, angle, data.f_current)
 
-                        if 50 < x < 1950 and 50 < y < 2950:
+                        if (50 < x < 1950 and 50 < y < 2950) or (50 < x < 1950 and -2950 < y < -50):
                             dist = euclidian_distance(
                                 x, data.x_current, y, data.y_current)
 
@@ -91,7 +91,7 @@ class LidarDetection:
                         x, y = self.transform.lidar2table(
                             data.x_current, data.y_current, distance, angle, data.f_current)
 
-                        if 50 < x < 1950 and 50 < y < 2950:
+                        if (50 < x < 1950 and 50 < y < 2950) or (50 < x < 1950 and -2950 < y < -50):
                             dist = euclidian_distance(
                                 x, data.x_current, y, data.y_current)
 
