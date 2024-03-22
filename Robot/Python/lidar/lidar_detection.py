@@ -28,7 +28,7 @@ class LidarDetection:
         self.distance = 1000
         self.lidar_thread = None
         self.init()
-        
+
     def start(self):
         self.lidar_thread = threading.Thread(target=self.scan)
         self.lidar_thread.start()
@@ -75,12 +75,13 @@ class LidarDetection:
                         x, y = self.transform.lidar2table(
                             data.x_current, data.y_current, distance, angle, data.f_current)
 
-                        if 50 < x < 1950 and 50 < y < 2950:
+                        if (50 < x < 1950 and 50 < y < 2950) or (50 < x < 1950 and -2950 < y < -50):
                             dist = euclidian_distance(
                                 x, data.x_current, y, data.y_current)
 
                             if dist < data.lidar_view:
-                                print("LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
+                                print(
+                                    "LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
                                 data.front_lidar_detection = True
                     # proverava zadnju stranu ako je ukljucena detekcija
                     elif ((angle < 180 + self.back_cone/2) and
@@ -90,12 +91,13 @@ class LidarDetection:
                         x, y = self.transform.lidar2table(
                             data.x_current, data.y_current, distance, angle, data.f_current)
 
-                        if 50 < x < 1950 and 50 < y < 2950:
+                        if (50 < x < 1950 and 50 < y < 2950) or (50 < x < 1950 and -2950 < y < -50):
                             dist = euclidian_distance(
                                 x, data.x_current, y, data.y_current)
 
                             if dist < data.lidar_view:
-                                print("LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
+                                print(
+                                    "LIIIIIIDDDDDDDDDDAAAAAAAAARRRRRRRRRRRRRR Detected")
                                 data.back_lidar_detection = True
                     else:
                         # print("LIDAR ALL OFF")

@@ -52,13 +52,22 @@ class Servo_Moving:
 
     # dovodi sve servoe na pocetni polozaj
     def home(self):
+        ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
+        ServoXL430(IDS.id_centar.value).rotate(180)
+        ServoXL430(IDS.id_gripper_back_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_3.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_3.value).rotate(215)
+        ServoXL430(IDS.id_back_arm.value).rotate(158, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(68, 30)
+        ServoXL430(IDS.id_grtalica_prednja_leva.value).rotate(350)
+        ServoXL430(IDS.id_grtalica_prednja_desna.value).rotate(1)
+        ServoXL430(IDS.id_grtalica_zadnja_desna.value).rotate(359)
+        ServoXL430(IDS.id_grtalica_zadnja_leva.value).rotate(10)
         return
-        # ServoXL430(IDS.id_cherry_pipe.value).rotate(170)
-        # ServoXL430(IDS.id_vacuum.value).rotate(173)
-        # ServoXL430(IDS.id_reservoir_door.value).rotate(190)
-        # ServoXL430(IDS.id_gripper.value).rotate(48)
-        # ServoXL430(IDS.id_lift.value).rotate(10)
-        # ServoXL430(IDS.id_doser.value).rotate(310)
 
 
 if __name__ == "__main__":
