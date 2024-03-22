@@ -1,5 +1,6 @@
 import data
 from strategies.choose_strategy import choose_strategy
+from servo.servo_moving import Servo_Moving
 import time
 from sensors import SensorsDetection
 import socket
@@ -49,10 +50,17 @@ class Main:
             sensors = SensorsDetection()
             sensors.start()
 
+            self.servo = Servo_Moving()
+            self.servo.home()
+
+            a = input("Press ENTER to start: ")
+
             from execute import Execute
 
             # pokretanje execute threada
             self.execute = Execute()
+            # self.execute.start()
+
             self.lidar = LidarDetection()
 
             # self.basket_comm = BasketCommunication()
@@ -61,8 +69,7 @@ class Main:
             #     print("Waiting for CINC")
             #     continue
 
-            a = input("Press any button to start: ")
-
+            a = input("Press ENTER OPET to start: ")
             # =================sima==============
 
             try:
