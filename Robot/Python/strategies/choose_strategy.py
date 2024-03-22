@@ -21,6 +21,7 @@ from strategies.strategy_0 import strategy0
 from strategies.strategy_1 import strategy1
 from strategies.strategy_2 import strategy2
 from strategies.strategy_3 import strategy3
+from strategies.strategy3_brza import strategy3_brza
 from strategies.strategy_5 import strategy5
 
 if __name__ == '__main__':

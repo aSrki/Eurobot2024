@@ -267,7 +267,7 @@ def parallel_rotate(ids, angles):
             data.object_sensor = 1
             print("all grippers empty")
         return
-    
+
     # Grtalica reboot
     array_grtalica = [1, 4, 5, 10]
     max_load_grtalica = 950
@@ -336,7 +336,7 @@ def parallel_rotate(ids, angles):
                         rotate(handler, portHandler, id, current_position - 1)
                         success_cnt += 1
                     elif abs((current_position/360)*4095 - angles[i]) < 20:
-                        success_cnt += 1                        
+                        success_cnt += 1
         return
 
 
@@ -432,7 +432,8 @@ class ServoXL430:
             print("TORQUE : %s" % self.handler.getRxPacketError(servo_error))
 
     def __del__(self):
-        self.portHandler.closePort()
+        # self.portHandler.closePort()
+        return
 
     def read_current_position(self):
         try:
