@@ -1,7 +1,9 @@
 import threading
 
 L = 125
-d = 72/2
+d = 75/2
+
+start_time = 0
 
 stopped = False
 detect = True
