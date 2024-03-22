@@ -147,7 +147,7 @@ def init_servos(ids):
             print("MULTIMODE : %s" %
                     handler.getRxPacketError(servo_error))
 
-def parallel_rotate(ids, angles, v = 300):
+def parallel_rotate(ids, angles, v = 500):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)

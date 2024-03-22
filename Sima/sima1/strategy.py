@@ -34,7 +34,9 @@ while True:
         target=read_distance, daemon=True)
     stop_sima_thread = threading.Thread(target=stop_sima)
 
-    time.sleep(90)
+    data.start_time = time.time()
+
+    time.sleep(5)
 
     data.stop_threads = False
 
@@ -43,22 +45,24 @@ while True:
 
     if comm_data == 'yellow':
         translate(200)
-        rotate(95)
+        rotate(90)
         translate(700)
         translate(370, False)
         print("yellow gotov")
 
     elif comm_data == 'blue':
         translate(200)
-        rotate(-95)
+        rotate(-90)
         translate(700)
         translate(370, False)
         print("blue gotov")
 
     data.stop_threads = True
-
+    print("Ovde sam 1")
     distance_acquire_thread.join()
+    print("Ovde sam 2")
     stop_sima_thread.join()
+    print("Ovde sam 3")
 
     data.stop_threads = False
 
