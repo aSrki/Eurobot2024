@@ -220,7 +220,7 @@ class PositionRegulation:
             rotpoj = 1
 
             KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 65 * pojacanje * rotpoj  # 75 bilo
+            KpR = 65 * pojacanje * rotpoj  # 65 bilo
 
             TiR = 660000000  # 6600 # 200
             TiK = 660000000  # 5200

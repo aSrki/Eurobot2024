@@ -55,7 +55,7 @@ end_of_match = False
 
 # parametri za detekciju
 
-lidar_view = 1000
+lidar_view = 450
 
 distance_when_backing = 100
 num_of_attemps = 2

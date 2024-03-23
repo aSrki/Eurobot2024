@@ -50,10 +50,12 @@ class Main:
             sensors = SensorsDetection()
             sensors.start()
 
-            self.servo = Servo_Moving()
-            self.servo.home()
+            # ================================================INIT SERVOA
+            # self.servo = Servo_Moving()
+            # self.servo.home()
+            # ===========================================================
 
-            a = input("Press ENTER to start: ")
+            # a = input("Press ENTER to start: ")
 
             from execute import Execute
 
@@ -69,7 +71,6 @@ class Main:
             #     print("Waiting for CINC")
             #     continue
 
-            a = input("Press ENTER OPET to start: ")
             # =================sima==============
 
             try:
@@ -78,19 +79,29 @@ class Main:
 
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-                s.settimeout(0.1)
+                # s.settimeout(1)
 
                 s.connect((host, port))
 
-                s.sendall(data.color.encode())
-
-                s.close()
+                print("Sima se povezao")
 
             except Exception as e:
                 print(f"Sime nisu na mrezi: {e}")
                 pass
 
             # =================kraj sima==============
+
+            a = input("Press ENTER OPET to start: ")
+            try:
+                s.sendall(data.color.encode())
+                s.sendall(data.color.encode())
+                s.sendall(data.color.encode())
+
+                print("Simi je poslato")
+            except Exception as e:
+                print(f"nije poslato jer: {e}")
+
+            s.close()
 
             data.start_time = time.time()
 
@@ -104,19 +115,11 @@ class Main:
 
                 data.elapsed_time = time.time() - data.start_time
 
-                if data.elapsed_time > 95 and self.first_basket:
-                    # self.basket_comm.start()
-                    # self.basket_comm.get_basket_points()
-                    self.first_basket = False
+                if data.elapsed_time > 101:
 
-                # elif data.elapsed_time > 99.5:
-                #     if data.basket_points != None:
-                #         data.points += data.basket_points
-                #     else:
-                #         data.points += data.cherry_points
-                #     # zaustavlja sve ako je vreme meca isteklo pre nego sto je zavrsio sve korake
-                #     data.running.clear()
-                #     continue
+                    # zaustavlja sve ako je vreme meca isteklo pre nego sto je zavrsio sve korake
+                    data.running.clear()
+                    break
                 elif data.elapsed_time > data.time_strategy_type and not data.end_of_match:
                     # prekida izvrsavanje strategije ako je doslo vreme da se vraca u bazu
                     data.TIMEOUT_FOR_LAST_STEPS = True

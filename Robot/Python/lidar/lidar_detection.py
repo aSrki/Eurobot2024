@@ -25,7 +25,7 @@ class LidarDetection:
         self.transform = TransformMatrix(50)
         self.front_cone = 100
         self.back_cone = 100
-        self.distance = 1000
+        self.distance = 450
         self.lidar_thread = None
         self.init()
 
