@@ -8,13 +8,13 @@ def stop_moving():
     l = l*360/4095
     r = r*360/4095
     print(f"STOP L:{l} R:{r}")
-    parallel_rotate([1, 4], [int(l), int(r)])
+    parallel_rotate([1, 4], [int(l), int(r)], a = 600)
 
 def stop_sima():
     print("radi tred")
     data.stopped = False
     while not data.stop_threads:
-        if (time.time() - data.start_time) > 20:
+        if (time.time() - data.start_time) > 100:
             print(time.time() - data.start_time)
             stop_moving()
             data.stop_threads = True
@@ -27,9 +27,9 @@ def stop_sima():
                 r = r*360/4095
                 print(f"DETENKCIJAAAAAAAAAAAAAAAAAAAAAAAAAAA L:{l} R:{r}")
                 data.stopped = True
-                parallel_rotate([1, 4], [int(l), int(r)])
+                parallel_rotate([1, 4], [int(l), int(r)], a = 600)
             if data.distance == 0 and data.stopped and not data.stop_threads:
-                parallel_rotate([1,4], [data.old_left, data.old_right])
+                parallel_rotate([1,4], [data.old_left, data.old_right], a = 100)
                 time.sleep(2)
                 data.stopped = False
                 print("stojim")
@@ -49,7 +49,7 @@ def rotate(deg):
         data.right_theta -= theta
     data.old_left = data.left_theta
     data.old_right = data.right_theta
-    parallel_rotate([1, 4], [data.left_theta, data.right_theta])
+    parallel_rotate([1, 4], [data.left_theta, data.right_theta], a = 200)
     time.sleep(0.5)
     print("rotiram")
     data.detect = True
@@ -73,7 +73,7 @@ def translate(len, detect = True):
     data.old_left = data.left_theta
     data.old_right = data.right_theta
     if not data.stop_threads:
-        parallel_rotate([1, 4], [data.left_theta, data.right_theta])
+        parallel_rotate([1, 4], [data.left_theta, data.right_theta], a = 100)
         print(f"idem : {len}")
         time.sleep((len/330))
 
