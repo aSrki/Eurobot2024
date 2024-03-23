@@ -19,55 +19,13 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="button_sto4">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>719</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Zelena</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto3">
-   <property name="geometry">
-    <rect>
-     <x>216</x>
-     <y>0</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Plava</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="button_sto2">
    <property name="geometry">
     <rect>
-     <x>396</x>
-     <y>0</y>
-     <width>90</width>
-     <height>90</height>
+     <x>340</x>
+     <y>120</y>
+     <width>251</width>
+     <height>211</height>
     </rect>
    </property>
    <property name="maximumSize">
@@ -82,16 +40,16 @@
     </font>
    </property>
    <property name="text">
-    <string>Zelena</string>
+    <string>Start</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button_sto1">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>0</y>
-     <width>90</width>
-     <height>90</height>
+     <x>70</x>
+     <y>120</y>
+     <width>231</width>
+     <height>211</height>
     </rect>
    </property>
    <property name="font">
@@ -100,133 +58,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Plava</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto5">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>110</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Plava</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto6">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>230</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>719</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Zelena</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto7">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>350</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>SORT</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto8">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>350</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>719</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Zelena</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto9">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>350</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Plava</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_sto10">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>350</y>
-     <width>90</width>
-     <height>90</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>719</width>
-     <height>480</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>15</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Zelena</string>
+    <string>Init servos</string>
    </property>
   </widget>
  </widget>

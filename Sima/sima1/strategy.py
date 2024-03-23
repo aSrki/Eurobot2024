@@ -36,7 +36,7 @@ while True:
 
     data.start_time = time.time()
 
-    time.sleep(5)
+    time.sleep(90)
 
     data.stop_threads = False
 
@@ -44,18 +44,25 @@ while True:
     stop_sima_thread.start()
 
     if comm_data == 'yellow':
-        translate(200)
+        translate(100)
         rotate(90)
-        translate(700)
-        translate(370, False)
-        print("yellow gotov")
+        translate(500)
+        translate(200, False)
+        rotate(-90)
+        translate(230, False)
 
     elif comm_data == 'blue':
-        translate(200)
+        translate(100)
         rotate(-90)
-        translate(700)
-        translate(370, False)
-        print("blue gotov")
+        translate(500)
+        translate(200, False)
+        rotate(90)
+        translate(230, False)
+        # translate(1800)
+        # rotate(-90)
+        # translate(500)
+        # translate(300, False)
+        # print("blue gotov")
 
     data.stop_threads = True
     print("Ovde sam 1")
@@ -66,6 +73,6 @@ while True:
 
     data.stop_threads = False
 
-    stop_moving()
+    # stop_moving()
 
     print("DONE")
