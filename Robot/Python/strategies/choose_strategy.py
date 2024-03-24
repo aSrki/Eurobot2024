@@ -21,8 +21,9 @@ from strategies.strategy_0 import strategy0
 from strategies.strategy_1 import strategy1
 from strategies.strategy_2 import strategy2
 from strategies.strategy_3 import strategy3
-from strategies.strategy3_brza import strategy3_brza
 from strategies.strategy_5 import strategy5
+from strategies.strategy3_brza import strategy3_brza
+from strategies.strategy5_brza import strategy5_brza
 
 if __name__ == '__main__':
     import sys
@@ -56,7 +57,7 @@ def choose_strategy():
         data.x_current = 195  # 295
         data.y_current = 155  # 2700
         data.f_current = 0
-        return strategy5.operations  # 2
+        return strategy5_brza.operations  # 2
 
 
 # class choses_strategy():

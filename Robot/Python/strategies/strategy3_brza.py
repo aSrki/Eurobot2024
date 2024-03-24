@@ -185,7 +185,7 @@ strategy3_brza.grip_back()
 strategy3_brza.end_step_actions()
 
 
-strategy3_brza.move_front_arm(110, v=30)
+strategy3_brza.move_front_arm(120, v=30)
 strategy3_brza.go_to_XY(624, -325)  # 285 325
 strategy3_brza.rotate_to(0)
 # strategy3_brza.move_back_arm(190, v=15)

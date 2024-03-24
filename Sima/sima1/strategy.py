@@ -46,7 +46,7 @@ while True:
     if comm_data == 'yellow':
         translate(100)
         rotate(90)
-        translate(500)
+        translate(650)
         translate(200, False)
         rotate(-90)
         translate(230, False)
