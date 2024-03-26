@@ -46,7 +46,7 @@ strategy5_brza.end_step_actions()
 
 # strategy5_brza.rotate_to(90)
 
-strategy5_brza.add_sequence(grip_back_plant())  # 0 #-80
+strategy5_brza.add_sequence(grip_back_plant(True))  # 0 #-80
 
 strategy5_brza.start_step_actions()
 strategy5_brza.go_to_XY(1750, 762, False)  # dolazi ispred plantera
@@ -231,6 +231,7 @@ strategy5_brza.end_step_actions()
 
 strategy5_brza.add_sequence(grip_front_plant())  # 0 #-80
 
+strategy5_brza.skip_to_flag("skip_object")
 strategy5_brza.front_sensors_off()
 strategy5_brza.back_sensors_on()
 
@@ -399,7 +400,7 @@ strategy5_brza.add_points("unload", 20)
 # strategy5_brza.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy5_brza.move_mechanism(180)
 
-strategy5_brza.back_all_on()
+strategy5_brza.front_all_on()
 
 strategy5_brza.go_to_XY(1000, 1000)
 
@@ -416,7 +417,7 @@ strategy5_brza.end()
 
 strategy5_brza.skip_to_flag("timeout")
 
-strategy5_brza.back_sensors_on()
+strategy5_brza.front_all_on()
 
 strategy5_brza.go_to_XY(1600, 450)
 strategy5_brza.add_points("unload", 10)
