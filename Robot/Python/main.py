@@ -13,6 +13,8 @@ DEBUG = True
 # za menjanje stratrgije na simi i prebacivanje putanja je /home/sima1/sima/Dynamixel-XL430-W250
 # fajl sa koordinatama je strategy.py
 sima1_IP = '192.168.1.143'
+sima2_IP = '192.168.1.212'
+sima3_IP = '192.168.1.192'
 
 
 def custom_print(msg):
@@ -67,41 +69,76 @@ class Main:
 
             # self.basket_comm = BasketCommunication()
 
-            # while data.cinc == 0:
-            #     print("Waiting for CINC")
-            #     continue
-
             # =================sima==============
 
             try:
                 host = sima1_IP
                 port = 12345
 
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-                # s.settimeout(1)
+                s1.settimeout(1)
 
-                s.connect((host, port))
+                s1.connect((host, port))
 
                 print("Sima se povezao")
 
             except Exception as e:
-                print(f"Sime nisu na mrezi: {e}")
+                print(f"Sima 1 nije na mrezi: {e}")
+                pass
+
+            try:
+                host = sima2_IP
+                port = 12345
+
+                s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+                s2.settimeout(1)
+
+                s2.connect((host, port))
+
+                print("Sima se povezao")
+
+            except Exception as e:
+                print(f"Sima 2 nije na mrezi: {e}")
+                pass
+
+            try:
+                host = sima3_IP
+                port = 12345
+
+                s3 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+                s3.settimeout(1)
+
+                s3.connect((host, port))
+
+                print("Sima se povezao")
+
+            except Exception as e:
+                print(f"Sima 3 nije na mrezi: {e}")
                 pass
 
             # =================kraj sima==============
 
-            a = input("Press ENTER OPET to start: ")
-            try:
-                s.sendall(data.color.encode())
-                s.sendall(data.color.encode())
-                s.sendall(data.color.encode())
+            # a = input("Press ENTER OPET to start: ")
 
-                print("Simi je poslato")
+            print("Waiting for CINC")
+            while data.cinc == 0:
+                continue
+
+            try:
+                s1.sendall(data.color.encode())
+                s2.sendall(data.color.encode())
+                s3.sendall(data.color.encode())
+
+                print("Simama je poslato")
             except Exception as e:
                 print(f"nije poslato jer: {e}")
 
-            s.close()
+            s1.close()
+            s2.close()
+            s3.close()
 
             data.start_time = time.time()
 

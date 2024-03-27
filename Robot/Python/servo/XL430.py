@@ -493,52 +493,70 @@ class ServoXL430:
 
         tolerance = 50
 
-        while (abs(abs(current_position) - abs(servo_angle)) > tolerance) and data.elapsed_time < data.time_strategy_type:
-            time.sleep(.01)
-            try:
+        if self.id > 40:
+            print("OKrecem MX")
+            start_time = time.time()
+            while (time.time() - start_time) < 3 and abs(servo_angle-current_position) > 100:
+                print(f"U vajlu sam {servo_angle} {current_position}")
                 current_position, result, servo_error = self.handler.read4ByteTxRx(
                     self.portHandler, self.id, CURRENT_POSITION)
-
+                time.sleep(0.1)
                 if current_position > 2147483648:
                     current_position -= 4294967296
 
-            except:
-                servo_error = 1
+            if abs(servo_angle-current_position) > 100:
+                goal_angle = int((current_position/4095)*365)
+                self.rotate(goal_angle)
+            return
+        else:
 
-            load = self.read_current_load()
-            # print(f"LOAD : {load}")
+            while (abs(abs(current_position) - abs(servo_angle)) > tolerance) and data.elapsed_time < data.time_strategy_type:
+                time.sleep(.01)
+                try:
+                    current_position, result, servo_error = self.handler.read4ByteTxRx(
+                        self.portHandler, self.id, CURRENT_POSITION)
 
-            if (load > 500) and (self.id == 11 or self.id == 8 or self.id == 2 or self.id == 9 or self.id == 7 or self.id == 3):
-                print(f"LOAD detected : {load}")
-                goal_angle = int(((current_position - 11)/4095)*365)
-                threading.Thread(target=self.rotate, args=[goal_angle]).start()
-                # self.rotate(goal_angle)
-                return
+                    if current_position > 2147483648:
+                        current_position -= 4294967296
 
-            # elif (load > 700) and (self.id == 9 or self.id == 7 or self.id == 3):
-            #     print(f"LOAD detected : {load}")
-            #     goal_angle = int(((current_position - 11)/4095)*365)
-            #     threading.Thread(target=self.rotate, args=[goal_angle]).start()
-            #     # self.rotate(goal_angle)
-            #     return
+                except:
+                    servo_error = 1
 
-            if servo_error != 0:
-                print("DEAD SERVO : %s" % str(self.id))
+                load = self.read_current_load()
+                # print(f"LOAD : {load}")
 
-                dxl_comm_result, dxl_error = self.handler.reboot(
-                    self.portHandler, self.id)
-                if dxl_comm_result != COMM_SUCCESS:
-                    print("%s" % self.handler.getTxRxResult(dxl_comm_result))
-                elif dxl_error != 0:
-                    print("%s" % self.handler.getRxPacketError(dxl_error))
+                if (load > 500) and (self.id == 11 or self.id == 8 or self.id == 2 or self.id == 9 or self.id == 7 or self.id == 3):
+                    print(f"LOAD detected : {load}")
+                    goal_angle = int(((current_position - 11)/4095)*365)
+                    threading.Thread(target=self.rotate, args=[
+                                     goal_angle]).start()
+                    # self.rotate(goal_angle)
+                    return
 
-                time.sleep(.1)
+                # elif (load > 700) and (self.id == 9 or self.id == 7 or self.id == 3):
+                #     print(f"LOAD detected : {load}")
+                #     goal_angle = int(((current_position - 11)/4095)*365)
+                #     threading.Thread(target=self.rotate, args=[goal_angle]).start()
+                #     # self.rotate(goal_angle)
+                #     return
 
-                print("[ID:%03d] reboot Succeeded\n" % self.id)
+                if servo_error != 0:
+                    print("DEAD SERVO : %s" % str(self.id))
 
-                # data.stop = True
-                data.dead_servo = self.id
-                return
+                    dxl_comm_result, dxl_error = self.handler.reboot(
+                        self.portHandler, self.id)
+                    if dxl_comm_result != COMM_SUCCESS:
+                        print("%s" % self.handler.getTxRxResult(dxl_comm_result))
+                    elif dxl_error != 0:
+                        print("%s" % self.handler.getRxPacketError(dxl_error))
+
+                    time.sleep(.1)
+
+                    print("[ID:%03d] reboot Succeeded\n" % self.id)
+
+                    # data.stop = True
+                    data.dead_servo = self.id
+                    return
 
         time.sleep(sleep/1000)
 

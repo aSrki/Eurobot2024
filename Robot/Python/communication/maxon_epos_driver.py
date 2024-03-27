@@ -56,7 +56,7 @@ if __name__ == "__main__":
         while True:
             speed1 = input("Speed: ")
             maxon1.rotate_with_rpm(int(speed1))
-            maxon2.rotate_with_rpm(-int(speed1))
+            maxon2.rotate_with_rpm(int(speed1))
         # maxon1.rotate_with_rpm(1500)
         # maxon2.rotate_with_rpm(-1500)
         # time.sleep(3)
