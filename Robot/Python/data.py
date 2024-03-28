@@ -3,8 +3,8 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-# color = "yellow"
-color = "blue"
+color = "yellow"
+# color = "blue"
 
 time_strategy_type = 95000
 
@@ -67,6 +67,7 @@ backing_time = 0.5  # kada se vraca nazad
 
 offset = 0
 
+# set_flag = 0
 skip_to = None
 num_of_skips = 0
 

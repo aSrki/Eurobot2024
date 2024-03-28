@@ -111,6 +111,7 @@ class Strategy:
         self.operations.append(check)
 
     def check_object(self):
+        # data.set_flag = flag
         check = CheckObject()
         self.operations.append(check)
 

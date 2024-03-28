@@ -9,7 +9,7 @@ strategy5_brza = Strategy()
 strategy5_brza.rotate_to(0)
 strategy5_brza.front_all_on()
 strategy5_brza.start_step_actions()
-strategy5_brza.go_to_XY(195, 830, g=0.4)  # rotira panele #y = 750
+strategy5_brza.go_to_XY(195, 820, g=0.4)  # rotira panele #y = 750
 strategy5_brza.activate_triangle()
 strategy5_brza.deactivate_prednja_grtalca()
 strategy5_brza.deactivate_zadnja_grtalca()
@@ -28,7 +28,7 @@ strategy5_brza.deactivate_triangle()
 strategy5_brza.activate_prednja_grtalca()
 strategy5_brza.end_step_actions()
 
-strategy5_brza.add_sequence(grip_front_plant())  # -20 #110
+strategy5_brza.add_sequence(grip_front_plant(True))  # -20 #110
 
 strategy5_brza.set_skip_flag(2)
 
@@ -233,7 +233,6 @@ strategy5_brza.end_step_actions()
 
 strategy5_brza.add_sequence(grip_front_plant())  # 0 #-80
 
-# strategy5_brza.skip_to_flag("skip_object")
 strategy5_brza.front_sensors_off()
 strategy5_brza.back_sensors_on()
 
@@ -245,7 +244,9 @@ strategy5_brza.activate_zadnja_grtalca()
 strategy5_brza.deactivate_prednja_grtalca()
 strategy5_brza.end_step_actions()
 
-strategy5_brza.add_sequence(grip_back_plant())  # -20
+strategy5_brza.set_skip_flag(2)
+strategy5_brza.add_sequence(grip_back_plant(True))  # -20
+strategy5_brza.set_skip_flag("reset")
 
 # strategy5_brza.front_sensors_on()
 # strategy5_brza.back_sensors_off()
@@ -420,7 +421,7 @@ strategy5_brza.end()
 # ============================brze, 6 manje, valjda pouzdanije===============
 
 strategy5_brza.skip_to_flag(2)
-strategy5_brza.skip_to_flag("skip_object")
+# strategy5_brza.skip_to_flag("skip_object")
 
 strategy5_brza.front_all_off()
 strategy5_brza.back_sensors_on()
@@ -436,17 +437,18 @@ strategy5_brza.end_step_actions()
 
 strategy5_brza.add_sequence(grip_back_plant())
 
-strategy5_brza.go_to_XY(1050, 600)
 
 strategy5_brza.start_step_actions()
-strategy5_brza.go_to_XY(1700, 800, False)  # 762 # dolazi ispred plantera
+strategy5_brza.go_to_XY(1050, 600)
 strategy5_brza.deactivate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
+
+strategy5_brza.go_to_XY(1700, 750, False)  # 762 # dolazi ispred plantera
 
 strategy5_brza.back_sensors_off()
 
 strategy5_brza.start_step_actions()  # dolazi i priprema ruku
-strategy5_brza.go_to_XY(1840, 800, False)  # 1820, 762
+strategy5_brza.go_to_XY(1840, 750, False)  # 1820, 762
 strategy5_brza.move_back_arm(210, v=15)
 strategy5_brza.move_mechanism(90)  # ostavlja prednje u planter bez saksija
 strategy5_brza.end_step_actions()
@@ -493,16 +495,17 @@ strategy5_brza.back_sensors_on()
 strategy5_brza.set_distance_angle(-100, 0)
 
 strategy5_brza.start_step_actions()  # ide na sledece biljke
-strategy5_brza.go_to_XY(1260, 700, False)
-strategy5_brza.move_mechanism(100)
+strategy5_brza.go_to_XY(1300, 700, False)
+strategy5_brza.move_mechanism(180)
+strategy5_brza.activate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.rotate_to(180)
-strategy5_brza.activate_zadnja_grtalca()
-strategy5_brza.add_sequence(grip3_back_plant(-130))
+strategy5_brza.add_sequence(grip3_back_plant(-100))
 
 strategy5_brza.start_step_actions()
 strategy5_brza.rotate_to(0)
+strategy5_brza.activate_prednja_grtalca()
 strategy5_brza.deactivate_zadnja_grtalca()
 strategy5_brza.end_step_actions()  # OVO IZVADITI AKO IDEMO NA 3 TANJIRA
 
@@ -510,17 +513,19 @@ strategy5_brza.back_all_off()
 strategy5_brza.front_all_on()
 
 strategy5_brza.set_distance_angle(230, 0)
+strategy5_brza.move_mechanism(180)
 strategy5_brza.add_sequence(grip_front_plant())  # -70
 
 # strategy5_brza.go_to_XY(980, -1000, False)  # pa na jos 6 komada
 # strategy5_brza.rotate_to(-90)
 
-strategy5_brza.back_sensors_off()
-strategy5_brza.front_sensors_on()
+strategy5_brza.front_all_off()
+strategy5_brza.back_all_on()
 
 strategy5_brza.start_step_actions()
-strategy5_brza.go_to_XY(1522, 280, False)  # 350
+strategy5_brza.go_to_XY(1552, 280, False)  # 350
 strategy5_brza.move_back_arm(210, v=15)  # podize ruku
+strategy5_brza.deactivate_prednja_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.back_all_off()
@@ -531,6 +536,9 @@ strategy5_brza.move_mechanism(140)  # 220
 strategy5_brza.move_back_arm(190, v=30)  # 100
 strategy5_brza.ungrip_back()
 strategy5_brza.move_back_arm(210, v=30)
+
+strategy5_brza.back_all_off()
+strategy5_brza.front_all_on()
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(200, 0)
@@ -552,14 +560,15 @@ strategy5_brza.set_distance_angle(60, 0)
 strategy5_brza.deactivate_prednja_grtalca(340, 300)
 strategy5_brza.end_step_actions()
 
+strategy5_brza.add_points("unload", 20)
+
 strategy5_brza.set_distance_angle(0, 90, g=0.3)  # zatorira ka tanjiru
 
 strategy5_brza.start_step_actions()
-strategy5_brza.set_distance_angle(150, 0, g=0.5)  # udje u tanjur
-strategy5_brza.deactivate_zadnja_grtalca()
+strategy5_brza.set_distance_angle(200, 0, g=0.7)  # udje u tanjur
+strategy5_brza.deactivate_prednja_grtalca()
 strategy5_brza.end_step_actions()
 
-strategy5_brza.add_points("unload", 20)
 
 # strategy5_brza.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy5_brza.move_mechanism(180)
