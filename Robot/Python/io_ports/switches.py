@@ -16,7 +16,7 @@ class Switches:
     BACK_LEFT = 22
     BACK_RIGHT = 21
 
-    CINC = 7
+    CINC = 4
 
     # SENZORI
     GPIO.setup(FRONT_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -24,7 +24,7 @@ class Switches:
     GPIO.setup(BACK_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(BACK_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-    GPIO.setup(CINC, GPIO.IN)
+    GPIO.setup(CINC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     def __init__(self):
         pass

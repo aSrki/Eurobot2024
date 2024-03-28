@@ -296,7 +296,7 @@ strategy5.rotate_to(180)
 strategy5.move_mechanism(220)  # 180
 strategy5.move_front_arm(100, v=30)  # 100
 strategy5.ungrip_front()
-strategy5.move_front_arm(110, v=30)
+strategy5.move_front_arm(120, v=30)
 
 strategy5.start_step_actions()
 strategy5.set_distance_angle(-100, 0)

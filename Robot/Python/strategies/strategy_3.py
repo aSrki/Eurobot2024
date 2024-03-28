@@ -30,7 +30,7 @@ strategy3.end_step_actions()
 
 strategy3.add_sequence(grip_back_plant())  # -20
 
-strategy3.skip_to_flag("reset")  # restartovanje flag-a
+strategy3.skip_to_flag(2)  # u slucaju da sretnemo nekoga prekoputa
 
 strategy3.back_sensors_off()
 strategy3.front_sensors_on()
@@ -43,6 +43,8 @@ strategy3.deactivate_zadnja_grtalca()
 # strategy3.move_mechanism(260)
 strategy3.activate_prednja_grtalca()
 strategy3.end_step_actions()
+
+strategy3.skip_to_flag("reset")  # gasenje flag-a
 
 # strategy3.rotate_to(-90)
 
@@ -65,7 +67,7 @@ strategy3.move_back_arm(175, v=15)
 strategy3.ungrip_back()
 
 strategy3.start_parallel()
-strategy3.move_back_arm(210, v=30)
+strategy3.move_back_arm(210, v=15)
 strategy3.move_mechanism(180)
 strategy3.end_parallel()
 
@@ -117,9 +119,9 @@ strategy3.add_sequence(grip_front_plant())  # 130
 strategy3.front_sensors_off()
 strategy3.back_sensors_on()
 
-strategy3.go_to_XY(612, -600, False)  # ide da ih ostavi kako zna i ume
+strategy3.go_to_XY(590, -600, False)  # ide da ih ostavi kako zna i ume
 strategy3.start_step_actions()
-strategy3.go_to_XY(612, -285, False)  # 350
+strategy3.go_to_XY(590, -285, False)  # 350
 strategy3.move_back_arm(210, v=15)  # podize ruku
 strategy3.end_step_actions()
 
@@ -170,10 +172,12 @@ strategy3.end_step_actions()
 strategy3.move_back_arm(165, v=30)
 strategy3.add_points("unload", 6)
 
+strategy3.start_step_actions()
 strategy3.go_to_XY(1500, -400, False)
+strategy3.move_back_arm(210, v=2)
+strategy3.end_step_actions()
 
 strategy3.start_parallel()
-strategy3.move_back_arm(210)
 strategy3.move_mechanism(180)
 strategy3.deactivate_zadnja_grtalca()
 strategy3.end_parallel()
@@ -344,9 +348,12 @@ strategy3.end_step_actions()
 strategy3.move_back_arm(165, v=30)
 strategy3.add_points("unload", 6)
 
-strategy3.go_to_XY(1500, -400, False)
+strategy3.start_step_actions()
+strategy3.go_to_XY(1500, -300, False)
+strategy3.move_back_arm(210, v=2)
+strategy3.end_step_actions()
+
 strategy3.start_parallel()
-strategy3.move_back_arm(210)
 strategy3.move_mechanism(180)
 strategy3.deactivate_zadnja_grtalca()
 strategy3.end_parallel()
@@ -361,11 +368,11 @@ strategy3.end()
 # ==========================TIMEOUT ===========================
 
 strategy3.skip_to_flag("timeout")
-strategy3.skip_to_flag("skip_object")
+# strategy3.skip_to_flag("skip_object")
 
 strategy3.back_sensors_on()
 
-strategy3.go_to_XY(1600, -400, False)
+strategy3.go_to_XY(1600, -300, False)
 
 strategy3.start_parallel()
 strategy3.move_back_arm(210)
