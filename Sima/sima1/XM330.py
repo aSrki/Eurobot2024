@@ -18,6 +18,25 @@ portHandler.setBaudRate(115200)
 
 handler = Protocol2PacketHandler()
 
+def rotate_arm(angle):
+        angle = int((angle/360) * 1023)
+
+        # handler.reboot(portHandler, 5)
+
+        # time.sleep(1)
+
+        communication_result, servo_error = handler.write1ByteTxRx(
+            portHandler, 5, 24, 1)
+        
+        communication_result, servo_error = handler.write2ByteTxRx(
+            portHandler, 5, 30, angle)
+        
+        time.sleep(1)
+        
+        communication_result, servo_error = handler.write1ByteTxRx(
+            portHandler, 5, 24, 0)
+   
+
 def send_velocity_multiple(ids, vels):
     vels[0] = int((vels[0] / 100)*32767)
     vels[1] = int((vels[1] / 100)*32767)
@@ -77,52 +96,23 @@ def send_velocity_multiple(ids, vels):
     groupSyncWrite.clearParam()
 
 def read_curr_pos_group(portHandler, handler):
+    dxl1_present_position = handler.read4ByteTxRx(portHandler, 1, 132)
+    dxl2_present_position = handler.read4ByteTxRx(portHandler, 4, 132)
 
+    dxl1_present_position = dxl1_present_position[0]
+    dxl2_present_position = dxl2_present_position[0]
 
-    groupSyncRead = GroupSyncRead(portHandler, handler, 132, 4)
-
-    dxl_addparam_result = groupSyncRead.addParam(1)
-    if dxl_addparam_result != True:
-        print("[ID:%03d] groupSyncRead addparam failed" % 1)
-        quit()
-
-    # Add parameter storage for Dynamixel#2 present position value
-    dxl_addparam_result = groupSyncRead.addParam(4)
-    if dxl_addparam_result != True:
-        print("[ID:%03d] groupSyncRead addparam failed" % 4)
-        quit()
-
-    dxl_comm_result = groupSyncRead.txRxPacket()
-    if dxl_comm_result != COMM_SUCCESS:
-        print("%s" % handler.getTxRxResult(dxl_comm_result))
-
-    # Check if groupsyncread data of Dynamixel#1 is available
-    dxl_getdata_result = groupSyncRead.isAvailable(1, 132, 4)
-    if dxl_getdata_result != True:
-        print("[ID:%03d] groupSyncRead getdata failed" % 1)
-        quit()
-
-    # Check if groupsyncread data of Dynamixel#2 is available
-    dxl_getdata_result = groupSyncRead.isAvailable(4, 132, 4)
-    if dxl_getdata_result != True:
-        print("[ID:%03d] groupSyncRead getdata failed" % 4)
-        quit()
-
-    # Get Dynamixel#1 present position value
-    dxl1_present_position = groupSyncRead.getData(1, 132, 4)
     if dxl1_present_position > 2000000000:
         dxl1_present_position -= 4294967296
 
-    # Get Dynamixel#2 present position value
-    dxl2_present_position = groupSyncRead.getData(4, 132, 4)
     if dxl2_present_position > 2000000000:
         dxl2_present_position -= 4294967296
-
-    groupSyncRead.clearParam()
 
     return dxl1_present_position, dxl2_present_position
 
 def init_servos(ids):
+
+    print("Usao u init servos")
 
     SERVO_PORT = "/dev/ttyUSB0"
 
