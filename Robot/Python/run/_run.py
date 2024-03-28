@@ -7,16 +7,7 @@ import threading
 import time
 import sys
 import os, subprocess
-# sys.path.append("/home/robot/Eurobot2024/Robot/Python")
-
-
-stylesheet = """
-    Screen1 {
-        background-image: url("/home/mali/robot/run/slika_stola.jpg");
-        background-position: center;
-    }
-"""
-
+sys.path.append("/home/robot/Eurobot2024/Robot/Python")
 
 class Payload():
     def __init__(self):
@@ -29,7 +20,7 @@ count_time = 0
 class Screen1(QDialog):
     def __init__(self):
         super(Screen1, self).__init__()
-        loadUi("C:/Users/srkia/OneDrive/Documents/GitHub/Eurobot2024/Robot/Python/run/screen1.ui", self)
+        loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen1.ui", self)
 
         self.showMaximized()
 
@@ -61,7 +52,7 @@ class Screen1(QDialog):
 class Screen2(QDialog):
     def __init__(self):
         super(Screen2, self).__init__()
-        loadUi("C:/Users/srkia/OneDrive/Documents/GitHub/Eurobot2024/Robot/Python/run/screen2.ui", self)
+        loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen2.ui", self)
 
         self.button_zuta.clicked.connect(self.on_click_zuta)
         self.button_plava.clicked.connect(self.on_click_plava)
@@ -93,7 +84,7 @@ class Screen2(QDialog):
 class Screen3(QDialog):
     def __init__(self):
         super(Screen3, self).__init__()
-        loadUi("C:/Users/srkia/OneDrive/Documents/GitHub/Eurobot2024/Robot/Python/run/screen3.ui", self)
+        loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen3.ui", self)
 
         self.button_back_3.clicked.connect(self.gotoScreen2)
         self.button_glhf.clicked.connect(self.glhf)
@@ -156,7 +147,6 @@ if __name__ == '__main__':
     # from main import Main
 
     app = QApplication(sys.argv)
-    app.setStyleSheet(stylesheet)
 
     widget = QtWidgets.QStackedWidget()
     widget.resize(719, 480)

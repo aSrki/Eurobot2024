@@ -1,5 +1,4 @@
 from moving import *
-from Tof400f import *
 from sensor import *
 import threading
 import data
@@ -11,11 +10,9 @@ first_stopped = False
 host = '0.0.0.0'
 port = 12345
 
-tof_port = serial.Serial(port='/dev/ttyS0', baudrate=115200,
-                         bytesize=8, parity='N', stopbits=1, timeout=1)
-
 init_sima()
 init_sensor()
+move_arm(225)
 
 while True:
     print("STARTED")
@@ -28,6 +25,7 @@ while True:
     comm_data = conn.recv(1024).decode()
 
     print(f"Received {comm_data}")
+    move_arm(225)
     conn.close()
 
     distance_acquire_thread = threading.Thread(
@@ -46,23 +44,22 @@ while True:
     if comm_data == 'yellow':
         translate(100)
         rotate(90)
-        translate(650)
-        translate(200, False)
+        translate(600, False)
         rotate(-90)
-        translate(230, False)
+        translate(500, False)
+        rotate(90)
+        translate(500, False)
 
     elif comm_data == 'blue':
         translate(100)
         rotate(-90)
-        translate(500)
-        translate(200, False)
+        translate(600, False)
         rotate(90)
-        translate(230, False)
-        # translate(1800)
-        # rotate(-90)
-        # translate(500)
-        # translate(300, False)
-        # print("blue gotov")
+        translate(500, False)
+        rotate(-90)
+        translate(500, False)
+
+    move_arm(330)
 
     data.stop_threads = True
     print("Ovde sam 1")

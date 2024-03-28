@@ -3,6 +3,9 @@ import time
 from math import *
 import data
 
+def move_arm(ang):
+    rotate_arm(ang)
+
 def stop_moving():
     l, r = read_curr_pos_group(portHandler, handler)
     l = l*360/4095
@@ -78,11 +81,14 @@ def translate(len, detect = True):
         time.sleep((len/330))
 
 def init_sima():
+    print("Udao u init sima")
     init_servos([1,4])
     l, r = read_curr_pos_group(portHandler, handler)
+    print(f"L : {l}, R : {r}")
     data.left_theta = l*360/4095
     data.right_theta = r*360/4095
     parallel_rotate([1, 4], [data.left_theta, data.right_theta], 4000)
+    print("Izassao iz init sima")
     time.sleep(.5)
 
 
