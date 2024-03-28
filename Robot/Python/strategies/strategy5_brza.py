@@ -101,10 +101,10 @@ strategy5_brza.end_step_actions()
 strategy5_brza.move_front_arm(80, v=15)
 strategy5_brza.ungrip_front()
 
-strategy5_brza.start_parallel()
-strategy5_brza.move_front_arm(120, v=30)
+# strategy5_brza.start_parallel()
+strategy5_brza.move_front_arm(120, v=15)
 strategy5_brza.move_mechanism(180)
-strategy5_brza.end_parallel()
+# strategy5_brza.end_parallel()
 
 strategy5_brza.add_points("unload", 24)
 
@@ -312,10 +312,10 @@ strategy5_brza.end_step_actions()
 strategy5_brza.move_front_arm(80, v=15)
 strategy5_brza.ungrip_front()
 
-strategy5_brza.start_parallel()
-strategy5_brza.move_front_arm(120, v=30)
+# strategy5_brza.start_parallel()
+strategy5_brza.move_front_arm(120, v=15)
 strategy5_brza.move_mechanism(180)
-strategy5_brza.end_parallel()
+# strategy5_brza.end_parallel()
 
 strategy5_brza.add_points("unload", 24)
 
@@ -497,10 +497,10 @@ strategy5_brza.end_step_actions()
 strategy5_brza.move_front_arm(80, v=15)
 strategy5_brza.ungrip_front()
 
-strategy5_brza.start_parallel()
-strategy5_brza.move_front_arm(120, v=30)
+# strategy5_brza.start_parallel()
+strategy5_brza.move_front_arm(120, v=15)
 strategy5_brza.move_mechanism(180)
-strategy5_brza.end_parallel()
+# strategy5_brza.end_parallel()
 
 strategy5_brza.add_points("unload", 24)
 
