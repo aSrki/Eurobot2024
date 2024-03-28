@@ -23,8 +23,8 @@ class LidarDetection:
         self.lidar = None
         self.max_num_of_scans = 3
         self.transform = TransformMatrix(50)
-        self.front_cone = 100
-        self.back_cone = 100
+        self.front_cone = 60
+        self.back_cone = 60
         self.distance = 500
         self.lidar_thread = None
         self.init()
