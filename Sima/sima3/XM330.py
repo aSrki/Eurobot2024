@@ -18,31 +18,32 @@ portHandler.setBaudRate(115200)
 
 handler = Protocol2PacketHandler()
 
+
 def rotate_arm(angle):
-        angle = int((angle/360) * 1023)
+    angle = int((angle/360) * 1023)
 
-        # handler.reboot(portHandler, 5)
+    # handler.reboot(portHandler, 5)
 
-        # time.sleep(1)
+    # time.sleep(1)
 
-        communication_result, servo_error = handler.write1ByteTxRx(
-            portHandler, 5, 24, 1)
-        
-        communication_result, servo_error = handler.write2ByteTxRx(
-            portHandler, 5, 30, angle)
-        
-        time.sleep(1)
-        
-        communication_result, servo_error = handler.write1ByteTxRx(
-            portHandler, 5, 24, 0)
-        
+    communication_result, servo_error = handler.write1ByteTxRx(
+        portHandler, 5, 24, 1)
+
+    communication_result, servo_error = handler.write2ByteTxRx(
+        portHandler, 5, 30, angle)
+
+    time.sleep(1)
+
+    communication_result, servo_error = handler.write1ByteTxRx(
+        portHandler, 5, 24, 0)
+
+
 def send_velocity_multiple(ids, vels):
     vels[0] = int((vels[0] / 100)*32767)
     vels[1] = int((vels[1] / 100)*32767)
-    
+
     portHandler = PortHandler(SERVO_PORT)
     portHandler.openPort()
-   
 
     # Baud rate set via Wizard (default value is 57600)
     portHandler.setBaudRate(BAUD_RATE)
@@ -50,7 +51,8 @@ def send_velocity_multiple(ids, vels):
     handler = Protocol2PacketHandler()
 
     for id in ids:
-        communication_result, servo_error = handler.write1ByteTxRx(portHandler, id, TORQUE_ADDR, 0)
+        communication_result, servo_error = handler.write1ByteTxRx(
+            portHandler, id, TORQUE_ADDR, 0)
         print("TORQUE : %s" % handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
@@ -58,12 +60,12 @@ def send_velocity_multiple(ids, vels):
     for i in range(len(ids)):
         print("Single mode on")
         communication_result, servo_error = handler.write1ByteTxRx(
-            portHandler, ids[i], OPERATING_MODE_ADDR, 1) # speed control mode
+            portHandler, ids[i], OPERATING_MODE_ADDR, 1)  # speed control mode
         print("SINGLEMODE : %s" %
-                handler.getTxRxResult(communication_result))
+              handler.getTxRxResult(communication_result))
         if servo_error != 0:
             print("SINGLEMODE : %s" %
-                    handler.getRxPacketError(servo_error))
+                  handler.getRxPacketError(servo_error))
 
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(
@@ -74,14 +76,17 @@ def send_velocity_multiple(ids, vels):
 
     dxl_goal_vel = vels
 
-    groupSyncWrite = GroupSyncWrite(portHandler, handler, PROFILE_VELOCITY_ADDR, 4)
+    groupSyncWrite = GroupSyncWrite(
+        portHandler, handler, PROFILE_VELOCITY_ADDR, 4)
 
     for i in range(len(ids)):
         # Allocate Dynamixel#1 goal position value into byte array
-        param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_vel[i]))]
+        param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_LOWORD(
+            dxl_goal_vel[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_vel[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_vel[i]))]
 
         # Add Dynamixel#1 goal position value to the Syncwrite parameter storage
-        dxl_addparam_result = groupSyncWrite.addParam(ids[i], param_goal_position)
+        dxl_addparam_result = groupSyncWrite.addParam(
+            ids[i], param_goal_position)
         if dxl_addparam_result != True:
             print("[ID:%03d] groupSyncWrite addparam failed" % ids[i])
             quit()
@@ -93,6 +98,7 @@ def send_velocity_multiple(ids, vels):
 
     # Clear syncwrite parameter storage
     groupSyncWrite.clearParam()
+
 
 def read_curr_pos_group(portHandler, handler):
     dxl1_present_position = handler.read4ByteTxRx(portHandler, 1, 132)
@@ -109,6 +115,7 @@ def read_curr_pos_group(portHandler, handler):
 
     return dxl1_present_position, dxl2_present_position
 
+
 def init_servos(ids):
 
     print("Usao u init servos")
@@ -117,7 +124,7 @@ def init_servos(ids):
 
     portHandler = PortHandler(SERVO_PORT)
     portHandler.openPort()
-    
+
     # Baud rate set via Wizard (default value is 57600)
     portHandler.setBaudRate(115200)
 
@@ -134,26 +141,26 @@ def init_servos(ids):
             portHandler, ids[i], 11, 4)
         if servo_error != 0:
             print("MULTIMODE : %s" %
-                    handler.getRxPacketError(servo_error))
+                  handler.getRxPacketError(servo_error))
 
-def parallel_rotate(ids, angles, v = 1000, a = 200):
+
+def parallel_rotate(ids, angles, v=1000, a=200):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)
     portHandler.openPort()
-    
+
     # Baud rate set via Wizard (default value is 57600)
     portHandler.setBaudRate(115200)
 
     handler = Protocol2PacketHandler()
-    
+
     for i in range(len(ids)):
         # Enabling torque in order to set position goal and velocity
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, ids[i], 64, 1)
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
-
 
     for i in range(len(ids)):
         communication_result, servo_error = handler.write4ByteTxRx(
@@ -172,10 +179,12 @@ def parallel_rotate(ids, angles, v = 1000, a = 200):
 
     for i in range(len(ids)):
         # Allocate Dynamixel#1 goal position value into byte array
-        param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_LOWORD(dxl_goal_position[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_position[i]))]
+        param_goal_position = [DXL_LOBYTE(DXL_LOWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_LOWORD(
+            dxl_goal_position[i])), DXL_LOBYTE(DXL_HIWORD(dxl_goal_position[i])), DXL_HIBYTE(DXL_HIWORD(dxl_goal_position[i]))]
 
         # Add Dynamixel#1 goal position value to the Syncwrite parameter storage
-        dxl_addparam_result = groupSyncWrite.addParam(ids[i], param_goal_position)
+        dxl_addparam_result = groupSyncWrite.addParam(
+            ids[i], param_goal_position)
         if dxl_addparam_result != True:
             print("[ID:%03d] groupSyncWrite addparam failed" % ids[i])
             quit()
@@ -220,7 +229,7 @@ class ServoXL430:
             print("TORQUE : %s" % self.handler.getRxPacketError(servo_error))
 
         # choosing operating mode
-        if(self.mode == "m"):
+        if (self.mode == "m"):
             print("Multi mode on")
             communication_result, servo_error = self.handler.write1ByteTxRx(
                 self.portHandler, id, 11, 4)
@@ -248,7 +257,6 @@ class ServoXL430:
 
     def __del__(self):
         self.portHandler.closePort()
-
 
     def rotate(self, *args):
         if len(args) == 1:
@@ -285,13 +293,13 @@ class ServoXL430:
         #         self.portHandler, self.id, 132)
         #     communication_result, servo_error = self.handler.write1ByteTxRx(
         #         self.portHandler, self.id, 65, 1)
-            #print("LED ON: %s" % self.handler.getTxRxResult(communication_result))
+            # print("LED ON: %s" % self.handler.getTxRxResult(communication_result))
             # if servo_error != 0:
             #    print("LED ON: %s" % self.handler.getRxPacketError(servo_error))
 
         # communication_result, servo_error = self.handler.write1ByteTxRx(
         #     self.portHandler, self.id, 65, 0)
-        #print("LED : %s" % self.handler.getTxRxResult(communication_result))
+        # print("LED : %s" % self.handler.getTxRxResult(communication_result))
         # if servo_error != 0:
         #    print("LED : %s" % self.handler.getRxPacketError(servo_error))
 
@@ -321,7 +329,7 @@ if __name__ == "__main__":
         if servo_error != 0:
             print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
-        if(mode == "m"):
+        if (mode == "m"):
             print("Multi mode on")
             communication_result, servo_error = handler.write1ByteTxRx(
                 portHandler, id, 11, 4)
@@ -368,9 +376,9 @@ if __name__ == "__main__":
         if servo_error != 0:
             print("POSITION : %s" % handler.getRxPacketError(servo_error))
 
-        if(angle >= 0):
+        if (angle >= 0):
             # while the servo is moving LED will be turned on
-            while(abs(current_position - angle) > 30):
+            while (abs(current_position - angle) > 30):
                 current_position, _, _ = handler.read4ByteTxRx(
                     portHandler, id, 132)
                 communication_result, servo_error = handler.write1ByteTxRx(

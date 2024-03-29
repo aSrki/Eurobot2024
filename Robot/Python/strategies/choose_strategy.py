@@ -51,7 +51,7 @@ def choose_strategy():
         data.x_current = 195
         data.y_current = -295  # -155
         data.f_current = 0
-        return strategy3.operations  # strategy1
+        return strategy3_brza.operations  # strategy1
     elif data.color == "yellow":
         data.time_strategy_type = 95   # 95
         data.x_current = 195  # 295

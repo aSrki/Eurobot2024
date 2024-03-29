@@ -80,8 +80,10 @@ strategy5_brza.add_points("unload", 24)
 strategy5_brza.front_sensors_on()
 # 650 # ide unapred prema sledecem planteru
 strategy5_brza.set_distance_angle(100, 0)
+
 strategy5_brza.front_sensors_off()
 strategy5_brza.back_sensors_on()
+
 strategy5_brza.start_step_actions()  # ide na sledece biljke
 strategy5_brza.go_to_XY(1300, 1000, False, off=120, at=100, b=0)  # ??????
 strategy5_brza.move_mechanism(100)
@@ -194,7 +196,7 @@ strategy5_brza.move_back_arm(210, v=30)
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(-60, 0)
-strategy5_brza.deactivate_zadnja_grtalca(20, 20)
+strategy5_brza.deactivate_zadnja_grtalca(60, 20)
 strategy5_brza.end_step_actions()
 
 strategy5_brza.set_distance_angle(0, -90, g=0.3)  # zatorira ka tanjiru
@@ -207,7 +209,7 @@ strategy5_brza.add_points("unload", 20)
 # strategy5_brza.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy5_brza.move_mechanism(180)
 
-strategy5_brza.back_all_on()
+strategy5_brza.front_all_on()
 
 strategy5_brza.go_to_XY(1000, 1000)
 
@@ -259,6 +261,7 @@ strategy5_brza.set_skip_flag("reset")
 # strategy5_brza.back_sensors_off()
 
 # ovde skace na zaobilaznu koordinatu u alternativnoj 2
+
 strategy5_brza.set_skip_flag(3)
 
 strategy5_brza.start_step_actions()
@@ -291,14 +294,16 @@ strategy5_brza.add_points("unload", 24)
 strategy5_brza.front_sensors_on()
 # 650 # ide unapred prema sledecem planteru
 strategy5_brza.set_distance_angle(100, 0)
+
 strategy5_brza.front_sensors_off()
 strategy5_brza.back_sensors_on()
+
 strategy5_brza.start_step_actions()  # ide na sledece biljke
 strategy5_brza.go_to_XY(1300, 1000, False, off=120, at=5, b=0)
 strategy5_brza.move_mechanism(100)
 strategy5_brza.activate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
-# TODO: ista prica kao i za onaj TODO treba nesto pametno smsliti
+# TODO : ista prica kao i za onaj TODO treba nesto pametno smsliti
 strategy5_brza.add_sequence(grip_back_plant())
 
 # =============================================
@@ -376,7 +381,6 @@ strategy5_brza.move_front_arm(120, v=15)  # podize ruku
 strategy5_brza.deactivate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
 
-strategy5_brza.front_sensors_off()
 
 strategy5_brza.rotate_to(180)
 # strategy5_brza.set_distance_angle(-10, 0)
@@ -385,6 +389,7 @@ strategy5_brza.move_front_arm(100, v=30)  # 100
 strategy5_brza.ungrip_front()
 strategy5_brza.move_front_arm(120, v=30)
 
+strategy5_brza.front_sensors_off()
 strategy5_brza.back_all_on()
 
 strategy5_brza.start_step_actions()
@@ -406,15 +411,15 @@ strategy5_brza.move_back_arm(210, v=30)
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(-60, 0)
-strategy5_brza.deactivate_zadnja_grtalca(20, 20)
+strategy5_brza.deactivate_zadnja_grtalca(60, 20)
 strategy5_brza.end_step_actions()
+
+strategy5_brza.add_points("unload", 20)
 
 strategy5_brza.set_distance_angle(0, -90, g=0.3)  # zatorira ka tanjiru
 strategy5_brza.set_distance_angle(-100, 0, g=0.5)  # udje u tanjur
 strategy5_brza.deactivate_zadnja_grtalca()
 
-
-strategy5_brza.add_points("unload", 20)
 
 # strategy5_brza.move_front_arm(120, s=0.5, v=30)  # ostavi biljke
 strategy5_brza.move_mechanism(180)
@@ -455,18 +460,23 @@ strategy5_brza.add_sequence(grip_back_plant())
 # ovde se ukljucuje ako je imao problem sa dolazenjem do prvog plantera
 strategy5_brza.skip_to_flag(3)
 
+strategy5_brza.back_sensors_off()
+strategy5_brza.front_all_on()
+
 strategy5_brza.start_step_actions()
-strategy5_brza.go_to_XY(1050, 600, at=100, b=200)
+strategy5_brza.go_to_XY(1050, 600, at=0, b=0)
 strategy5_brza.deactivate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
+
+strategy5_brza.front_all_off()
+strategy5_brza.back_all_on()
 
 # 762 # dolazi ispred plantera
 strategy5_brza.go_to_XY(1700, 750, False, at=100, b=0)
 
-strategy5_brza.back_sensors_off()
 
 strategy5_brza.start_step_actions()  # dolazi i priprema ruku
-strategy5_brza.go_to_XY(1840, 750, False)  # 1820, 762
+strategy5_brza.go_to_XY(1840, 750, False, at=100, b=0)  # 1820, 762
 strategy5_brza.move_back_arm(210, v=15)
 strategy5_brza.move_mechanism(90)  # ostavlja prednje u planter bez saksija
 strategy5_brza.end_step_actions()
@@ -482,7 +492,7 @@ strategy5_brza.end_parallel()
 strategy5_brza.add_points("unload", 24)
 
 # ======================OVDE RAZLIKA===================
-
+strategy5_brza.front_all_on()
 strategy5_brza.set_distance_angle(100, 0)
 strategy5_brza.go_to_XY(1382, 700, at=100, b=0)
 
@@ -520,7 +530,7 @@ strategy5_brza.activate_zadnja_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.rotate_to(180)
-strategy5_brza.add_sequence(grip3_back_plant(-100))
+strategy5_brza.add_sequence(grip3_back_plant(-110))
 
 strategy5_brza.start_step_actions()
 strategy5_brza.rotate_to(0)
