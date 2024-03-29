@@ -44,14 +44,14 @@ while True:
     if comm_data == 'yellow':
         translate(100)
         rotate(90)
-        translate(700)
+        translate(600)
         rotate(90)
         translate(150, False)
 
     elif comm_data == 'blue':
         translate(100)
         rotate(-90)
-        translate(700)
+        translate(600)
         rotate(-90)
         translate(150, False)
 

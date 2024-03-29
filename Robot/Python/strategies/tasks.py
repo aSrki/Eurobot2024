@@ -99,21 +99,6 @@ def grip_front_plant(check=False):
     return gfp.operations
 
 
-def grip3_front_plant(p=0):
-    gfp3 = Strategy()
-
-    gfp3.set_distance_angle(95 + p, 0)
-
-    # gfp.start_parallel()
-    gfp3.move_front_arm(72, v=30)  # 87 #72
-    gfp3.grip_front()
-    # gfp.end_parallel(0.2)
-    gfp3.set_distance_angle(-60, 0)
-    # gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
-    gfp3.move_front_arm(110, v=15)  # 95
-    return gfp3.operations
-
-
 def grip_back_plant(check=False):
     gbp = Strategy()
 
@@ -128,6 +113,21 @@ def grip_back_plant(check=False):
     gbp.move_back_arm(200, v=15)  # 185
 
     return gbp.operations
+
+
+def grip3_front_plant(p=0):
+    gfp3 = Strategy()
+
+    gfp3.set_distance_angle(95 + p, 0)
+
+    # gfp.start_parallel()
+    gfp3.move_front_arm(72, v=30)  # 87 #72
+    gfp3.grip_front()
+    # gfp.end_parallel(0.2)
+    gfp3.set_distance_angle(-60, 0)
+    # gfp.set_distance_angle(-60, 0)  # -80 stavljeno da ne smeta drugim biljkama
+    gfp3.move_front_arm(110, v=15)  # 95
+    return gfp3.operations
 
 
 def grip3_back_plant(p=0):

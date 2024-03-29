@@ -46,7 +46,7 @@ while True:
         rotate(90)
         translate(600, False)
         rotate(-90)
-        translate(500, False)
+        translate(450, False)
         rotate(90)
         translate(500, False)
 
@@ -55,7 +55,7 @@ while True:
         rotate(-90)
         translate(600, False)
         rotate(90)
-        translate(500, False)
+        translate(450, False)
         rotate(-90)
         translate(500, False)
 
