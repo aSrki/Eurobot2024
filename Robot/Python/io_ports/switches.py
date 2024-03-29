@@ -16,6 +16,9 @@ class Switches:
     BACK_LEFT = 22
     BACK_RIGHT = 21
 
+    OBJECT1 = 18
+    OBJECT2 = 23
+
     CINC = 4
 
     # SENZORI
@@ -23,6 +26,9 @@ class Switches:
     GPIO.setup(FRONT_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(BACK_LEFT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(BACK_RIGHT, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+    GPIO.setup(OBJECT1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(OBJECT2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     GPIO.setup(CINC, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -59,6 +65,10 @@ class Switches:
                 data.sensor_front_right = 0
                 data.sensor_back_left = 0
                 data.sensor_back_right = 0
+
+            elif data.sensors == data.Sensors.OBJECT:
+                data.object_sensor_1 = GPIO.input(self.OBJECT1)
+                data.object_sensor_2 = GPIO.input(self.OBJECT2)
 
             else:
                 # print("\n\n\n\n\t\tGRESKA U SWITCHEVIMA\n\n\n\n")

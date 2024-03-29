@@ -3,7 +3,7 @@ import threading
 
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
-#color = "yellow"
+# color = "yellow"
 color = "blue"
 
 time_strategy_type = 95000
@@ -153,13 +153,17 @@ sensor_back_right = 0
 front_lidar_detection = False
 back_lidar_detection = False
 
-object_sensor = 0
+object_sensor = 0  # ovo je flag za grippere
+
+object_sensor_1 = 0  # ovo su promeljive za senzore SIMA
+object_sensor_2 = 0
 
 
 class Sensors(Enum):
     FRONT_ON = 0
     BACK_ON = 1
     ALL_OFF = 4
+    OBJECT = 5
 
 
 sensors = Sensors.ALL_OFF

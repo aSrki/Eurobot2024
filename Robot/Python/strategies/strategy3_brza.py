@@ -394,7 +394,7 @@ strategy3_brza.back_all_on()
 
 # strategy3_brza.go_to_XY(590, -600)  # ide da ih ostavi kako zna i ume
 strategy3_brza.start_step_actions()
-strategy3_brza.go_to_XY(624, -280, False, at=100, b=200)  # -285
+strategy3_brza.go_to_XY(610, -280, False, at=100, b=200)  # -285
 strategy3_brza.move_back_arm(210, v=15)  # podize ruku
 strategy3_brza.deactivate_prednja_grtalca()
 strategy3_brza.end_step_actions()
