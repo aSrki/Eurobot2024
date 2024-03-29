@@ -205,7 +205,7 @@ strategy3_brza.move_front_arm(120, v=30)
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(60, 0)
-strategy3_brza.activate_prednja_grtalca(350, 300)  # izbacuje desnu grtalcu
+strategy3_brza.activate_prednja_desna_grtalca()  # izbacuje desnu grtalcu
 strategy3_brza.end_step_actions()
 
 strategy3_brza.add_points("unload", 20)
@@ -429,7 +429,7 @@ strategy3_brza.move_front_arm(120, v=30)
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(60, 0)
-strategy3_brza.activate_prednja_grtalca(350, 300)  # izbacuje desnu grtalcu
+strategy3_brza.activate_prednja_desna_grtalca()  # izbacuje desnu grtalcu
 strategy3_brza.end_step_actions()
 
 strategy3_brza.add_points("unload", 20)
@@ -605,7 +605,7 @@ strategy3_brza.move_back_arm(210, v=30)
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(-60, 0)
-strategy3_brza.deactivate_prednja_grtalca(60, 20)
+strategy3_brza.activate_zadnja_desna_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.add_points("unload", 20)

@@ -58,6 +58,7 @@ class Step:
         self.direction_is_forward = True
         self.sensor = Sensors.ALL_OFF
         self.lidar = False
+        self.object = False
 
         self.translate_pojacanje = 1
         self.rotate_pojacanje = 1
@@ -72,7 +73,7 @@ class Step:
     @classmethod
     def go_to_XY(cls, x, y, direction=True, gain=1,
                  sleep=0, sensor=Sensors.ALL_OFF, lidar=Sensors.ALL_OFF, stop_sleep=0.5,
-                 backing_sleep=0.5, attemps=2, backing=200, num_of_skips=0, offset=0):
+                 backing_sleep=0.5, attemps=2, backing=200, num_of_skips=0, offset=0, object=0):
         step = cls()
         step.type_of_parameters = TypesOfSendParameters.COORDINATE
         step.x = x

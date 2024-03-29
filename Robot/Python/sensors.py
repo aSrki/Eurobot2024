@@ -32,12 +32,12 @@ class SensorsDetection:
             if not data.running.is_set():
                 return
 
-            if (self.front_sensors() or self.back_sensors() or self.lidar_back_sensors() or self.lidar_front_sensor()) and not data.stop:
+            if (self.front_sensors() or self.back_sensors() or self.lidar_back_sensors() or self.lidar_front_sensor() or self.object_1_sensor() or self.object_2_sensor()) and not data.stop:
                 data.stop = True
                 data.is_front = (data.sensors == Sensors.FRONT_ON) or (
                     data.lidar == Sensors.FRONT_ON)
                 data.is_back = (data.sensors == Sensors.BACK_ON) or (
-                    data.lidar == Sensors.BACK_ON)
+                    data.lidar == Sensors.BACK_ON) or (data.sensors == Sensors.OBJECT)
 
                 data.sensors = Sensors.ALL_OFF
                 data.lidar = Sensors.ALL_OFF
@@ -68,6 +68,20 @@ class SensorsDetection:
     def lidar_back_sensors(self):
         if data.back_lidar_detection:
             custom_print("Lidar detected in back")
+            return True
+
+        return False
+
+    def object_1_sensor(self):
+        if data.object_sensor_1:
+            custom_print("Object detected by sensor 1")
+            return True
+
+        return False
+
+    def object_2_sensor(self):
+        if data.object_sensor_2:
+            custom_print("Object detected by sensor 2")
             return True
 
         return False
