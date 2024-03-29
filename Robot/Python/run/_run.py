@@ -8,7 +8,8 @@ import time
 import sys
 import os, subprocess
 sys.path.append("/home/robot/Eurobot2024/Robot/Python")
-
+from main import Main
+import data
 class Payload():
     def __init__(self):
         self.color = None
@@ -33,13 +34,10 @@ class Screen1(QDialog):
        
 
     def on_click_sto1(self):
-        gamePayload.color = 'blue'
-        gamePayload.plate = 1
-        # gamePayload.printPayload()
+        self.gotoScreen1()
 
+    
     def on_click_sto2(self):
-        gamePayload.color = 'green'
-        gamePayload.plate = 1
         # gamePayload.printPayload()
         self.gotoScreen2()
 
@@ -57,14 +55,17 @@ class Screen2(QDialog):
         self.button_zuta.clicked.connect(self.on_click_zuta)
         self.button_plava.clicked.connect(self.on_click_plava)
         self.button_back.clicked.connect(self.gotoScreen1)
+        
+        self.button_zuta.setStyleSheet("background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
+        self.button_plava.setStyleSheet("background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
 
     def on_click_zuta(self):
-        gamePayload.strategy_type = 'aggressive'
+        gamePayload.color = 'yellow'
         # gamePayload.printPayload()
         self.gotoScreen3()
 
     def on_click_plava(self):
-        gamePayload.strategy_type = 'passive'
+        gamePayload.color = 'blue'
         # gamePayload.printPayload()
         self.gotoScreen3()
 
@@ -88,8 +89,8 @@ class Screen3(QDialog):
 
         self.button_back_3.clicked.connect(self.gotoScreen2)
         self.button_glhf.clicked.connect(self.glhf)
-        self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n" + "Izabran tanjir: " + str(gamePayload.plate) +
-                           "\nIzabrana strategija: " + str(gamePayload.strategy_type) + "\nDa li si siguran da zelis da nastavis?")
+        self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n" 
+                           "Da li si siguran da zelis da nastavis?")
 
     def gotoScreen2(self):
         screen2 = Screen2()
@@ -108,39 +109,38 @@ class Screen3(QDialog):
 
 class Screen4(QDialog):
     def __init__(self):
+
         super(Screen4, self).__init__()
-        loadUi("screen4.ui", self)
-
-        # self.label.setText("Points: " + str(0) + "\nTime: " + str(data.elapsed_time) + "s")
+        loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen4.ui", self)
+        data.color = gamePayload.color
+        self.label.setText("Points: " + str(0) + "\nTime: " + str(data.elapsed_time) + "s")
         self.kill_all_button.clicked.connect(self.kill_all)
-        self.kill_all_button.setStyleSheet(
-            "background-color: red; border: none;")
+        self.kill_all_button.setStyleSheet("background-color: red; border: none;")
 
-        # main = Main()
-        # self.main_thread = threading.Thread(target=main.start)
+
+        main = Main()
+        self.main_thread = threading.Thread(target=main.start)
         self.main_thread.start()
 
         self.timer = QtCore.QTimer()
-        # self.timer.timeout.connect(self.update_label)
+        self.timer.timeout.connect(self.update_label)
         self.timer.start(1000)
+    
 
-    # def update_label(self):
-    #     if data.cinc != 1:
-    #         ispis = str("WAITING FOR CINC \n" + "Strategy:" +
-    #                     str(data.plate) + ", " + str(data.color))
-    #     else:
-    #         ispis = str("Points: " + str(data.points) +
-    #                     "\nTime: " + str(int(data.elapsed_time)) + "s\n")
-    #     self.label.setText(ispis)
+    def update_label(self):
+        if data.cinc != 1:
+            ispis = str("WAITING FOR CINC \n" + "Strategy:" + str(data.color))
+        else:
+            ispis = str("Points: " + str(data.points))
+        self.label.setText(ispis)
 
     def kill_all(self):
-        # data.running.clear()
+        data.running.clear()
         self.main_thread.join()
         print("KILLING MAIN THREAD")
-        time.sleep(0.2)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
-        self.close()
-
+        # time.sleep(0.2)
+        # widget.setCurrentIndex(widget.currentIndex() + 1)
+        # self.close()
 
 if __name__ == '__main__':
     # import data
