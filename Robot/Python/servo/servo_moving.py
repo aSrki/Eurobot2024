@@ -51,6 +51,42 @@ class Servo_Moving:
         return
 
     # dovodi sve servoe na pocetni polozaj
+    def init_yellow(self):
+        ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
+        ServoXL430(IDS.id_centar.value).rotate(30)
+        ServoXL430(IDS.id_gripper_back_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_3.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_3.value).rotate(215)
+        ServoXL430(IDS.id_back_arm.value).rotate(165, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(95, 30)
+        ServoXL430(IDS.id_grtalica_prednja_leva.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_prednja_desna.value).rotate(60)
+        ServoXL430(IDS.id_grtalica_zadnja_desna.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_zadnja_leva.value).rotate(60)
+        return
+
+    def init_blue(self):
+        ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
+        ServoXL430(IDS.id_centar.value).rotate(300)
+        ServoXL430(IDS.id_gripper_back_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_back_3.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_1.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_2.value).rotate(215)
+        ServoXL430(IDS.id_gripper_front_3.value).rotate(215)
+        ServoXL430(IDS.id_back_arm.value).rotate(175, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(75, 30)
+        ServoXL430(IDS.id_grtalica_prednja_leva.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_prednja_desna.value).rotate(60)
+        ServoXL430(IDS.id_grtalica_zadnja_desna.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_zadnja_leva.value).rotate(60)
+        return
+
     def home(self):
         ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
         ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
@@ -62,11 +98,12 @@ class Servo_Moving:
         ServoXL430(IDS.id_gripper_front_2.value).rotate(215)
         ServoXL430(IDS.id_gripper_front_3.value).rotate(215)
         ServoXL430(IDS.id_back_arm.value).rotate(158, 30)
-        ServoXL430(IDS.id_front_arm.value).rotate(68, 30)
-        ServoXL430(IDS.id_grtalica_prednja_leva.value).rotate(350)
-        ServoXL430(IDS.id_grtalica_prednja_desna.value).rotate(1)
-        ServoXL430(IDS.id_grtalica_zadnja_desna.value).rotate(359)
-        ServoXL430(IDS.id_grtalica_zadnja_leva.value).rotate(10)
+        ServoXL430(IDS.id_front_arm.value).rotate(65, 30)
+        ServoXL430(IDS.id_grtalica_prednja_leva.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_prednja_desna.value).rotate(60)
+        ServoXL430(IDS.id_grtalica_zadnja_desna.value).rotate(300)
+        ServoXL430(IDS.id_grtalica_zadnja_leva.value).rotate(60)
+        return
         return
 
 

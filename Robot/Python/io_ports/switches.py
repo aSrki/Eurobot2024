@@ -66,7 +66,7 @@ class Switches:
                 data.sensor_back_left = 0
                 data.sensor_back_right = 0
 
-            elif data.sensors == data.Sensors.OBJECT:
+            elif (data.sensors == data.Sensors.OBJECT) and (data.elapsed_time > 90) and (data.x_current > 1400 and (-600 < data.y_current < 600)):
                 # print("\n Uspesno upaljeni senzori za sime \n!!!")
                 data.object_sensor_1 = GPIO.input(self.OBJECT1)
                 data.object_sensor_2 = GPIO.input(self.OBJECT2)
