@@ -137,7 +137,7 @@ strategy3.move_back_arm(200, v=30)
 strategy3.start_step_actions()
 strategy3.set_distance_angle(100, 0)
 strategy3.grip_back()
-strategy3.activate_prednja_grtalca(350, 340)  # izbacuje desnu grtalcu
+strategy3.activate_prednja_grtalca(300, 350)  # izbacuje desnu grtalcu
 strategy3.end_step_actions()
 
 

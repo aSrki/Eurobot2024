@@ -196,7 +196,7 @@ strategy5_brza.move_back_arm(210, v=30)
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(-60, 0)
-strategy5_brza.deactivate_zadnja_grtalca(60, 20)
+strategy5_brza.activate_zadnja_desna_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.set_distance_angle(0, -90, g=0.3)  # zatorira ka tanjiru
@@ -411,7 +411,7 @@ strategy5_brza.move_back_arm(210, v=30)
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(-60, 0)
-strategy5_brza.deactivate_zadnja_grtalca(60, 20)
+strategy5_brza.deactivate_zadnja_desna_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.add_points("unload", 20)
@@ -586,7 +586,7 @@ strategy5_brza.move_front_arm(120, v=30)
 
 strategy5_brza.start_step_actions()
 strategy5_brza.set_distance_angle(60, 0)
-strategy5_brza.deactivate_prednja_grtalca(340, 300)
+strategy5_brza.activate_prednja_desna_grtalca()
 strategy5_brza.end_step_actions()
 
 strategy5_brza.add_points("unload", 20)

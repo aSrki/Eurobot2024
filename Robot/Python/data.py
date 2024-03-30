@@ -168,5 +168,6 @@ class Sensors(Enum):
 
 sensors = Sensors.ALL_OFF
 lidar = Sensors.ALL_OFF
+object = Sensors.ALL_OFF
 
 TIMEOUT_FOR_LAST_STEPS = False
