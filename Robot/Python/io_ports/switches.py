@@ -66,7 +66,7 @@ class Switches:
                 data.sensor_back_left = 0
                 data.sensor_back_right = 0
 
-            elif (data.sensors == data.Sensors.OBJECT) and (data.elapsed_time > 90) and (data.x_current > 1400 and (-600 < data.y_current < 600)):
+            elif (data.sensors == data.Sensors.BACK_ON) and (data.elapsed_time > 90) and not (data.x_current > 1300 and (-700 < data.y_current < 700)):
                 # print("\n Uspesno upaljeni senzori za sime \n!!!")
                 data.object_sensor_1 = GPIO.input(self.OBJECT1)
                 data.object_sensor_2 = GPIO.input(self.OBJECT2)
@@ -78,7 +78,7 @@ class Switches:
                 data.sensor_front_right = 0
 
             else:
-                # print("\n\n\n\n\t\tGRESKA U SWITCHEVIMA\n\n\n\n")
+                print("\n\n\n\n\t\tGRESKA U SWITCHEVIMA\n\n\n\n")
                 data.sensor_front_left = GPIO.input(self.FRONT_LEFT)
                 data.sensor_front_right = GPIO.input(self.FRONT_RIGHT)
                 data.sensor_back_left = GPIO.input(self.BACK_LEFT)

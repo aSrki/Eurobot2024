@@ -5,28 +5,28 @@ from strategies.strategy import Strategy
 
 strategy0 = Strategy()
 
-strategy0.object_sensor_on()
+# strategy0.object_sensor_on()
 
-strategy0.go_to_XY(195, 1000, at=100, b=0)
-strategy0.go_to_XY(195, 0, False, at=100, b=0)
+# strategy0.go_to_XY(195, 1000, at=100, b=0)
+# strategy0.go_to_XY(195, 0, False, at=100, b=0)
 
-# strategy0.set_distance_angle(1300, 0, at=100, b=0)
-# strategy0.set_distance_angle(-1300, 0, at=100, b=0)
+# # strategy0.set_distance_angle(1300, 0, at=100, b=0)
+# # strategy0.set_distance_angle(-1300, 0, at=100, b=0)
 
-strategy0.activate_prednja_desna_grtalca()
-strategy0.deactivate_prednja_desna_grtalca()
-strategy0.activate_prednja_leva_grtalca()
-strategy0.deactivate_prednja_leva_grtalca()
+# strategy0.activate_prednja_desna_grtalca()
+# strategy0.deactivate_prednja_desna_grtalca()
+# strategy0.activate_prednja_leva_grtalca()
+# strategy0.deactivate_prednja_leva_grtalca()
 
-strategy0.activate_zadnja_desna_grtalca()
-strategy0.deactivate_zadnja_desna_grtalca()
-strategy0.activate_zadnja_leva_grtalca()
-strategy0.deactivate_zadnja_leva_grtalca()
+# strategy0.activate_zadnja_desna_grtalca()
+# strategy0.deactivate_zadnja_desna_grtalca()
+# strategy0.activate_zadnja_leva_grtalca()
+# strategy0.deactivate_zadnja_leva_grtalca()
 
-strategy0.activate_prednja_grtalca()
-strategy0.deactivate_prednja_grtalca()
-strategy0.activate_zadnja_grtalca()
-strategy0.deactivate_zadnja_grtalca()
+# strategy0.activate_prednja_grtalca()
+# strategy0.deactivate_prednja_grtalca()
+# strategy0.activate_zadnja_grtalca()
+# strategy0.deactivate_zadnja_grtalca()
 
 # =========================test strategija========================
 

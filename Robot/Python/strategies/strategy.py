@@ -73,12 +73,6 @@ class Strategy:
     def back_lidar_off(self):
         Strategy.back_lidar = False
 
-    def object_sensor_on(self):
-        Strategy.object_detection = True
-
-    def object_sensor_off(self):
-        Strategy.object_detection = False
-
     def start_parallel(self):
         self.thread = True
 
@@ -562,9 +556,6 @@ class Strategy:
         else:
             lidar = Sensors.ALL_OFF
 
-        if Strategy.object_detection:
-            sensors = Sensors.OBJECT
-
         step = Step.go_to_XY(
             x, y, direction=d, gain=g, sleep=s, sensor=sensors,
             lidar=lidar, backing=b, attemps=at, stop_sleep=ss,
@@ -587,9 +578,6 @@ class Strategy:
             lidar = Sensors.BACK_ON
         else:
             lidar = Sensors.ALL_OFF
-
-        if Strategy.object_detection:
-            sensors = Sensors.OBJECT
 
         step = Step.set_distance_angle(
             distance=d, angle=a, gain=g, sleep=s, sensor=sensors,

@@ -156,8 +156,6 @@ class Main:
 
                     # zaustavlja sve ako je vreme meca isteklo pre nego sto je zavrsio sve korake
                     data.running.clear()
-                    if (data.x_current > 1450) and (-550 < data.y_current < 550):
-                        data.points += 10
                     break
                 elif data.elapsed_time > data.time_strategy_type and not data.end_of_match:
                     # prekida izvrsavanje strategije ako je doslo vreme da se vraca u bazu
@@ -165,6 +163,8 @@ class Main:
 
                 time.sleep(.1)
 
+            if (data.x_current > 1450) and (-550 < data.y_current < 550):
+                data.points += 10
             self.stop()
 
             return
