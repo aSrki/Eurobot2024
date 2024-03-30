@@ -24,6 +24,7 @@ from strategies.strategy_3 import strategy3
 from strategies.strategy_5 import strategy5
 from strategies.strategy3_brza import strategy3_brza
 from strategies.strategy5_brza import strategy5_brza
+from strategies.strategy_zuta_L import strategy_zuta_L
 
 if __name__ == '__main__':
     import sys
@@ -58,6 +59,12 @@ def choose_strategy():
         data.y_current = 295  # 155
         data.f_current = 0
         return strategy5_brza.operations  # 2
+    elif data.color == "yellow" and data.type_of_strategy == "lale":
+        data.time_strategy_type = 95   # 95
+        data.x_current = 1000  # 295
+        data.y_current = 2705  # 155
+        data.f_current = 0
+        return strategy_zuta_L.operations  # 2
 
 
 # class choses_strategy():
