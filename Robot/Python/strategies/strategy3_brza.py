@@ -465,7 +465,7 @@ strategy3_brza.back_all_off()
 strategy3_brza.front_all_on()
 
 strategy3_brza.start_step_actions()
-# 1320 ide do biljaka kod sime
+
 strategy3_brza.go_to_XY(700, -2000, off=120, at=100, b=0)
 strategy3_brza.add_sequence(prepare_front_arm())
 strategy3_brza.deactivate_zadnja_grtalca()
@@ -493,7 +493,7 @@ strategy3_brza.front_all_on()
 strategy3_brza.go_to_XY(1700, -750, at=100, b=0)
 
 strategy3_brza.start_step_actions()  # dolazi i priprema ruku
-strategy3_brza.go_to_XY(1840, -750, at=100, b=0)  # 1820, 762
+strategy3_brza.go_to_XY(1840, -750, at=100, b=0)  # 1820, -
 strategy3_brza.move_front_arm(120, v=15)
 strategy3_brza.move_mechanism(270)  # ostavlja prednje u planter bez saksija
 strategy3_brza.end_step_actions()
@@ -519,7 +519,7 @@ strategy3_brza.go_to_XY(1382, -700, False, at=100, b=0)
 # =====================================================
 
 strategy3_brza.start_step_actions()  # podize ruku
-strategy3_brza.go_to_XY(1382, -210, False, at=100, b=200)  # 185
+strategy3_brza.go_to_XY(1382, -185, False, at=100, b=200)  # 185
 strategy3_brza.move_back_arm(210, v=15)
 strategy3_brza.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy3_brza.end_step_actions()
@@ -550,7 +550,7 @@ strategy3_brza.activate_prednja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.rotate_to(180)
-strategy3_brza.add_sequence(grip3_back_plant(-130))
+strategy3_brza.add_sequence(grip3_front_plant())
 
 strategy3_brza.start_step_actions()
 strategy3_brza.rotate_to(0)
@@ -563,7 +563,7 @@ strategy3_brza.back_all_on()
 
 strategy3_brza.set_distance_angle(-230, 0)
 strategy3_brza.move_mechanism(180)
-strategy3_brza.add_sequence(grip_back_plant())  # -70
+strategy3_brza.add_sequence(grip_back_plant(-130))  # -70
 
 # strategy3_brza.go_to_XY(980, -1000, False)  # pa na jos 6 komada
 # strategy3_brza.rotate_to(-90)
@@ -605,7 +605,7 @@ strategy3_brza.move_back_arm(210, v=30)
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(-60, 0)
-strategy3_brza.deactivate_prednja_grtalca(60, 20)
+strategy3_brza.deactivate_zadnja_grtalca(350, 300)
 strategy3_brza.end_step_actions()
 
 strategy3_brza.add_points("unload", 20)
