@@ -6,13 +6,17 @@ from PyQt5.uic import loadUi
 import threading
 import time
 import sys
-import os, subprocess
+import os
+import subprocess
 sys.path.append("/home/robot/Eurobot2024/Robot/Python")
 from main import Main
 import data
+from servo.servo_moving import Servo_Moving
+
 class Payload():
     def __init__(self):
         self.color = None
+
 
 gamePayload = Payload()
 count_time = 0
@@ -25,27 +29,33 @@ class Screen1(QDialog):
 
         self.showMaximized()
 
-        self.button_sto1.clicked.connect(self.on_click_sto1)
-        self.button_sto1.setStyleSheet(
+        self.button_init_yellow.clicked.connect(self.on_click_init_yellow)
+        self.button_init_yellow.setStyleSheet(
             "background-color: transparent; border: none;")
+        
+        self.button_init_blue.clicked.connect(self.on_click_init_blue)
+        self.button_init_blue.setStyleSheet(
+            "background-color: transparent; border: none;")
+        
         self.button_sto2.clicked.connect(self.on_click_sto2)
         self.button_sto2.setStyleSheet(
             "background-color: transparent; border: none;")
-       
 
-    def on_click_sto1(self):
-        self.gotoScreen1()
+    def on_click_init_yellow(self):
+        Servo_Moving().init_yellow()
 
-    
+    def on_click_init_blue(self):
+        Servo_Moving().init_blue()
+
     def on_click_sto2(self):
-        # gamePayload.printPayload()
         self.gotoScreen2()
 
-    def gotoScreen2(self):    
+    def gotoScreen2(self):
         screen2 = Screen2()
         widget.addWidget(screen2)
         widget.setCurrentIndex(widget.currentIndex() + 1)
         self.close()
+
 
 class Screen2(QDialog):
     def __init__(self):
@@ -55,9 +65,11 @@ class Screen2(QDialog):
         self.button_zuta.clicked.connect(self.on_click_zuta)
         self.button_plava.clicked.connect(self.on_click_plava)
         self.button_back.clicked.connect(self.gotoScreen1)
-        
-        self.button_zuta.setStyleSheet("background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
-        self.button_plava.setStyleSheet("background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
+
+        self.button_zuta.setStyleSheet(
+            "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
+        self.button_plava.setStyleSheet(
+            "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
 
     def on_click_zuta(self):
         gamePayload.color = 'yellow'
@@ -89,7 +101,7 @@ class Screen3(QDialog):
 
         self.button_back_3.clicked.connect(self.gotoScreen2)
         self.button_glhf.clicked.connect(self.glhf)
-        self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n" 
+        self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n"
                            "Da li si siguran da zelis da nastavis?")
 
     def gotoScreen2(self):
@@ -113,10 +125,11 @@ class Screen4(QDialog):
         super(Screen4, self).__init__()
         loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen4.ui", self)
         data.color = gamePayload.color
-        self.label.setText("Points: " + str(0) + "\nTime: " + str(data.elapsed_time) + "s")
+        self.label.setText("Points: " + str(0) + "\nTime: " +
+                           str(data.elapsed_time) + "s")
         self.kill_all_button.clicked.connect(self.kill_all)
-        self.kill_all_button.setStyleSheet("background-color: red; border: none;")
-
+        self.kill_all_button.setStyleSheet(
+            "background-color: red; border: none;")
 
         main = Main()
         self.main_thread = threading.Thread(target=main.start)
@@ -125,7 +138,6 @@ class Screen4(QDialog):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_label)
         self.timer.start(1000)
-    
 
     def update_label(self):
         if data.cinc != 1:
@@ -141,6 +153,7 @@ class Screen4(QDialog):
         # time.sleep(0.2)
         # widget.setCurrentIndex(widget.currentIndex() + 1)
         # self.close()
+
 
 if __name__ == '__main__':
     # import data
