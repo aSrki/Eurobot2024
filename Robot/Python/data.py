@@ -7,6 +7,7 @@ chosen_strategy = None
 color = "blue"
 
 time_strategy_type = 95000
+type_of_strategy = ""
 
 debug = True
 

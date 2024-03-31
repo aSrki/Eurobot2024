@@ -61,7 +61,7 @@ class Execute:
                 if not data.running.is_set():
                     break
 
-                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout:
+                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout and not ((data.x_current > 1450) and (-550 < data.y_current < 550)):
                     custom_print(f"TIMEOUT: {data.elapsed_time}")
 
                     data.TIMEOUT_FOR_LAST_STEPS = False

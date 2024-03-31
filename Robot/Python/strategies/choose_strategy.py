@@ -25,6 +25,7 @@ from strategies.strategy_5 import strategy5
 from strategies.strategy3_brza import strategy3_brza
 from strategies.strategy5_brza import strategy5_brza
 from strategies.strategy_zuta_L import strategy_zuta_L
+from strategies.strategy_plava_L import strategy_plava_L
 
 if __name__ == '__main__':
     import sys
@@ -48,23 +49,31 @@ def choose_strategy():
         # print(f"Plate number: {data.plate}")
 
     if data.color == "blue":
-        data.time_strategy_type = 95  # 95  ... 90
-        data.x_current = 195
-        data.y_current = -295  # -155
-        data.f_current = 0
-        return strategy3_brza.operations  # strategy1
+        if data.type_of_strategy == "passive":
+            data.time_strategy_type = 95  # 95  ... 90
+            data.x_current = 195
+            data.y_current = -295  # -155
+            data.f_current = 0
+            return strategy3_brza.operations  # strategy1
+        elif data.type_of_strategy == "agressive":
+            data.time_strategy_type = 95   # 95
+            data.x_current = 1000  # 195
+            data.y_current = -2705  # 295
+            data.f_current = 0
+            return strategy_plava_L.operations  # 2
     elif data.color == "yellow":
-        data.time_strategy_type = 95   # 95
-        data.x_current = 195  # 295
-        data.y_current = 295  # 155
-        data.f_current = 0
-        return strategy5_brza.operations  # 2
-    elif data.color == "yellow" and data.type_of_strategy == "lale":
-        data.time_strategy_type = 95   # 95
-        data.x_current = 1000  # 295
-        data.y_current = 2705  # 155
-        data.f_current = 0
-        return strategy_zuta_L.operations  # 2
+        if data.type_of_strategy == "passive":
+            data.time_strategy_type = 95  # 95  ... 90
+            data.x_current = 195
+            data.y_current = 295  # -155
+            data.f_current = 0
+            return strategy5_brza.operations  # strategy1
+        elif data.type_of_strategy == "agressive":
+            data.time_strategy_type = 95   # 95
+            data.x_current = 1000  # 195
+            data.y_current = 2705  # 295
+            data.f_current = 0
+            return strategy_zuta_L.operations  # 2
 
 
 # class choses_strategy():
