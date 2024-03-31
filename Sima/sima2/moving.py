@@ -78,7 +78,7 @@ def translate(len, detect = True):
     if not data.stop_threads:
         parallel_rotate([4, 1], [data.left_theta, data.right_theta], a = 100)
         print(f"idem : {len}")
-        time.sleep((len/330))
+        time.sleep((len/270))
 
 def init_sima():
     print("Udao u init sima")

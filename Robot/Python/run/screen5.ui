@@ -18,38 +18,20 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>719</width>
-    <height>480</height>
+    <width>1000</width>
+    <height>1000</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="button_pusti_robote">
+  <widget class="QPushButton" name="button_passive">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>130</y>
-     <width>571</width>
-     <height>131</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>40</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>ROBOT</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_unload">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>280</y>
-     <width>150</width>
-     <height>151</height>
+     <x>5</x>
+     <y>70</y>
+     <width>390</width>
+     <height>330</height>
     </rect>
    </property>
    <property name="font">
@@ -58,16 +40,16 @@
     </font>
    </property>
    <property name="text">
-    <string>UNLOAD</string>
+    <string>PASSIVE</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_bldc_in">
+  <widget class="QPushButton" name="button_nazad">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>280</y>
-     <width>150</width>
-     <height>151</height>
+     <x>10</x>
+     <y>10</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -76,16 +58,16 @@
     </font>
    </property>
    <property name="text">
-    <string>BLDC IN</string>
+    <string>NAZAD</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_bldc_out">
+  <widget class="QPushButton" name="button_agressive">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>280</y>
-     <width>150</width>
-     <height>151</height>
+     <x>400</x>
+     <y>70</y>
+     <width>390</width>
+     <height>330</height>
     </rect>
    </property>
    <property name="font">
@@ -93,44 +75,11 @@
      <pointsize>20</pointsize>
     </font>
    </property>
-   <property name="text">
-    <string>BLDC OUT</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_bldc_off">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>280</y>
-     <width>150</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>20</pointsize>
-    </font>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>BLDC OFF</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_exit">
-   <property name="geometry">
-    <rect>
-     <x>540</x>
-     <y>20</y>
-     <width>101</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>70</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>X</string>
+    <string>AGRESSIVE</string>
    </property>
   </widget>
  </widget>
