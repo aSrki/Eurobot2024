@@ -48,24 +48,43 @@ while True:
     stop_sima_thread.start()
 
     if comm_data == 'yellow':
+        # translate(300, False)
+        # rotate(90)
+        # translate(600, False)
+        # rotate(-90)
+        # translate(250, False)
+        # rotate(90)
+        # translate(500, False)
+        # rotate(-45)
+        
         translate(300, False)
-        rotate(90)
+        rotate(45)
+        translate(700, False)
+        rotate(75)
         translate(600, False)
-        rotate(-90)
-        translate(250, False)
-        rotate(90)
-        translate(500, False)
-        rotate(-45)
+        
+        
+        
 
     elif comm_data == 'blue':
+        # translate(300, False)
+        # rotate(-90)
+        # translate(600, False)
+        # rotate(90)
+        # translate(250, False)
+        # rotate(-90)
+        # translate(500, False)
+        # rotate(-45)
+        
         translate(300, False)
-        rotate(-90)
-        translate(600, False)
-        rotate(90)
-        translate(250, False)
-        rotate(-90)
-        translate(500, False)
         rotate(-45)
+        translate(700, False)
+        rotate(-75)
+        translate(600, False)
+        # rotate(-90)
+        # translate(500, False)
+        # rotate(-45)
+        
 
     move_arm(330)
 

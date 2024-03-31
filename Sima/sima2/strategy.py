@@ -52,13 +52,13 @@ while True:
         translate(20)
         rotate(90)
         translate(1100, False)
-        rotate(-45)
+        #rotate(-45)
 
     elif comm_data == 'blue':
         translate(20)
         rotate(-90)
         translate(1100, False)
-        rotate(45)
+        #rotate(45)
 
     move_arm(270)
 
