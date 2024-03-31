@@ -37,7 +37,7 @@ class SensorsDetection:
                 data.is_front = (data.sensors == Sensors.FRONT_ON) or (
                     data.lidar == Sensors.FRONT_ON)
                 data.is_back = (data.sensors == Sensors.BACK_ON) or (
-                    data.lidar == Sensors.BACK_ON) or (data.sensors == Sensors.OBJECT)
+                    data.lidar == Sensors.BACK_ON)
 
                 data.sensors = Sensors.ALL_OFF
                 data.lidar = Sensors.ALL_OFF
@@ -74,14 +74,14 @@ class SensorsDetection:
 
     def object_1_sensor(self):
         if data.object_sensor_1:
-            custom_print("Object detected by sensor 1")
+            # custom_print("Object detected by sensor 1")
             return True
 
         return False
 
     def object_2_sensor(self):
         if data.object_sensor_2:
-            custom_print("Object detected by sensor 2")
+            # custom_print("Object detected by sensor 2")
             return True
 
         return False
