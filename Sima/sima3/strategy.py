@@ -10,19 +10,21 @@ first_stopped = False
 host = '0.0.0.0'
 port = 12345
 
-init_sima()
 init_sensor()
+init_sima()
 move_arm(175)
 
 while True:
+    comm_data = ""
     print("STARTED")
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((host, port))
     s.listen(1)
 
-    conn, addr = s.accept()
-    comm_data = conn.recv(1024).decode()
+    while comm_data == "":
+        conn, addr = s.accept()
+        comm_data = conn.recv(1024).decode()
 
     print(f"Received {comm_data}")
     move_arm(175)
@@ -35,6 +37,7 @@ while True:
     data.start_time = time.time()
 
     time.sleep(94)
+    init_sima()
 
     data.stop_threads = False
 
@@ -44,17 +47,19 @@ while True:
     if comm_data == 'yellow':
         translate(100)
         rotate(90)
-        translate(600)
+        translate(650)
         rotate(90)
         translate(150, False)
 
     elif comm_data == 'blue':
         translate(100)
         rotate(-90)
-        translate(600)
+        translate(750)
         rotate(-90)
         translate(150, False)
 
+    move_arm(260)
+    move_arm(260)
     move_arm(260)
 
     data.stop_threads = True

@@ -29,6 +29,9 @@ def rotate_arm(angle):
             portHandler, 5, 24, 1)
         
         communication_result, servo_error = handler.write2ByteTxRx(
+            portHandler, 5, 32, 200)
+        
+        communication_result, servo_error = handler.write2ByteTxRx(
             portHandler, 5, 30, angle)
         
         time.sleep(1)
@@ -136,8 +139,13 @@ def init_servos(ids):
         if servo_error != 0:
             print("MULTIMODE : %s" %
                     handler.getRxPacketError(servo_error))
+            
+    for id in ids:
+        _, servo_error = handler.write1ByteTxRx(portHandler, id, 64, 1)
+        if servo_error != 0:
+            print("TORQUE : %s" % handler.getRxPacketError(servo_error))
 
-def parallel_rotate(ids, angles, v = 1000, a = 200):
+def parallel_rotate(ids, angles, v = 1000, a = 100):
     SERVO_PORT = "/dev/ttyUSB0"
 
     portHandler = PortHandler(SERVO_PORT)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>720</width>
-    <height>480</height>
+    <width>746</width>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="button_zuta">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>5</x>
      <y>70</y>
-     <width>351</width>
-     <height>411</height>
+     <width>390</width>
+     <height>330</height>
     </rect>
    </property>
    <property name="font">
@@ -44,10 +44,10 @@ background-color: rgb(255, 216, 16);</string>
   <widget class="QPushButton" name="button_plava">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>400</x>
      <y>70</y>
-     <width>351</width>
-     <height>411</height>
+     <width>390</width>
+     <height>330</height>
     </rect>
    </property>
    <property name="font">
