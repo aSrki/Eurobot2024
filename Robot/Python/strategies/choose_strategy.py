@@ -26,6 +26,7 @@ from strategies.strategy3_brza import strategy3_brza
 from strategies.strategy5_brza import strategy5_brza
 from strategies.strategy_zuta_L import strategy_zuta_L
 from strategies.strategy_plava_L import strategy_plava_L
+from strategies.strategy_zuta_FULL import strategy_zuta_FULL
 
 if __name__ == '__main__':
     import sys
@@ -67,13 +68,20 @@ def choose_strategy():
             data.x_current = 195
             data.y_current = 295  # -155
             data.f_current = 0
-            return strategy5_brza.operations  # strategy1
+            return strategy_zuta_FULL.operations  # strategy1
         elif data.type_of_strategy == "agressive":
             data.time_strategy_type = 95   # 95
             data.x_current = 1000  # 195
             data.y_current = 2705  # 295
             data.f_current = 0
             return strategy_zuta_L.operations  # 2
+
+    if data.color == "blue":
+        data.time_strategy_type = 95  # 95  ... 90
+        data.x_current = 195
+        data.y_current = -295  # -155
+        data.f_current = 0
+        return strategy_zuta_FULL.operations  # strategy1
 
 
 # class choses_strategy():

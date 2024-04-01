@@ -63,7 +63,7 @@ strategy3_brza.end_step_actions()
 strategy3_brza.skip_to_flag("reset")
 
 strategy3_brza.start_step_actions()  # dolazi i priprema ruku
-strategy3_brza.go_to_XY(1850, -730)  # 1850
+strategy3_brza.set_distance_angle(50, 0)  # 1850
 strategy3_brza.move_mechanism(270)  # ostavlja zadnje u planter bez saksija
 strategy3_brza.end_step_actions()
 
@@ -89,7 +89,7 @@ strategy3_brza.move_back_arm(210, v=15)
 strategy3_brza.end_step_actions()
 
 strategy3_brza.start_step_actions()  # podize ruku
-strategy3_brza.go_to_XY(1382, -190, False, at=100, b=200)  # -185
+strategy3_brza.go_to_XY(1382, -200, False, at=100, b=200)  # -185
 strategy3_brza.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy3_brza.end_step_actions()
 
@@ -142,6 +142,7 @@ strategy3_brza.set_skip_flag(5)
 strategy3_brza.start_step_actions()
 strategy3_brza.go_to_XY(1000, -1500, False, at=0, b=0)  # pa na jos 6 komada
 strategy3_brza.deactivate_zadnja_grtalca()
+strategy3_brza.deactivate_prednja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.back_all_off()
@@ -156,6 +157,9 @@ strategy3_brza.end_step_actions()
 
 strategy3_brza.add_points("unload", 6)
 
+strategy3_brza.front_all_off()
+strategy3_brza.back_all_on()
+
 strategy3_brza.start_step_actions()
 strategy3_brza.go_to_XY(1300, -650, False, at=100, b=0)
 strategy3_brza.deactivate_zadnja_grtalca()
@@ -169,7 +173,9 @@ strategy3_brza.front_all_on()
 
 strategy3_brza.start_step_actions()
 strategy3_brza.go_to_XY(1542, -270, at=100, b=200)  # 350
+strategy3_brza.deactivate_prednja_grtalca()
 strategy3_brza.move_front_arm(120, v=15)  # podize ruku
+strategy3_brza.deactivate_zadnja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.front_all_off()
@@ -208,7 +214,7 @@ strategy3_brza.set_distance_angle(0, -95, g=0.3)  # zatorira ka tanjiru
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(-300, 0, g=0.5)  # udje u tanjur
-strategy3_brza.deactivate_zadnja_grtalca()
+# strategy3_brza.deactivate_zadnja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.all_off()
@@ -391,7 +397,7 @@ strategy3_brza.set_distance_angle(0, -95, g=0.3)  # zatorira ka tanjiru
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(-300, 0, g=0.5)  # udje u tanjur
-strategy3_brza.deactivate_zadnja_grtalca()
+# strategy3_brza.deactivate_zadnja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.all_off()
@@ -567,7 +573,7 @@ strategy3_brza.set_distance_angle(0, -95, g=0.3)  # zatorira ka tanjiru
 
 strategy3_brza.start_step_actions()
 strategy3_brza.set_distance_angle(-300, 0, g=0.5)  # udje u tanjur
-strategy3_brza.deactivate_zadnja_grtalca()
+# strategy3_brza.deactivate_zadnja_grtalca()
 strategy3_brza.end_step_actions()
 
 strategy3_brza.all_off()

@@ -46,28 +46,28 @@ class SensorsDetection:
 
     def front_sensors(self):
         if data.sensor_front_right or data.sensor_front_left:
-            custom_print("Detected in front")
+            # custom_print("Detected in front")
             return True
 
         return False
 
     def back_sensors(self):
         if data.sensor_back_right or data.sensor_back_left:
-            custom_print("Detected in back")
+            # custom_print("Detected in back")
             return True
 
         return False
 
     def lidar_front_sensor(self):
         if data.front_lidar_detection:
-            custom_print("Lidar detected in front")
+            # custom_print("Lidar detected in front")
             return True
 
         return False
 
     def lidar_back_sensors(self):
         if data.back_lidar_detection:
-            custom_print("Lidar detected in back")
+            # custom_print("Lidar detected in back")
             return True
 
         return False

@@ -52,8 +52,8 @@ class Servo_Moving:
 
     # dovodi sve servoe na pocetni polozaj
     def init_yellow(self):
-        ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
-        ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
+        ServoXL430(IDS.id_back_arm.value).rotate(195, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(105, 30)
         ServoXL430(IDS.id_centar.value).rotate(30)
         ServoXL430(IDS.id_gripper_back_1.value).rotate(140)
         ServoXL430(IDS.id_gripper_back_2.value).rotate(140)
@@ -76,8 +76,8 @@ class Servo_Moving:
         return
 
     def init_blue(self):
-        ServoXL430(IDS.id_back_arm.value).rotate(190, 30)
-        ServoXL430(IDS.id_front_arm.value).rotate(100, 30)
+        ServoXL430(IDS.id_back_arm.value).rotate(195, 30)
+        ServoXL430(IDS.id_front_arm.value).rotate(105, 30)
         ServoXL430(IDS.id_centar.value).rotate(300)
         ServoXL430(IDS.id_gripper_back_1.value).rotate(140)
         ServoXL430(IDS.id_gripper_back_2.value).rotate(140)
