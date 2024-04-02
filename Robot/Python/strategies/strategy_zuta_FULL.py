@@ -22,12 +22,6 @@ strategy_zuta_FULL.add_points("unload", 15)  # ispisuje poene za panele
 strategy_zuta_FULL.set_skip_flag(1)
 # ako detektuje nekog ili ako ne bude biljaka na cetvrtom (srednjem kod panela) tanjiru
 
-strategy_zuta_FULL.start_step_actions()
-# dolazi do cetvrtog tanjira(srednji tanjir kod panela)
-strategy_zuta_FULL.go_to_XY(500, 1500, off=120, b=50, at=0)
-strategy_zuta_FULL.deactivate_triangle()
-strategy_zuta_FULL.activate_prednja_grtalca()
-strategy_zuta_FULL.end_step_actions()
 
 # provjerava da li je pokupio biljke na prvom tanjiru
 strategy_zuta_FULL.add_sequence(yellow_get_4_front(True))
@@ -247,6 +241,8 @@ strategy_zuta_FULL.skip_to_flag("reset")
 # ovde skace na zaobilaznu koordinatu u alternativnoj 2
 strategy_zuta_FULL.set_skip_flag("zaobilazak")
 
+strategy_zuta_FULL.back_all_off()
+strategy_zuta_FULL.front_all_on()
 strategy_zuta_FULL.start_step_actions()
 # 762 # dolazi ispred plantera
 strategy_zuta_FULL.go_to_XY(1800, 780, at=2, b=200, bs=1)

@@ -60,8 +60,8 @@ while True:
         translate(300, False)
         rotate(45)
         translate(700, False)
-        rotate(75)
-        translate(600, False)
+        rotate(68) #75
+        translate(600, True)
         
         
         
@@ -79,8 +79,8 @@ while True:
         translate(300, False)
         rotate(-45)
         translate(700, False)
-        rotate(-75)
-        translate(600, False)
+        rotate(-65)  #-75
+        translate(600, True)
         # rotate(-90)
         # translate(500, False)
         # rotate(-45)
