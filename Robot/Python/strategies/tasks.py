@@ -208,13 +208,15 @@ def univerzalni_kraj_zuta():
     uk.start_step_actions()
     uk.go_to_XY(1542, 270, False, at=100, b=200)  # 350
     uk.move_back_arm(210, v=15)  # podize ruku
+    uk.deactivate_prednja_grtalca()
+    uk.deactivate_zadnja_grtalca()
     uk.end_step_actions()
     uk.skip_to_flag("reset")
     uk.back_all_off()
 
     uk.rotate_to(0)
     # uk.set_distance_angle(-10, 0)
-    uk.move_mechanism(130)  # 220
+    uk.move_mechanism(160)  # 220
     uk.move_back_arm(190, v=30)  # 100
     uk.ungrip_back()
     uk.move_back_arm(210, v=30)
@@ -231,7 +233,7 @@ def univerzalni_kraj_zuta():
     uk.move_front_arm(120, v=30)
     uk.go_to_XY(1312, 270, at=100, b=0)  # 285
     uk.rotate_to(180)
-    uk.move_mechanism(230)  # izbaci ruku
+    uk.move_mechanism(200)  # izbaci ruku
     uk.move_front_arm(100, v=30)
     uk.ungrip_front()
     uk.move_front_arm(120, v=30)
@@ -465,7 +467,7 @@ def blue_get_6_front(check=False, off=120):
 
     bg6f.start_step_actions()
     # ide do biljaka kod sime to jest prvi tanjir
-    bg6f.go_to_XY(700, -2000, off=off, at=0, b=100)
+    bg6f.go_to_XY(1300, -2000, off=off, at=0, b=100)
     bg6f.add_sequence(prepare_front_arm())
     bg6f.deactivate_zadnja_grtalca()
     bg6f.activate_prednja_grtalca()
@@ -705,7 +707,7 @@ def yellow_get_6_front(check=False, off=120):
 
     g6f.start_step_actions()
     # ide do biljaka kod sime to jest prvi tanjir
-    g6f.go_to_XY(700, 2000, off=off, at=0, b=100)
+    g6f.go_to_XY(1300, 2000, off=off, at=0, b=100)
     g6f.add_sequence(prepare_front_arm())
     g6f.deactivate_zadnja_grtalca()
     g6f.activate_prednja_grtalca()

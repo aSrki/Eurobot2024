@@ -249,7 +249,7 @@ strategy_zuta_FULL.set_skip_flag("zaobilazak")
 
 strategy_zuta_FULL.start_step_actions()
 # 762 # dolazi ispred plantera
-strategy_zuta_FULL.go_to_XY(1800, 780, False, at=2, b=200, bs=1)
+strategy_zuta_FULL.go_to_XY(1800, 780, at=2, b=200, bs=1)
 strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.move_back_arm(210, v=15)
 strategy_zuta_FULL.end_step_actions()
@@ -868,19 +868,11 @@ strategy_zuta_FULL.skip_to_flag(56)
 strategy_zuta_FULL.add_sequence(yellow_get_3_front())
 strategy_zuta_FULL.skip_to_flag("reset")
 
-strategy_zuta_FULL.skip_to_flag(37)
-strategy_zuta_FULL.skip_to_flag(47)
+# strategy_zuta_FULL.skip_to_flag(37)
+# strategy_zuta_FULL.skip_to_flag(47)
 
 strategy_zuta_FULL.add_sequence(yellow_get_2_back())
 strategy_zuta_FULL.skip_to_flag("reset")
-
-strategy_zuta_FULL.back_all_off()
-strategy_zuta_FULL.front_all_on()
-
-strategy_zuta_FULL.start_step_actions()
-strategy_zuta_FULL.go_to_XY(1050, 600, at=0, b=0)
-strategy_zuta_FULL.deactivate_zadnja_grtalca()
-strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.front_all_off()
 strategy_zuta_FULL.back_all_on()
@@ -941,6 +933,110 @@ strategy_zuta_FULL.all_off()
 strategy_zuta_FULL.go_to_XY(1620, 250, False, at=100, b=0, bs=0.1, s=0.1)
 
 strategy_zuta_FULL.end()
+
+# ====================alternativna gde ce na kraju da proverava tanjir br3 jer do sada nije ==========================
+
+strategy_zuta_FULL.skip_to_flag(37)
+strategy_zuta_FULL.skip_to_flag(47)
+
+strategy_zuta_FULL.add_sequence(yellow_get_2_back())
+strategy_zuta_FULL.skip_to_flag("reset")
+
+strategy_zuta_FULL.front_all_off()
+strategy_zuta_FULL.back_all_on()
+
+strategy_zuta_FULL.start_step_actions()
+strategy_zuta_FULL.go_to_XY(1800, 800, False, at=100, b=0, bs=1)
+strategy_zuta_FULL.deactivate_zadnja_grtalca()
+strategy_zuta_FULL.move_back_arm(210, v=15)
+strategy_zuta_FULL.end_step_actions()
+
+strategy_zuta_FULL.rotate_to(90)
+strategy_zuta_FULL.skip_to_flag("reset")
+
+strategy_zuta_FULL.back_all_off()
+
+strategy_zuta_FULL.start_step_actions()  # dolazi i priprema ruku
+strategy_zuta_FULL.set_distance_angle(-50, 0)
+strategy_zuta_FULL.move_mechanism(90)  # ostavlja prednje u planter bez saksija
+strategy_zuta_FULL.end_step_actions()
+
+strategy_zuta_FULL.move_back_arm(175, v=15)
+strategy_zuta_FULL.ungrip_back()
+
+# strategy_zuta_FULL.start_parallel()
+strategy_zuta_FULL.move_back_arm(210, v=30)
+strategy_zuta_FULL.move_mechanism(180)
+# strategy_zuta_FULL.end_parallel()
+
+strategy_zuta_FULL.add_points("unload", 24)
+
+strategy_zuta_FULL.front_all_on()
+
+strategy_zuta_FULL.set_distance_angle(100, 0, at=100, b=0)
+
+strategy_zuta_FULL.start_step_actions()
+strategy_zuta_FULL.go_to_XY(1382, 700, at=100, b=0)
+strategy_zuta_FULL.move_front_arm(120, v=15)
+strategy_zuta_FULL.end_step_actions()
+
+strategy_zuta_FULL.start_step_actions()  # podize ruku
+strategy_zuta_FULL.go_to_XY(1382, 200, at=100, b=200)  # 185
+strategy_zuta_FULL.rotate_to(180)
+strategy_zuta_FULL.move_mechanism(340)  # ostavlja biljke u drugi plenter
+strategy_zuta_FULL.end_step_actions()
+
+strategy_zuta_FULL.move_front_arm(80, v=15)
+strategy_zuta_FULL.ungrip_front()
+
+# strategy_zuta_FULL.start_parallel()
+strategy_zuta_FULL.move_front_arm(120, v=15)
+strategy_zuta_FULL.move_mechanism(180)
+# strategy_zuta_FULL.end_parallel()
+
+strategy_zuta_FULL.add_points("unload", 24)
+
+# ide na tanjir br.3 sada
+strategy_zuta_FULL.set_distance_angle(-450, 0, at=100, b=0)
+
+strategy_zuta_FULL.back_all_off()
+strategy_zuta_FULL.front_all_on()
+
+strategy_zuta_FULL.start_step_actions()
+strategy_zuta_FULL.go_to_XY(700, 700, at=100, b=0)
+strategy_zuta_FULL.deactivate_zadnja_grtalca()
+strategy_zuta_FULL.add_sequence(prepare_arms6())
+strategy_zuta_FULL.end_step_actions()
+
+strategy_zuta_FULL.front_all_off()
+strategy_zuta_FULL.back_all_on()
+
+strategy_zuta_FULL.start_step_actions()
+strategy_zuta_FULL.rotate_to(180)
+strategy_zuta_FULL.activate_zadnja_grtalca()
+strategy_zuta_FULL.end_step_actions()
+
+# ovde nema vise sta da trazi i ide kuci ako ne nadje
+strategy_zuta_FULL.set_skip_flag(7)
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130, True))
+strategy_zuta_FULL.skip_to_flag("reset")
+
+strategy_zuta_FULL.start_step_actions()
+strategy_zuta_FULL.rotate_to(3)
+strategy_zuta_FULL.activate_prednja_grtalca()
+strategy_zuta_FULL.deactivate_zadnja_grtalca()
+strategy_zuta_FULL.end_step_actions()  # OVO IZVADITI AKO IDEMO NA 3 TANJIRA
+
+strategy_zuta_FULL.back_all_off()
+strategy_zuta_FULL.front_all_on()
+
+strategy_zuta_FULL.set_distance_angle(230, 0)
+strategy_zuta_FULL.move_mechanism(180)
+strategy_zuta_FULL.add_sequence(grip_front_plant())
+
+# 3 - 2 u potove i grtne u polje pored
+strategy_zuta_FULL.add_sequence(univerzalni_kraj_zuta())
+
 
 # ================traganje za biljkama na kraju strategija ==========
 strategy_zuta_FULL.skip_to_flag(4)
@@ -1030,8 +1126,10 @@ strategy_zuta_FULL.front_all_off()
 strategy_zuta_FULL.back_all_on()
 
 strategy_zuta_FULL.start_step_actions()
-strategy_zuta_FULL.go_to_XY(1472, 270, False, at=100, b=200)  # 350
+strategy_zuta_FULL.go_to_XY(1472, 280, False, at=100, b=200)  # 350
 strategy_zuta_FULL.move_back_arm(210, v=15)  # podize ruku
+strategy_zuta_FULL.deactivate_zadnja_grtalca()
+strategy_zuta_FULL.deactivate_prednja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.back_all_off()
