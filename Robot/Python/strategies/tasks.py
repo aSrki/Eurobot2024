@@ -203,7 +203,7 @@ def univerzalni_kraj_zuta():
     uk.back_all_on()
 
     uk.set_skip_flag("brzi_istovar")
-    uk.check_time(75, "brzi_istovar")
+    uk.check_time(74, "brzi_istovar")
 
     uk.start_step_actions()
     uk.go_to_XY(1542, 270, False, at=100, b=200)  # 350
@@ -246,7 +246,7 @@ def univerzalni_kraj_zuta():
     uk.set_distance_angle(0, 95, g=0.3)  # zatorira ka tanjiru
 
     uk.start_step_actions()
-    uk.set_distance_angle(300, 0, g=0.5)  # udje u tanjur
+    uk.set_distance_angle(350, 0, g=0.5)  # udje u tanjur
     # uk.deactivate_prednja_grtalca()
     uk.end_step_actions()
 
