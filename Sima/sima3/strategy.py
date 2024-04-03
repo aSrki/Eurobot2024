@@ -44,14 +44,14 @@ while True:
     distance_acquire_thread.start()
     stop_sima_thread.start()
 
-    if comm_data == 'yellow':
+    if comm_data == 'yellowuski' or comm_data == 'yellowsiroki':
         translate(100)
         rotate(90)
         translate(650)
         rotate(90)
         translate(150, False)
 
-    elif comm_data == 'blue':
+    elif comm_data == 'blueuski'or comm_data == 'bluesiroki':
         translate(100)
         rotate(-90)
         translate(750)

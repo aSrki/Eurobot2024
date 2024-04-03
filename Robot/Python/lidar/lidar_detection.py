@@ -37,6 +37,7 @@ class LidarDetection:
         try:
             self.lidar = RPLidar(None, data.LIDAR_PORT,
                                  baudrate=115200, timeout=3)
+            self.lidar.set_pwm()
             self.lidar.logging = False
             print(self.lidar.health)
             print(self.lidar._serial_port)

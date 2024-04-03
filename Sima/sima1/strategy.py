@@ -47,44 +47,41 @@ while True:
     distance_acquire_thread.start()
     stop_sima_thread.start()
 
-    if comm_data == 'yellow':
-        translate(300, False)
+    if comm_data == 'yellowsiroki':
+        translate(300)
         rotate(90)
         translate(600, False)
         rotate(-90)
         translate(250, False)
         rotate(90)
         translate(500, False)
-        #rotate(-45)
-        
-        # translate(300, False)
-        # rotate(45)
-        # translate(700, False)
-        # rotate(68) #75
-        # translate(600, True)
-        
-        
-        
 
-    elif comm_data == 'blue':
-        translate(300, False)
+    elif comm_data == 'bluesiroki':
+        translate(300)
         rotate(-90)
         translate(600, False)
         rotate(90)
         translate(250, False)
         rotate(-90)
         translate(500, False)
-        #rotate(-45)
-        
-        # translate(300, False)
-        # rotate(-45)
-        # translate(700, False)
-        # rotate(-65)  #-75
-        # translate(600, True)
-        # rotate(-90)
-        # translate(500, False)
-        # rotate(-45)
-        
+
+    elif comm_data == 'yellowuski':
+        translate(300)
+        rotate(90)
+        translate(400, False)
+        rotate(-90)
+        translate(250, False)
+        rotate(90)
+        translate(700, False)
+
+    elif comm_data == 'blueuski':
+        translate(300)
+        rotate(-90)
+        translate(400, False)
+        rotate(90)
+        translate(250, False)
+        rotate(-90)
+        translate(700, False)
 
     move_arm(330)
 

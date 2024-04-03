@@ -18,7 +18,7 @@ class Payload():
     def __init__(self):
         self.color = None
         self.type_of_strategy = None
-
+        self.table = None
 
 gamePayload = Payload()
 count_time = 0
@@ -105,6 +105,8 @@ class Screen3(QDialog):
         self.label.setText("Izabrana boja tanjira: " + str(gamePayload.color) + "\n"
                            "Da li si siguran da zelis da nastavis?")
         
+        print(f"COLOR: " + str(gamePayload.color) + "\n TABLE: " + str(gamePayload.table)  + "\n STRATEGY: " + str(gamePayload.type_of_strategy))
+        
         self.sima_1_label.setStyleSheet("background-color: red;")
         self.sima_2_label.setStyleSheet("background-color: red;")
         self.sima_3_label.setStyleSheet("background-color: red;")   
@@ -156,6 +158,7 @@ class Screen4(QDialog):
         loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen4.ui", self)
         data.color = gamePayload.color
         data.type_of_strategy = gamePayload.type_of_strategy
+        data.table = gamePayload.table
         self.label.setText("Points: " + str(0) + "\nTime: " +
                            str(data.elapsed_time) + "s")
         self.kill_all_button.clicked.connect(self.kill_all)
@@ -241,11 +244,11 @@ class Screen5(QDialog):
 
     def on_click_agressive(self):
         gamePayload.type_of_strategy = 'agressive'
-        self.gotoScreen3()
+        self.gotoScreen6()
 
     def on_click_passive(self):
         gamePayload.type_of_strategy = 'passive'
-        self.gotoScreen3()
+        self.gotoScreen6()
 
     def on_click_nazad(self):
         screen2 = Screen2()
@@ -259,6 +262,53 @@ class Screen5(QDialog):
         widget.setCurrentIndex(widget.currentIndex() + 1)
         self.close()
 
+    def gotoScreen6(self):
+        screen6 = Screen6()
+        widget.addWidget(screen6)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+class Screen6(QDialog):
+    def __init__(self):
+        super(Screen6, self).__init__()
+        loadUi("/home/robot/Eurobot2024/Robot/Python/run/screen6.ui", self)
+
+        self.button_sto_uski.clicked.connect(self.on_click_sto_uski)
+        self.button_sto_siroki.clicked.connect(self.on_click_sto_siroki)
+        self.button_back.clicked.connect(self.gotoScreen5)
+
+        if gamePayload.color == "yellow":
+            self.button_sto_uski.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
+            self.button_sto_siroki.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
+            
+        else:
+            self.button_sto_uski.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
+            self.button_sto_siroki.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
+
+      
+    def on_click_sto_uski(self):
+        gamePayload.table = 'uski'
+        self.gotoScreen3()
+
+    def on_click_sto_siroki(self):
+        gamePayload.table = 'siroki'
+        self.gotoScreen3()
+
+    def gotoScreen3(self):
+        screen3 = Screen3()
+        widget.addWidget(screen3)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
+
+    def gotoScreen5(self):
+        screen5 = Screen5()
+        widget.addWidget(screen5)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+        self.close()
 
 if __name__ == '__main__':
     # import data

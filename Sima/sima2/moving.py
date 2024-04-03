@@ -55,7 +55,7 @@ def rotate(deg):
     parallel_rotate([4, 1], [data.left_theta, data.right_theta], a = 200)
     time.sleep(0.5)
     print("rotiram")
-    data.detect = True
+    data.detect = False
 
 def translate(len, detect = True):
     print(data.stop_threads)
