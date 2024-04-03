@@ -49,7 +49,6 @@ class LidarDetection:
         num_of_scans = 0
 
         try:
-
             for scan in self.lidar.iter_scans():
                 # print(self.lidar._serial_port)
                 if not data.running.is_set():
@@ -116,6 +115,8 @@ class LidarDetection:
             print(f"LIDAR SCAN ERROR: {e}")
 
         self.stop()
+        self.lidar_thread.join()
+        self.start()
 
     def stop(self):
         try:

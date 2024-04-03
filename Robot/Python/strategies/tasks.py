@@ -121,7 +121,7 @@ def grip3_front_plant(p=0, check=False):
     gfp3.set_distance_angle(95 + p, 0)
 
     # gfp.start_parallel()
-    gfp3.move_front_arm(72, v=30)  # 87 #72
+    gfp3.move_front_arm(75, v=30)  # 87 #72
     gfp3.grip_front()
     if check:
         gfp3.check_object()
@@ -137,7 +137,7 @@ def grip3_back_plant(p=0, check=False):
 
     gbp3.set_distance_angle(-230 - p, 0)  # -230
     # gbp3.start_parallel()
-    gbp3.move_back_arm(159, v=30)  # 162
+    gbp3.move_back_arm(162, v=30)  # 162
     gbp3.grip_back()
     if check:
         gbp3.check_object()
@@ -196,68 +196,132 @@ def leave_back_plant():  # van terena biljke bez saksija
 
 
 def univerzalni_kraj_zuta():
-    uk = Strategy()
+    ukz = Strategy()
 
-    # ==========================univerzalni kraj=======================
-    uk.front_all_off()
-    uk.back_all_on()
+    # ==========================univerzalni kraj zuta=======================
+    ukz.front_all_off()
+    ukz.back_all_on()
 
-    uk.set_skip_flag("brzi_istovar")
-    uk.check_time(74, "brzi_istovar")
+    ukz.set_skip_flag("brzi_istovar")
+    ukz.check_time(72, "brzi_istovar")
 
-    uk.start_step_actions()
-    uk.go_to_XY(1542, 270, False, at=100, b=200)  # 350
-    uk.move_back_arm(210, v=15)  # podize ruku
-    uk.deactivate_prednja_grtalca()
-    uk.deactivate_zadnja_grtalca()
-    uk.end_step_actions()
-    uk.skip_to_flag("reset")
-    uk.back_all_off()
+    ukz.start_step_actions()
+    ukz.go_to_XY(1542, 270, False, at=100, b=200)  # 350
+    ukz.move_back_arm(210, v=15)  # podize rukzu
+    ukz.deactivate_prednja_grtalca()
+    ukz.deactivate_zadnja_grtalca()
+    ukz.end_step_actions()
+    ukz.skip_to_flag("reset")
+    ukz.back_all_off()
 
-    uk.rotate_to(0)
-    # uk.set_distance_angle(-10, 0)
-    uk.move_mechanism(160)  # 220
-    uk.move_back_arm(190, v=30)  # 100
-    uk.ungrip_back()
-    uk.move_back_arm(210, v=30)
+    ukz.rotate_to(0)
+    # ukz.set_distance_angle(-10, 0)
+    ukz.move_mechanism(160)  # 220
+    ukz.move_back_arm(190, v=30)  # 100
+    ukz.ungrip_back()
+    ukz.move_back_arm(210, v=30)
 
-    uk.front_all_on()
+    ukz.front_all_on()
 
-    uk.start_step_actions()
-    uk.set_distance_angle(200, 0, at=100, b=0)
-    uk.grip_back()
-    uk.deactivate_prednja_grtalca()
-    uk.deactivate_zadnja_grtalca()
-    uk.end_step_actions()
+    ukz.start_step_actions()
+    ukz.set_distance_angle(200, 0, at=100, b=0)
+    ukz.grip_back()
+    ukz.deactivate_prednja_grtalca()
+    ukz.deactivate_zadnja_grtalca()
+    ukz.end_step_actions()
 
-    uk.move_front_arm(120, v=30)
-    uk.go_to_XY(1312, 270, at=100, b=0)  # 285
-    uk.rotate_to(180)
-    uk.move_mechanism(200)  # izbaci ruku
-    uk.move_front_arm(100, v=30)
-    uk.ungrip_front()
-    uk.move_front_arm(120, v=30)
+    ukz.move_front_arm(120, v=30)
+    ukz.go_to_XY(1312, 270, at=100, b=0)  # 285
+    ukz.rotate_to(180)
+    ukz.move_mechanism(200)  # izbaci rukzu
+    ukz.move_front_arm(100, v=30)
+    ukz.ungrip_front()
+    ukz.move_front_arm(120, v=30)
 
-    uk.start_step_actions()
-    uk.set_distance_angle(60, 0)
-    uk.activate_prednja_desna_grtalca()
-    uk.end_step_actions()
+    ukz.start_step_actions()
+    ukz.set_distance_angle(60, 0)
+    ukz.activate_prednja_desna_grtalca()
+    ukz.end_step_actions()
 
-    uk.add_points("unload", 20)
+    ukz.add_points("unload", 20)
 
-    uk.set_distance_angle(0, 95, g=0.3)  # zatorira ka tanjiru
+    ukz.set_distance_angle(0, 95, g=0.3)  # zatorira ka tanjiru
 
-    uk.start_step_actions()
-    uk.set_distance_angle(350, 0, g=0.5)  # udje u tanjur
-    # uk.deactivate_prednja_grtalca()
-    uk.end_step_actions()
+    ukz.start_step_actions()
+    ukz.set_distance_angle(350, 0, g=0.5)  # udje u tanjur
+    # ukz.deactivate_prednja_grtalca()
+    ukz.end_step_actions()
 
-    uk.all_off()
+    ukz.all_off()
 
-    uk.end()
+    ukz.end()
 
-    return uk.operations
+    return ukz.operations
 
+
+
+
+
+def univerzalni_kraj_plava():
+    ukp = Strategy()
+
+    # ==========================univerzalni kraj plava=======================
+    ukp.back_all_off()
+    ukp.front_all_on()
+
+    ukp.set_skip_flag("brzi_istovar")
+    ukp.check_time(72, "brzi_istovar")
+
+    ukp.start_step_actions()
+    ukp.go_to_XY(1542, -270, at=100, b=200)  # 350
+    ukp.move_front_arm(120, v=15)  # podize rukpu
+    ukp.deactivate_zadnja_grtalca()
+    ukp.deactivate_prednja_grtalca()
+    ukp.end_step_actions()
+    ukp.skip_to_flag("reset")
+    ukp.back_all_off()
+
+    ukp.rotate_to(0)
+    # ukp.set_distance_angle(-10, 0)
+    ukp.move_mechanism(240)  # 220
+    ukp.move_front_arm(100, v=30)  # 100
+    ukp.ungrip_front()
+    ukp.move_front_arm(120, v=30)
+
+    ukp.back_all_on()
+
+    ukp.start_step_actions()
+    ukp.set_distance_angle(-200, 0, at=100, b=0)
+    ukp.grip_front()
+    ukp.deactivate_zadnja_grtalca()
+    ukp.deactivate_prednja_grtalca()
+    ukp.end_step_actions()
+
+    ukp.move_back_arm(210, v=30)
+    ukp.go_to_XY(1312, -270, False, at=100, b=0)  # 285
+    ukp.rotate_to(180)
+    ukp.move_mechanism(120)  # izbaci rukpu
+    ukp.move_back_arm(190, v=30)
+    ukp.ungrip_back()
+    ukp.move_back_arm(210, v=30)
+
+    ukp.start_step_actions()
+    ukp.set_distance_angle(-60, 0)
+    ukp.activate_zadnja_desna_grtalca()
+    ukp.end_step_actions()
+
+    ukp.add_points("unload", 20) # dodaje poene za pet u metale
+
+    ukp.set_distance_angle(0, -95, g=0.3)  # zatorira ka tanjiru
+
+    ukp.set_distance_angle(-350, 0, g=0.5)  # udje u tanjur
+    # ukp.deactivate_prednja_grtalca()
+
+    ukp.all_off()
+
+    ukp.end()
+
+    return ukp.operations
 
 def blue_get_1_front(check=False, off=120):
     bg1f = Strategy()

@@ -9,11 +9,12 @@ strategy_zuta_FULL = Strategy()
 strategy_zuta_FULL.rotate_to(0)
 strategy_zuta_FULL.front_sensors_on()
 strategy_zuta_FULL.start_step_actions()
-strategy_zuta_FULL.go_to_XY(195, 810, g=0.4)  # rotira panele
+strategy_zuta_FULL.go_to_XY(195, 790, g=0.4)  # rotira panele
 strategy_zuta_FULL.activate_triangle()
 strategy_zuta_FULL.deactivate_prednja_grtalca()
 strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.add_sequence(prepare_front_arm())
+strategy_zuta_FULL.deactivate_triangle()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.add_points("unload", 15)  # ispisuje poene za panele
@@ -154,8 +155,8 @@ strategy_zuta_FULL.add_sequence(grip_front_plant())
 # # poeni za gole biljke u cosku iz kog smo krenuli
 # strategy_zuta_FULL.add_points("unload", 6)
 
-strategy_zuta_FULL.back_all_off()
-strategy_zuta_FULL.front_all_on()
+strategy_zuta_FULL.front_all_off()
+strategy_zuta_FULL.back_all_on()
 
 strategy_zuta_FULL.start_step_actions()
 # dolazi blizu metala po istom iksu kako bi ostavio 5 biljaka u njih
@@ -165,13 +166,10 @@ strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 # skace ovde ako u se u prethodnom prozoru detektuje i preskace grtanje u pocetni cosak
-# strategy_zuta_FULL.skip_to_flag(5)
-
-strategy_zuta_FULL.front_all_off()
-strategy_zuta_FULL.back_all_on()
+# strategy_zuta_FULL.skip_to_flag(5) NEMA OVOG VISE
 
 strategy_zuta_FULL.set_skip_flag("brzi_istovar")  # stavlja fleg u kojem ako
-strategy_zuta_FULL.check_time(74, "brzi_istovar")
+strategy_zuta_FULL.check_time(72, "brzi_istovar")
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.go_to_XY(1542, 265, False, at=100, b=200)  # 350
@@ -252,7 +250,8 @@ strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(90)
 
-strategy_zuta_FULL.back_all_off()
+strategy_zuta_FULL.front_all_off()
+
 strategy_zuta_FULL.skip_to_flag("reset")
 
 strategy_zuta_FULL.start_step_actions()  # dolazi i priprema ruku
@@ -280,7 +279,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.start_step_actions()  # podize ruku
-strategy_zuta_FULL.go_to_XY(1382, 210, at=100, b=200)  # 185
+strategy_zuta_FULL.go_to_XY(1382, 190, at=100, b=200)  # 185
 strategy_zuta_FULL.move_mechanism(340)  # ostavlja biljke u drugi plenter
 strategy_zuta_FULL.end_step_actions()
 
@@ -292,13 +291,15 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 24) # za drugi plenter
 
 
 strategy_zuta_FULL.front_all_off()
 strategy_zuta_FULL.back_all_on()
 
 strategy_zuta_FULL.set_distance_angle(-100, 0)
+
+strategy_zuta_FULL.set_skip_flag(8) ## ide na tanjir broj tri ako nema u tanjiru dva ili vidi protivnika
 
 strategy_zuta_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
@@ -308,7 +309,9 @@ strategy_zuta_FULL.activate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(180)
-strategy_zuta_FULL.add_sequence(grip3_back_plant(-130))
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130, True))
+
+strategy_zuta_FULL.skip_to_flag("reset")
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.rotate_to(3)
@@ -414,7 +417,7 @@ strategy_zuta_FULL.activate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(180)
-strategy_zuta_FULL.add_sequence(grip3_back_plant(-110))
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130))
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.rotate_to(5)
@@ -520,7 +523,7 @@ strategy_zuta_FULL.activate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(180)
-strategy_zuta_FULL.add_sequence(grip3_back_plant(-110))
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130))
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.rotate_to(3)
@@ -623,7 +626,7 @@ strategy_zuta_FULL.activate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(180)
-strategy_zuta_FULL.add_sequence(grip3_back_plant(-110))
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130))
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.rotate_to(5)
@@ -840,7 +843,7 @@ strategy_zuta_FULL.activate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.rotate_to(180)
-strategy_zuta_FULL.add_sequence(grip3_back_plant(-110))
+strategy_zuta_FULL.add_sequence(grip3_back_plant(-130))
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.rotate_to(0)
@@ -865,7 +868,7 @@ strategy_zuta_FULL.add_sequence(yellow_get_3_front())
 strategy_zuta_FULL.skip_to_flag("reset")
 
 # strategy_zuta_FULL.skip_to_flag(37)
-# strategy_zuta_FULL.skip_to_flag(47)
+strategy_zuta_FULL.skip_to_flag(57)
 
 strategy_zuta_FULL.add_sequence(yellow_get_2_back())
 strategy_zuta_FULL.skip_to_flag("reset")
@@ -935,6 +938,7 @@ strategy_zuta_FULL.end()
 strategy_zuta_FULL.skip_to_flag(37)
 strategy_zuta_FULL.skip_to_flag(47)
 
+
 strategy_zuta_FULL.add_sequence(yellow_get_2_back())
 strategy_zuta_FULL.skip_to_flag("reset")
 
@@ -977,7 +981,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.start_step_actions()  # podize ruku
-strategy_zuta_FULL.go_to_XY(1382, 200, at=100, b=200)  # 185
+strategy_zuta_FULL.go_to_XY(1382, 190, at=100, b=200)  # 185
 strategy_zuta_FULL.rotate_to(180)
 strategy_zuta_FULL.move_mechanism(340)  # ostavlja biljke u drugi plenter
 strategy_zuta_FULL.end_step_actions()
@@ -998,6 +1002,7 @@ strategy_zuta_FULL.set_distance_angle(-450, 0, at=100, b=0)
 strategy_zuta_FULL.back_all_off()
 strategy_zuta_FULL.front_all_on()
 
+strategy_zuta_FULL.skip_to_flag(8)
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.go_to_XY(700, 700, at=100, b=0)
 strategy_zuta_FULL.deactivate_zadnja_grtalca()

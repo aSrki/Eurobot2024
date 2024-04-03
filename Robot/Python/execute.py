@@ -151,16 +151,12 @@ class Execute:
                         data.lidar = self.operation.lidar
                         self.choose_type_of_moving(self.operation)
                     elif isinstance(self.operation, Step):
-                        if data.num_of_skips > 0:
+                        if data.num_of_skips > 1:
                             data.num_of_skips -= 1
-                            custom_print(
-                                f"SKIPPING {data.num_of_skips} MORE STEPS")
                             continue
                         else:
                             self.skipping = False
-                            custom_print("DONE SKIPPING STEPS")
                     else:
-                        custom_print("SKIPPING OPERATION NOT STEP")
                         continue
 
                 custom_print(

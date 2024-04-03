@@ -94,7 +94,7 @@ class Step:
     @classmethod
     def set_distance_angle(cls, distance, angle, sleep=0, sensor=Sensors.ALL_OFF,
                            lidar=False, gain=1, stop_sleep=0.5, backing_sleep=0.5,
-                           attemps=2, backing=300, num_of_skips=1):
+                           attemps=2, backing=300, num_of_skips=0):
         step = cls()
         step.type_of_parameters = TypesOfSendParameters.DISTANCE_ANGLE
         step.distance = distance
