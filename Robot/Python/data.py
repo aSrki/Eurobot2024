@@ -40,6 +40,7 @@ f_current = 0
 # initial_rotate_pojacanje = .8
 translate_pojacanje = 1
 translate_rot_pojacanje = 1
+top_speed = 1
 rotate_pojacanje = 1  # bilo 1.2
 
 operations = []

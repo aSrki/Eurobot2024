@@ -61,7 +61,7 @@ class Execute:
                 if not data.running.is_set():
                     break
 
-                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout and not ((data.x_current > 1450) and (-550 < data.y_current < 550)):
+                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout and not (((data.x_current > 550) and (-550 < data.y_current < 550)) or ((data.x_current > 1450) and (-550 < data.y_current < 550))):
                     custom_print(f"TIMEOUT: {data.elapsed_time}")
 
                     data.TIMEOUT_FOR_LAST_STEPS = False
@@ -326,6 +326,7 @@ class Execute:
     def choose_type_of_moving(self, step):
         data.translate_pojacanje = step.translate_pojacanje
         data.rotate_pojacanje = step.rotate_pojacanje
+        data.top_speed = step.top_speed
 
         # TODO: ZNAJ DA OVO POSTOJI. JAKO.
         if step.translate_pojacanje < .5:

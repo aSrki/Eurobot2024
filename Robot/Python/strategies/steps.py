@@ -62,6 +62,7 @@ class Step:
 
         self.translate_pojacanje = 1
         self.rotate_pojacanje = 1
+        self.top_speed = 1
 
         self.num_of_attemps = 2
         self.num_of_skips = 1
@@ -73,7 +74,7 @@ class Step:
     @classmethod
     def go_to_XY(cls, x, y, direction=True, gain=1,
                  sleep=0, sensor=Sensors.ALL_OFF, lidar=Sensors.ALL_OFF, stop_sleep=0.5,
-                 backing_sleep=0.5, attemps=2, backing=200, num_of_skips=0, offset=0):
+                 backing_sleep=0.5, attemps=2, backing=200, num_of_skips=0, offset=0, top_speed=1):
         step = cls()
         step.type_of_parameters = TypesOfSendParameters.COORDINATE
         step.x = x
@@ -81,6 +82,7 @@ class Step:
         step.sleep = sleep
         step.direction_is_forward = direction
         step.translate_pojacanje = gain
+        step.top_speed = top_speed
         step.sensor = sensor
         step.lidar = lidar
         step.stop_sleep = stop_sleep
@@ -94,7 +96,7 @@ class Step:
     @classmethod
     def set_distance_angle(cls, distance, angle, sleep=0, sensor=Sensors.ALL_OFF,
                            lidar=False, gain=1, stop_sleep=0.5, backing_sleep=0.5,
-                           attemps=2, backing=300, num_of_skips=0):
+                           attemps=2, backing=300, num_of_skips=0, top_speed=1):
         step = cls()
         step.type_of_parameters = TypesOfSendParameters.DISTANCE_ANGLE
         step.distance = distance
@@ -108,6 +110,7 @@ class Step:
         step.distance_when_backing = backing
         step.num_of_skips = num_of_skips
         step.translate_pojacanje = gain
+        step.top_speed = top_speed
         return step
 
     @classmethod

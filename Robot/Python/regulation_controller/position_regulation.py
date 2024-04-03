@@ -46,8 +46,9 @@ class PositionRegulation:
     t_trans = 0.03
     t_rot = 0.03
 
+    speed_gain = 1
     min_pid = 0
-    max_pid = 3000
+    max_pid = 3000 * speed_gain
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -217,6 +218,8 @@ class PositionRegulation:
             # ============TRANSlACIJAAAA======================================================================================
         elif self.sending_trans and not self.sending_stop:
             pojacanje = data.translate_pojacanje
+            self.speed_gain = data.top_speed
+
             rotpoj = 1
 
             KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete

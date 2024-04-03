@@ -115,7 +115,7 @@ class LidarDetection:
             print(f"LIDAR SCAN ERROR: {e}")
 
         self.stop()
-        self.lidar_thread.join()
+        # self.lidar_thread.join()
         self.start()
 
     def stop(self):

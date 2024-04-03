@@ -540,8 +540,8 @@ class Strategy:
             else:
                 self.operations.append(action)
 
-    def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0):
-        '''d - direction, g - gain, s - sleep, ss - sleep after detection, bs - sleep after backing, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags'''
+    def go_to_XY(self, x, y, d=True, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, off=0, ts=data.top_speed):
+        '''d - direction, g - gain, s - sleep, ss - sleep after detection, bs - sleep after backing, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags, ts - top speed gain'''
         if Strategy.front_sensors:
             sensors = Sensors.FRONT_ON
         elif Strategy.back_sensors:
@@ -559,11 +559,11 @@ class Strategy:
         step = Step.go_to_XY(
             x, y, direction=d, gain=g, sleep=s, sensor=sensors,
             lidar=lidar, backing=b, attemps=at, stop_sleep=ss,
-            backing_sleep=bs, num_of_skips=ns, offset=off
+            backing_sleep=bs, num_of_skips=ns, offset=off, top_speed=ts
         )
         self.operations.append(step)
 
-    def set_distance_angle(self, d, a, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips):
+    def set_distance_angle(self, d, a, g=1, s=0, ss=data.stop_time, bs=data.backing_time, at=data.num_of_attemps, b=data.distance_when_backing, ns=data.num_of_skips, ts=data.top_speed):
         '''d - distance, a - angle, g - gain, s - sleep, ss - after detection sleep, bs - after backing sleep, at - number of avoidance attemps, b - distance when backing, ns - number of steps to skip if detected without flags'''
         if Strategy.front_sensors:
             sensors = Sensors.FRONT_ON
@@ -582,7 +582,7 @@ class Strategy:
         step = Step.set_distance_angle(
             distance=d, angle=a, gain=g, sleep=s, sensor=sensors,
             lidar=lidar, backing=b, attemps=at, stop_sleep=ss,
-            backing_sleep=bs, num_of_skips=ns
+            backing_sleep=bs, num_of_skips=ns, top_speed=ts
         )
         self.operations.append(step)
 
