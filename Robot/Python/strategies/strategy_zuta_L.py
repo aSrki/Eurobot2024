@@ -10,9 +10,6 @@ strategy_zuta_L.rotate_to(0)
 
 strategy_zuta_L.add_sequence(yellow_get_5_back())
 
-strategy_zuta_L.back_all_off()
-strategy_zuta_L.front_all_on()
-
 strategy_zuta_L.set_skip_flag(1)  # ako ne nadje nista na drugom setu
 
 strategy_zuta_L.add_sequence(yellow_get_3_front(True))  # -20 #110
@@ -37,7 +34,7 @@ strategy_zuta_L.back_all_off()
 strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1550, 450, at=100, b=0)  # dolazi ispred plantera
+strategy_zuta_L.go_to_XY(1550, 450, at=100, b=10)  # dolazi ispred plantera
 strategy_zuta_L.move_front_arm(130)  # ovo samo ja smem
 strategy_zuta_L.activate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
@@ -48,7 +45,7 @@ strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1350, 762, False, at=100, b=0)
+strategy_zuta_L.go_to_XY(1350, 762, False, at=100, b=10)
 strategy_zuta_L.deactivate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
 
@@ -74,7 +71,7 @@ strategy_zuta_L.add_points("unload", 24)
 
 strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
-strategy_zuta_L.go_to_XY(1382, 762, False, at=100, b=0)  # ??????
+strategy_zuta_L.go_to_XY(1382, 762, False, at=100, b=10)  # ??????
 
 # =============================================
 
@@ -104,7 +101,7 @@ strategy_zuta_L.skip_to_flag("reset")
 strategy_zuta_L.add_sequence(yellow_get_4_back())
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(195, 280, False, at=100, b=0)
+strategy_zuta_L.go_to_XY(210, 280, False, at=100, b=10)
 strategy_zuta_L.deactivate_zadnja_grtalca()
 strategy_zuta_L.deactivate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
@@ -116,25 +113,25 @@ strategy_zuta_L.start_step_actions()
 strategy_zuta_L.rotate_to(0)
 strategy_zuta_L.move_mechanism(180)
 strategy_zuta_L.move_front_arm(80)
-strategy_zuta_L.move_back_arm(170)
+strategy_zuta_L.move_back_arm(210)
 strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(200, 1850, g=0.4, at=100,
-                         b=0)  # rotira panele #y = 750
+strategy_zuta_L.go_to_XY(215, 1850, g=0.4, at=100,
+                         b=10)  # rotira panele #y = 750
 strategy_zuta_L.activate_triangle()
 strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.add_points("unload", 30)
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(612, 2300, at=100, b=0)
+strategy_zuta_L.go_to_XY(612, 2300, at=100, b=10)
 strategy_zuta_L.deactivate_triangle()
 strategy_zuta_L.end_step_actions()
-# strategy_zuta_L.go_to_XY(612, 2815, at=100, b=0)
+# strategy_zuta_L.go_to_XY(612, 2815, at=100, b=10)
 
 strategy_zuta_L.start_step_actions()  # dolazi i priprema ruku
-strategy_zuta_L.go_to_XY(612, 2830, at=100, b=0)
+strategy_zuta_L.go_to_XY(612, 2800, at=100, b=10)
 strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(270)  # ostavlja prednje u planter bez saksija
 strategy_zuta_L.end_step_actions()
@@ -149,16 +146,22 @@ strategy_zuta_L.move_mechanism(180)
 
 strategy_zuta_L.add_points("unload", 24)
 
+strategy_zuta_L.front_all_off()
+strategy_zuta_L.back_all_on()
+
+strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(450, 450, False, at=100,
-                         b=0)  # dolazi ispred plantera
+                         b=10)  # dolazi ispred plantera
+
+strategy_zuta_L.move_back_arm(210, v=15)
+strategy_zuta_L.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
+strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.back_sensors_off()
 
 # dolazi i priprema ruku # 1850
-strategy_zuta_L.move_back_arm(210, v=15)
-strategy_zuta_L.move_mechanism(90)  # ostavlja zadnje u planter bez saksija
 
-strategy_zuta_L.move_back_arm(167, v=15)
+strategy_zuta_L.move_back_arm(177, v=15)
 strategy_zuta_L.ungrip_back()
 
 strategy_zuta_L.move_back_arm(210, v=15)
@@ -189,15 +192,18 @@ strategy_zuta_L.back_all_off()
 strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1650, 450, at=100, b=0)  # dolazi ispred plantera
+strategy_zuta_L.go_to_XY(1650, 450, at=100, b=200)  # dolazi ispred plantera
 strategy_zuta_L.move_front_arm(130)  # ovo samo ja smem
 strategy_zuta_L.activate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.add_points("unload", 6)
 
+strategy_zuta_L.front_all_off()
+strategy_zuta_L.back_all_on()
+
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1350, 762, False, at=100, b=0)
+strategy_zuta_L.go_to_XY(1350, 762, False, at=100, b=10)
 strategy_zuta_L.deactivate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
 
@@ -223,7 +229,7 @@ strategy_zuta_L.add_points("unload", 24)
 
 strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
-strategy_zuta_L.go_to_XY(1382, 762, False, at=100, b=0)  # ??????
+strategy_zuta_L.go_to_XY(1382, 762, False, at=100, b=10)  # ??????
 
 # =============================================
 
@@ -251,7 +257,7 @@ strategy_zuta_L.skip_to_flag(3)
 strategy_zuta_L.add_sequence(yellow_get_4_front())
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(195, 280, False, at=100, b=0)
+strategy_zuta_L.go_to_XY(210, 280, False, at=100, b=10)
 strategy_zuta_L.deactivate_zadnja_grtalca()
 strategy_zuta_L.deactivate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
@@ -263,25 +269,25 @@ strategy_zuta_L.start_step_actions()
 strategy_zuta_L.rotate_to(0)
 strategy_zuta_L.move_mechanism(180)
 strategy_zuta_L.move_front_arm(80)
-strategy_zuta_L.move_back_arm(170)
+strategy_zuta_L.move_back_arm(210)
 strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(200, 1850, g=0.4, at=100,
-                         b=0)  # rotira panele #y = 750
+strategy_zuta_L.go_to_XY(215, 1850, g=0.4, at=100,
+                         b=10)  # rotira panele #y = 750
 strategy_zuta_L.activate_triangle()
 strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.add_points("unload", 30)
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(612, 2300, at=100, b=0)
+strategy_zuta_L.go_to_XY(612, 2300, at=100, b=10)
 strategy_zuta_L.deactivate_triangle()
 strategy_zuta_L.end_step_actions()
-# strategy_zuta_L.go_to_XY(612, 2815, at=100, b=0)
+# strategy_zuta_L.go_to_XY(612, 2815, at=100, b=10)
 
 strategy_zuta_L.start_step_actions()  # dolazi i priprema ruku
-strategy_zuta_L.go_to_XY(612, 2850, at=100, b=0)
+strategy_zuta_L.go_to_XY(612, 2800, at=100, b=10)
 strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(270)  # ostavlja prednje u planter bez saksija
 strategy_zuta_L.end_step_actions()
@@ -300,7 +306,7 @@ strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
 
 strategy_zuta_L.go_to_XY(450, 450, False, at=100,
-                         b=0)  # dolazi ispred plantera
+                         b=10)  # dolazi ispred plantera
 
 strategy_zuta_L.end()
 
@@ -311,7 +317,7 @@ strategy_zuta_L.skip_to_flag("timeout")
 
 strategy_zuta_L.front_all_on()
 
-strategy_zuta_L.go_to_XY(450, 450, False, at=100, b=0, bs=0.1, s=0.1)
+strategy_zuta_L.go_to_XY(450, 450, False, at=100, b=10, bs=0.1, s=0.1)
 # strategy_zuta_L.add_points("unload", 10)
 
 strategy_zuta_L.start_parallel()

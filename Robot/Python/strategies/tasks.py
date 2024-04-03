@@ -259,9 +259,6 @@ def univerzalni_kraj_zuta():
     return ukz.operations
 
 
-
-
-
 def univerzalni_kraj_plava():
     ukp = Strategy()
 
@@ -310,7 +307,7 @@ def univerzalni_kraj_plava():
     ukp.activate_zadnja_desna_grtalca()
     ukp.end_step_actions()
 
-    ukp.add_points("unload", 20) # dodaje poene za pet u metale
+    ukp.add_points("unload", 20)  # dodaje poene za pet u metale
 
     ukp.set_distance_angle(0, -95, g=0.3)  # zatorira ka tanjiru
 
@@ -322,6 +319,7 @@ def univerzalni_kraj_plava():
     ukp.end()
 
     return ukp.operations
+
 
 def blue_get_1_front(check=False, off=120):
     bg1f = Strategy()
@@ -493,8 +491,8 @@ def blue_get_5_front(check=False, off=120):
     # ide do biljaka kod sime to jest prvi tanjir
     bg5f.go_to_XY(700, -2000, off=off, at=0, b=100)
     bg5f.add_sequence(prepare_front_arm())
-    bg5f.deactivate_zadnja_grtalca()
     bg5f.activate_prednja_grtalca()
+    bg5f.deactivate_zadnja_grtalca()
     bg5f.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru
@@ -694,7 +692,8 @@ def yellow_get_4_front(check=False, off=120):
     g4f.go_to_XY(500, 1500, off=off, at=0, b=100)
     g4f.add_sequence(prepare_front_arm())
     g4f.deactivate_zadnja_grtalca()
-    g4f.activate_prednja_grtalca()
+    g4f.activate_prednja_desna_grtalca()
+    g4f.activate_prednja_leva_grtalca()
     g4f.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru

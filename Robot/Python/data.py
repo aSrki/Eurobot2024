@@ -5,7 +5,8 @@ import threading
 chosen_strategy = None
 # color = "yellow"
 color = "blue"
-
+# table = "siroki"
+table = "uski"
 time_strategy_type = 95000
 type_of_strategy = "passive"
 
@@ -40,6 +41,7 @@ f_current = 0
 # initial_rotate_pojacanje = .8
 translate_pojacanje = 1
 translate_rot_pojacanje = 1
+top_speed = 1
 rotate_pojacanje = 1  # bilo 1.2
 
 operations = []
@@ -70,7 +72,7 @@ offset = 0
 
 # set_flag = 0
 skip_to = None
-num_of_skips = 0
+num_of_skips = 1
 
 sum_encoder_left = 0.0
 sum_encoder_right = 0.0
