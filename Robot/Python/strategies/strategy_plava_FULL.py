@@ -68,10 +68,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -101,7 +101,7 @@ strategy_plava_FULL.set_distance_angle(100, 0)
 
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke 3 pa 3
 strategy_plava_FULL.go_to_XY(1300, -700, at=100,
-                             b=10)  # dolazi do drugog tanjira
+                             b=50)  # dolazi do drugog tanjira
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -136,7 +136,7 @@ strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
 # dolazi blizu metala po istom iksu kako bi ostavio 5 biljaka u njih
-strategy_plava_FULL.go_to_XY(1542, -650, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1542, -650, at=100, b=50)
 strategy_plava_FULL.deactivate_zadnja_grtalca()
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -167,14 +167,14 @@ strategy_plava_FULL.move_front_arm(120, v=30)
 strategy_plava_FULL.back_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.set_distance_angle(-200, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-200, 0, at=100, b=50)
 strategy_plava_FULL.grip_front()
 strategy_plava_FULL.deactivate_zadnja_grtalca()
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.move_back_arm(210, v=30)
-strategy_plava_FULL.go_to_XY(1312, -270, False, at=100, b=10)  # 285
+strategy_plava_FULL.go_to_XY(1312, -270, False, at=100, b=50)  # 285
 strategy_plava_FULL.rotate_to(180)
 strategy_plava_FULL.move_mechanism(130)  # izbaci ruku
 strategy_plava_FULL.move_back_arm(190, v=30)
@@ -249,10 +249,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -281,7 +281,7 @@ strategy_plava_FULL.set_skip_flag(8)
 
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
-strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=50)
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -322,14 +322,14 @@ strategy_plava_FULL.back_all_on()
 
 # strategy_plava_FULL.start_step_actions()
 strategy_plava_FULL.deactivate_prednja_grtalca()
-strategy_plava_FULL.go_to_XY(1050, -600, False, at=2, b=10, ns=0)
+strategy_plava_FULL.go_to_XY(1050, -600, False, at=2, b=50, ns=0)
 # strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -357,10 +357,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -386,15 +386,17 @@ strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.set_distance_angle(100, 0)
 
+strategy_plava_FULL.set_skip_flag(9)
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
-strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=50)
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.rotate_to(180)
-strategy_plava_FULL.add_sequence(grip3_front_plant(0))
+strategy_plava_FULL.add_sequence(grip3_front_plant(0, True))
+strategy_plava_FULL.skip_to_flag("reset")
 
 strategy_plava_FULL.start_step_actions()
 strategy_plava_FULL.rotate_to(-5)
@@ -411,7 +413,7 @@ strategy_plava_FULL.add_sequence(grip_back_plant())  # -70
 
 strategy_plava_FULL.add_sequence(univerzalni_kraj_plava())
 
-# ========================alternativna strategija 3 ako je dosao sa tanjira br.2 =====================================
+# ========================alternativna strategija 3 ako je dosao sa tanjira br.6 =====================================
 
 strategy_plava_FULL.skip_to_flag(13)
 # strategy_plava_FULL.skip_to_flag("skip_object")
@@ -424,7 +426,7 @@ strategy_plava_FULL.front_all_off()
 strategy_plava_FULL.back_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1050, -600, False, at=0, b=10)
+strategy_plava_FULL.go_to_XY(1050, -600, False, at=0, b=50)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
@@ -432,7 +434,7 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -800, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -800, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -460,10 +462,10 @@ strategy_plava_FULL.add_points("unload", 24)  # ostavlja prve u tanjir
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -488,15 +490,17 @@ strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.set_distance_angle(100, 0)
 
+strategy_plava_FULL.set_skip_flag(10)
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
-strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=50)
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.rotate_to(180)
-strategy_plava_FULL.add_sequence(grip3_front_plant())
+strategy_plava_FULL.add_sequence(grip3_front_plant(0, True))
+strategy_plava_FULL.skip_to_flag("reset")
 
 strategy_plava_FULL.start_step_actions()
 strategy_plava_FULL.rotate_to(-3)
@@ -526,7 +530,7 @@ strategy_plava_FULL.front_all_off()
 strategy_plava_FULL.back_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(850, -600, False, at=1, b=10, ns=0)
+strategy_plava_FULL.go_to_XY(850, -600, False, at=1, b=50, ns=0)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
@@ -534,7 +538,7 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -562,10 +566,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -592,7 +596,7 @@ strategy_plava_FULL.set_distance_angle(100, 0)
 
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
-strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=50)
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -635,12 +639,12 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1050, -600, at=0, b=10)
+strategy_plava_FULL.go_to_XY(1050, -600, at=0, b=50)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -668,10 +672,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -698,7 +702,7 @@ strategy_plava_FULL.set_distance_angle(100, 0)
 
 strategy_plava_FULL.start_step_actions()  # ide na sledece biljke
 # TODO: napraviti da ide na sl tanjir ako ovde vidi protivnika
-strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1300, -700, at=100, b=50)
 strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.activate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -738,7 +742,7 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -780, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -766,10 +770,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -789,11 +793,36 @@ strategy_plava_FULL.move_mechanism(180)
 
 strategy_plava_FULL.add_points("unload", 24)  # poeni za drugi plenter
 
-strategy_plava_FULL.all_off()
+strategy_plava_FULL.set_distance_angle(200, 0, at = 0, b = 50)
 
-strategy_plava_FULL.go_to_XY(1620, -250, at=100, g=0.5, b=10, bs=0.1, s=0.1)
+strategy_plava_FULL.back_all_off()
+strategy_plava_FULL.front_all_on()
 
-strategy_plava_FULL.end()
+strategy_plava_FULL.set_skip_flag(7)
+strategy_plava_FULL.start_step_actions()
+strategy_plava_FULL.go_to_XY(700, -1700, at=2, b=50)
+strategy_plava_FULL.add_sequence(prepare_arms6())
+strategy_plava_FULL.end_step_actions()
+
+strategy_plava_FULL.rotate_to(180)
+
+strategy_plava_FULL.add_sequence(grip3_front_plant(0, True))
+strategy_plava_FULL.skip_to_flag("reset")
+
+strategy_plava_FULL.start_step_actions()
+strategy_plava_FULL.rotate_to(0)
+strategy_plava_FULL.activate_zadnja_grtalca()
+strategy_plava_FULL.deactivate_prednja_grtalca()
+strategy_plava_FULL.end_step_actions()
+
+strategy_plava_FULL.front_all_off()
+strategy_plava_FULL.back_all_on()
+
+strategy_plava_FULL.set_distance_angle(-230, 0)
+strategy_plava_FULL.move_mechanism(180)
+strategy_plava_FULL.add_sequence(grip_back_plant())
+
+strategy_plava_FULL.add_sequence(univerzalni_kraj_plava())
 
 
 # ====================alternativna gde ce na kraju da proverava tanjir br5 jer do sada nije ==========================
@@ -809,7 +838,7 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1800, -800, at=100, b=10, bs=1)
+strategy_plava_FULL.go_to_XY(1800, -800, at=100, b=50, bs=1)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.move_front_arm(120, v=15)
 strategy_plava_FULL.end_step_actions()
@@ -837,10 +866,10 @@ strategy_plava_FULL.add_points("unload", 24)  # poeni za prvi plenter
 
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL.move_back_arm(210, v=15)
 strategy_plava_FULL.end_step_actions()
 
@@ -861,13 +890,18 @@ strategy_plava_FULL.move_mechanism(180)
 strategy_plava_FULL.add_points("unload", 24)  # poeni za drugi plenter
 
 # ide na tanjir br.5 sada
-strategy_plava_FULL.set_distance_angle(450, 0, at=100, b=10)
+strategy_plava_FULL.set_distance_angle(450, 0, at=100, b=50)
+
+strategy_plava_FULL.skip_to_flag(9)
+strategy_plava_FULL.skip_to_flag(10)
+
 
 strategy_plava_FULL.front_all_off()
 strategy_plava_FULL.back_all_on()
 
+
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(700, -700, False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(700, -700, False, at=100, b=50)
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.add_sequence(prepare_arms6())
 strategy_plava_FULL.end_step_actions()
@@ -902,14 +936,13 @@ strategy_plava_FULL.add_sequence(univerzalni_kraj_plava())
 
 # ================traganje za biljkama na kraju strategija ==========
 strategy_plava_FULL.skip_to_flag(4)
-
 strategy_plava_FULL.skip_to_flag(8)
 
 strategy_plava_FULL.front_all_off()
 strategy_plava_FULL.back_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(700, -700,  False, at=100, b=10)
+strategy_plava_FULL.go_to_XY(700, -700,  False, at=100, b=50)
 strategy_plava_FULL.add_sequence(prepare_arms6())
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.end_step_actions()
@@ -948,7 +981,7 @@ strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.go_to_XY(700, -1700, at=100, b=10)
+strategy_plava_FULL.go_to_XY(700, -1700, at=100, b=50)
 strategy_plava_FULL.add_sequence(prepare_arms6())
 strategy_plava_FULL.end_step_actions()
 
@@ -979,7 +1012,13 @@ strategy_plava_FULL.skip_to_flag(7)
 strategy_plava_FULL.front_all_off()
 strategy_plava_FULL.back_all_on()
 
-strategy_plava_FULL.go_to_XY(1550, -250, False, at=100, b=10, bs=0.1, s=0.1)
+strategy_plava_FULL.start_step_actions()
+strategy_plava_FULL.go_to_XY(1670, -250, False, at=100, b=50, bs=0.1, s=0.1)
+strategy_plava_FULL.deactivate_prednja_grtalca()
+strategy_plava_FULL.deactivate_zadnja_grtalca()
+strategy_plava_FULL.end_step_actions()
+
+strategy_plava_FULL.end()
 # ========================TIME CHECK==============================
 
 strategy_plava_FULL.skip_to_flag("brzi_istovar")
@@ -1027,7 +1066,7 @@ strategy_plava_FULL.skip_to_flag("timeout")
 
 strategy_plava_FULL.front_all_on()
 
-strategy_plava_FULL.go_to_XY(1620, -250, at=100, b=10, bs=0.1, s=0.1)
+strategy_plava_FULL.go_to_XY(1620, -250, at=100, b=50, bs=0.1, s=0.1)
 
 strategy_plava_FULL.start_parallel()
 strategy_plava_FULL.ungrip_front()

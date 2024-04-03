@@ -156,7 +156,7 @@ class Strategy:
         else:
             self.operations.append(action)
 
-    def grip_front(self, a1=240, v=100, s=0.1, da=0):
+    def grip_front(self, a1=235, v=100, s=0.1, da=0):
         '''podrazumeva 230, u intervalu od 140 do 230, v - velocity, s - sleep time, da - delay action in step'''
         # action = parallel_rotate([IDS.id_gripper_front_1.value, IDS.id_gripper_front_2.value, IDS.id_gripper_front_3.value], [a1, a2, a3])
         # if self.add_to_step:

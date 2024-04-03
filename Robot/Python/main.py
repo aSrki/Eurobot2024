@@ -128,9 +128,9 @@ class Main:
                 continue
 
             try:
-                s1.sendall(data.color.encode())
-                s2.sendall(data.color.encode())
-                s3.sendall(data.color.encode())
+                s1.sendall(str(str(data.color) + str(data.table)).encode())
+                s2.sendall(str(str(data.color) + str(data.table)).encode())
+                s3.sendall(str(str(data.color) + str(data.table)).encode())
 
                 print("Simama je poslato")
             except Exception as e:

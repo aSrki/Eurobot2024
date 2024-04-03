@@ -692,7 +692,8 @@ def yellow_get_4_front(check=False, off=120):
     g4f.go_to_XY(500, 1500, off=off, at=0, b=100)
     g4f.add_sequence(prepare_front_arm())
     g4f.deactivate_zadnja_grtalca()
-    g4f.activate_prednja_grtalca()
+    g4f.activate_prednja_desna_grtalca()
+    g4f.activate_prednja_leva_grtalca()
     g4f.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru
