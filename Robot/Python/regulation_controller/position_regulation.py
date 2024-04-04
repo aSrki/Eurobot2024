@@ -48,7 +48,7 @@ class PositionRegulation:
 
     speed_gain = 1
     min_pid = 0
-    max_pid = 3000 * speed_gain
+    max_pid = 3000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -402,10 +402,11 @@ class PositionRegulation:
         #               self.rot_speed)
 
         # ANTI WINDUP
-        if self.speed > self.max_pid:
-            self.speed = self.max_pid
-        elif self.speed < -self.max_pid:
-            self.speed = -self.max_pid
+        if self.speed > self.max_pid * data.top_speed:
+            print(f"SSSSPPPPPEEEEEEEDDDDDDDDDD GGGGGAAAAAAAIIIIIIIIINNNNNNNNN : {data.top_speed}")
+            self.speed = self.max_pid * data.top_speed
+        elif self.speed < -self.max_pid * data.top_speed:
+            self.speed = -self.max_pid * data.top_speed
 
         MVL = int(self.speed - self.rot_speed)
         MVR = int(self.speed + self.rot_speed)

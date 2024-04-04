@@ -301,7 +301,7 @@ def univerzalni_kraj_plava():
     ukp.move_back_arm(190, v=30)
     ukp.ungrip_back()
     ukp.move_back_arm(210, v=30)
-
+    
     ukp.start_step_actions()
     ukp.set_distance_angle(-60, 0)
     ukp.activate_zadnja_desna_grtalca()
@@ -472,7 +472,8 @@ def blue_get_4_back(check=False, off=120):
     bg4b.go_to_XY(500, -1500, False, off=off, at=0, b=100)
     bg4b.add_sequence(prepare_back_arm())
     bg4b.deactivate_prednja_grtalca()
-    bg4b.activate_zadnja_grtalca()
+    bg4b.activate_zadnja_leva_grtalca()
+    bg4b.activate_zadnja_desna_grtalca()
     bg4b.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru

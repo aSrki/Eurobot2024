@@ -54,7 +54,9 @@ while True:
         rotate(-90)
         translate(250, False)
         rotate(90)
-        translate(500, False)
+        translate(250)
+        translate(250, False)
+
 
     elif comm_data == 'bluesiroki':
         translate(300)
@@ -63,7 +65,8 @@ while True:
         rotate(90)
         translate(250, False)
         rotate(-90)
-        translate(500, False)
+        translate(250)
+        translate(250, False)
 
     elif comm_data == 'yellowuski':
         translate(300)
@@ -72,7 +75,8 @@ while True:
         rotate(-90)
         translate(250, False)
         rotate(90)
-        translate(700, False)
+        translate(250)
+        translate(250, False)
 
     elif comm_data == 'blueuski':
         translate(300)
@@ -81,7 +85,8 @@ while True:
         rotate(90)
         translate(250, False)
         rotate(-90)
-        translate(700, False)
+        translate(250)
+        translate(250, False)
 
     move_arm(330)
 

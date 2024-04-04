@@ -165,8 +165,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 9: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -174,7 +174,7 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
                 elif (ids[i] == data.IDS.id_gripper_back_2.value):
                     # print("servo 7")
@@ -182,8 +182,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 7: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -191,7 +191,7 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
                 elif (ids[i] == data.IDS.id_gripper_back_3.value):
                     # print("servo 3")
@@ -199,8 +199,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 3: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -208,7 +208,7 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_BACK:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
                 elif (ids[i] == data.IDS.id_gripper_front_1.value):
                     # print("servo 11")
@@ -216,8 +216,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 11: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -225,7 +225,7 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
                 elif (ids[i] == data.IDS.id_gripper_front_2.value):
                     # print("servo 2")
@@ -233,8 +233,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 2: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -242,7 +242,7 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
                 elif (ids[i] == data.IDS.id_gripper_front_3.value):
                     # print("servo 8")
@@ -250,8 +250,8 @@ def parallel_rotate(ids, angles):
                     current_position = read_current_position(
                         handler, portHandler, id)
                     current_load = read_current_load(handler, portHandler, id)
-                    print(
-                        f"Servo: {id}:, Current position: {current_position}")
+                    # print(
+                    #     f"Servo: {id}:, Current position: {current_position}")
                     # print(f"load 8: {current_load}")
                     if current_load > max_load:
                         print("LOAAAADDDDD")
@@ -259,9 +259,9 @@ def parallel_rotate(ids, angles):
                         success_cnt += 1
                         if current_position > MAX_ANGLE_FRONT:
                             detection_cnt += 1
-                    elif abs((current_position/360)*4095 - angles[i]) < 20:
+                    elif abs((current_position/360)*4095 - angles[i]) < 30:
                         success_cnt += 1
-                # print(f"success_num: {success_cnt}")
+                print(f"success_num: {success_cnt}")
         print(f"detected: {detection_cnt}")
         if detection_cnt == 3:
             data.object_sensor = 1

@@ -71,13 +71,13 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1352, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 # ostavlja biljke u drugi plenter i ravna limove da bi posle mogao da ubaci po 5 biljaka u njih
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -185, False, at=100, b=200)
+strategy_plava_FULL_uski.go_to_XY(1352, -185, False, at=100, b=200)
 strategy_plava_FULL_uski.move_mechanism(20)
 strategy_plava_FULL_uski.end_step_actions()
 
@@ -221,7 +221,7 @@ strategy_plava_FULL_uski.front_all_off()
 strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.start_step_actions()
 # 762 # dolazi ispred plantera
-strategy_plava_FULL_uski.go_to_XY(1800, -730, False, at=2, b=200, bs=1)
+strategy_plava_FULL_uski.go_to_XY(1750, -730, False, at=2, b=200, bs=1)
 strategy_plava_FULL_uski.deactivate_prednja_grtalca()
 strategy_plava_FULL_uski.move_front_arm(120, v=15)
 strategy_plava_FULL_uski.end_step_actions()
@@ -233,7 +233,7 @@ strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.skip_to_flag("reset")
 
 strategy_plava_FULL_uski.start_step_actions()  # dolazi i priprema ruku
-strategy_plava_FULL_uski.set_distance_angle(50, 0)
+strategy_plava_FULL_uski.set_distance_angle(100, 0)
 # ostavlja prednje u planter bez saksija
 strategy_plava_FULL_uski.move_mechanism(270)
 strategy_plava_FULL_uski.end_step_actions()
@@ -253,12 +253,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
 
@@ -323,7 +323,7 @@ strategy_plava_FULL_uski.back_all_on()
 
 # strategy_plava_FULL_uski.start_step_actions()
 strategy_plava_FULL_uski.deactivate_prednja_grtalca()
-strategy_plava_FULL_uski.go_to_XY(1050, -600, False, at=2, b=50, ns=0)
+strategy_plava_FULL_uski.go_to_XY(1050, -600, False, at=2, b=50, ns=1)
 # strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.back_all_off()
@@ -361,12 +361,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -467,12 +467,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1379, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1379, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -534,7 +534,7 @@ strategy_plava_FULL_uski.front_all_off()
 strategy_plava_FULL_uski.back_all_on()
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(850, -600, False, at=1, b=50, ns=0)
+strategy_plava_FULL_uski.go_to_XY(850, -600, False, at=1, b=50, ns=1)
 strategy_plava_FULL_uski.deactivate_prednja_grtalca()
 strategy_plava_FULL_uski.end_step_actions()
 
@@ -573,12 +573,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -680,12 +680,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -779,12 +779,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -877,12 +877,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -1042,6 +1042,7 @@ strategy_plava_FULL_uski.go_to_XY(1472, -280, at=100, b=200)  # 350
 strategy_plava_FULL_uski.move_front_arm(120, v=15)  # podize ruku
 strategy_plava_FULL_uski.deactivate_prednja_grtalca()
 strategy_plava_FULL_uski.deactivate_zadnja_grtalca()
+strategy_plava_FULL_uski.ungrip_back()
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.front_all_off()
@@ -1079,7 +1080,7 @@ strategy_plava_FULL_uski.skip_to_flag("timeout")
 
 strategy_plava_FULL_uski.front_all_on()
 
-strategy_plava_FULL_uski.go_to_XY(1620, -250, at=100, b=50, bs=0.1, s=0.1)
+strategy_plava_FULL_uski.go_to_XY(1610, -250, at=100, b=50, bs=0.1, s=0.1)
 
 strategy_plava_FULL_uski.start_parallel()
 strategy_plava_FULL_uski.ungrip_front()

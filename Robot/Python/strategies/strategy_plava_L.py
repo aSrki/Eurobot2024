@@ -25,7 +25,7 @@ strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1000, -1500, at=100, b=100)
+strategy_plava_L.go_to_XY(1000, -1500, at=100, b=200)
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
@@ -38,18 +38,18 @@ strategy_plava_L.back_all_on()
 
 strategy_plava_L.start_step_actions()
 strategy_plava_L.go_to_XY(1550, -450, False, at=100,
-                          b=10)  # dolazi ispred plantera
+                          b=50)  # dolazi ispred plantera
 strategy_plava_L.move_back_arm(220)  # ovo samo ja smem
 strategy_plava_L.activate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
 
-strategy_plava_L.add_points("unload", 6)
+# strategy_plava_L.add_points("unload", 6)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1350, -762, at=100, b=10)
+strategy_plava_L.go_to_XY(1350, -762, at=100, b=50)
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
@@ -76,7 +76,7 @@ strategy_plava_L.add_points("unload", 24)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
-strategy_plava_L.go_to_XY(1382, -762, at=100, b=10)
+strategy_plava_L.go_to_XY(1382, -762, at=100, b=50)
 
 # =============================================
 
@@ -106,7 +106,7 @@ strategy_plava_L.skip_to_flag("reset")
 strategy_plava_L.add_sequence(blue_get_4_front())
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(195, -300, at=100, b=10)
+strategy_plava_L.go_to_XY(175, -300, at=100, b=50)
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.end_step_actions()
@@ -122,23 +122,23 @@ strategy_plava_L.move_back_arm(170)
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(200, -1850, False, g=0.4, at=100,
-                          b=10)  # rotira panele #y = 750
+strategy_plava_L.go_to_XY(190, -1850, False, g=1, at=100,
+                          b=50, ts=0.5)  # rotira panele #y = 750
 strategy_plava_L.activate_triangle()
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.add_points("unload", 30)
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(612, -2500, False, at=100, b=10)
+strategy_plava_L.go_to_XY(612, -2500, False, at=100, b=50)
 strategy_plava_L.deactivate_triangle()
 strategy_plava_L.end_step_actions()
-# strategy_plava_L.go_to_XY(612, 2815, at=100, b=10)
+# strategy_plava_L.go_to_XY(612, 2815, at=100, b=50)
 
 strategy_plava_L.start_step_actions()  # dolazi i priprema ruku
-strategy_plava_L.go_to_XY(612, -2830, False, at=100, b=10)
+strategy_plava_L.go_to_XY(612, -2830, False, at=100, b=50)
 strategy_plava_L.move_back_arm(210, v=15)
-strategy_plava_L.move_mechanism(90)  # ostavlja prednje u planter bez saksija
+strategy_plava_L.move_mechanism(20)  # ostavlja prednje u planter bez saksija
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.move_back_arm(175, v=15)
@@ -156,10 +156,13 @@ strategy_plava_L.front_all_on()
 
 strategy_plava_L.start_step_actions()
 strategy_plava_L.go_to_XY(450, -450, at=100,
-                          b=10)  # dolazi ispred plantera
+                          b=50)  # dolazi ispred plantera
 strategy_plava_L.move_front_arm(80, v=15)
 strategy_plava_L.move_mechanism(270)  # ostavlja zadnje u planter bez saksija
 strategy_plava_L.end_step_actions()
+
+strategy_plava_L.set_distance_angle(0, 45)
+
 strategy_plava_L.ungrip_front()
 strategy_plava_L.move_front_arm(100)
 
@@ -180,7 +183,7 @@ strategy_plava_L.front_all_off()
 strategy_plava_L.back_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1400, -2150, False, at=100, b=100)
+strategy_plava_L.go_to_XY(1400, -2150, False, at=100, b=200)
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
@@ -194,18 +197,18 @@ strategy_plava_L.back_all_on()
 strategy_plava_L.move_mechanism(180)
 strategy_plava_L.start_step_actions()
 strategy_plava_L.go_to_XY(1650, -450, False, at=100,
-                          b=10)  # dolazi ispred plantera
+                          b=50)  # dolazi ispred plantera
 strategy_plava_L.move_back_arm(220)  # ovo samo ja smem
 strategy_plava_L.activate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
 
-strategy_plava_L.add_points("unload", 6)
+# strategy_plava_L.add_points("unload", 6)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1350, -762, at=100, b=10)
+strategy_plava_L.go_to_XY(1350, -762, at=100, b=50)
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
 
@@ -228,7 +231,7 @@ strategy_plava_L.add_points("unload", 24)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
-strategy_plava_L.go_to_XY(1382, -762, at=100, b=10)  # ??????
+strategy_plava_L.go_to_XY(1382, -762, at=100, b=50)  # ??????
 
 # =============================================
 
@@ -249,7 +252,7 @@ strategy_plava_L.move_mechanism(180)
 strategy_plava_L.add_points("unload", 24)
 
 strategy_plava_L.set_skip_flag(2)
-strategy_plava_L.set_distance_angle(-300, 0, at=0, b=100)
+strategy_plava_L.set_distance_angle(-300, 0, at=0, b=200)
 strategy_plava_L.skip_to_flag(2)
 
 strategy_plava_L.skip_to_flag(3)
@@ -259,7 +262,7 @@ strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(195, -300, at=100, b=10)
+strategy_plava_L.go_to_XY(175, -300, at=100, b=50)
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.end_step_actions()
@@ -275,23 +278,23 @@ strategy_plava_L.move_back_arm(170)
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(200, -1850, False, g=0.4, at=100,
-                          b=10)  # rotira panele #y = 750
+strategy_plava_L.go_to_XY(190, -1850, False, g=1, at=100,
+                          b=50, ts=0.5)  # rotira panele #y = 750
 strategy_plava_L.activate_triangle()
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.add_points("unload", 30)
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(612, -2300, False, at=100, b=10)
+strategy_plava_L.go_to_XY(612, -2300, False, at=100, b=50)
 strategy_plava_L.deactivate_triangle()
 strategy_plava_L.end_step_actions()
-# strategy_plava_L.go_to_XY(612, 2815, at=100, b=10)
+# strategy_plava_L.go_to_XY(612, 2815, at=100, b=50)
 
 strategy_plava_L.start_step_actions()  # dolazi i priprema ruku
-strategy_plava_L.go_to_XY(612, -2850, False, at=100, b=10)
+strategy_plava_L.go_to_XY(612, -2850, False, at=100, b=50)
 strategy_plava_L.move_back_arm(210, v=15)
-strategy_plava_L.move_mechanism(90)  # ostavlja prednje u planter bez saksija
+strategy_plava_L.move_mechanism(20)  # ostavlja prednje u planter bez saksija
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.move_back_arm(175, v=15)
@@ -308,7 +311,7 @@ strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.go_to_XY(450, -450, at=100,
-                          b=10)  # dolazi ispred plantera
+                          b=50) 
 
 strategy_plava_L.end()
 
@@ -320,7 +323,7 @@ strategy_plava_L.skip_to_flag("timeout")
 strategy_plava_L.front_all_off()
 strategy_plava_L.back_all_on()
 
-strategy_plava_L.go_to_XY(450, -450, False, at=100, b=10, bs=0.1, s=0.1)
+strategy_plava_L.go_to_XY(450, -450, False, at=100, b=50, bs=0.1, s=0.1)
 # strategy_plava_L.add_points("unload", 10)
 
 strategy_plava_L.start_parallel()

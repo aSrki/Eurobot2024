@@ -54,7 +54,7 @@ while True:
     elif comm_data == 'blueuski'or comm_data == 'bluesiroki':
         translate(100)
         rotate(-90)
-        translate(750)
+        translate(650)
         rotate(-90)
         translate(150, False)
 
@@ -62,6 +62,8 @@ while True:
     move_arm(260)
     move_arm(260)
 
+    time.sleep(2)
+    
     data.stop_threads = True
     print("Ovde sam 1")
     distance_acquire_thread.join()
