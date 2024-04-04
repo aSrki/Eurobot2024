@@ -1031,6 +1031,7 @@ strategy_plava_FULL.go_to_XY(1472, -280, at=100, b=200)  # 350
 strategy_plava_FULL.move_front_arm(120, v=15)  # podize ruku
 strategy_plava_FULL.deactivate_prednja_grtalca()
 strategy_plava_FULL.deactivate_zadnja_grtalca()
+strategy_plava_FULL.ungrip_back()
 strategy_plava_FULL.end_step_actions()
 
 strategy_plava_FULL.front_all_off()
@@ -1044,6 +1045,7 @@ strategy_plava_FULL.move_front_arm(120, v=30)
 
 strategy_plava_FULL.start_step_actions()
 strategy_plava_FULL.set_distance_angle(60, 0)
+strategy_plava_FULL.grip_back()
 strategy_plava_FULL.activate_prednja_leva_grtalca()
 strategy_plava_FULL.end_step_actions()
 

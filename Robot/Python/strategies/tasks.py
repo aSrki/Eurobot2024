@@ -472,8 +472,8 @@ def blue_get_4_back(check=False, off=120, attempts=0):
     bg4b.go_to_XY(500, -1500, False, off=off, at=attempts, b=100)
     bg4b.add_sequence(prepare_back_arm())
     bg4b.deactivate_prednja_grtalca()
-    bg4b.activate_zadnja_leva_grtalca()
     bg4b.activate_zadnja_desna_grtalca()
+    bg4b.activate_zadnja_leva_grtalca()
     bg4b.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru

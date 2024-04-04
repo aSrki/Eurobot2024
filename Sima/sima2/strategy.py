@@ -89,6 +89,8 @@ while True:
         time.sleep(0.5)
 
     move_arm(270)
+    move_arm(270)
+    move_arm(270)
 
     data.stop_threads = True
     print("Ovde sam 1")

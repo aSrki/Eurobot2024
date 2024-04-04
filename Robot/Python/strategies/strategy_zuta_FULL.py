@@ -1171,6 +1171,7 @@ strategy_zuta_FULL.go_to_XY(1472, 280, False, at=100, b=200)  # 350
 strategy_zuta_FULL.move_back_arm(210, v=15)  # podize ruku
 strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.deactivate_prednja_grtalca()
+strategy_zuta_FULL.ungrip_front()
 strategy_zuta_FULL.end_step_actions()
 
 strategy_zuta_FULL.back_all_off()
@@ -1184,6 +1185,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 
 strategy_zuta_FULL.start_step_actions()
 strategy_zuta_FULL.set_distance_angle(-60, 0)
+strategy_zuta_FULL.grip_front()
 strategy_zuta_FULL.activate_zadnja_leva_grtalca()
 strategy_zuta_FULL.end_step_actions()
 

@@ -1244,6 +1244,7 @@ strategy_zuta_FULL_uski.move_back_arm(210, v=30)
 
 strategy_zuta_FULL_uski.start_step_actions()
 strategy_zuta_FULL_uski.set_distance_angle(-60, 0)
+strategy_zuta_FULL_uski.grip_front()
 strategy_zuta_FULL_uski.activate_zadnja_leva_grtalca()
 strategy_zuta_FULL_uski.end_step_actions()
 
