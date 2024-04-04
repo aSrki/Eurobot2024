@@ -330,7 +330,7 @@ strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.front_all_on()
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1800, -780, at=100, b=50, bs=1)
+strategy_plava_FULL_uski.go_to_XY(1800, -780, at=100, b=50)
 strategy_plava_FULL_uski.deactivate_prednja_grtalca()
 strategy_plava_FULL_uski.move_front_arm(120, v=15)
 strategy_plava_FULL_uski.end_step_actions()
@@ -839,7 +839,7 @@ strategy_plava_FULL_uski.skip_to_flag(37)
 strategy_plava_FULL_uski.skip_to_flag(47)
 strategy_plava_FULL_uski.skip_to_flag(57)
 
-strategy_plava_FULL_uski.add_sequence(blue_get_2_front())
+strategy_plava_FULL_uski.add_sequence(blue_get_2_front(False, 120, 100))
 strategy_plava_FULL_uski.skip_to_flag("reset")
 
 strategy_plava_FULL_uski.back_all_off()
@@ -877,12 +877,12 @@ strategy_plava_FULL_uski.back_all_on()
 strategy_plava_FULL_uski.set_distance_angle(-100, 0, at=100, b=50)
 
 strategy_plava_FULL_uski.start_step_actions()
-strategy_plava_FULL_uski.go_to_XY(1389, -700, False, at=100, b=50)
+strategy_plava_FULL_uski.go_to_XY(1382, -700, False, at=100, b=50)
 strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.end_step_actions()
 
 strategy_plava_FULL_uski.start_step_actions()  # podize ruku
-strategy_plava_FULL_uski.go_to_XY(1389, -190, False, at=100, b=200)  # 185
+strategy_plava_FULL_uski.go_to_XY(1382, -190, False, at=100, b=200)  # 185
 strategy_plava_FULL_uski.rotate_to(180)
 strategy_plava_FULL_uski.move_mechanism(20)  # ostavlja biljke u drugi plenter
 strategy_plava_FULL_uski.end_step_actions()
@@ -1078,9 +1078,11 @@ strategy_plava_FULL_uski.end()
 
 strategy_plava_FULL_uski.skip_to_flag("timeout")
 
-strategy_plava_FULL_uski.front_all_on()
+strategy_plava_FULL_uski.front_all_off()
+strategy_plava_FULL_uski.back_all_on()
 
-strategy_plava_FULL_uski.go_to_XY(1610, -250, at=100, b=50, bs=0.1, s=0.1)
+strategy_plava_FULL_uski.go_to_XY(
+    1610, -250, False, at=100, b=50, bs=0.1, s=0.1)
 
 strategy_plava_FULL_uski.start_parallel()
 strategy_plava_FULL_uski.ungrip_front()

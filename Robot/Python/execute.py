@@ -245,17 +245,17 @@ class Execute:
             custom_print("DETECTED WHILE BACKING")
             self.num_of_detections = 0
 
-        if data.is_front:
+        if data.is_front != False:
             custom_print("FRONT DETECTED")
 
             steps = backing_steps(
                 self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)
 
-        elif data.is_back:
+        elif data.is_back != False:
             print("BACK DETECTED")
 
             steps = forward_steps(
-                self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)
+                self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)  # self.operation.distance_when_backing
 
         # korekcija
         data.operations.insert(0, steps[1])
@@ -266,7 +266,10 @@ class Execute:
         data.lidar = Sensors.ALL_OFF
 
         self.backing = True
+
         data.is_front = None
+        data.is_back = None
+
         data.stop = False
 
     def execute_action(self, operation):

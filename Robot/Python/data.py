@@ -4,11 +4,11 @@ import threading
 # *****IZBOR STRATEGIJE*********
 chosen_strategy = None
 # color = "yellow"
-color = "yellow"
+color = "blue"
 # table = "siroki"
 table = "uski"
 time_strategy_type = 95000
-type_of_strategy = "agressive"
+type_of_strategy = "passive"
 
 debug = True
 

@@ -1265,6 +1265,7 @@ strategy_zuta_FULL_uski.end()
 
 strategy_zuta_FULL_uski.skip_to_flag("timeout")
 
+strategy_zuta_FULL_uski.front_all_off()
 strategy_zuta_FULL_uski.back_all_on()
 
 strategy_zuta_FULL_uski.go_to_XY(1620, 250, False, at=100, b=50, bs=0.1, s=0.1)

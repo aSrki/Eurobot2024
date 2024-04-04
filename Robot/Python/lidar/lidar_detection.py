@@ -113,7 +113,8 @@ class LidarDetection:
 
         except Exception as e:
             # plt.show()
-            print(f"LIDAR SCAN ERROR: {e}")
+            # print(f"LIDAR SCAN ERROR: {e}")
+            pass
 
         self.stop()
         # self.lidar_thread.join()
@@ -127,7 +128,8 @@ class LidarDetection:
             self.lidar.disconnect()
             time.sleep(0.1)
         except Exception as e:
-            print(f"LIDAR ERROR: {e}")
+            # print(f"LIDAR ERROR: {e}")
+            pass
 
 
 if __name__ == "__main__":

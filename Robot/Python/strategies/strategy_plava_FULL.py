@@ -1066,7 +1066,7 @@ strategy_plava_FULL.skip_to_flag("timeout")
 
 strategy_plava_FULL.front_all_on()
 
-strategy_plava_FULL.go_to_XY(1620, -250, at=100, b=50, bs=0.1, s=0.1)
+strategy_plava_FULL.go_to_XY(1620, -250, False, at=100, b=50, bs=0.1, s=0.1)
 
 strategy_plava_FULL.start_parallel()
 strategy_plava_FULL.ungrip_front()

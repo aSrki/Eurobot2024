@@ -23,7 +23,6 @@ while True:
     s.bind((host, port))
     s.listen(1)
 
-
     while comm_data == "":
         conn, addr = s.accept()
         comm_data = conn.recv(1024).decode()
@@ -57,7 +56,6 @@ while True:
         translate(250)
         translate(250, False)
 
-
     elif comm_data == 'bluesiroki':
         translate(300)
         rotate(-90)
@@ -86,7 +84,7 @@ while True:
         translate(250, False)
         rotate(-90)
         translate(250)
-        translate(250, False)
+        translate(450, False)
 
     move_arm(330)
 
