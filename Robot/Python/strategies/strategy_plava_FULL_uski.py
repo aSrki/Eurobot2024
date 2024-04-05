@@ -62,7 +62,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 # ===========================================================
 
@@ -89,7 +89,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.front_all_on()
@@ -246,7 +246,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -272,7 +272,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 
 strategy_plava_FULL_uski.back_all_off()
@@ -356,7 +356,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -381,7 +381,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni zadrugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni zadrugi plenter
 
 
 strategy_plava_FULL_uski.back_all_off()
@@ -462,7 +462,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # ostavlja prve u tanjir
+strategy_plava_FULL_uski.add_points("unload", 20)  # ostavlja prve u tanjir
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -488,7 +488,7 @@ strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
 strategy_plava_FULL_uski.add_points(
-    "unload", 24)  # dodaje poene za drugi plenter
+    "unload", 20)  # dodaje poene za drugi plenter
 
 strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.front_all_on()
@@ -568,7 +568,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -593,7 +593,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.front_all_on()
@@ -675,7 +675,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -700,7 +700,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 strategy_plava_FULL_uski.back_all_off()
 strategy_plava_FULL_uski.front_all_on()
@@ -774,7 +774,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -799,7 +799,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 strategy_plava_FULL_uski.set_distance_angle(200, 0, at=0, b=50)
 
@@ -872,7 +872,7 @@ strategy_plava_FULL_uski.move_front_arm(120, v=30)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za prvi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za prvi plenter
 
 strategy_plava_FULL_uski.back_all_on()
 
@@ -897,7 +897,7 @@ strategy_plava_FULL_uski.move_back_arm(210, v=15)
 strategy_plava_FULL_uski.move_mechanism(180)
 # strategy_plava_FULL_uski.end_parallel()
 
-strategy_plava_FULL_uski.add_points("unload", 24)  # poeni za drugi plenter
+strategy_plava_FULL_uski.add_points("unload", 20)  # poeni za drugi plenter
 
 # ide na tanjir br.5 sada
 strategy_plava_FULL_uski.set_distance_angle(450, 0, at=100, b=50)

@@ -64,7 +64,7 @@ strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 # =================================================
 
 strategy_zuta_L.front_all_off()
@@ -87,7 +87,7 @@ strategy_zuta_L.move_back_arm(210, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 
 strategy_zuta_L.back_sensors_off()
 strategy_zuta_L.front_sensors_on()
@@ -116,7 +116,7 @@ strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(185, 1850, g=1, at=100,
-                         b=50, ts = 0.5)  # rotira panele #y = 750
+                         b=50, ts=0.5)  # rotira panele #y = 750
 strategy_zuta_L.activate_triangle()
 strategy_zuta_L.end_step_actions()
 
@@ -142,7 +142,7 @@ strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 
 strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
@@ -220,7 +220,7 @@ strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 # =================================================
 
 strategy_zuta_L.front_all_off()
@@ -243,7 +243,7 @@ strategy_zuta_L.move_back_arm(210, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 
 strategy_zuta_L.set_skip_flag(2)
 strategy_zuta_L.set_distance_angle(300, 0, at=0, b=200)
@@ -270,7 +270,7 @@ strategy_zuta_L.end_step_actions()
 
 strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(185, 1850, g=1, at=100,
-                         b=50, ts = 0.5)  # rotira panele #y = 750
+                         b=50, ts=0.5)  # rotira panele #y = 750
 strategy_zuta_L.activate_triangle()
 strategy_zuta_L.end_step_actions()
 
@@ -296,7 +296,7 @@ strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(180)
 # strategy_zuta_L.end_parallel()
 
-strategy_zuta_L.add_points("unload", 24)
+strategy_zuta_L.add_points("unload", 20)
 
 strategy_zuta_L.front_all_off()
 strategy_zuta_L.back_all_on()
