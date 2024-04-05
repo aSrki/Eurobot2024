@@ -34,7 +34,7 @@ strategy_zuta_L.back_all_off()
 strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1550, 450, at=100, b=50)  # dolazi ispred plantera
+strategy_zuta_L.go_to_XY(1750, 250, at=100, b=50)  # dolazi ispred plantera
 strategy_zuta_L.move_front_arm(130)  # ovo samo ja smem
 strategy_zuta_L.activate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
@@ -158,6 +158,7 @@ strategy_zuta_L.end_step_actions()
 strategy_zuta_L.back_sensors_off()
 
 # dolazi i priprema ruku # 1850
+strategy_zuta_L.set_distance_angle(0, -45)
 
 strategy_zuta_L.move_back_arm(177, v=15)
 strategy_zuta_L.ungrip_back()
@@ -190,7 +191,7 @@ strategy_zuta_L.back_all_off()
 strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
-strategy_zuta_L.go_to_XY(1650, 450, at=100, b=200)  # dolazi ispred plantera
+strategy_zuta_L.go_to_XY(1750, 250, at=100, b=200)  # dolazi ispred plantera
 strategy_zuta_L.move_front_arm(130)  # ovo samo ja smem
 strategy_zuta_L.activate_prednja_grtalca()
 strategy_zuta_L.end_step_actions()
