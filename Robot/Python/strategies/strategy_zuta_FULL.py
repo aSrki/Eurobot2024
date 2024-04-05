@@ -1194,7 +1194,7 @@ strategy_zuta_FULL.add_points("unload", 12)
 strategy_zuta_FULL.set_distance_angle(0, 93, g=0.3)  # zatorira ka tanjiru
 
 strategy_zuta_FULL.start_step_actions()
-strategy_zuta_FULL.set_distance_angle(-180, 0, g=0.5)  # udje u tanjur
+strategy_zuta_FULL.set_distance_angle(-200, 0, g=0.5)  # udje u tanjur
 # strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 

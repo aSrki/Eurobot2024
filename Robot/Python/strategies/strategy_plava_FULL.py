@@ -793,7 +793,7 @@ strategy_plava_FULL.move_mechanism(180)
 
 strategy_plava_FULL.add_points("unload", 20)  # poeni za drugi plenter
 
-strategy_plava_FULL.set_distance_angle(200, 0, at = 0, b = 50)
+strategy_plava_FULL.set_distance_angle(200, 0, at=0, b=50)
 
 strategy_plava_FULL.back_all_off()
 strategy_plava_FULL.front_all_on()
@@ -1054,7 +1054,7 @@ strategy_plava_FULL.add_points("unload", 12)  # poeni za 3 biljke u limovima
 strategy_plava_FULL.set_distance_angle(0, -93, g=0.3)  # zatorira ka tanjiru
 
 strategy_plava_FULL.start_step_actions()
-strategy_plava_FULL.set_distance_angle(180, 0, g=0.5)  # udje u tanjur
+strategy_plava_FULL.set_distance_angle(200, 0, g=0.5)  # udje u tanjur
 # strategy_plava_FULL.deactivate_zadnja_grtalca()
 strategy_plava_FULL.end_step_actions()
 
