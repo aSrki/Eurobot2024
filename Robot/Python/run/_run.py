@@ -227,6 +227,7 @@ class Screen5(QDialog):
 
         self.button_agressive.clicked.connect(self.on_click_agressive)
         self.button_passive.clicked.connect(self.on_click_passive)
+        self.button_6solar.clicked.connect(self.on_click_6solar)
         self.button_nazad.clicked.connect(self.on_click_nazad)
 
         if gamePayload.color == "yellow":
@@ -234,11 +235,15 @@ class Screen5(QDialog):
                 "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
             self.button_passive.setStyleSheet(
                 "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
+            self.button_6solar.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/zuto.png);")
             
         else:
             self.button_agressive.setStyleSheet(
                 "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
             self.button_passive.setStyleSheet(
+                "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
+            self.button_6solar.setStyleSheet(
                 "background-image : url(/home/robot/Eurobot2024/Robot/Python/run/plavo.png);")
 
 
@@ -248,6 +253,10 @@ class Screen5(QDialog):
 
     def on_click_passive(self):
         gamePayload.type_of_strategy = 'passive'
+        self.gotoScreen6()
+
+    def on_click_6solar(self):
+        gamePayload.type_of_strategy = '6solar'
         self.gotoScreen6()
 
     def on_click_nazad(self):
