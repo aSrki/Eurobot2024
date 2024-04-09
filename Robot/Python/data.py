@@ -5,6 +5,7 @@ import threading
 chosen_strategy = None
 # color = "yellow"
 color = "blue"
+koliko = "6solar"
 # table = "siroki"
 table = "uski"
 time_strategy_type = 95000

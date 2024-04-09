@@ -62,7 +62,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)  # poeni za prvi plenter
+strategy_zuta_FULL.add_points("unload", 20)  # poeni za prvi plenter
 
 # ===========================================================
 
@@ -89,7 +89,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)  # poeni za drugi plenter
+strategy_zuta_FULL.add_points("unload", 20)  # poeni za drugi plenter
 
 strategy_zuta_FULL.front_all_off()
 strategy_zuta_FULL.back_all_on()
@@ -267,7 +267,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -291,7 +291,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)  # za drugi plenter
+strategy_zuta_FULL.add_points("unload", 20)  # za drugi plenter
 
 
 strategy_zuta_FULL.front_all_off()
@@ -376,7 +376,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -401,7 +401,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 # 650 # ide unatrrag prema sledecem tanjiru
 
@@ -484,7 +484,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -509,7 +509,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 # 650 # ide unatrrag prema sledecem tanjiru
 
@@ -589,7 +589,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -614,7 +614,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 # 650 # ide unatrrag prema sledecem tanjiru
 
@@ -699,7 +699,7 @@ strategy_zuta_FULL.add_sequence(univerzalni_kraj_zuta())
 # strategy_zuta_FULL.move_mechanism(180)
 # # strategy_zuta_FULL.end_parallel()
 
-# strategy_zuta_FULL.add_points("unload", 24)
+# strategy_zuta_FULL.add_points("unload", 20)
 
 # strategy_zuta_FULL.front_all_on()
 
@@ -724,7 +724,7 @@ strategy_zuta_FULL.add_sequence(univerzalni_kraj_zuta())
 # strategy_zuta_FULL.move_mechanism(180)
 # # strategy_zuta_FULL.end_parallel()
 
-# strategy_zuta_FULL.add_points("unload", 24)
+# strategy_zuta_FULL.add_points("unload", 20)
 
 # # 650 # ide unatrrag prema sledecem tanjiru
 
@@ -806,7 +806,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -831,7 +831,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 # 650 # ide unatrrag prema sledecem tanjiru
 
@@ -905,7 +905,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -930,7 +930,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.set_distance_angle(-200, 0, at=0, b=50)
 strategy_zuta_FULL.front_all_off()
@@ -1000,7 +1000,7 @@ strategy_zuta_FULL.move_back_arm(210, v=30)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 strategy_zuta_FULL.front_all_on()
 
@@ -1025,7 +1025,7 @@ strategy_zuta_FULL.move_front_arm(120, v=15)
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 
-strategy_zuta_FULL.add_points("unload", 24)
+strategy_zuta_FULL.add_points("unload", 20)
 
 # ide na tanjir br.3 sada
 strategy_zuta_FULL.set_distance_angle(-450, 0, at=100, b=50)
@@ -1194,7 +1194,7 @@ strategy_zuta_FULL.add_points("unload", 12)
 strategy_zuta_FULL.set_distance_angle(0, 93, g=0.3)  # zatorira ka tanjiru
 
 strategy_zuta_FULL.start_step_actions()
-strategy_zuta_FULL.set_distance_angle(-180, 0, g=0.5)  # udje u tanjur
+strategy_zuta_FULL.set_distance_angle(-200, 0, g=0.5)  # udje u tanjur
 # strategy_zuta_FULL.deactivate_zadnja_grtalca()
 strategy_zuta_FULL.end_step_actions()
 

@@ -54,16 +54,16 @@ class Switches:
                 data.sensor_back_left = 0
                 data.sensor_back_right = 0
 
-            elif (data.sensors == data.Sensors.BACK_ON) and (data.elapsed_time > 90) and not (data.x_current > 1400 and (-700 < data.y_current < 700)):
-                # print("\n Uspesno upaljeni senzori za sime \n!!!")
-                data.object_sensor_1 = GPIO.input(self.OBJECT1)
-                data.object_sensor_2 = GPIO.input(self.OBJECT2)
+            # elif (data.sensors == data.Sensors.BACK_ON) and (data.elapsed_time > 90) and not (data.x_current > 1400 and (-700 < data.y_current < 700)):
+            #     # print("\n Uspesno upaljeni senzori za sime \n!!!")
+            #     data.object_sensor_1 = GPIO.input(self.OBJECT1)
+            #     data.object_sensor_2 = GPIO.input(self.OBJECT2)
 
-                # ovo je specificno za ovu godinu jer su object senzori sa zadnje strane
-                data.sensor_back_left = GPIO.input(self.BACK_LEFT)
-                data.sensor_back_right = GPIO.input(self.BACK_RIGHT)
-                data.sensor_front_left = 0
-                data.sensor_front_right = 0
+            #     # ovo je specificno za ovu godinu jer su object senzori sa zadnje strane
+            #     data.sensor_back_left = GPIO.input(self.BACK_LEFT)
+            #     data.sensor_back_right = GPIO.input(self.BACK_RIGHT)
+            #     data.sensor_front_left = 0
+            #     data.sensor_front_right = 0
 
             elif data.sensors == data.Sensors.BACK_ON:
                 data.sensor_back_left = GPIO.input(self.BACK_LEFT)

@@ -37,7 +37,7 @@ strategy_plava_L.front_all_off()
 strategy_plava_L.back_all_on()
 
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1550, -450, False, at=100,
+strategy_plava_L.go_to_XY(1750, -250, False, at=100,
                           b=50)  # dolazi ispred plantera
 strategy_plava_L.move_back_arm(220)  # ovo samo ja smem
 strategy_plava_L.activate_zadnja_grtalca()
@@ -71,7 +71,7 @@ strategy_plava_L.move_back_arm(210, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 # =================================================
 
 strategy_plava_L.back_all_off()
@@ -94,7 +94,7 @@ strategy_plava_L.move_front_arm(120, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 
 strategy_plava_L.front_all_off()
 strategy_plava_L.back_all_on()
@@ -149,7 +149,7 @@ strategy_plava_L.move_back_arm(210, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
@@ -196,7 +196,7 @@ strategy_plava_L.back_all_on()
 
 strategy_plava_L.move_mechanism(180)
 strategy_plava_L.start_step_actions()
-strategy_plava_L.go_to_XY(1650, -450, False, at=100,
+strategy_plava_L.go_to_XY(1750, -250, False, at=100,
                           b=50)  # dolazi ispred plantera
 strategy_plava_L.move_back_arm(220)  # ovo samo ja smem
 strategy_plava_L.activate_zadnja_grtalca()
@@ -226,7 +226,7 @@ strategy_plava_L.move_back_arm(210, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 # =================================================
 
 strategy_plava_L.back_all_off()
@@ -249,7 +249,7 @@ strategy_plava_L.move_front_arm(120, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 
 strategy_plava_L.set_skip_flag(2)
 strategy_plava_L.set_distance_angle(-300, 0, at=0, b=200)
@@ -305,13 +305,13 @@ strategy_plava_L.move_back_arm(210, v=15)
 strategy_plava_L.move_mechanism(180)
 # strategy_plava_L.end_parallel()
 
-strategy_plava_L.add_points("unload", 24)
+strategy_plava_L.add_points("unload", 20)
 
 strategy_plava_L.back_all_off()
 strategy_plava_L.front_all_on()
 
 strategy_plava_L.go_to_XY(450, -450, at=100,
-                          b=50) 
+                          b=50)
 
 strategy_plava_L.end()
 
@@ -330,7 +330,7 @@ strategy_plava_L.start_parallel()
 strategy_plava_L.ungrip_back()
 strategy_plava_L.ungrip_front()
 strategy_plava_L.move_back_arm(120)
-strategy_plava_L.move_mechanism(180)
+# strategy_plava_L.move_mechanism(180)
 strategy_plava_L.deactivate_prednja_grtalca()
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_parallel()
