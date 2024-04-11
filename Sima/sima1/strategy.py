@@ -48,51 +48,62 @@ while True:
 
     if comm_data == 'yellowsiroki':
         translate(300)
+         
         rotate(90)
         translate(400, False)
+         
         rotate(-90)
         translate(290, False)
-        rotate(90)
-        translate(250)
-        rotate(12)
-        translate(440, False)
+         
+        rotate(97, vel = 700)
+        translate(680, False)
+
+         
 
     elif comm_data == 'bluesiroki':
         translate(300)
+         
         rotate(-90)
         translate(400, False)
+         
         rotate(90)
         translate(290, False)
-        rotate(-90)
-        translate(250)
-        rotate(-12)
-        translate(440, False)
+         
+        rotate(-97, vel = 700)
+        translate(680, False)
+
+         
 
     elif comm_data == 'yellowuski':
         translate(300)
+         
         rotate(90)
         translate(400, False)
+         
         rotate(-90)
         translate(290, False)
-        rotate(90)
-        translate(250)
-        rotate(12)
-        translate(440, False)
+         
+        rotate(97, vel = 700)
+        translate(680, False)
 
+         
     elif comm_data == 'blueuski':
         translate(300)
+         
         rotate(-90)
         translate(400, False)
+         
         rotate(90)
         translate(290, False)
-        rotate(-90)
-        translate(250)
-        rotate(-12)
-        translate(440, False)
+         
+        rotate(-97, vel = 700)
+        translate(680, False)
+
 
     move_arm(330)
     move_arm(330)
     move_arm(330)
+
 
     data.stop_threads = True
     print("Ovde sam 1")

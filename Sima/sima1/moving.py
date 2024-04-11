@@ -39,7 +39,7 @@ def stop_sima():
         time.sleep(0.05)
 
 
-def rotate(deg):
+def rotate(deg, vel = 1000):
     if data.stop_threads:
         return
     data.detect = False
@@ -52,7 +52,7 @@ def rotate(deg):
         data.right_theta -= theta
     data.old_left = data.left_theta
     data.old_right = data.right_theta
-    parallel_rotate([1, 4], [data.left_theta, data.right_theta], a = 200)
+    parallel_rotate([1, 4], [data.left_theta, data.right_theta], v = vel, a = 200)
     time.sleep(0.5)
     print("rotiram")
     data.detect = True

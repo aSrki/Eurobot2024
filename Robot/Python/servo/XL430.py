@@ -501,6 +501,8 @@ class ServoXL430:
                 current_position, result, servo_error = self.handler.read4ByteTxRx(
                     self.portHandler, self.id, CURRENT_POSITION)
                 time.sleep(0.1)
+                print(f"XM RES: {result}")
+                print(f"XM ERR: {servo_error}")
                 if current_position > 2147483648:
                     current_position -= 4294967296
 

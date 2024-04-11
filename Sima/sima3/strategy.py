@@ -36,7 +36,7 @@ while True:
 
     data.start_time = time.time()
 
-    time.sleep(94)
+    time.sleep(93.5)
     init_sima()
 
     data.stop_threads = False

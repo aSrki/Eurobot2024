@@ -28,11 +28,15 @@ def rotate_arm(angle):
         communication_result, servo_error = handler.write1ByteTxRx(
             portHandler, 5, 24, 1)
         
-        communication_result, servo_error = handler.write2ByteTxRx(
-            portHandler, 5, 32, 200)
+        print(f"torue {servo_error}")
         
         communication_result, servo_error = handler.write2ByteTxRx(
+            portHandler, 5, 32, 200)
+        print(f"speed {servo_error}")
+
+        communication_result, servo_error = handler.write2ByteTxRx(
             portHandler, 5, 30, angle)
+        print(f"angle {servo_error}")
         
         time.sleep(1)
         
