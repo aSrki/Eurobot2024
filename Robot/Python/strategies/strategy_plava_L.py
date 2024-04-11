@@ -212,6 +212,9 @@ strategy_plava_L.go_to_XY(1350, -762, at=100, b=50)
 strategy_plava_L.deactivate_zadnja_grtalca()
 strategy_plava_L.end_step_actions()
 
+strategy_plava_L.front_all_off()
+strategy_plava_L.back_all_on()
+
 strategy_plava_L.start_step_actions()  # dolazi i priprema ruku
 strategy_plava_L.go_to_XY(1850, -762, False)
 strategy_plava_L.move_back_arm(210, v=15)
@@ -294,7 +297,7 @@ strategy_plava_L.end_step_actions()
 strategy_plava_L.start_step_actions()  # dolazi i priprema ruku
 strategy_plava_L.go_to_XY(612, -2850, False, at=100, b=50)
 strategy_plava_L.move_back_arm(210, v=15)
-strategy_plava_L.move_mechanism(20)  # ostavlja prednje u planter bez saksija
+strategy_plava_L.move_mechanism(20)  # ostavlja prednje u fiplanter bez saksija
 strategy_plava_L.end_step_actions()
 
 strategy_plava_L.move_back_arm(175, v=15)

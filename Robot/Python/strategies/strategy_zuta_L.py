@@ -51,7 +51,7 @@ strategy_zuta_L.back_all_off()
 strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()  # dolazi i priprema ruku
-strategy_zuta_L.go_to_XY(1850, 762)
+strategy_zuta_L.go_to_XY(1850, 762, at=100, b=50)
 strategy_zuta_L.move_front_arm(120, v=15)
 strategy_zuta_L.move_mechanism(270)  # ostavlja prednje u planter bez saksija
 strategy_zuta_L.end_step_actions()
@@ -175,8 +175,8 @@ strategy_zuta_L.skip_to_flag(1)
 
 strategy_zuta_L.add_sequence(yellow_get_6_front())
 
-strategy_zuta_L.front_all_off()
-strategy_zuta_L.back_all_on()
+strategy_zuta_L.back_all_off()
+strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(1400, 2150, at=100, b=200)
@@ -186,9 +186,6 @@ strategy_zuta_L.end_step_actions()
 
 # skipuje na drugu alternativnu jer tamo ima zaobilaznu koordinatu
 # strategy_zuta_L.set_skip_flag(3)
-
-strategy_zuta_L.back_all_off()
-strategy_zuta_L.front_all_on()
 
 strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(1750, 250, at=100, b=200)  # dolazi ispred plantera
@@ -246,12 +243,18 @@ strategy_zuta_L.move_mechanism(180)
 
 strategy_zuta_L.add_points("unload", 20)
 
+strategy_zuta_L.back_all_off()
+strategy_zuta_L.front_all_on()
+
 strategy_zuta_L.set_skip_flag(2)
 strategy_zuta_L.set_distance_angle(300, 0, at=0, b=200)
 strategy_zuta_L.skip_to_flag(2)
 
 strategy_zuta_L.skip_to_flag(3)
 strategy_zuta_L.add_sequence(yellow_get_4_front())
+
+strategy_zuta_L.front_all_off()
+strategy_zuta_L.back_all_on()
 
 strategy_zuta_L.start_step_actions()
 strategy_zuta_L.go_to_XY(210, 280, False, at=100, b=50)
@@ -312,7 +315,7 @@ strategy_zuta_L.end()
 
 strategy_zuta_L.skip_to_flag("timeout")
 
-strategy_zuta_L.front_all_on()
+strategy_zuta_L.back_all_on()
 
 strategy_zuta_L.go_to_XY(450, 450, False, at=100, b=50, bs=0.1, s=0.1)
 # strategy_zuta_L.add_points("unload", 10)
