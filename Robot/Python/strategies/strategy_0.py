@@ -5,6 +5,15 @@ from strategies.strategy import Strategy
 
 strategy0 = Strategy()
 
+# ================tijest kamera===============
+strategy0.go_to_XY(1000, 1500)
+strategy0.check_cam([4, 1, 2, 3, 5, 6])
+strategy0.check_cam([1, 2, 3, 5, 6, 4])
+
+strategy0.go_to_XY(1000, 1500)
+# ====================================================
+# strategy0.go_to_XY(1000, 600)
+
 # strategy0.object_sensor_on()
 
 # strategy0.go_to_XY(195, 1000, at=100, b=0)
@@ -149,7 +158,7 @@ strategy0 = Strategy()
 # strategy0.add_sequence(grip_front_plant())
 # strategy0.add_sequence(front_plant_in_pot())
 
-strategy0.end()
+# strategy0.end()
 
 # =================test ruke zadnja===================
 # strategy0.add_sequence(init_servos())

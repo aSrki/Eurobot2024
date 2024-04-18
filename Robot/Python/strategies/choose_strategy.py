@@ -82,7 +82,8 @@ def choose_strategy():
                 data.x_current = 195
                 data.y_current = 295  # -155
                 data.f_current = 0
-                return strategy_zuta_FULL.operations  # strategy1
+                return strategy0.operations  # 2
+                # return strategy_zuta_FULL.operations  # strategy1
             if data.type_of_strategy == "6solar":
                 data.time_strategy_type = 95  # 95  ... 90
                 data.x_current = 195

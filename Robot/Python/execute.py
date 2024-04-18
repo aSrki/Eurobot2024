@@ -46,6 +46,8 @@ class Execute:
 
         self.raised_timeout = False
 
+        self.taken_plants = []
+
     def start(self):
         # Pokretanje execute threada
         self.moving.start()
@@ -123,6 +125,36 @@ class Execute:
                         custom_print("NO OBJECT")
 
                     continue
+
+                if isinstance(self.operation, SkipPlant) and not self.skipping:
+                    self.plant_flag = self.operation.plant_flag
+                    if not self.plant_flag:
+                        if data.side == "first":
+                            data.side = "second"
+                        elif data.side == "second":
+                            data.side = "first"
+                    continue
+
+                elif isinstance(self.operation, Cam) and not self.skipping:
+                    self.priorities = self.operation.priorities
+                    for num in self.priorities:
+                        if data.cam_arr[num-1] and (num not in self.taken_plants):
+                            plant = num
+                            self.taken_plants.append(num)
+                            break
+
+                        self.taken_plants.append(num)
+
+                    steps = master_plant(plant, data.side, data.color)
+
+                    for i in range(len(steps)):
+                        data.operations.insert(0, steps[len(steps)-i-1])
+
+                    data.cam_arr = [0, 0, 0, 0, 1, 1]
+                    print(
+                        f"ooooOOOOOOoooooOOOOOOOO ................... MENJAM NIZ NOVINIZ: {data.cam_arr}")
+
+                    continue
                 # TODO: preimenovati imena flagova na relevantne
                 elif isinstance(self.operation, Points) and not self.skipping:
                     if self.operation.type == "sort":
@@ -188,6 +220,7 @@ class Execute:
                     data.sensors = self.operation.sensor
                     data.lidar = self.operation.lidar
 
+                    custom_print(f"TRENUTNA OPERACIJA: {self.operation}")
                     custom_print(f"SENSORS: {self.operation.sensor}")
                     custom_print(f"LIDAR: {self.operation.lidar}")
                     custom_print(f"IN BACKING: {self.backing}")
@@ -203,6 +236,36 @@ class Execute:
                     elif not data.stop and self.backing:
                         custom_print("KRAJ DETEKCIJE")
                         self.backing = False
+
+            elif data.stop and self.plant_flag:
+                self.last_angle = data.f_current
+                self.moving.stop()
+
+                self.plant_flag = False
+                while not isinstance(self.operation, SkipPlant):
+                    print(
+                        "popujemmmmmmmmmmmmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
+                    self.operation = data.operations.pop(0)
+
+                # TODO: proveriti jer je jako sus
+                # if data.is_front != None:
+                #     self.get_steps_for_detection()
+                # elif data.is_back != None:
+                #     self.get_steps_for_detection()
+
+                for num in self.priorities:
+                    if data.cam_arr[num-1] and (num not in self.taken_plants):
+                        plant = num
+                        self.taken_plants.append(num)
+                        break
+
+                    self.taken_plants.append(num)
+
+                    steps = master_plant(plant, data.side, data.color)
+
+                    for i in range(len(steps)):
+                        data.operations.insert(0, steps[len(steps)-i-1])
+                data.stop = False
 
             elif data.stop:
                 self.last_angle = data.f_current

@@ -91,6 +91,16 @@ class Strategy:
         skip.is_start = True
         self.operations.append(skip)
 
+    def set_plant_flag(self):
+        plantflag = SkipPlant()
+        plantflag.plant_flag = True
+        self.operations.append(plantflag)
+
+    def clear_plant_flag(self):
+        plantflag = SkipPlant()
+        plantflag.plant_flag = False
+        self.operations.append(plantflag)
+
     def skip_to_flag(self, flag):
         skip = Skip()
         skip.skip_to_flag = flag
@@ -116,6 +126,11 @@ class Strategy:
         # data.set_flag = flag
         check = CheckObject()
         self.operations.append(check)
+
+    def check_cam(self, priorities=None):
+        cam = Cam()
+        cam.priorities = priorities
+        self.operations.append(cam)
 
     def add_sequence(self, sequence):
         '''sequence - lista operacija'''

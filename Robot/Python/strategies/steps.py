@@ -137,11 +137,25 @@ class CheckObject:
         pass
 
 
+class Cam:
+
+    def __init__(self):
+        self.priorities = None
+        pass
+
+
 class Skip:
 
     def __init__(self):
         self.skip_to_flag = 1
         self.is_start = False
+
+
+class SkipPlant:
+
+    def __init__(self):
+        self.marker = None
+        self.plant_flag = None
 
 
 class End:

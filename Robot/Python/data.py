@@ -8,6 +8,10 @@ color = "blue"
 koliko = "6solar"
 # table = "siroki"
 table = "uski"
+side = "first"
+
+cam_arr = [1, 1, 1, 0, 1, 1]
+
 time_strategy_type = 95000
 type_of_strategy = "passive"
 

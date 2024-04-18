@@ -689,8 +689,8 @@ def yellow_get_4_front(check=False, off=120, attempts=0):
     g4f.front_all_on()
 
     g4f.start_step_actions()
-    # ide do biljaka kod sime to jest prvi tanjir
     g4f.go_to_XY(500, 1500, off=off, at=attempts, b=100)
+    # ide do biljaka kod sime to jest prvi tanjir
     g4f.add_sequence(prepare_front_arm())
     g4f.deactivate_zadnja_grtalca()
     g4f.activate_prednja_desna_grtalca()
@@ -802,6 +802,70 @@ def yellow_get_6_back(check=False, off=120, attempts=0):
 
     return g6b.operations
 
+
+def master_plant(plant, side=data.side, color=data.color):
+    mp = Strategy()
+    mp.set_plant_flag()
+    if color == "yellow":
+        if side == "first":
+            match plant:
+                case 1:
+                    mp.add_sequence(yellow_get_1_front(True))
+                case 2:
+                    mp.add_sequence(yellow_get_2_front(True))
+                case 3:
+                    mp.add_sequence(yellow_get_3_front(True))
+                case 4:
+                    mp.add_sequence(yellow_get_4_front(True))
+                case 5:
+                    mp.add_sequence(yellow_get_5_front(True))
+                case 6:
+                    mp.add_sequence(yellow_get_6_front(True))
+        elif side == "second":
+            match plant:
+                case 1:
+                    mp.add_sequence(yellow_get_1_back(True))
+                case 2:
+                    mp.add_sequence(yellow_get_2_back(True))
+                case 3:
+                    mp.add_sequence(yellow_get_3_back(True))
+                case 4:
+                    mp.add_sequence(yellow_get_4_back(True))
+                case 5:
+                    mp.add_sequence(yellow_get_5_back(True))
+                case 6:
+                    mp.add_sequence(yellow_get_6_back(True))
+    elif color == "blue":
+        if side == "first":
+            match plant:
+                case 1:
+                    mp.add_sequence(blue_get_1_back(True))
+                case 2:
+                    mp.add_sequence(blue_get_6_back(True))
+                case 3:
+                    mp.add_sequence(blue_get_5_back(True))
+                case 4:
+                    mp.add_sequence(blue_get_4_back(True))
+                case 5:
+                    mp.add_sequence(blue_get_3_back(True))
+                case 6:
+                    mp.add_sequence(blue_get_2_back(True))
+        elif side == "second":
+            match plant:
+                case 1:
+                    mp.add_sequence(blue_get_1_front(True))
+                case 2:
+                    mp.add_sequence(blue_get_6_front(True))
+                case 3:
+                    mp.add_sequence(blue_get_5_front(True))
+                case 4:
+                    mp.add_sequence(blue_get_4_front(True))
+                case 5:
+                    mp.add_sequence(blue_get_3_front(True))
+                case 6:
+                    mp.add_sequence(blue_get_2_front(True))
+    mp.clear_plant_flag()
+    return mp.operations
 
 # def pink1(xoff=0, yoff=0, ainiempts=0, off=data.offset):
 
