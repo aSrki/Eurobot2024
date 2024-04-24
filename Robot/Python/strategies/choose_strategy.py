@@ -65,7 +65,7 @@ def choose_strategy():
                 data.y_current = -295  # -155
                 data.f_current = 0
                 return strategy_plava_FULL.operations  # strategy1
-            if data.type_of_strategy == "6solar":
+            elif data.type_of_strategy == "6solar":
                 data.time_strategy_type = 95  # 95  ... 90
                 data.x_current = 195
                 data.y_current = -295  # -155
@@ -86,6 +86,7 @@ def choose_strategy():
                 return strategy_zuta_KAMERA.operations  # 2
                 # return strategy_zuta_FULL.operations  # strategy1
             if data.type_of_strategy == "6solar":
+
                 data.time_strategy_type = 95  # 95  ... 90
                 data.x_current = 195
                 data.y_current = 295  # -155
@@ -106,7 +107,7 @@ def choose_strategy():
                 data.y_current = -295  # -155
                 data.f_current = 0
                 return strategy_plava_FULL_uski.operations
-            if data.type_of_strategy == "6solar":
+            elif data.type_of_strategy == "6solar":
                 data.time_strategy_type = 95  # 95  ... 90
                 data.x_current = 195
                 data.y_current = -295  # -155
@@ -118,6 +119,12 @@ def choose_strategy():
                 data.y_current = -2705  # 295
                 data.f_current = 0
                 return strategy_plava_L.operations  # 2
+            elif data.type_of_strategy == "test":
+                data.time_strategy_type = 100000   # 95
+                data.x_current = 0  # 195
+                data.y_current = 0  # 295
+                data.f_current = 0
+                return strategy0.operations  # 2
         elif data.color == "yellow":
             if data.type_of_strategy == "passive":
                 data.time_strategy_type = 95  # 95  ... 90
@@ -125,7 +132,7 @@ def choose_strategy():
                 data.y_current = 295  # -155
                 data.f_current = 0
                 return strategy_zuta_FULL_uski.operations
-            if data.type_of_strategy == "6solar":
+            elif data.type_of_strategy == "6solar":
                 data.time_strategy_type = 95  # 95  ... 90
                 data.x_current = 195
                 data.y_current = 295  # -155
