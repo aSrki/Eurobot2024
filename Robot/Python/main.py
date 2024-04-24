@@ -5,6 +5,7 @@ import time
 from sensors import SensorsDetection
 import socket
 from lidar.lidar_detection import LidarDetection
+from communication.cam_comm import CAM_COMM
 
 DEBUG = True
 
@@ -67,7 +68,11 @@ class Main:
 
             self.lidar = LidarDetection()
 
-            # self.basket_comm = BasketCommunication()
+            # ==================kamera=================
+
+            self.kamera = CAM_COMM()
+            print(data.cam_arr)
+            self.kamera.start()
 
             # =================sima==============
 

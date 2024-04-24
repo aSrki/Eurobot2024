@@ -148,51 +148,77 @@ def grip3_back_plant(p=0, check=False):
     return gbp3.operations
 
 
-def release_front_plant():  # u terenu biljke bez saksija
-    rfp = Strategy()
+def ostavljanje_prednjom_rukom_bez_limova():
+    oprbl = Strategy()
 
-    rfp.move_mechanism(160)  # 20 #60
-    rfp.move_front_arm(85, v=30, s=0.1)  # 85
-    rfp.ungrip_front()
-    rfp.move_front_arm(120, s=0.5)
+    oprbl.move_mechanism(270)
 
-    return rfp.operations
+    oprbl.move_front_arm(85, v=15)
+    oprbl.ungrip_front()
 
+    # oprbl.start_parallel()
+    oprbl.move_front_arm(120, v=15)
+    oprbl.move_mechanism(180)
+    # oprbl.end_parallel()
 
-def release_back_plant():  # u terenu biljke bez saksija
-    rbp = Strategy()
+    oprbl.add_points("unload", 20)  # poeni za prvi plenter
 
-    rbp.move_mechanism(200)
-    rbp.move_back_arm(175, v=30, s=0.1)
-    rbp.ungrip_back()
-    rbp.move_back_arm(210, s=0.5)
-
-    return rbp.operations
+    return oprbl.operations
 
 
-def leave_front_plant():  # van terena biljke bez saksija
-    lfp = Strategy()
+def ostavljanje_zadnjom_rukom_bez_limova():
+    ozrbl = Strategy()
 
-    lfp.move_front_arm(120)
-    lfp.move_mechanism(340)
-    lfp.move_front_arm(80, v=30, s=0.1)
-    lfp.ungrip_front()
-    lfp.move_front_arm(120, s=0.5)
-    lfp.move_mechanism(180)
+    ozrbl.move_mechanism(90)
+    ozrbl.end_step_actions()
 
-    return lfp.operations
+    ozrbl.move_back_arm(175, v=15)
+    ozrbl.ungrip_back()
+
+    # ozrbl.start_parallel()
+    ozrbl.move_back_arm(210, v=15)
+    ozrbl.move_mechanism(180)
+    # ozrbl.end_parallel()
+
+    ozrbl.add_points("unload", 20)
+
+    return ozrbl.operations
 
 
-def leave_back_plant():  # van terena biljke bez saksija
-    lbp = Strategy()
-    lbp.move_back_arm(210)
-    lbp.move_mechanism(150)
-    lbp.move_back_arm(190, v=30, s=0.1)
-    lbp.ungrip_back()
-    lbp.move_back_arm(210, s=0.5)
-    lbp.move_mechanism(180)
+def ostavljanje_prednjom_rukom_sa_limovima():
+    oprsl = Strategy()
 
-    return lbp.operations
+    oprsl.move_mechanism(340)
+
+    oprsl.move_front_arm(80, v=15)
+    oprsl.ungrip_front()
+
+    # oprsl.start_parallel()
+    oprsl.move_front_arm(120, v=15)
+    oprsl.move_mechanism(180)
+    # oprsl.end_parallel()
+
+    oprsl.add_points("unload", 20)  # poeni za drugi plenter
+
+    return oprsl.operations
+
+
+def ostavljanje_zadnjom_rukom_sa_limova():
+    ozrsl = Strategy()
+
+    ozrsl.move_mechanism(20)
+
+    ozrsl.move_back_arm(170, v=15)
+    ozrsl.ungrip_back()
+
+    # ozrsl.start_parallel()
+    ozrsl.move_back_arm(210, v=15)
+    ozrsl.move_mechanism(180)
+    # ozrsl.end_parallel()
+
+    ozrsl.add_points("unload", 20)  # poeni za drugi plenter
+
+    return ozrsl.operations
 
 
 def univerzalni_kraj_zuta():

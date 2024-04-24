@@ -156,6 +156,9 @@ class SkipPlant:
     def __init__(self):
         self.marker = None
         self.plant_flag = None
+        self.num_of_attemps = 0
+        self.distance_when_backing = 100
+        self.backing_sleep = 0.5
 
 
 class End:

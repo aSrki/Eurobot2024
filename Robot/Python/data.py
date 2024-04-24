@@ -10,7 +10,7 @@ koliko = "6solar"
 table = "uski"
 side = "first"
 
-cam_arr = [1, 1, 1, 0, 1, 1]
+cam_arr = [1, 1, 1, 1, 1, 1]
 
 time_strategy_type = 95000
 type_of_strategy = "passive"

@@ -372,7 +372,7 @@ strategy_zuta_FULL.move_back_arm(175, v=15)
 strategy_zuta_FULL.ungrip_back()
 
 # strategy_zuta_FULL.start_parallel()
-strategy_zuta_FULL.move_back_arm(210, v=30)
+strategy_zuta_FULL.move_back_arm(210, v=30)  # TODO: v=15
 strategy_zuta_FULL.move_mechanism(180)
 # strategy_zuta_FULL.end_parallel()
 

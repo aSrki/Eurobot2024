@@ -223,7 +223,7 @@ class PositionRegulation:
             rotpoj = 1
 
             KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 65 * pojacanje * rotpoj  # 65 bilo
+            KpR = 55 * pojacanje * rotpoj  # 65 bilo
 
             TiR = 660000000  # 6600 # 200
             TiK = 660000000  # 5200
@@ -403,7 +403,8 @@ class PositionRegulation:
 
         # ANTI WINDUP
         if self.speed > self.max_pid * data.top_speed:
-            print(f"SSSSPPPPPEEEEEEEDDDDDDDDDD GGGGGAAAAAAAIIIIIIIIINNNNNNNNN : {data.top_speed}")
+            print(
+                f"SSSSPPPPPEEEEEEEDDDDDDDDDD GGGGGAAAAAAAIIIIIIIIINNNNNNNNN : {data.top_speed}")
             self.speed = self.max_pid * data.top_speed
         elif self.speed < -self.max_pid * data.top_speed:
             self.speed = -self.max_pid * data.top_speed

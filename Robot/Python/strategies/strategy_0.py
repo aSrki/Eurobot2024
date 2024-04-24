@@ -11,6 +11,7 @@ strategy0.check_cam([4, 1, 2, 3, 5, 6])
 strategy0.check_cam([1, 2, 3, 5, 6, 4])
 
 strategy0.go_to_XY(1000, 1500)
+strategy0.end()
 # ====================================================
 # strategy0.go_to_XY(1000, 600)
 

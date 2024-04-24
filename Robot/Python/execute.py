@@ -46,6 +46,8 @@ class Execute:
 
         self.raised_timeout = False
 
+        self.plant_flag = False
+
         self.taken_plants = []
 
     def start(self):
@@ -118,11 +120,37 @@ class Execute:
                     if data.object_sensor == 0:
                         custom_print("OBJECT IN ROBOT")
                     else:
-                        self.last_flag = data.skip_to
-                        # data.skip_to = "skip_object"
-                        self.skipping = True
-                        # custom_print(f"Current Active flag: {data.set_flag}")
-                        custom_print("NO OBJECT")
+                        if self.plant_flag:
+                            plant = 0
+                            self.plant_flag = False
+                            while not isinstance(self.operation, SkipPlant):
+                                print(
+                                    "popujemmmmmmmmmmmmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
+                                self.operation = data.operations.pop(0)
+
+                            for num in self.priorities:
+                                if data.cam_arr[num-1] and (num not in self.taken_plants):
+                                    plant = num
+                                    self.taken_plants.append(num)
+                                    break
+
+                                if num not in self.taken_plants:
+                                    self.taken_plants.append(num)
+
+                            print(
+                                f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
+                            steps = master_plant(plant, data.side, data.color)
+
+                            for i in range(len(steps)):
+                                data.operations.insert(
+                                    0, steps[len(steps)-i-1])
+                            custom_print("NO OBJECT")
+                        else:
+                            self.last_flag = data.skip_to
+                            # data.skip_to = "skip_object"
+                            self.skipping = True
+                            # custom_print(f"Current Active flag: {data.set_flag}")
+                            custom_print("NO OBJECT")
 
                     continue
 
@@ -137,22 +165,26 @@ class Execute:
 
                 elif isinstance(self.operation, Cam) and not self.skipping:
                     self.priorities = self.operation.priorities
+                    plant = 0
                     for num in self.priorities:
                         if data.cam_arr[num-1] and (num not in self.taken_plants):
                             plant = num
                             self.taken_plants.append(num)
                             break
 
-                        self.taken_plants.append(num)
+                        if num not in self.taken_plants:
+                            self.taken_plants.append(num)
+                    print(
+                        f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
 
                     steps = master_plant(plant, data.side, data.color)
 
                     for i in range(len(steps)):
                         data.operations.insert(0, steps[len(steps)-i-1])
 
-                    data.cam_arr = [0, 0, 0, 0, 1, 1]
-                    print(
-                        f"ooooOOOOOOoooooOOOOOOOO ................... MENJAM NIZ NOVINIZ: {data.cam_arr}")
+                    # data.cam_arr = [0, 0, 0, 0, 1, 1]
+                    # print(
+                    #     f"ooooOOOOOOoooooOOOOOOOO ................... MENJAM NIZ NOVINIZ: {data.cam_arr}")
 
                     continue
                 # TODO: preimenovati imena flagova na relevantne
@@ -238,20 +270,16 @@ class Execute:
                         self.backing = False
 
             elif data.stop and self.plant_flag:
+                plant = 0
                 self.last_angle = data.f_current
                 self.moving.stop()
 
                 self.plant_flag = False
+
                 while not isinstance(self.operation, SkipPlant):
                     print(
                         "popujemmmmmmmmmmmmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                     self.operation = data.operations.pop(0)
-
-                # TODO: proveriti jer je jako sus
-                # if data.is_front != None:
-                #     self.get_steps_for_detection()
-                # elif data.is_back != None:
-                #     self.get_steps_for_detection()
 
                 for num in self.priorities:
                     if data.cam_arr[num-1] and (num not in self.taken_plants):
@@ -259,12 +287,21 @@ class Execute:
                         self.taken_plants.append(num)
                         break
 
-                    self.taken_plants.append(num)
+                    if num not in self.taken_plants:
+                        self.taken_plants.append(num)
 
-                    steps = master_plant(plant, data.side, data.color)
+                print(
+                    f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
+                steps = master_plant(plant, data.side, data.color)
 
-                    for i in range(len(steps)):
-                        data.operations.insert(0, steps[len(steps)-i-1])
+                for i in range(len(steps)):
+                    data.operations.insert(0, steps[len(steps)-i-1])
+
+                if data.is_front != None:
+                    self.get_steps_for_detection()
+                elif data.is_back != None:
+                    self.get_steps_for_detection()
+
                 data.stop = False
 
             elif data.stop:

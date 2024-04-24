@@ -34,6 +34,7 @@ from strategies.sest_solarana_zuta_siroka import sest_solarna_zuta_siroka
 from strategies.sest_solarna_plava_siroka import sest_solarna_plava_siroka
 from strategies.sest_solarna_plava_uska import sest_solarna_plava_uska
 from strategies.sest_solarna_zuta_uska import sest_solarna_zuta_uska
+from strategies.strategy_zuta_KAMERA import strategy_zuta_KAMERA
 
 if __name__ == '__main__':
     import sys
@@ -82,7 +83,7 @@ def choose_strategy():
                 data.x_current = 195
                 data.y_current = 295  # -155
                 data.f_current = 0
-                return strategy0.operations  # 2
+                return strategy_zuta_KAMERA.operations  # 2
                 # return strategy_zuta_FULL.operations  # strategy1
             if data.type_of_strategy == "6solar":
                 data.time_strategy_type = 95  # 95  ... 90
