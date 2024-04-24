@@ -4,7 +4,8 @@ import time
 import data
 from communication.can_comm import *
 from communication.maxon_epos_driver import MaxonMotor
-
+import matplotlib.pyplot as plt
+from math import *
 
 class PositionRegulation:
     count = 0
@@ -48,7 +49,7 @@ class PositionRegulation:
 
     speed_gain = 1
     min_pid = 0
-    max_pid = 3000
+    max_pid = 7000
 
     cur_encoder_left = 0
     cur_encoder_right = 0
@@ -69,6 +70,13 @@ class PositionRegulation:
 
     def __init__(self):
         self.W_F = data.f_current
+
+        self.vel_r = []
+        self.vel_l = []
+
+        self.KPR_faktor = 1
+
+        self.v_last = 0
 
         self.MVL = 0
         self.MVR = 0
@@ -143,9 +151,9 @@ class PositionRegulation:
         # print('Desni enkoder:\t{}'.format(data.sum_encoder_right))
         # print('Levi trenutna vrednost enkoder:\t{}'.format(encoder_left))
         # print('Desni trenutna vrednost enkoder:\t{}'.format(encoder_right))
-        # print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
-        # print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
-        # print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
+        print('X-osa:\t\t\t{:.3f} mm'.format(data.x_current))
+        print('Y-osa:\t\t\t{:.3f} mm'.format(data.y_current))
+        print('UGAO osa:\t\t{:.3f}'.format(f), ' \n\n\n')
 
         # print("enK: {0}, enR: {1}".format(self.en_K, self.en_R))
         # # print('d duzina:\t\t\t{:.0f}'.format(d))
@@ -169,6 +177,50 @@ class PositionRegulation:
     def reset_position(self):
         self.stop_position = False
 
+    def calculate_velocity(self, s, s_fin, a_ac, a_dc, v_cr):
+        print(f"S je : {s}, S_FIN je : {s_fin}")
+
+        vel_sign = 1
+        if s_fin < 0:
+            vel_sign = -1
+
+        s = abs(s)
+        s_fin = abs(s_fin)
+
+        if s_fin != 0:
+            self.KPR_faktor = ((s_fin - s)/s_fin)
+
+        if s_fin == 0:
+            return 0
+        
+        v = 0
+
+        s1 = (v_cr ** 2) / (2 * a_ac)
+        s3 = (v_cr ** 2) / (-2 * a_dc)
+
+        if s1+s3 > s_fin:
+            s1 = s_fin/2
+            s3 = s_fin/2
+
+        s2 = s_fin - s1 - s3
+
+        if s <= s1:
+            v = sqrt(2 * a_ac * s) + 0.25
+            self.v_last = v
+        
+        elif (s <= s1 + s2) and (s2 > 0):
+            v = v_cr
+            self.v_last = v
+
+        elif s <= s1 + s2 + s3:
+            eq = (self.v_last ** 2) + 2 * a_dc * (s - s1 - s2)
+            if eq < 0:
+                eq  = 0
+            v = sqrt(eq)
+
+        print(f"V : {v}, SIGN : {vel_sign}")
+        return v * vel_sign
+    
     def regulation(self, d, f, debug):
         # KSENIJA DODALA OBRISI
         debug = False
@@ -203,6 +255,7 @@ class PositionRegulation:
         if self.sending_rot and not self.sending_stop:
             pojacanje = data.translate_pojacanje
             rotpoj = 1
+
             if debug:
                 print("MOVING FROM POS REG")
 
@@ -223,13 +276,15 @@ class PositionRegulation:
             rotpoj = 1
 
             KpK = 10 * pojacanje  # 7.2 !!!! 6 - 16 u zavisnosti stabilnosti i brzine koju hcete
-            KpR = 65 * pojacanje * rotpoj  # 65 bilo
+            KpR = 50 * pojacanje * rotpoj * self.KPR_faktor  # 65 bilo
+            # if KpR < 5:
+            #     KpR = 5
 
-            TiR = 660000000  # 6600 # 200
+            TiR = 5600  # 6600 # 200
             TiK = 660000000  # 5200
 
             TdK = .1  # 1
-            TdR = .8  # 3
+            TdR = .4  # 3
         else:
             if debug:
                 print("STOP")
@@ -279,11 +334,15 @@ class PositionRegulation:
         Ki = KpK * (1 / TiK) * integralK
         Kd = KpK * TdK * difK
         pid_K = Kp + Ki + Kd
+        pid_K = self.calculate_velocity(self.D, self.W_d, 700, -700, 800)
+        self.speed = int((pid_K*16*60)/(75*3.14))
+        print(f"PPPIIIIIIIIIIDDDDDDDDDD KKKKKK {pid_K}")
 
         Rp = KpR * enR
         Ri = KpR * (1 / TiR) * integralR
         Rd = KpR * TdR * difR
         pid_R = Rp + Ri + Rd
+        self.rot_speed = pid_R
         # ----------------------------------------
 
         if debug:
@@ -307,43 +366,43 @@ class PositionRegulation:
 
         # RAMP FOR TRANSLATION
 
-        if self.sending_trans:
-            dif_speed = pid_K - self.old_speed
-            if W_d >= 0:
+        # if self.sending_trans:
+        #     dif_speed = pid_K - self.old_speed
+        #     if W_d >= 0:
 
-                curve = self.calculate_curve_trans(self.t_trans)
-                self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
+        #         curve = self.calculate_curve_trans(self.t_trans)
+        #         self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
 
-                if dif_speed < -self.RAMP_INCREMENT_STOP:
-                    if debug:
-                        print("RAMP DOWN TRANSLATION")
-                    self.speed -= self.RAMP_INCREMENT_STOP
+        #         if dif_speed < -self.RAMP_INCREMENT_STOP:
+        #             if debug:
+        #                 print("RAMP DOWN TRANSLATION")
+        #             self.speed -= self.RAMP_INCREMENT_STOP
 
-                elif pid_K > curve:
-                    if debug:
-                        print("CURVE UP TRANSLATION")
-                    self.speed = curve
-                else:
-                    self.speed = pid_K
-                    self.t_rot = 0.03
-            else:
-                curve = self.calculate_curve_trans(self.t_trans)
-                self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
-                if pid_K < -curve:
-                    if debug:
-                        print("CURVE UP TRANSLATION")
-                    self.speed = -curve
-                elif dif_speed > self.RAMP_INCREMENT_STOP:
-                    if debug:
-                        print("RAMP DOWN TRANSLATION")
-                    self.speed += self.RAMP_INCREMENT_STOP
-                else:
-                    self.speed = pid_K
-                    self.t_rot = 0.03
-        else:
-            self.speed = pid_K
-            # self.t = 0.03
-        # RAMP FOR ROTATION NOT DONE YET
+        #         elif pid_K > curve:
+        #             if debug:
+        #                 print("CURVE UP TRANSLATION")
+        #             self.speed = curve
+        #         else:
+        #             self.speed = pid_K
+        #             self.t_rot = 0.03
+        #     else:
+        #         curve = self.calculate_curve_trans(self.t_trans)
+        #         self.t_trans += self.CURVE_INC_TRANS * data.translate_pojacanje
+        #         if pid_K < -curve:
+        #             if debug:
+        #                 print("CURVE UP TRANSLATION")
+        #             self.speed = -curve
+        #         elif dif_speed > self.RAMP_INCREMENT_STOP:
+        #             if debug:
+        #                 print("RAMP DOWN TRANSLATION")
+        #             self.speed += self.RAMP_INCREMENT_STOP
+        #         else:
+        #             self.speed = pid_K
+        #             self.t_rot = 0.03
+        # else:
+        #     self.speed = pid_K
+        #     # self.t = 0.03
+        # # RAMP FOR ROTATION NOT DONE YET
         if self.sending_rot:
             dif_rot_speed = pid_R - self.old_rot_speed
 
@@ -402,20 +461,25 @@ class PositionRegulation:
         #               self.rot_speed)
 
         # ANTI WINDUP
-        if self.speed > self.max_pid * data.top_speed:
-            print(f"SSSSPPPPPEEEEEEEDDDDDDDDDD GGGGGAAAAAAAIIIIIIIIINNNNNNNNN : {data.top_speed}")
-            self.speed = self.max_pid * data.top_speed
-        elif self.speed < -self.max_pid * data.top_speed:
-            self.speed = -self.max_pid * data.top_speed
+        # if self.speed > self.max_pid * data.top_speed:
+        #     print(f"SSSSPPPPPEEEEEEEDDDDDDDDDD GGGGGAAAAAAAIIIIIIIIINNNNNNNNN : {data.top_speed}")
+        #     self.speed = self.max_pid * data.top_speed
+        # elif self.speed < -self.max_pid * data.top_speed:
+        #     self.speed = -self.max_pid * data.top_speed
 
         MVL = int(self.speed - self.rot_speed)
         MVR = int(self.speed + self.rot_speed)
+
+        self.vel_r.append(MVR)
+        self.vel_l.append(MVL)
 
         self.MVL = MVL
         self.MVR = MVR
 
         if (enK >= -3) and (enK <= 3) and (-.5 <= enR <= .5):
             data.budz = True
+
+            plt.plot(self.vel_r)
 
             self.maxon_left.rotate_with_rpm(0)
             self.maxon_right.rotate_with_rpm(0)
@@ -424,6 +488,8 @@ class PositionRegulation:
             self.integral_R = 0
 
             self.sending_stop = True
+
+            
 
             if debug:
                 print('======================STOP===========================', MVL)
