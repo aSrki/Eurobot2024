@@ -174,6 +174,12 @@ class Execute:
 
                         if num not in self.taken_plants:
                             self.taken_plants.append(num)
+                        if (1 in self.taken_plants) and (2 in self.taken_plants) and (3 in self.taken_plants) and (4 in self.taken_plants) and (5 in self.taken_plants) and (6 in self.taken_plants):
+                            self.last_flag = data.skip_to
+                            # data.skip_to = "skip_object"
+                            self.skipping = True
+                            # custom_print(f"Current Active flag: {data.set_flag}")
+                            custom_print("NO PLANTS, KRADJA")
                     print(
                         f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
 
@@ -181,10 +187,6 @@ class Execute:
 
                     for i in range(len(steps)):
                         data.operations.insert(0, steps[len(steps)-i-1])
-
-                    # data.cam_arr = [0, 0, 0, 0, 1, 1]
-                    # print(
-                    #     f"ooooOOOOOOoooooOOOOOOOO ................... MENJAM NIZ NOVINIZ: {data.cam_arr}")
 
                     continue
                 # TODO: preimenovati imena flagova na relevantne
