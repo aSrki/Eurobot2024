@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import socket
 from math import *
+import sys
 
 def get_markers_centers(frame):
     ret_centers = [0, 0, 0, 0]
@@ -63,13 +64,33 @@ def get_green(frame, x_min, x_max, y_min, y_max):
         y1 = int(y_off - sqrt(4*(y_off**2) + 4*A)/2)
         for y in range(y1, y2 + 1):
             tmp = frame[x, y]
-            color_b += tmp[0]
+            # color_b += tmp[0]
             color_g += tmp[1]
-            color_r += tmp[2]
+            # color_r += tmp[2]
             # frame[x, y] = (100, 50, 0)
             sum += 1
+    # return int(color_b/sum), int(color_g/sum), int(color_r/sum)
+    return 0, int(color_g/sum), 0
 
-    return 0, 0, int(color_r/sum)#int(color_b/sum), int(color_g/sum), int(color_r/sum)
+debug_arg = False
+
+try:
+    debug_arg = sys.argv[1]
+
+    if debug_arg == "True" or debug_arg == "true":
+        debug_arg = True
+
+    elif debug_arg == "False" or debug_arg == "false":
+        debug_arg = False
+
+    else:
+        debug_arg = False
+    
+    print(debug_arg)
+
+except:
+    pass
+
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -88,11 +109,13 @@ s1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 s1.settimeout(1)
 
-s1.connect((host, port))
+if not debug_arg:
+    s1.connect((host, port))
 
 try:
     while True:
         ret, frame = cap.read()
+
         height, width = frame.shape[:2]
 
         if not matrix_found:
@@ -101,24 +124,35 @@ try:
             matrix = find_matrix(frame, markers_centers)
             print(type(matrix))
 
-
             if matrix is not None: 
                 matrix_found = True
                 print("Nasao matrix")
 
-        else:
+
+        if matrix_found:
             frame = cv2.warpPerspective(frame, matrix, (width, height), cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=(0,0))
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-            b1, g1, r1 = get_green(frame, 73, 206, 500, 633)
-            b2, g2, r2 = get_green(frame, 150, 283, 846, 1046)
-            b3, g3, r3 = get_green(frame, 426, 560, 846, 1046)
-            b4, g4, r4 = get_green(frame, 523, 656, 500, 633)
-            b5, g5, r5 = get_green(frame, 426, 560, 120, 320)
-            b6, g6, r6 = get_green(frame, 160, 293, 120, 320)
+            green_mask = cv2.inRange(frame, (15, 0, 0), (100, 255, 255))
 
-            red_detected = [r1, r2, r3, r4, r5, r6]
+            #isecanje zelenila
+            imask = green_mask>0
+            green = np.zeros_like(frame, np.uint8)
+            green[imask] = frame[imask]
+
+            frame = green
+            frame = cv2.cvtColor(frame, cv2.COLOR_HSV2BGR)
+
+            b1, g1, r1 = get_green(frame, 93, 226, 580, 713)
+            b2, g2, r2 = get_green(frame, 180, 313, 880, 1080)
+            b3, g3, r3 = get_green(frame, 456, 590, 880, 1080)
+            b4, g4, r4 = get_green(frame, 543, 676, 580, 713)
+            b5, g5, r5 = get_green(frame, 456, 590, 200, 400)
+            b6, g6, r6 = get_green(frame, 180, 313, 200, 400)
+
+            # red_detected = [r1, r2, r3, r4, r5, r6]
             # blue_detected = [b1, b2, b3, b4, b5, b6]
-            # green_detected = [g1, g2, g3, g4, g5, g6]
+            green_detected = [g1, g2, g3, g4, g5, g6]
             # print("\n=============================")
             # print(f"R: {red_detected}")
             # print(f"G: {green_detected}")
@@ -127,12 +161,13 @@ try:
 
             res = ""
             for i in range(6):
-                if 90<red_detected[i]<195:
+                if green_detected[i]>15:
                     res += '1'
                 else:
                     res += '0'
-                
-            s1.sendall(str(res).encode())
+            
+            if not debug_arg:
+                s1.sendall(str(res).encode())
             print(res)
             # cv2.imshow('frame', frame)
 
