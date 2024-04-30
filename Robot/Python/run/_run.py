@@ -110,6 +110,7 @@ class Screen3(QDialog):
         self.sima_1_label.setStyleSheet("background-color: red;")
         self.sima_2_label.setStyleSheet("background-color: red;")
         self.sima_3_label.setStyleSheet("background-color: red;")   
+        self.kamera_lable_3.setStyleSheet("background-color: red;")
     
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_simas)
@@ -120,6 +121,7 @@ class Screen3(QDialog):
         res1 = os.popen('ping -c 1 -W 0.2 192.168.1.143').read()
         res2 = os.popen('ping -c 1 -W 0.2 192.168.1.212').read()
         res3 = os.popen('ping -c 1 -W 0.2 192.168.1.192').read()
+        res4 = os.popen('ping -c 1 -W 0.2 192.168.1.137').read()
 
         if "1 received" in res1:
             self.sima_1_label.setStyleSheet("background-color: green;")        
@@ -135,6 +137,11 @@ class Screen3(QDialog):
             self.sima_3_label.setStyleSheet("background-color: green;")        
         elif "0 received" in res3:
             self.sima_3_label.setStyleSheet("background-color: red;") 
+
+        if "1 received" in res4:
+            self.kamera_lable_3.setStyleSheet("background-color: green;")        
+        elif "0 received" in res4:
+            self.kamera_lable_3.setStyleSheet("background-color: red;") 
 
     def gotoScreen2(self):
         screen2 = Screen2()
@@ -172,6 +179,7 @@ class Screen4(QDialog):
         self.sima_1_label_screen4.setStyleSheet("background-color: red;")
         self.sima_2_label_screen4.setStyleSheet("background-color: red;")
         self.sima_3_label_screen4.setStyleSheet("background-color: red;")
+        self.kamera_lable_4.setStyleSheet("background-color: red;")
 
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.update_label)
@@ -186,6 +194,7 @@ class Screen4(QDialog):
         res1 = os.popen('ping -c 1 -W 0.2 192.168.1.143').read()
         res2 = os.popen('ping -c 1 -W 0.2 192.168.1.212').read()
         res3 = os.popen('ping -c 1 -W 0.2 192.168.1.192').read()
+        res4 = os.popen('ping -c 1 -W 0.2 192.168.1.137').read()
 
         if "1 received" in res1:
             self.sima_1_label_screen4.setStyleSheet("background-color: green;")        
@@ -201,6 +210,11 @@ class Screen4(QDialog):
             self.sima_3_label_screen4.setStyleSheet("background-color: green;")        
         elif "0 received" in res3:
             self.sima_3_label_screen4.setStyleSheet("background-color: red;") 
+
+        if "1 received" in res4:
+            self.kamera_lable_4.setStyleSheet("background-color: green;")        
+        elif "0 received" in res4:
+            self.kamera_lable_4.setStyleSheet("background-color: red;") 
 
     def update_label(self):
         if data.cinc != 1:
@@ -249,15 +263,15 @@ class Screen5(QDialog):
 
     def on_click_agressive(self):
         gamePayload.type_of_strategy = 'agressive'
-        self.gotoScreen6()
+        self.gotoScreen3()
 
     def on_click_passive(self):
         gamePayload.type_of_strategy = 'passive'
-        self.gotoScreen6()
+        self.gotoScreen3()
 
     def on_click_6solar(self):
         gamePayload.type_of_strategy = '6solar'
-        self.gotoScreen6()
+        self.gotoScreen3()
 
     def on_click_nazad(self):
         screen2 = Screen2()
