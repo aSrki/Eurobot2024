@@ -7,7 +7,7 @@ chosen_strategy = None
 color = "blue"
 koliko = "6solar"
 # table = "siroki"
-table = "uski"
+table = "siroki"
 side = "first"
 
 cam_arr = [1, 1, 1, 1, 1, 1]

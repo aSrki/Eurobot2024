@@ -85,6 +85,8 @@ class Moving:
     def go_using_coordinates(self, __x, __y, direction_is_forward, offset):
         self.position.t_rot = 0.01
         self.position.t_trans = 0.01
+        self.position.integral_K = 0
+        self.position.integral_R = 0
         # ***************************************************************************************
         # ********************************** ROTATION ****************************************
         # **************************************************************************************
@@ -165,6 +167,8 @@ class Moving:
     def go_using_rotation(self, __f):
         self.position.t_rot = 0.01
         self.position.t_trans = 0.01
+        self.position.integral_K = 0
+        self.position.integral_R = 0
         if self.DEBUG_FOR_GO:
             print("ugao koji saljem je   =  ", __f)
 
@@ -182,6 +186,8 @@ class Moving:
     def go_using_distance_angle(self, distance, angle, direction_is_forward):
         self.position.t_rot = 0.01
         self.position.t_trans = 0.01
+        self.position.integral_K = 0
+        self.position.integral_R = 0
         # ***************************************************************************************
         # ********************************** ROTATION ****************************************
         # **************************************************************************************
@@ -263,6 +269,9 @@ class Moving:
     def while_translate(self, distance, __x, __y, is_coordinate_moving):
         self.position.t_rot = 0.01
         self.position.t_trans = 0.01
+        self.position.integral_K = 0
+        self.position.integral_R = 0
+        self.position.first = True
         timer = 0
         timer_still_running = True
 
@@ -295,6 +304,9 @@ class Moving:
     def while_rotation(self, rotation):
         self.position.t_rot = 0.01
         self.position.t_trans = 0.01
+        self.position.integral_K = 0
+        self.position.integral_R = 0
+        self.position.first = True
         timer = 0
         timer_still_running = True
 
