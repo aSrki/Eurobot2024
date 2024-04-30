@@ -106,14 +106,16 @@ class Execute:
 
                 # Provera da li treba da skipuje u zavisnosti od vremena
                 elif isinstance(self.operation, TimeCheck) and not self.skipping:
-                    if self.operation.skip_to_flag == "timeout":
-                        data.skip_to = "timeout"
-                        self.raised_timeout = True
-                        self.skipping = True
-                        print(f"TIMEOUT TIME: {data.elapsed_time}")
+                    if self.operation.time < data.elapsed_time:
+                        if self.operation.skip_to_flag == "timeout":
+                            data.skip_to = "timeout"
+                            self.raised_timeout = True
+                            self.skipping = True
+                            print(f"TIMEOUT TIME: {data.elapsed_time}")
 
-                    elif self.operation.time < data.elapsed_time:
-                        self.skipping = True
+                        else:
+                            data.skip_to = self.operation.skip_to_flag
+                            self.skipping = True
 
                     continue
                 elif isinstance(self.operation, CheckObject) and not self.skipping:

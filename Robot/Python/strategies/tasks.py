@@ -347,7 +347,7 @@ def univerzalni_kraj_plava():
     return ukp.operations
 
 
-def blue_get_1_front(check=False, off=100, attempts=0):
+def blue_get_1_front(check=False, off=115, attempts=0):
     bg1f = Strategy()
 
     bg1f.back_all_off()
@@ -367,7 +367,7 @@ def blue_get_1_front(check=False, off=100, attempts=0):
     return bg1f.operations
 
 
-def blue_get_1_back(check=False, off=100, attempts=0):
+def blue_get_1_back(check=False, off=115, attempts=0):
     bg1b = Strategy()
 
     bg1b.front_all_off()
@@ -387,7 +387,7 @@ def blue_get_1_back(check=False, off=100, attempts=0):
     return bg1b.operations
 
 
-def blue_get_2_front(check=False, off=100, attempts=0):
+def blue_get_2_front(check=False, off=115, attempts=0):
     bg2f = Strategy()
 
     bg2f.back_all_off()
@@ -407,7 +407,7 @@ def blue_get_2_front(check=False, off=100, attempts=0):
     return bg2f.operations
 
 
-def blue_get_2_back(check=False, off=100, attempts=0):
+def blue_get_2_back(check=False, off=115, attempts=0):
     bg2b = Strategy()
 
     bg2b.front_all_off()
@@ -427,7 +427,7 @@ def blue_get_2_back(check=False, off=100, attempts=0):
     return bg2b.operations
 
 
-def blue_get_3_front(check=False, off=100, attempts=0):
+def blue_get_3_front(check=False, off=115, attempts=0):
     bg3f = Strategy()
 
     bg3f.back_all_off()
@@ -447,7 +447,7 @@ def blue_get_3_front(check=False, off=100, attempts=0):
     return bg3f.operations
 
 
-def blue_get_3_back(check=False, off=100, attempts=0):
+def blue_get_3_back(check=False, off=115, attempts=0):
     bg3b = Strategy()
 
     bg3b.front_all_off()
@@ -467,7 +467,7 @@ def blue_get_3_back(check=False, off=100, attempts=0):
     return bg3b.operations
 
 
-def blue_get_4_front(check=False, off=100, attempts=0):
+def blue_get_4_front(check=False, off=115, attempts=0):
     bg4f = Strategy()
 
     bg4f.back_all_off()
@@ -487,7 +487,7 @@ def blue_get_4_front(check=False, off=100, attempts=0):
     return bg4f.operations
 
 
-def blue_get_4_back(check=False, off=100, attempts=0):
+def blue_get_4_back(check=False, off=115, attempts=0):
     bg4b = Strategy()
 
     bg4b.front_all_off()
@@ -498,8 +498,7 @@ def blue_get_4_back(check=False, off=100, attempts=0):
     bg4b.go_to_XY(500, -1500, False, off=off, at=attempts, b=100)
     bg4b.add_sequence(prepare_back_arm())
     bg4b.deactivate_prednja_grtalca()
-    bg4b.activate_zadnja_desna_grtalca()
-    bg4b.activate_zadnja_leva_grtalca()
+    bg4b.activate_zadnja_grtalca()
     bg4b.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru
@@ -508,7 +507,7 @@ def blue_get_4_back(check=False, off=100, attempts=0):
     return bg4b.operations
 
 
-def blue_get_5_front(check=False, off=100, attempts=0):
+def blue_get_5_front(check=False, off=115, attempts=0):
     bg5f = Strategy()
 
     bg5f.back_all_off()
@@ -528,7 +527,7 @@ def blue_get_5_front(check=False, off=100, attempts=0):
     return bg5f.operations
 
 
-def blue_get_5_back(check=False, off=100, attempts=0):
+def blue_get_5_back(check=False, off=115, attempts=0):
     bg5b = Strategy()
 
     bg5b.front_all_off()
@@ -548,7 +547,7 @@ def blue_get_5_back(check=False, off=100, attempts=0):
     return bg5b.operations
 
 
-def blue_get_6_front(check=False, off=100, attempts=0):
+def blue_get_6_front(check=False, off=115, attempts=0):
     bg6f = Strategy()
 
     bg6f.back_all_off()
@@ -568,7 +567,7 @@ def blue_get_6_front(check=False, off=100, attempts=0):
     return bg6f.operations
 
 
-def blue_get_6_back(check=False, off=100, attempts=0):
+def blue_get_6_back(check=False, off=115, attempts=0):
     bg6b = Strategy()
 
     bg6b.front_all_off()
@@ -588,7 +587,7 @@ def blue_get_6_back(check=False, off=100, attempts=0):
     return bg6b.operations
 
 
-def yellow_get_1_front(check=False, off=100, attempts=0):
+def yellow_get_1_front(check=False, off=115, attempts=0):
     g1f = Strategy()
 
     g1f.back_all_off()
@@ -608,7 +607,7 @@ def yellow_get_1_front(check=False, off=100, attempts=0):
     return g1f.operations
 
 
-def yellow_get_1_back(check=False, off=100, attempts=0):
+def yellow_get_1_back(check=False, off=115, attempts=0):
     g1b = Strategy()
 
     g1b.front_all_off()
@@ -628,7 +627,7 @@ def yellow_get_1_back(check=False, off=100, attempts=0):
     return g1b.operations
 
 
-def yellow_get_2_front(check=False, off=100, attempts=0):
+def yellow_get_2_front(check=False, off=115, attempts=0):
     g2f = Strategy()
 
     g2f.back_all_off()
@@ -648,7 +647,7 @@ def yellow_get_2_front(check=False, off=100, attempts=0):
     return g2f.operations
 
 
-def yellow_get_2_back(check=False, off=100, attempts=0):
+def yellow_get_2_back(check=False, off=115, attempts=0):
     g2b = Strategy()
 
     g2b.front_all_off()
@@ -668,7 +667,7 @@ def yellow_get_2_back(check=False, off=100, attempts=0):
     return g2b.operations
 
 
-def yellow_get_3_front(check=False, off=100, attempts=0):
+def yellow_get_3_front(check=False, off=115, attempts=0):
     g3f = Strategy()
 
     g3f.back_all_off()
@@ -688,7 +687,7 @@ def yellow_get_3_front(check=False, off=100, attempts=0):
     return g3f.operations
 
 
-def yellow_get_3_back(check=False, off=100, attempts=0):
+def yellow_get_3_back(check=False, off=115, attempts=0):
     g3b = Strategy()
 
     g3b.front_all_off()
@@ -708,7 +707,7 @@ def yellow_get_3_back(check=False, off=100, attempts=0):
     return g3b.operations
 
 
-def yellow_get_4_front(check=False, off=100, attempts=0):
+def yellow_get_4_front(check=False, off=115, attempts=0):
     g4f = Strategy()
 
     g4f.back_all_off()
@@ -719,8 +718,7 @@ def yellow_get_4_front(check=False, off=100, attempts=0):
     # ide do biljaka kod sime to jest prvi tanjir
     g4f.add_sequence(prepare_front_arm())
     g4f.deactivate_zadnja_grtalca()
-    g4f.activate_prednja_desna_grtalca()
-    g4f.activate_prednja_leva_grtalca()
+    g4f.activate_prednja_grtalca()
     g4f.end_step_actions()
 
     # provjerava da li postoje biljke na prvom tanjiru
@@ -729,7 +727,7 @@ def yellow_get_4_front(check=False, off=100, attempts=0):
     return g4f.operations
 
 
-def yellow_get_4_back(check=False, off=100, attempts=0):
+def yellow_get_4_back(check=False, off=115, attempts=0):
     g4b = Strategy()
 
     g4b.front_all_off()
@@ -749,7 +747,7 @@ def yellow_get_4_back(check=False, off=100, attempts=0):
     return g4b.operations
 
 
-def yellow_get_5_front(check=False, off=100, attempts=0):
+def yellow_get_5_front(check=False, off=115, attempts=0):
     g5f = Strategy()
 
     g5f.back_all_off()
@@ -769,7 +767,7 @@ def yellow_get_5_front(check=False, off=100, attempts=0):
     return g5f.operations
 
 
-def yellow_get_5_back(check=False, off=100, attempts=0):
+def yellow_get_5_back(check=False, off=115, attempts=0):
     g5b = Strategy()
 
     g5b.front_all_off()
@@ -789,7 +787,7 @@ def yellow_get_5_back(check=False, off=100, attempts=0):
     return g5b.operations
 
 
-def yellow_get_6_front(check=False, off=100, attempts=0):
+def yellow_get_6_front(check=False, off=115, attempts=0):
     g6f = Strategy()
 
     g6f.back_all_off()
@@ -809,7 +807,7 @@ def yellow_get_6_front(check=False, off=100, attempts=0):
     return g6f.operations
 
 
-def yellow_get_6_back(check=False, off=100, attempts=0):
+def yellow_get_6_back(check=False, off=115, attempts=0):
     g6b = Strategy()
 
     g6b.front_all_off()
