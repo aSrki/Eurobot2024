@@ -12,6 +12,8 @@ side = "first"
 
 cam_arr = [1, 1, 1, 1, 1, 1]
 
+# points_arr = []
+
 time_strategy_type = 95000
 type_of_strategy = "passive"
 

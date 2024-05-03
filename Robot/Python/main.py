@@ -168,7 +168,7 @@ class Main:
 
                 time.sleep(.1)
 
-            if ((data.x_current > 1450) and (-550 < data.y_current < 550)) or ((data.x_current < 550) and (-550 < data.y_current < 550)):
+            if ((data.x_current > 1450) and (-550 < data.y_current < 550)) or ((data.x_current < 550) and (-550 < data.y_current < 550)) or ((645 < data.x_current < 1355) and (data.y_current < -2450 or data.y_current > 2450)):
                 data.points += 10
             self.stop()
 

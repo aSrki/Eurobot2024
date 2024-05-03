@@ -33,7 +33,7 @@ class CAM_COMM:
                 for i in range(6):
                     self.cam_arr[i] = int(self.com_res[i])
                 # print("OVDE sam 3")
-                print(self.cam_arr)
+                # print(self.cam_arr)
                 data.cam_arr = self.cam_arr
 
     def start(self):

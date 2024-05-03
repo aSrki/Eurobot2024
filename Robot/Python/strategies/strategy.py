@@ -395,7 +395,7 @@ class Strategy:
 
     def deactivate_zadnja_desna_grtalca(self, a=300, v=100, s=0.1, da=0):
         action = Action.move_servo(
-            IDS.id_grtalica_prednja_desna.value, angle=a, velocity=v, sleep=s, thread=self.thread
+            IDS.id_grtalica_zadnja_desna.value, angle=a, velocity=v, sleep=s, thread=self.thread
         )
         if self.add_to_step:
             action.delay_action = da

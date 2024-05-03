@@ -48,6 +48,8 @@ class Execute:
 
         self.plant_flag = False
 
+        self.temp_flag = None
+
         self.taken_plants = []
 
     def start(self):
@@ -65,7 +67,7 @@ class Execute:
                 if not data.running.is_set():
                     break
 
-                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout and not (((data.x_current > 550) and (-550 < data.y_current < 550)) or ((data.x_current > 1450) and (-550 < data.y_current < 550)) or ((675 < data.x_current < 1325) and (data.y_current < -2450 or data.y_current > 2450))):
+                if data.TIMEOUT_FOR_LAST_STEPS and not self.raised_timeout and not (((data.x_current > 550) and (-550 < data.y_current < 550)) or ((data.x_current > 1450) and (-550 < data.y_current < 550)) or ((635 < data.x_current < 1355) and (data.y_current < -2450 or data.y_current > 2450))):
                     custom_print(f"TIMEOUT: {data.elapsed_time}")
 
                     data.TIMEOUT_FOR_LAST_STEPS = False
@@ -87,6 +89,7 @@ class Execute:
                     data.operations.clear()
                     self.moving.position.maxon_right.rotate_with_rpm(0)
                     self.moving.position.maxon_left.rotate_with_rpm(0)
+                    # print(f"ooooOOOOOOO poeizakraj: {data.points_arr}")
                     continue
 
                 elif isinstance(self.operation, Skip):
@@ -141,12 +144,22 @@ class Execute:
 
                             print(
                                 f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
-                            steps = master_plant(plant, data.side, data.color)
 
-                            for i in range(len(steps)):
-                                data.operations.insert(
-                                    0, steps[len(steps)-i-1])
-                            custom_print("NO OBJECT")
+                            if set([1, 2, 3, 4, 5, 6]).issubset(self.taken_plants):
+                                data.skip_to = self.temp_flag
+                                self.last_flag = data.skip_to
+                                # data.skip_to = "skip_object"
+                                self.skipping = True
+                                # custom_print(f"Current Active flag: {data.set_flag}")
+                                custom_print("NO PLANTS, KRADJA")
+                            else:
+                                steps = master_plant(
+                                    plant, data.side, data.color)
+
+                                for i in range(len(steps)):
+                                    data.operations.insert(
+                                        0, steps[len(steps)-i-1])
+                                custom_print("NO OBJECT")
                         else:
                             self.last_flag = data.skip_to
                             # data.skip_to = "skip_object"
@@ -166,6 +179,11 @@ class Execute:
                     continue
 
                 elif isinstance(self.operation, Cam) and not self.skipping:
+
+                    self.temp_flag = data.skip_to
+                    data.skip_to = None
+                    self.last_flag = None
+
                     self.priorities = self.operation.priorities
                     plant = 0
                     for num in self.priorities:
@@ -176,7 +194,10 @@ class Execute:
 
                         if num not in self.taken_plants:
                             self.taken_plants.append(num)
-                        if (1 in self.taken_plants) and (2 in self.taken_plants) and (3 in self.taken_plants) and (4 in self.taken_plants) and (5 in self.taken_plants) and (6 in self.taken_plants):
+
+                        if set([1, 2, 3, 4, 5, 6]).issubset(self.taken_plants):
+
+                            data.skip_to = self.temp_flag
                             self.last_flag = data.skip_to
                             # data.skip_to = "skip_object"
                             self.skipping = True
@@ -193,6 +214,7 @@ class Execute:
                     continue
                 # TODO: preimenovati imena flagova na relevantne
                 elif isinstance(self.operation, Points) and not self.skipping:
+                    # data.points_arr.append(self.operation.points)
                     if self.operation.type == "sort":
                         data.points += self.operation.points
                     elif self.operation.type == "unload":
@@ -296,15 +318,24 @@ class Execute:
 
                 print(
                     f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
-                steps = master_plant(plant, data.side, data.color)
 
-                for i in range(len(steps)):
-                    data.operations.insert(0, steps[len(steps)-i-1])
+                if set([1, 2, 3, 4, 5, 6]).issubset(self.taken_plants):
+                    data.skip_to = self.temp_flag
+                    self.last_flag = data.skip_to
+                    # data.skip_to = "skip_object"
+                    self.skipping = True
+                    # custom_print(f"Current Active flag: {data.set_flag}")
+                    custom_print("NO PLANTS, KRADJA")
+                else:
+                    steps = master_plant(plant, data.side, data.color)
 
-                if data.is_front != None:
-                    self.get_steps_for_detection()
-                elif data.is_back != None:
-                    self.get_steps_for_detection()
+                    for i in range(len(steps)):
+                        data.operations.insert(0, steps[len(steps)-i-1])
+
+                    if data.is_front == True:
+                        self.get_steps_for_detection()
+                    elif data.is_back == True:
+                        self.get_steps_for_detection()
 
                 data.stop = False
 
@@ -313,9 +344,9 @@ class Execute:
                 self.moving.stop()
 
                 # TODO: proveriti jer je jako sus
-                if data.is_front != None:
+                if data.is_front == True:
                     self.get_steps_for_detection()
-                elif data.is_back != None:
+                elif data.is_back == True:
                     self.get_steps_for_detection()
 
         custom_print("END")
@@ -349,13 +380,13 @@ class Execute:
             custom_print("DETECTED WHILE BACKING")
             self.num_of_detections = 0
 
-        if data.is_front != False:
+        if data.is_front == True:
             custom_print("FRONT DETECTED")
 
             steps = backing_steps(
                 self.operation.distance_when_backing, 0, self.operation.backing_sleep, self.last_angle)
 
-        elif data.is_back != False:
+        elif data.is_back == True:
             print("BACK DETECTED")
 
             steps = forward_steps(
