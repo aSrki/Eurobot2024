@@ -103,7 +103,9 @@ strategy_zuta_KAMERA.move_back_arm(210, v=15)
 strategy_zuta_KAMERA.set_distance_angle(-70, 0)
 strategy_zuta_KAMERA.activate_zadnja_desna_grtalca()
 strategy_zuta_KAMERA.set_distance_angle(0, -90, g=0.6)
-strategy_zuta_KAMERA.add_points("unload", 10)
+
+strategy_zuta_KAMERA.add_points("unload", 8)
+
 strategy_zuta_KAMERA.deactivate_zadnja_desna_grtalca()
 strategy_zuta_KAMERA.set_distance_angle(30, 0)
 strategy_zuta_KAMERA.go_to_XY(562, 2800, at=100, b=50)
@@ -169,7 +171,11 @@ strategy_zuta_KAMERA.move_mechanism(180)
 strategy_zuta_KAMERA.back_all_off()
 strategy_zuta_KAMERA.front_all_on()
 
+strategy_zuta_KAMERA.start_step_actions()
 strategy_zuta_KAMERA.go_to_XY(1302, 2250, at=0, b=200)
+strategy_zuta_KAMERA.move_mechanism(180)
+strategy_zuta_KAMERA.end_step_actions()
+
 strategy_zuta_KAMERA.go_to_XY(632, 2250, at=0, b=50)
 strategy_zuta_KAMERA.go_to_XY(632, 2820, at=100, b=50)
 strategy_zuta_KAMERA.rotate_to(0)
@@ -341,15 +347,15 @@ strategy_zuta_KAMERA.check_object()
 strategy_zuta_KAMERA.move_front_arm(120, v=15)
 strategy_zuta_KAMERA.move_mechanism(180)
 
-strategy_zuta_KAMERA.back_all_off()
-strategy_zuta_KAMERA.front_all_on()
-
-strategy_zuta_KAMERA.go_to_XY(632, 2620, at=100, b=50)
-
 strategy_zuta_KAMERA.front_all_off()
 strategy_zuta_KAMERA.back_all_on()
 
-strategy_zuta_KAMERA.go_to_XY(632, 2820, False, at=100, b=50)
+strategy_zuta_KAMERA.go_to_XY(632, 2620, False, at=100, b=50)
+
+strategy_zuta_KAMERA.back_all_off()
+strategy_zuta_KAMERA.front_all_on()
+
+strategy_zuta_KAMERA.go_to_XY(632, 2820, at=100, b=50)
 strategy_zuta_KAMERA.rotate_to(0)
 strategy_zuta_KAMERA.add_sequence(ostavljanje_prednjom_rukom_sa_limovima())
 

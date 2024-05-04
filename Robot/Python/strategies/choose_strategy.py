@@ -35,6 +35,7 @@ from strategies.sest_solarna_plava_siroka import sest_solarna_plava_siroka
 from strategies.sest_solarna_plava_uska import sest_solarna_plava_uska
 from strategies.sest_solarna_zuta_uska import sest_solarna_zuta_uska
 from strategies.strategy_zuta_KAMERA import strategy_zuta_KAMERA
+from strategies.strategy_plava_KAMERA import strategy_plava_KAMERA
 
 if __name__ == '__main__':
     import sys
@@ -66,7 +67,7 @@ def choose_strategy():
                 data.x_current = 195
                 data.y_current = -295  # -155
                 data.f_current = 0
-                return strategy_plava_FULL.operations  # strategy1
+                return strategy_plava_KAMERA.operations  # strategy1
             elif data.type_of_strategy == "6solar":
                 data.time_strategy_type = 97  # 95  ... 90
                 data.x_current = 195
@@ -101,51 +102,51 @@ def choose_strategy():
                 data.f_current = 0
                 return strategy_zuta_L.operations  # 2
 
-    elif table == "uski":
-        if data.color == "blue":
-            if data.type_of_strategy == "passive":
-                data.time_strategy_type = 97  # 95  ... 90
-                data.x_current = 195
-                data.y_current = -295  # -155
-                data.f_current = 0
-                return strategy_plava_FULL_uski.operations
-            elif data.type_of_strategy == "6solar":
-                data.time_strategy_type = 97  # 95  ... 90
-                data.x_current = 195
-                data.y_current = -295  # -155
-                data.f_current = 0
-                return sest_solarna_plava_uska.operations  # strategy1
-            elif data.type_of_strategy == "agressive":
-                data.time_strategy_type = 97   # 95
-                data.x_current = 1000  # 195
-                data.y_current = -2705  # 295
-                data.f_current = 0
-                return strategy_plava_L.operations  # 2
-            elif data.type_of_strategy == "test":
-                data.time_strategy_type = 100000   # 95
-                data.x_current = 0  # 195
-                data.y_current = 0  # 295
-                data.f_current = 0
-                return strategy0.operations  # 2
-        elif data.color == "yellow":
-            if data.type_of_strategy == "passive":
-                data.time_strategy_type = 97  # 95  ... 90
-                data.x_current = 195
-                data.y_current = 295  # -155
-                data.f_current = 0
-                return strategy_zuta_FULL_uski.operations
-            elif data.type_of_strategy == "6solar":
-                data.time_strategy_type = 97  # 95  ... 90
-                data.x_current = 195
-                data.y_current = 295  # -155
-                data.f_current = 0
-                return sest_solarna_zuta_uska.operations  # strategy1
-            elif data.type_of_strategy == "agressive":
-                data.time_strategy_type = 97   # 95
-                data.x_current = 1000  # 195
-                data.y_current = 2705  # 295
-                data.f_current = 0
-                return strategy_zuta_L.operations  # 2
+    # elif table == "uski":
+    #     if data.color == "blue":
+    #         if data.type_of_strategy == "passive":
+    #             data.time_strategy_type = 97  # 95  ... 90
+    #             data.x_current = 195
+    #             data.y_current = -295  # -155
+    #             data.f_current = 0
+    #             return strategy_plava_FULL_uski.operations
+    #         elif data.type_of_strategy == "6solar":
+    #             data.time_strategy_type = 97  # 95  ... 90
+    #             data.x_current = 195
+    #             data.y_current = -295  # -155
+    #             data.f_current = 0
+    #             return sest_solarna_plava_uska.operations  # strategy1
+    #         elif data.type_of_strategy == "agressive":
+    #             data.time_strategy_type = 97   # 95
+    #             data.x_current = 1000  # 195
+    #             data.y_current = -2705  # 295
+    #             data.f_current = 0
+    #             return strategy_plava_L.operations  # 2
+    #         elif data.type_of_strategy == "test":
+    #             data.time_strategy_type = 100000   # 95
+    #             data.x_current = 0  # 195
+    #             data.y_current = 0  # 295
+    #             data.f_current = 0
+    #             return strategy0.operations  # 2
+    #     elif data.color == "yellow":
+    #         if data.type_of_strategy == "passive":
+    #             data.time_strategy_type = 97  # 95  ... 90
+    #             data.x_current = 195
+    #             data.y_current = 295  # -155
+    #             data.f_current = 0
+    #             return strategy_zuta_FULL_uski.operations
+    #         elif data.type_of_strategy == "6solar":
+    #             data.time_strategy_type = 97  # 95  ... 90
+    #             data.x_current = 195
+    #             data.y_current = 295  # -155
+    #             data.f_current = 0
+    #             return sest_solarna_zuta_uska.operations  # strategy1
+    #         elif data.type_of_strategy == "agressive":
+    #             data.time_strategy_type = 97   # 95
+    #             data.x_current = 1000  # 195
+    #             data.y_current = 2705  # 295
+    #             data.f_current = 0
+    #             return strategy_zuta_L.operations  # 2
 
     # if data.color == "blue":
     #     data.time_strategy_type = 97  # 95  ... 90

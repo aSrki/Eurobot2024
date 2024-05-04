@@ -133,18 +133,6 @@ class Execute:
                                     "popujemmmmmmmmmmmmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                                 self.operation = data.operations.pop(0)
 
-                            for num in self.priorities:
-                                if data.cam_arr[num-1] and (num not in self.taken_plants):
-                                    plant = num
-                                    self.taken_plants.append(num)
-                                    break
-
-                                if num not in self.taken_plants:
-                                    self.taken_plants.append(num)
-
-                            print(
-                                f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
-
                             if set([1, 2, 3, 4, 5, 6]).issubset(self.taken_plants):
                                 data.skip_to = self.temp_flag
                                 self.last_flag = data.skip_to
@@ -152,7 +140,20 @@ class Execute:
                                 self.skipping = True
                                 # custom_print(f"Current Active flag: {data.set_flag}")
                                 custom_print("NO PLANTS, KRADJA")
+
                             else:
+                                for num in self.priorities:
+                                    if data.cam_arr[num-1] and (num not in self.taken_plants):
+                                        plant = num
+                                        self.taken_plants.append(num)
+                                        break
+
+                                    if num not in self.taken_plants:
+                                        self.taken_plants.append(num)
+
+                                print(
+                                    f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
+
                                 steps = master_plant(
                                     plant, data.side, data.color)
 
@@ -307,18 +308,6 @@ class Execute:
                         "popujemmmmmmmmmmmmMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
                     self.operation = data.operations.pop(0)
 
-                for num in self.priorities:
-                    if data.cam_arr[num-1] and (num not in self.taken_plants):
-                        plant = num
-                        self.taken_plants.append(num)
-                        break
-
-                    if num not in self.taken_plants:
-                        self.taken_plants.append(num)
-
-                print(
-                    f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
-
                 if set([1, 2, 3, 4, 5, 6]).issubset(self.taken_plants):
                     data.skip_to = self.temp_flag
                     self.last_flag = data.skip_to
@@ -326,7 +315,20 @@ class Execute:
                     self.skipping = True
                     # custom_print(f"Current Active flag: {data.set_flag}")
                     custom_print("NO PLANTS, KRADJA")
+
                 else:
+                    for num in self.priorities:
+                        if data.cam_arr[num-1] and (num not in self.taken_plants):
+                            plant = num
+                            self.taken_plants.append(num)
+                            break
+
+                        if num not in self.taken_plants:
+                            self.taken_plants.append(num)
+
+                    print(
+                        f"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ZABRANJENE BILJKE:   {self.taken_plants}")
+
                     steps = master_plant(plant, data.side, data.color)
 
                     for i in range(len(steps)):

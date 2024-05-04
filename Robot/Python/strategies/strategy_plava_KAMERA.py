@@ -12,7 +12,7 @@ strategy_plava_KAMERA.set_skip_flag(1)
 strategy_plava_KAMERA.back_sensors_on()
 strategy_plava_KAMERA.start_step_actions()
 strategy_plava_KAMERA.go_to_XY(
-    180, -1900, False, ts=0.5, at=0, b=100, bs=0.5)  # rotira panele
+    185, -1900, False, ts=0.5, at=0, b=100, bs=0.5)  # rotira panele
 strategy_plava_KAMERA.move_front_arm(120)
 strategy_plava_KAMERA.activate_triangle()
 strategy_plava_KAMERA.deactivate_prednja_grtalca()
@@ -47,7 +47,7 @@ strategy_plava_KAMERA.end_step_actions()
 strategy_plava_KAMERA.rotate_to(90)
 
 strategy_plava_KAMERA.all_off()
-strategy_plava_KAMERA.set_distance_angle(-80, 0)
+strategy_plava_KAMERA.set_distance_angle(-90, 0)
 
 strategy_plava_KAMERA.rotate_to(90)
 strategy_plava_KAMERA.add_sequence(ostavljanje_zadnjom_rukom_bez_limova())
@@ -101,10 +101,12 @@ strategy_plava_KAMERA.move_front_arm(100, v=15)
 strategy_plava_KAMERA.ungrip_front()
 strategy_plava_KAMERA.move_front_arm(120, v=15)
 strategy_plava_KAMERA.set_distance_angle(70, 0)
-strategy_plava_KAMERA.activate_prednja_leva_grtalca()
+strategy_plava_KAMERA.activate_prednja_desna_grtalca()
 strategy_plava_KAMERA.set_distance_angle(0, 90, g=0.6)
-strategy_plava_KAMERA.add_points("unload", 10)
-strategy_plava_KAMERA.deactivate_prednja_leva_grtalca()
+
+strategy_plava_KAMERA.add_points("unload", 8)
+
+strategy_plava_KAMERA.deactivate_prednja_desna_grtalca()
 strategy_plava_KAMERA.set_distance_angle(-30, 0)
 strategy_plava_KAMERA.go_to_XY(562, -2800, False, at=100, b=50)
 strategy_plava_KAMERA.rotate_to(0)
@@ -129,7 +131,7 @@ strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
 
 strategy_plava_KAMERA.start_step_actions()
-strategy_plava_KAMERA.go_to_XY(1222, -2600, at=2, b=200)
+strategy_plava_KAMERA.go_to_XY(1242, -2600, at=2, b=200)
 strategy_plava_KAMERA.deactivate_prednja_grtalca()
 strategy_plava_KAMERA.deactivate_zadnja_grtalca()
 strategy_plava_KAMERA.end_step_actions()
@@ -138,7 +140,7 @@ strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
 
 strategy_plava_KAMERA.start_step_actions()
-strategy_plava_KAMERA.go_to_XY(1282, -2780, at=2, b=200)
+strategy_plava_KAMERA.go_to_XY(1302, -2780, at=2, b=200)
 strategy_plava_KAMERA.move_front_arm(120)
 strategy_plava_KAMERA.activate_prednja_leva_grtalca()
 strategy_plava_KAMERA.move_mechanism(180)
@@ -150,7 +152,7 @@ strategy_plava_KAMERA.rotate_to(80)
 
 strategy_plava_KAMERA.deactivate_prednja_leva_grtalca()
 
-strategy_plava_KAMERA.go_to_XY(1302, -2870)
+strategy_plava_KAMERA.go_to_XY(1352, -2870)
 strategy_plava_KAMERA.rotate_to(180)
 
 strategy_plava_KAMERA.start_step_actions()
@@ -169,7 +171,11 @@ strategy_plava_KAMERA.move_mechanism(180)
 strategy_plava_KAMERA.front_all_off()
 strategy_plava_KAMERA.back_all_on()
 
+strategy_plava_KAMERA.start_step_actions()
 strategy_plava_KAMERA.go_to_XY(1302, -2250, False, at=0, b=200)
+strategy_plava_KAMERA.move_mechanism(180)
+strategy_plava_KAMERA.end_step_actions()
+
 strategy_plava_KAMERA.go_to_XY(632, -2250, False, at=0, b=50)
 strategy_plava_KAMERA.go_to_XY(632, -2820, False, at=100, b=50)
 strategy_plava_KAMERA.rotate_to(0)
@@ -211,7 +217,7 @@ strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
 
 strategy_plava_KAMERA.start_step_actions()
-strategy_plava_KAMERA.go_to_XY(1222, -2600, at=2, b=200)
+strategy_plava_KAMERA.go_to_XY(1242, -2600, at=2, b=200)
 strategy_plava_KAMERA.deactivate_prednja_grtalca()
 strategy_plava_KAMERA.deactivate_zadnja_grtalca()
 strategy_plava_KAMERA.end_step_actions()
@@ -220,7 +226,7 @@ strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
 
 strategy_plava_KAMERA.start_step_actions()
-strategy_plava_KAMERA.go_to_XY(1282, -2780, at=2, b=200)
+strategy_plava_KAMERA.go_to_XY(1302, -2780, at=2, b=200)
 strategy_plava_KAMERA.move_front_arm(120)
 strategy_plava_KAMERA.activate_prednja_leva_grtalca()
 strategy_plava_KAMERA.move_mechanism(180)
@@ -232,7 +238,8 @@ strategy_plava_KAMERA.rotate_to(80)
 
 strategy_plava_KAMERA.deactivate_prednja_leva_grtalca()
 
-strategy_plava_KAMERA.go_to_XY(1302, -2870)
+strategy_plava_KAMERA.go_to_XY(1352, -2870)
+strategy_plava_KAMERA.rotate_to(180)
 
 strategy_plava_KAMERA.start_step_actions()
 strategy_plava_KAMERA.set_distance_angle(20, 0)
@@ -341,15 +348,15 @@ strategy_plava_KAMERA.check_object()
 strategy_plava_KAMERA.move_back_arm(210, v=15)
 strategy_plava_KAMERA.move_mechanism(180)
 
-strategy_plava_KAMERA.front_all_off()
-strategy_plava_KAMERA.back_all_on()
-
-strategy_plava_KAMERA.go_to_XY(632, -2620, False, at=100, b=50)
-
 strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
 
-strategy_plava_KAMERA.go_to_XY(632, -2820, at=100, b=50)
+strategy_plava_KAMERA.go_to_XY(632, -2620, at=100, b=50)
+
+strategy_plava_KAMERA.front_all_off()
+strategy_plava_KAMERA.back_all_on()
+
+strategy_plava_KAMERA.go_to_XY(632, -2820, False, at=100, b=50)
 strategy_plava_KAMERA.rotate_to(0)
 strategy_plava_KAMERA.add_sequence(ostavljanje_zadnjom_rukom_sa_limova())
 
@@ -441,6 +448,6 @@ strategy_plava_KAMERA.end_parallel()
 
 strategy_plava_KAMERA.back_all_off()
 strategy_plava_KAMERA.front_all_on()
-strategy_plava_KAMERA.go_to_XY(650, 2750, at=100, b=0)
+strategy_plava_KAMERA.go_to_XY(650, -2750, at=100, b=0)
 
 strategy_plava_KAMERA.end()

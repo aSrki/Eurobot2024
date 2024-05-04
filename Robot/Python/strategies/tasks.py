@@ -154,14 +154,13 @@ def ostavljanje_prednjom_rukom_bez_limova():
     oprbl.move_mechanism(270)
 
     oprbl.move_front_arm(85, v=15)
+    oprbl.add_points("unload", 20)  # poeni za prvi plenter
     oprbl.ungrip_front()
 
     # oprbl.start_parallel()
     oprbl.move_front_arm(120, v=15)
     oprbl.move_mechanism(180)
     # oprbl.end_parallel()
-
-    oprbl.add_points("unload", 20)  # poeni za prvi plenter
 
     return oprbl.operations
 
@@ -173,14 +172,13 @@ def ostavljanje_zadnjom_rukom_bez_limova():
     ozrbl.end_step_actions()
 
     ozrbl.move_back_arm(175, v=15)
+    ozrbl.add_points("unload", 20)
     ozrbl.ungrip_back()
 
     # ozrbl.start_parallel()
     ozrbl.move_back_arm(210, v=15)
     ozrbl.move_mechanism(180)
     # ozrbl.end_parallel()
-
-    ozrbl.add_points("unload", 20)
 
     return ozrbl.operations
 
@@ -191,14 +189,13 @@ def ostavljanje_prednjom_rukom_sa_limovima():
     oprsl.move_mechanism(340)
 
     oprsl.move_front_arm(80, v=15)
+    oprsl.add_points("unload", 20)  # poeni za drugi plenter
     oprsl.ungrip_front()
 
     # oprsl.start_parallel()
     oprsl.move_front_arm(120, v=15)
     oprsl.move_mechanism(180)
     # oprsl.end_parallel()
-
-    oprsl.add_points("unload", 20)  # poeni za drugi plenter
 
     return oprsl.operations
 
@@ -209,14 +206,13 @@ def ostavljanje_zadnjom_rukom_sa_limova():
     ozrsl.move_mechanism(20)
 
     ozrsl.move_back_arm(170, v=15)
+    ozrsl.add_points("unload", 20)  # poeni za drugi plenter
     ozrsl.ungrip_back()
 
     # ozrsl.start_parallel()
     ozrsl.move_back_arm(210, v=15)
     ozrsl.move_mechanism(180)
     # ozrsl.end_parallel()
-
-    ozrsl.add_points("unload", 20)  # poeni za drugi plenter
 
     return ozrsl.operations
 
