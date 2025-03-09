@@ -1,0 +1,32 @@
+
+class Auto():
+    def __init__(self, ime, boja):
+        self.ime = ime 
+        self.boja = boja
+
+    def nazovi(self):
+        self.ime = self.ime + "RENORENO"
+        print(f"novo ime {self.ime}")
+
+    def bojaB(self):
+        if self.ime == "renoRENORENO":
+            print(f"Boja je {self.boja}")
+
+
+reno = Auto("reno", "crven")
+
+reno.nazovi()
+reno.bojaB()
+
+
+def nazovi(ime):
+    ime = ime + "RENORENO"
+    print(f"novo ime {ime}")
+    return ime
+
+def bojaB(boja,ime):
+    if ime == "renoRENORENO":
+        print(f"Boja je {boja}")
+
+vraceno_ime = nazovi("reno")
+bojaB("crven", vraceno_ime)

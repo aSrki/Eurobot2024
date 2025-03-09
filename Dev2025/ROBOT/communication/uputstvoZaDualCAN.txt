@@ -1,0 +1,70 @@
+# RPI 5
+
+pip3 install python-can --break-system-packages
+
+sudo nano /boot/firmware/config.txt
+dtparam=spi=on
+dtoverlay=mcp2515-can0,oscillator=16000000,interrupt=25
+dtoverlay=mcp2515-can1,oscillator=16000000,interrupt=24
+
+ip link show
+
+
+sudo nano /etc/systemd/system/canstartup.service
+
+[Unit]
+Description=CANStartup Python Script
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/robot/canstartup/CANStartup.py
+WorkingDirectory=/home/robot/canstartup/
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+RestartSec=10
+StartLimitInterval=500
+StartLimitBurst=5
+User=robot
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+provera statusa
+sudo systemctl status canstartup.service
+
+
+
+DAJ BOZE DA NE TREBA - ide posle izmene servisa
+sudo systemctl daemon-reload
+sudo systemctl restart canstartup.service
+
+
+
+
+
+
+
+
+
+
+
+
+# RPI 4
+veoma vazno uputstvo!!!>!?
+
+ukucate 
+
+sudo nano /etc/rc.local
+
+dodajte pre exit 0: 
+
+python3 /home/(USERNAME PROMENITI)/(FOLDER GDE JE SKRIPTA)/CANStartup.py &
+
+VAZNOO!!!! MORA BITI ABSOLUTNA PUTANJA I PYTHON3 Ne PYTHON!!!!??
+
+to je to.
+
